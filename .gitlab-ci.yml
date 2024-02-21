@@ -9,22 +9,9 @@ build:
   script:
     - make all
 
-test:
-  stage: test
-  script:
-    - # Add commands to run your game's tests here
-
-deploy:
-  stage: deploy
-  script:
-    - mkdir -p releases
-    - cp my_game releases/my_game
-  artifacts:
-    paths:
-      - releases/
 
 release_job:
-  stage: release
+  stage: deploy
   image: registry.gitlab.com/gitlab-org/release-cli:latest
   rules:
     - if: $CI_COMMIT_TAG                 # Run this job when a tag is created
