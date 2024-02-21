@@ -1,8 +1,6 @@
-image: gcc:latest
-
 before_script:
   - apt-get update -qy
-  - apt-get install -y libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev
+  - apt-get install -y build-essential libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev
 
 build:
   stage: build
