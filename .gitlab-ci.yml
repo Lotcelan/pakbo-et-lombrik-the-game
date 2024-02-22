@@ -4,6 +4,10 @@ build:
   stage: build
   script:
     - sudo make all
+  artifacts:
+    paths:
+      - src/
+      - build/
 
 
 release_job:
