@@ -3,7 +3,7 @@ before_script:
 build:
   stage: build
   script:
-    - make all
+    - sudo make all
 
 
 release_job:
