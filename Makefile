@@ -19,13 +19,11 @@ all: $(TARGET)
 
 # Linking
 $(TARGET): $(OBJS)
-	@mkdir -p $(@D)
-	$(CC) $(OBJS) -o $@ $(LDFLAGS)
+    $(CC) $(OBJS) -o $@ $(LDFLAGS)
 
 # Compilation
 $(BUILDDIR)/%.o: $(SRCDIR)/%.c
-	@mkdir -p $(@D)
-	$(CC) $(CFLAGS) -MMD -c $< -o $@
+    $(CC) $(CFLAGS) -MMD -c $< -o $@
 
 # Include dependency files
 -include $(DEPS)
@@ -33,14 +31,14 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.c
 # Clean build files
 .PHONY: clean
 clean:
-	rm -rf $(BUILDDIR) $(TARGET)
+    rm -rf $(BUILDDIR) $(TARGET)
 
 # Print help message
 .PHONY: help
 help:
-	@echo "Usage: make [target]"
-	@echo ""
-	@echo "Targets:"
-	@echo "  all        : Build the game (default)"
-	@echo "  clean      : Clean build files"
-	@echo "  help       : Print this help message"
+    @echo "Usage: make [target]"
+    @echo ""
+    @echo "Targets:"
+    @echo "  all        : Build the game (default)"
+    @echo "  clean      : Clean build files"
+    @echo "  help       : Print this help message"
