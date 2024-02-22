@@ -6,7 +6,6 @@ build:
     - make all
   artifacts:
     paths:
-      - src/
       - build/
 
 
