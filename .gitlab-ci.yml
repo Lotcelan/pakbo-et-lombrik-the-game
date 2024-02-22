@@ -1,5 +1,5 @@
 before_script:
-  - apk add gcc g++ make sdl2-dev sdl2_image-dev sdl2_mixer-dev sdl2_ttf-dev
+  - apk add sudo gcc g++ make sdl2-dev sdl2_image-dev sdl2_mixer-dev sdl2_ttf-dev
 build:
   stage: build
   script:
