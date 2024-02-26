@@ -1,27 +1,37 @@
-# Compiler and flags
+
+
 CC := gcc
-CFLAGS := -Wall -Wextra -Isrc `sdl2-config --cflags`
-LDFLAGS := -lm `sdl2-config --libs`
+CFLAGS := -Wall -Wextra -Isrc `sdl2-config --cflags` -pedantic -MMD -MP
+LDFLAGS := -lm `sdl2-config --libs` -I/usr/include -L/usr/lib/x86_64-linux-gnu -Isrc/engine/include -Isrc -Istructures -ljansson
 
 # Directories
 SRCDIR := src
+BUILDDIR := build
 TARGET := bin/game
 
 # Source files
-SRCS := $(wildcard $(SRCDIR)/*.c)
-OBJS := $(SRCS:.c=.o)
+SRCS := $(wildcard $(SRCDIR)/*.c) $(wildcard $(SRCDIR)/engine/*.c) $(wildcard $(SRCDIR)/engine/structures/*.c)
+OBJS := $(patsubst $(SRCDIR)/%.c,$(BUILDDIR)/%.o,$(SRCS))
+DEPS := $(OBJS:.o=.d)
 
 # Default target
+.PHONY: all
 all: $(TARGET)
 
 # Linking
 $(TARGET): $(OBJS)
+	@mkdir -p $(@D)
 	$(CC) $(OBJS) -o $@ $(LDFLAGS)
 
 # Compilation
-%.o: %.c
+$(BUILDDIR)/%.o: $(SRCDIR)/%.c
+	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@
 
+# Include dependency files
+-include $(DEPS)
+
 # Clean build files
-clean:
-	rm -f $(TARGET) $(OBJS)
+.PHONY: clean
+	rm -rf $(BUILDDIR)
+	rm -rf bin/*

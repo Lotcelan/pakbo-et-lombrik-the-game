@@ -1,0 +1,29 @@
+{
+    "name": "Exemple level", // The name can not be 'none'
+    "background" : "background.png", // In the assets folder
+    "structures" : [
+        {
+            "x" : 0,
+            "y" : 0,
+            "texture" : "wall.png",
+            "allow_pass_through" : 8, // On 4 bits : first bit : left, then cyclig clockwise
+            "teleport_to_scene" : "none"
+        },
+        {
+            "x" : 100,
+            "y" : 100,
+            "texture" : "door.png",
+            "allow_pass_through" : 8,
+            "teleport_to_scene" : "scene02"
+        }
+
+    ],
+    "entities" : [
+        {
+            "x" : 50,
+            "y" : 50,
+            "respawn_delay" : 5000, // In ms, the amount of time to wait AFTER leaving the room to have the entity respawn (if killed). Negative value if no respawn
+            "entity" : "monster1"
+        }
+    ]
+}

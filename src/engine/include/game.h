@@ -3,15 +3,17 @@
 
 #include <SDL2/SDL.h>
 #include "scenes.h"
+#include <stdbool.h>
 
 typedef enum GameStatus {
     RUNNING,
+    LOADING,
     PAUSED,
 } GameStatus;
 
-typedef struct  {
+typedef struct GameData {
     GameStatus state;
-    Scene current_scene;
+    Scene* current_scene;
     
     SDL_Window* window;
     SDL_Renderer* renderer;
@@ -19,7 +21,7 @@ typedef struct  {
 
 } GameData;
 
-bool init_game(GameData* gameData);
+GameData* init_game(int width, int height, const char* title);
 void free_game(GameData* game);
 
 #endif
