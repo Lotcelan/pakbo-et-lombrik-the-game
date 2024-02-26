@@ -20,19 +20,18 @@ int main(int argc, char *argv[]) {
     */
 
     while (game->state != PAUSED) {
-        printf("Game state: %d\n", game->state);
         while (SDL_PollEvent(&(game->event)) != 0) {
-            printf("Event");
             if ((game->event).type == SDL_QUIT) {
                 game->state = PAUSED;
             }
         }
-        printf("a");
         SDL_SetRenderDrawColor(game->renderer, 0, 0, 0, 255);
-        printf("b");
         SDL_RenderClear(game->renderer);
 
-        update_entities(game->current_scene->entities);
+        if (game->current_scene != NULL) {
+            update_entities(game->current_scene->entities);
+        }
+
         update_scene(game->current_scene);
 
         render_scene(game->current_scene, game);

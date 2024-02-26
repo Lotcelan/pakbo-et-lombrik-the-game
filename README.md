@@ -28,10 +28,11 @@ Voilà c'est tout. N'hésitez pas à changer le README pour Mac
 			| - exemple_monster.h/c : pour la logique du mob
 	| - engine/ : Contient les fichiers du moteur de jeu
 		| - physics / audio / scene etc...
+		| - structures/ : Structures de données intéressantes
+
 - assets/ :
 	| - audio/
 	| - sprites/
 	| ...
-- structures/ : Structures de données intéressantes
 - Makefile : Pour construire le jeu (selon architecture) et effectuer les tests
 ```

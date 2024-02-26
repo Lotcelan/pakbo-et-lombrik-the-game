@@ -18,6 +18,10 @@ DEPS := $(OBJS:.o=.d)
 .PHONY: all
 all: $(TARGET)
 
+.PHONY: run
+run: $(TARGET)
+	./$(TARGET)
+
 # Linking
 $(TARGET): $(OBJS)
 	@mkdir -p $(@D)

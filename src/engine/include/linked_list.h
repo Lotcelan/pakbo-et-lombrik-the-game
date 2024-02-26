@@ -2,6 +2,7 @@
 #define LINKED_LIST
 
 #include <stdlib.h>
+#include <stdio.h>
 
 typedef struct List {
     void* value;
