@@ -12,7 +12,7 @@ void map(void* (*f)(void*), List* list) {
 	return;
 }
 
-/*
+
 
 
 int length(List *list)
@@ -247,4 +247,4 @@ int compare_str(void *a, void *b)
 
 
 
-*/
+

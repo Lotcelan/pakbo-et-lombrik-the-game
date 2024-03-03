@@ -15,12 +15,12 @@ List* init_linked_list(void* value);
 void append(void* value, List** pList);
 void map(void* (*f)(void*), List* list);
 
-/*
+
 // Final primitives
 int length(List *list);
 
 List *create_list(void *value, List *next);
-List *list_del_first( List *l, void delete(List*);
+List *list_del_first( List *l, void delete(List*));
 List *append_end(void *value, List *list);
 List *append_first(void *value, List *list);
 List *reverse(List *list);
@@ -37,5 +37,5 @@ void list_delete(List *list, void delete(List*));
 List *merge_sort(List *list, void delete(List*), int comparaison(void*, void*));
 int compare_str(void *a, void *b);
     
-*/
+
 #endif
