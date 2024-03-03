@@ -1,7 +1,8 @@
-# Compiler and flags
+
+
 CC := gcc
-CFLAGS := -Wall -Wextra -Isrc `sdl2-config --cflags`
-LDFLAGS := -lm `sdl2-config --libs`
+CFLAGS := -Wall -Wextra -Isrc `sdl2-config --cflags` -pedantic -MMD -MP
+LDFLAGS := -lm `sdl2-config --libs` -I/usr/include -L/usr/lib/x86_64-linux-gnu -Isrc/engine/include -Isrc -Istructures -ljansson
 
 # Directories
 SRCDIR := src
@@ -9,13 +10,17 @@ BUILDDIR := build
 TARGET := bin/game
 
 # Source files
-SRCS := $(wildcard $(SRCDIR)/*.c) $(wildcard $(SRCDIR)/engine/*.c)
+SRCS := $(wildcard $(SRCDIR)/*.c) $(wildcard $(SRCDIR)/engine/*.c) $(wildcard $(SRCDIR)/engine/structures/*.c)
 OBJS := $(patsubst $(SRCDIR)/%.c,$(BUILDDIR)/%.o,$(SRCS))
 DEPS := $(OBJS:.o=.d)
 
 # Default target
 .PHONY: all
 all: $(TARGET)
+
+.PHONY: run
+run: $(TARGET)
+	./$(TARGET)
 
 # Linking
 $(TARGET): $(OBJS)
@@ -25,22 +30,12 @@ $(TARGET): $(OBJS)
 # Compilation
 $(BUILDDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p $(@D)
-	$(CC) $(CFLAGS) -MMD -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 # Include dependency files
 -include $(DEPS)
 
 # Clean build files
 .PHONY: clean
-clean:
-	rm -rf $(BUILDDIR) $(TARGET)
-
-# Print help message
-.PHONY: help
-help:
-	@echo "Usage: make [target]"
-	@echo ""
-	@echo "Targets:"
-	@echo "  all        : Build the game (default)"
-	@echo "  clean      : Clean build files"
-	@echo "  help       : Print this help message"
+	rm -rf $(BUILDDIR)
+	rm -rf bin/*

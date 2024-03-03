@@ -1,0 +1,22 @@
+before_script:
+  - apk add gcc g++ make sdl2-dev sdl2_image-dev sdl2_mixer-dev sdl2_ttf-dev
+build:
+  stage: build
+  script:
+    - make all
+  artifacts:
+    paths:
+      - build/
+
+
+
+release_job:
+  stage: deploy
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  rules:
+    - if: $CI_COMMIT_TAG                 # Run this job when a tag is created
+  script:
+    - echo "running release_job"
+  release:                               # See https://docs.gitlab.com/ee/ci/yaml/#release for available properties
+    tag_name: '$CI_COMMIT_TAG'
+    description: '$CI_COMMIT_TAG'
