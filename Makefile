@@ -10,7 +10,7 @@ BUILDDIR := build
 TARGET := bin/game
 
 # Source files
-SRCS := $(wildcard $(SRCDIR)/*.c) $(wildcard $(SRCDIR)/engine/*.c) $(wildcard $(SRCDIR)/engine/structures/*.c)
+SRCS := $(wildcard $(SRCDIR)/*.c) $(wildcard $(SRCDIR)/engine/*.c) $(wildcard $(SRCDIR)/engine/structures/*.c) $(wildcard $(SRCDIR)/scenes/**/*.c)
 OBJS := $(patsubst $(SRCDIR)/%.c,$(BUILDDIR)/%.o,$(SRCS))
 DEPS := $(OBJS:.o=.d)
 
