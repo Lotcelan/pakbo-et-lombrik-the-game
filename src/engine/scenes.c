@@ -63,21 +63,34 @@ Scene* init_scene(char* title) {
     strcpy(path, "../src/scenes/");
     strcat(path, title);
     strcat(path, "/data.json");
+    FILE *file = fopen(path, "r");
+    if (!file) {
+        fprintf(stderr, "Failed to open file\n");
+        return 1;
+    }
+    printf("hey\n");
+    json_t *root = json_loadf(file, 0, &error);
+    printf("heyoo\n");
+    fclose(file);
+    printf("Loaded JSON data:\n");
+    json_dumpf(root, stdout, JSON_INDENT(4));
 
-    json_t *root = json_load_file(path, 0, &error);
     if (root) {
         init_scene_with_json(root, new);
         json_decref(root);
     }
+    if (!root) {
+        fprintf(stderr, "JSON error on line %d: %s\n", error.line, error.text);
+        return 1;
+    }
+
+    // Do something with the loaded JSON data
+    // For example, printing it
 
     return new;
 
 }
 
-void render_scene(Scene* scene, GameData* game) {
-    return;
-}
-
-void update_scene(Scene* scene) {
+void render_scene(GameData* game) {
     return;
 }

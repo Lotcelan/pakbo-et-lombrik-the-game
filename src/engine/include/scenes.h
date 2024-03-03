@@ -27,11 +27,12 @@ typedef struct Scene {
     List* entities;
     Texture background;
     List* structures;
+    void (*update)(GameData* game);
+
 } Scene;
 
 Scene* init_scene(char* title); // Title = nom de la scène = nom du dossier dans scenes/
-void update_scene(Scene* scene);
-void render_scene(Scene* scene, GameData* game);
+void render_scene(GameData* game);
 void free_scene(Scene* scene);
 void change_scene(void (*next)(void));
 

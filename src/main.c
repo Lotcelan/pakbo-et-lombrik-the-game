@@ -2,6 +2,8 @@
 #include "engine/include/scenes.h"
 #include "engine/include/entity.h"
 
+#include "scenes/scene01/scene01.h"
+
 int main(int argc, char *argv[]) {
     // Initialize SDL
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -10,6 +12,9 @@ int main(int argc, char *argv[]) {
     }
 
     GameData* game = init_game(800, 600, "SDL2 Window");
+
+    Scene* scene01 = init_scene01();
+    game->current_scene = scene01;
 
     /* Main loop :
         - Getting events
@@ -30,11 +35,11 @@ int main(int argc, char *argv[]) {
 
         if (game->current_scene != NULL) {
             update_entities(game->current_scene->entities);
+            game->current_scene->update(game);
         }
 
-        update_scene(game->current_scene);
 
-        render_scene(game->current_scene, game);
+        render_scene(game);
 
         SDL_RenderPresent(game->renderer);
     }
