@@ -1,4 +1,4 @@
-#include "binary_heap.h"
+#include "../include/binary_heap.h"
 
 binary_heap* binary_heap_create(int capacity, int (*compare)(void*, void*)) {
     binary_heap* bh = malloc(sizeof(binary_heap));

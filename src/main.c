@@ -1,5 +1,6 @@
-#include <SDL2/SDL.h>
-#include <stdio.h>
+#include "engine/include/game.h"
+#include "engine/include/scenes.h"
+#include "engine/include/entity.h"
 
 int main(int argc, char *argv[]) {
     // Initialize SDL
@@ -8,44 +9,37 @@ int main(int argc, char *argv[]) {
         return -1;
     }
 
-    // Create a window
-    SDL_Window *window = SDL_CreateWindow("Simple Window",
-                                          SDL_WINDOWPOS_UNDEFINED,
-                                          SDL_WINDOWPOS_UNDEFINED,
-                                          640, 480,
-                                          SDL_WINDOW_SHOWN);
-    if (window == NULL) {
-        printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
-        return -1;
+    GameData* game = init_game(800, 600, "SDL2 Window");
+
+    /* Main loop :
+        - Getting events
+        - Updating the entities logic with the event
+        - Updating the scene logic with the event
+        - Render the scene
+        - Render the entities
+    */
+
+    while (game->state != PAUSED) {
+        while (SDL_PollEvent(&(game->event)) != 0) {
+            if ((game->event).type == SDL_QUIT) {
+                game->state = PAUSED;
+            }
+        }
+        SDL_SetRenderDrawColor(game->renderer, 0, 0, 0, 255);
+        SDL_RenderClear(game->renderer);
+
+        if (game->current_scene != NULL) {
+            update_entities(game->current_scene->entities);
+        }
+
+        update_scene(game->current_scene);
+
+        render_scene(game->current_scene, game);
+
+        SDL_RenderPresent(game->renderer);
     }
 
-    // Create a renderer
-    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-    if (renderer == NULL) {
-        printf("Renderer could not be created! SDL_Error: %s\n", SDL_GetError());
-        return -1;
-    }
-
-    // Set renderer color to white
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-
-    // Clear the screen
-    SDL_RenderClear(renderer);
-
-    // Render a simple rectangle
-    SDL_Rect rect = { 100, 100, 200, 100 }; // x, y, width, height
-    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Red color
-    SDL_RenderFillRect(renderer, &rect);
-
-    // Update the screen
-    SDL_RenderPresent(renderer);
-
-    // Delay to show the window
-    SDL_Delay(2000);
-
-    // Clean up
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
+    free_game(game);
     SDL_Quit();
 
     return 0;
