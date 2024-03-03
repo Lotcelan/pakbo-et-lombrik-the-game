@@ -10,10 +10,13 @@ typedef struct List {
     struct List* next;
 } List;
 
+// For compatibility's sake (currently)
 List* init_linked_list(void* value);
 void append(void* value, List** pList);
 void map(void* (*f)(void*), List* list);
 
+/*
+// Final primitives
 int length(List *list);
 
 List *create_list(void *value, List *next);
@@ -34,4 +37,5 @@ void list_delete(List *list, void delete(List*));
 List *merge_sort(List *list, void delete(List*), int comparaison(void*, void*));
 int compare_str(void *a, void *b);
     
+*/
 #endif

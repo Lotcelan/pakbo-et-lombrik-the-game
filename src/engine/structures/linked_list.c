@@ -1,5 +1,19 @@
 #include "../include/linked_list.h"
 
+List* init_linked_list(void* value) {
+	return NULL;
+}
+
+void append(void* value, List** pList) {
+	return;
+}
+
+void map(void* (*f)(void*), List* list) {
+	return;
+}
+
+/*
+
 
 int length(List *list)
     {
@@ -60,7 +74,7 @@ List *reverse(List *list)
 
 List *list_del_i_element(List *l, int ind, void delete(List*))
     {
-        int len = lengh(l) ;
+        int len = length(l) ;
         if (ind>len)
             {
                 return l ;
@@ -187,13 +201,13 @@ void list_delete(List *list, void delete(List*))
 
 List *merge_sort(List *list, void delete(List*), int comparaison(void*, void*))
     {
-        if (lengh(list) <= 1)
+        if (length(list) <= 1)
             {
                 return list ;
             }
         else
             {
-                int len = lengh(list) ;
+                int len = length(list) ;
                 List *begin = prefix_non_delete(list, (len/2)) ;
                 List *end = suffix_non_delete(list, (len/2)) ;
                 List *l1 = merge_sort(begin, delete, comparaison) ;
@@ -232,3 +246,5 @@ int compare_str(void *a, void *b)
     }
 
 
+
+*/
