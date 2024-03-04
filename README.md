@@ -11,6 +11,12 @@ Setup de SDL2 (sous Linux avec `apt`) & Jansson (librairie pour parse du JSON) :
 sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-ttf-dev libsdl2-mixer-dev libjansson-dev
 ```
 
+Setup de SDL2 (sous Arch avec `yay`) :
+
+```sh
+yay -S sdl2 sdl2_image sdl2_mixer sdl2_ttf
+```
+
 Voilà c'est tout. N'hésitez pas à changer le README pour Mac
 
 ## Structure du projet :
