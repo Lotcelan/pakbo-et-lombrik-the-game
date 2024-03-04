@@ -5,16 +5,16 @@
         {
             "x" : 0,
             "y" : 0,
-            "texture" : "wall.png",
+            "texture" : "wall.jpg",
             "allow_pass_through" : 8,
             "teleport_to_scene" : "none"
         },
         {
-            "x" : 100,
-            "y" : 100,
-            "texture" : "door.png",
+            "x" : 200,
+            "y" : 200,
+            "texture" : "wall.jpg",
             "allow_pass_through" : 8,
-            "teleport_to_scene" : "scene02"
+            "teleport_to_scene" : "none"
         }
 
     ],

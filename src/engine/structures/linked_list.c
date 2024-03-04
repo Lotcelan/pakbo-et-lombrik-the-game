@@ -1,7 +1,7 @@
 #include "../include/linked_list.h"
 
 List* init_linked_list(void* value) {
-	return NULL;
+	return create_list(value, NULL);
 }
 
 void append(void* value, List** pList) {

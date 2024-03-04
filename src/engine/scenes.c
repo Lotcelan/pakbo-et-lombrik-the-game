@@ -1,7 +1,28 @@
 #include "include/scenes.h"
 #include "include/game.h"
 
-void init_scene_with_json(json_t *root, Scene* scene) {
+Structure* init_structure(GameData* game, char* name, char* path, int x, int y, int allow_pass_through, char* teleport_to_scene) {
+    Structure* s = (Structure*)malloc(sizeof(Structure));
+    if (s == NULL) {
+        exit(-1);
+    }
+    s->name = name;
+    s->texture = load_texture(game->renderer, path);
+    s->position.x = x;
+    s->position.y = y;
+
+    char* img_path = (char*)malloc(strlen(path) + 14);
+    strcpy(img_path, "../src/assets/");
+    strcat(img_path, path);
+    s->texture = load_texture(game->renderer, img_path);
+    SDL_QueryTexture(s->texture, NULL, NULL, &s->position.w, &s->position.h);
+
+    s->allow_pass_through = allow_pass_through;
+    s->teleport_to_scene = teleport_to_scene;
+    return s;
+}
+
+void init_scene_with_json(GameData* game, json_t *root, Scene* scene) {
     const char *name = json_string_value(json_object_get(root, "name"));
     const char *background = json_string_value(json_object_get(root, "background"));
 
@@ -23,6 +44,15 @@ void init_scene_with_json(json_t *root, Scene* scene) {
 
         printf("Structure %zu: x=%d, y=%d, texture=%s, allow_pass_through=%d, teleport_to_scene=%s\n",
                index, x, y, texture, allow_pass_through, teleport_to_scene);
+        
+        Structure* s = init_structure(game, json_string_value(json_object_get(value, "name")),
+                                      json_string_value(json_object_get(value, "texture")),
+                                      json_integer_value(json_object_get(value, "x")),
+                                      json_integer_value(json_object_get(value, "y")),
+                                      json_integer_value(json_object_get(value, "allow_pass_through")),
+                                      json_string_value(json_object_get(value, "teleport_to_scene")));
+
+        scene->structures = append_first(s, scene->structures);
     }
 
     json_t* entities = json_object_get(root, "entities");
@@ -44,7 +74,7 @@ void init_scene_with_json(json_t *root, Scene* scene) {
     }
 }
 
-Scene* init_scene(char* title) {
+Scene* init_scene(GameData* game, char* title) {
     Scene* new = (Scene*)malloc(sizeof(Scene));
 
     if (new == NULL) {
@@ -77,7 +107,7 @@ Scene* init_scene(char* title) {
     json_dumpf(root, stdout, JSON_INDENT(4));
 
     if (root) {
-        init_scene_with_json(root, new);
+        init_scene_with_json(game, root, new);
         json_decref(root);
     }
     if (!root) {
@@ -147,5 +177,19 @@ void render_scene(GameData* game) {
 
     // Clean up
     SDL_DestroyTexture(backgroundTexture);
+
+
+    // Render all the structures
+    List* current = game->current_scene->structures;
+    while (current != NULL) {
+        printf("aleeed\n");
+        Structure* s = (Structure*)current->value;
+        if (s == NULL) {
+            break;
+        }
+        SDL_Rect rect = s->position;
+        SDL_RenderCopy(game->renderer, s->texture, NULL, &rect);
+        current = current->next;
+    }
 }
 

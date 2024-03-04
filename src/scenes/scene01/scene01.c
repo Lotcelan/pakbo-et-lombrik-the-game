@@ -5,9 +5,9 @@ void update_scene01(GameData* game) {
     return;
 }
 
-Scene* init_scene01() {
+Scene* init_scene01(GameData* game) {
     printf("hola\n");
-    Scene* scene = init_scene("scene01");
+    Scene* scene = init_scene(game, "scene01");
     scene->update = update_scene01;
 
     return scene;

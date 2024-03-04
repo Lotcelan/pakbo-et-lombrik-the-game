@@ -16,7 +16,6 @@ typedef struct GameData GameData;
 
 typedef struct Structure {
     char* name;
-    char* path;
     SDL_Texture* texture;
     SDL_Rect position;
     int allow_pass_through;
@@ -32,12 +31,12 @@ typedef struct Scene {
 
 } Scene;
 
-Scene* init_scene(char* title); // Title = nom de la scène = nom du dossier dans scenes/
+Scene* init_scene(GameData* game, char* title); // Title = nom de la scène = nom du dossier dans scenes/
 void render_scene(GameData* game);
 void free_scene(Scene* scene);
 void change_scene(void (*next)(void));
 SDL_Texture* load_texture(SDL_Renderer* renderer, char* path);
 
-void init_scene_with_json(json_t *root, Scene* scene);
+void init_scene_with_json(GameData* game, json_t *root, Scene* scene);
 
 #endif

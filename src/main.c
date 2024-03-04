@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
 
     GameData* game = init_game(800, 600, "SDL2 Window");
 
-    Scene* scene01 = init_scene01();
+    Scene* scene01 = init_scene01(game);
     game->current_scene = scene01;
 
     /* Main loop :
@@ -37,7 +37,6 @@ int main(int argc, char *argv[]) {
             update_entities(game->current_scene->entities);
             game->current_scene->update(game);
         }
-
 
         render_scene(game);
 
