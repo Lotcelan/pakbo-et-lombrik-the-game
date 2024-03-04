@@ -37,5 +37,6 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.c
 
 # Clean build files
 .PHONY: clean
+clean:
 	rm -rf $(BUILDDIR)
 	rm -rf bin/*
