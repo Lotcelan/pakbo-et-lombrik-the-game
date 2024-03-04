@@ -247,4 +247,235 @@ int compare_str(void *a, void *b)
 
 
 
+List *create_list_cyclic(void *value, List *next)
+    {
+        if (next == NULL)
+            {
+                List *list = malloc(sizeof(*list)) ;
+                list->value = value ;
+                list->next = list ;
+                return list ;
+            }
+        List *list = malloc(sizeof(*list)) ;
+        list->value = value ;
+        list->next = next ;
+        List *p = next ;
+        while(p->next != next)
+            {
+                p = p->next ;
+            }
+        p->next = list ;
+        return list ;
+    }
 
+void print_list_cyclic(List *list) 
+    {
+        if (list == NULL) 
+            {
+                printf("\n [] \n \n") ;
+                return ;
+            }
+
+        printf("\n [") ;
+        void *element = list->value ;
+        List *head = list ;
+        list = list->next ;
+        printf("%s", (char*)element) ;
+        while (list != head)
+            {
+                void *element = list->value ;
+                list = list->next ;
+                printf(", %s", (char*)element) ;
+            }
+        printf("] \n \n") ;
+    }
+
+List *list_cyclic_del_first( List *l, void delete(List*) )
+    {
+        List *move = l ;
+        if (move->next == l)
+            {
+               delete(l) ;
+               return NULL ;
+            }
+        while (move->next != l)
+            {
+                move = move->next ;
+            }
+        move->next = l->next ;
+        List *p = l->next ;
+        if (delete!=NULL) 
+            {
+                delete(l) ;
+            }
+        return p ;
+    }
+
+int lengh_cyclic(List *list)
+    {
+        if (list != NULL)
+        {
+            int lengh = 1 ;
+            List *p = list ;
+            while (p->next != list) 
+                {
+                    lengh ++ ;
+                    p = p->next ;
+                }
+            return lengh ;
+        }
+        return 0 ;
+    }
+
+List *append_cyclic_end(void *value, List *list, void delete(List*)) 
+    {
+        if (list == NULL)
+            {
+                return create_list_cyclic(value, NULL) ;
+            }
+        if (list->next == list)
+            {
+                void *element = list->value ;
+                List *suit = list_cyclic_del_first(list, delete) ;
+                suit = create_list_cyclic(value, suit) ;
+                suit = create_list_cyclic(element, suit) ;
+                return suit ;
+            }
+        void *element = list->value ;
+        List *suit = list_cyclic_del_first(list, delete) ;
+        return create_list_cyclic(element, append_cyclic_end(value, suit, delete)) ;
+    }
+
+List *append_cyclic_first(void *value, List *list)
+    {
+        return create_list_cyclic(value, list) ;
+    }
+
+List *reverse_cyclic(List *list, void delete(List*))
+    {
+        if (list == NULL)
+            {
+                return NULL ;
+            }
+        void *first_element = list->value ;
+        List *new_list = create_list_cyclic(first_element, NULL) ;
+        list = list_cyclic_del_first(list, delete) ;
+        while (list != NULL)
+            {
+                void *element = list->value ;
+                new_list = create_list_cyclic(element, new_list) ;
+                list = list_cyclic_del_first(list, delete) ;
+            }
+        return new_list ;
+    }
+
+List *list_cyclic_del_i_element(List *l, int ind, void delete(List*))
+    {
+        int len = lengh_cyclic(l) ;
+        if (ind>len)
+            {
+                return l ;
+            }
+        if (ind == 1)
+            {
+                return list_cyclic_del_first(l, delete) ;
+            }
+        ind -- ;
+        return create_list_cyclic(l->value, list_cyclic_del_i_element(list_cyclic_del_first(l, delete), ind, delete)) ;
+    }
+
+List *merge_cyclic(List *list1, List *list2, void delete(List*), int comparaison(void*, void*))
+{
+    if (list1 == NULL)
+    {
+        return list2;
+    }
+    else if (list2 == NULL)
+    {
+        return list1;
+    }
+    void *val1 = list1->value;
+    void *val2 = list2->value;
+
+    if (comparaison(val1, val2) == 1) //signifie que val1 arrive avant val2 dans l'ordre de comparaison
+    {
+        list1 = list_cyclic_del_first(list1, delete) ;
+        List *suit = merge_cyclic(list1, list2, delete, comparaison) ;
+        return create_list_cyclic(val1, suit);
+    }
+    else
+    {
+        list2 = list_cyclic_del_first(list2, delete) ;
+        List *suit = merge_cyclic(list1, list2, delete, comparaison) ;
+        return create_list_cyclic(val2, suit);
+    }
+}
+
+List *suffix_cyclic_non_delete(List *list, int n, List *first)
+    {
+        int len = lengh_cyclic(first) ;
+        if (n >= len)
+            {
+                return NULL ;
+            }
+        if (n == 0)
+            {
+                if (list == first)
+                {
+                    return NULL ;
+                }
+                List *p = list ;
+                return create_list_cyclic(p->value, suffix_cyclic_non_delete(p->next, n, first)) ;
+            }
+        List *p = list ;
+        return suffix_cyclic_non_delete(p->next, n-1, first) ;
+    }
+
+List *prefix_cyclic_non_delete(List *list, int n)
+    {
+        if (n == 0)
+            {
+                return NULL ;
+            }
+        List *p = list ;
+        return create_list_cyclic(p->value, prefix_cyclic_non_delete(p->next, n-1)) ;
+    }
+
+void list_cyclic_delete(List *list, void delete(List*))
+    {
+        while (list != NULL)
+            {
+                list = list_cyclic_del_first(list, delete) ;
+            }
+    }
+
+List *merge_sort_cyclic(List *list, void delete(List*), int comparaison(void*, void*))
+    {
+        if (lengh_cyclic(list) <= 1)
+            {
+                return list ;
+            }
+        else
+            {
+                int len = lengh_cyclic(list) ;
+                List *begin = prefix_cyclic_non_delete(list, (len/2)) ;
+                List *end = suffix_cyclic_non_delete(list, (len/2), list) ;
+                List *l1 = merge_sort_cyclic(begin, delete, comparaison) ;
+                List *l2 = merge_sort_cyclic(end, delete, comparaison) ;
+                List *merged = merge_cyclic(l1, l2, delete, comparaison) ;
+                return merged ;
+                list_cyclic_delete(list, delete) ;
+            } 
+    }
+
+List *map_list_cyclic(List *list, void *f(void *a), void delete(List*))
+    {
+        if (list == NULL)
+            {
+                return list ;
+            }
+        void *element = list->value;
+        list = list_cyclic_del_first(list, delete);
+        element = f(element);
+        return create_list_cyclic(element, map_list_cyclic(list, f, delete)) ;
+    }

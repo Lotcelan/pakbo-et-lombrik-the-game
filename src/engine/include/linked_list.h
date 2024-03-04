@@ -36,6 +36,33 @@ List *prefix_non_delete(List *list, int n);
 void list_delete(List *list, void delete(List*));
 List *merge_sort(List *list, void delete(List*), int comparaison(void*, void*));
 int compare_str(void *a, void *b);
-    
+List *create_list_cyclic(void *value, List *next) ;
+
+void print_list_cyclic(List *list) ;
+
+List *list_cyclic_del_first( List *l, void delete(List*) ) ;
+
+int lengh_cyclic(List *list) ;
+
+List *append_cyclic_end(void *value, List *list, void delete(List*)) ;
+
+List *append_cyclic_first(void *value, List *list) ;
+
+List *reverse_cyclic(List *list, void delete(List*)) ;
+
+List *list_del_i_element(List *l, int ind, void delete(List*)) ;
+
+List *merge_cyclic(List *list1, List *list2, void delete(List*), int comparaison(void*, void*)) ;
+
+List *suffix_cyclic_non_delete(List *list, int n, List *first) ;
+
+List *prefix_cyclic_non_delete(List *list, int n) ;
+
+void list_cyclic_delete(List *list, void delete(List*)) ;
+
+List *merge_sort_cyclic(List *list, void delete(List*), int comparaison(void*, void*)) ;
+
+List *map_list_cyclic(List *list, void *f(void *a), void delete(List*)) ;
+
 
 #endif
