@@ -17,7 +17,13 @@ Setup de SDL2 (sous Arch avec `yay`) :
 yay -S sdl2 sdl2_image sdl2_mixer sdl2_ttf
 ```
 
-Voilà c'est tout. N'hésitez pas à changer le README pour Mac
+Setup de SDL2 (sous Mac OSX avec `brew`) :
+
+```sh
+brew install sdl2 sdl2_image sdl2_ttf sdl2_mixer sdl2_ttf
+```
+
+Voilà c'est tout. 
 
 ## Structure du projet :
 
