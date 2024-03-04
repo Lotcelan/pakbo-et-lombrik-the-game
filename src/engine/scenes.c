@@ -1,10 +1,11 @@
 #include "include/scenes.h"
+#include "include/game.h"
 
 void init_scene_with_json(json_t *root, Scene* scene) {
     const char *name = json_string_value(json_object_get(root, "name"));
     const char *background = json_string_value(json_object_get(root, "background"));
 
-    //strcpy(scene->background, background);
+    strcpy(scene->background, background);
 
     printf("Name: %s\n", name);
     printf("Background: %s\n", background);
@@ -91,6 +92,60 @@ Scene* init_scene(char* title) {
 
 }
 
-void render_scene(GameData* game) {
-    return;
+SDL_Texture* load_texture(SDL_Renderer* renderer, char* img_path) {
+    // Load the image located at img_path and return it as an SDL_Texture
+    // If the image cannot be loaded, return NULL
+    SDL_Surface* surface = IMG_Load(img_path);
+    if (surface == NULL) {
+        fprintf(stderr, "Failed to load image: %s\n", img_path);
+        return NULL;
+    }
+
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+    if (texture == NULL) {
+        fprintf(stderr, "Failed to create texture from surface: %s\n", img_path);
+        return NULL;
+    }
+
+    SDL_FreeSurface(surface);
+    return texture;
+
+
 }
+
+void render_scene(GameData* game) {
+    // Using game->renderer, render the scene : the background then all the textures
+
+    // Load the background texture contained in game->current_scene->background and resize it to width and height of the window
+    // Then render it at (0, 0)
+
+    int width, height;
+    SDL_GetWindowSize(game->window, &width, &height);
+
+    // Load the background texture in ../assets/{game->current_scene->background} 
+    char* background_path = (char*)malloc(strlen(game->current_scene->background) + 14);
+    strcpy(background_path, "../src/assets/");
+    strcat(background_path, game->current_scene->background);
+    
+    SDL_Texture* backgroundTexture = load_texture(game->renderer, background_path);
+    if (backgroundTexture == NULL) {
+        fprintf(stderr, "Failed to load background texture\n");
+        return;
+    }
+
+    // Get the dimensions of the background texture
+    int backgroundWidth, backgroundHeight;
+    SDL_QueryTexture(backgroundTexture, NULL, NULL, &backgroundWidth, &backgroundHeight);
+
+    // Calculate the scale factors to resize the background texture
+    float scaleX = (float)width / backgroundWidth;
+    float scaleY = (float)height / backgroundHeight;
+
+    // Render the background texture
+    SDL_Rect backgroundRect = {0, 0, width, height};
+    SDL_RenderCopyEx(game->renderer, backgroundTexture, NULL, &backgroundRect, 0, NULL, SDL_FLIP_NONE);
+
+    // Clean up
+    SDL_DestroyTexture(backgroundTexture);
+}
+

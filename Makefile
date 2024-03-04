@@ -2,7 +2,7 @@
 
 CC := gcc
 CFLAGS := -Wall -Wextra -Isrc `sdl2-config --cflags` -pedantic -MMD -MP
-LDFLAGS := -lm `sdl2-config --libs` -I/usr/include -L/usr/lib/x86_64-linux-gnu -Isrc/engine/include -Isrc -Istructures -ljansson
+LDFLAGS := -lm -lSDL2 -lSDL2_image `sdl2-config --libs` -I/usr/include -L/usr/lib/x86_64-linux-gnu -Isrc/engine/include -Isrc -Istructures -ljansson
 
 # Directories
 SRCDIR := src

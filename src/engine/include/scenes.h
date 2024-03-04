@@ -2,6 +2,7 @@
 #define SCENES_H
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
 #include <stdbool.h>
 #include <stdio.h>
@@ -25,7 +26,7 @@ typedef struct Structure {
 typedef struct Scene {
     char title[200];
     List* entities;
-    Texture background;
+    char background[200];
     List* structures;
     void (*update)(GameData* game);
 
@@ -35,6 +36,7 @@ Scene* init_scene(char* title); // Title = nom de la scène = nom du dossier dan
 void render_scene(GameData* game);
 void free_scene(Scene* scene);
 void change_scene(void (*next)(void));
+SDL_Texture* load_texture(SDL_Renderer* renderer, char* path);
 
 void init_scene_with_json(json_t *root, Scene* scene);
 
