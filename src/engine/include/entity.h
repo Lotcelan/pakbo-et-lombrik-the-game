@@ -11,7 +11,10 @@
 
 typedef enum EntityType {
     // List of names of entities in the folder entities/
-    monster1
+    player;
+    monster;
+    weapon;
+    
 } EntityType;
 
 // Exemple
@@ -33,6 +36,7 @@ typedef struct Entity {
     int stats[STATS_AMOUNT];
     void (*update)(struct Entity* e);
     int respawn_delay;
+    EntityType *entity_type;
 } Entity;
 
 Entity* init_entity(char* entity, int respawn_delay, int x, int y);
