@@ -1,18 +1,20 @@
 {
     "name": "Exemple level",
-    "background" : "background.png",
+    "background" : "src_assets_background",
     "structures" : [
         {
+            "identifier" : "wall01",
             "x" : 0,
             "y" : 0,
-            "texture" : "wall.jpg",
+            "resource" : "src_assets_wall",
             "allow_pass_through" : 8,
             "teleport_to_scene" : "none"
         },
         {
+            "identifier" : "wall02",
             "x" : 200,
             "y" : 200,
-            "texture" : "wall.jpg",
+            "resource" : "src_assets_wall",
             "allow_pass_through" : 8,
             "teleport_to_scene" : "none"
         }

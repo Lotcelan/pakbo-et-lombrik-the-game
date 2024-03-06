@@ -4,6 +4,9 @@
 #include <SDL2/SDL.h>
 #include "scenes.h"
 #include <stdbool.h>
+#include "hashtable.h"
+
+typedef struct Scene Scene;
 
 typedef enum GameStatus {
     RUNNING,
@@ -19,6 +22,7 @@ typedef struct GameData {
     SDL_Renderer* renderer;
     SDL_Event event;
 
+    HashTable* resources;
 } GameData;
 
 GameData* init_game(int width, int height, const char* title);

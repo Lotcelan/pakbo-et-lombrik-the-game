@@ -2,6 +2,8 @@
 #include "engine/include/scenes.h"
 #include "engine/include/entity.h"
 
+#include "resources.h"
+
 #include "scenes/scene01/scene01.h"
 
 int main(int argc, char *argv[]) {
@@ -13,6 +15,8 @@ int main(int argc, char *argv[]) {
 
     GameData* game = init_game(800, 600, "SDL2 Window");
 
+    
+    // Init scenes
     Scene* scene01 = init_scene01(game);
     game->current_scene = scene01;
 

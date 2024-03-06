@@ -6,16 +6,18 @@
 
 #include <stdbool.h>
 #include <stdio.h>
+#include <string.h>
 
 #include <jansson.h>
 #include "assets.h"
 #include "entity.h"
 #include "linked_list.h"
+#include "assets.h"
 
 typedef struct GameData GameData;
 
 typedef struct Structure {
-    char* name;
+    char* identifier;
     SDL_Texture* texture;
     SDL_Rect position;
     int allow_pass_through;

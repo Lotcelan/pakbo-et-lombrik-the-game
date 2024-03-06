@@ -28,7 +28,7 @@ int length(List *list)
 
 List *create_list(void *value, List *next) 
     {
-        List *list = malloc(sizeof(*list)) ;
+        List *list = malloc(sizeof(List)) ;
         list->value = value ;
         list->next = next ;
         return list ;
@@ -251,12 +251,12 @@ List *create_list_cyclic(void *value, List *next)
     {
         if (next == NULL)
             {
-                List *list = malloc(sizeof(*list)) ;
+                List *list = malloc(sizeof(List)) ;
                 list->value = value ;
                 list->next = list ;
                 return list ;
             }
-        List *list = malloc(sizeof(*list)) ;
+        List *list = malloc(sizeof(List)) ;
         list->value = value ;
         list->next = next ;
         List *p = next ;

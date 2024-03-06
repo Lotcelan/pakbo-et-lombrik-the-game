@@ -2,6 +2,11 @@
 #define ASSETS_H
 
 #include <SDL2/SDL.h>
+#include <string.h>
+#include "game.h"
+#include "../../resources.h"
+
+typedef struct GameData GameData;
 
 typedef struct {
     char* name;
@@ -12,6 +17,12 @@ typedef struct {
     SDL_Rect dstRect;
 } Texture;
 
+typedef struct MemTexture {
+    int size;
+    unsigned char* data;
+} MemTexture;
+
+SDL_Texture* loadTextureFromMemory(GameData* game, char* resource);
 
 /*
 SDL_Surface* surface = IMG_Load("path_to_image.png");

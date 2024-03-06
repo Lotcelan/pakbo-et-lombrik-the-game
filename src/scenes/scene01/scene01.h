@@ -2,6 +2,7 @@
 #define SCENE01_H
 
 #include "../../engine/include/scenes.h"
+#include "../../resources.h"
 
 #include <stdio.h>
 

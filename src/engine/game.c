@@ -20,6 +20,12 @@ GameData* init_game(int width, int height, const char* title) {
         return NULL;
     }
 
+    // Init resources
+    HashTable* resources = init_resources();
+    gameData->resources = resources;
+
+    displayHashTableResource(resources);
+
     gameData->event = (SDL_Event){0};
     gameData->window = window;
     gameData->renderer = renderer;
