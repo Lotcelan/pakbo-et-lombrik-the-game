@@ -58,7 +58,6 @@ Le fichier `data.json` doit suivre ce format :
             "allow_pass_through" : 8,
             "teleport_to_scene" : "scene02"
         }
-
     ],
     "entities" : [
         {

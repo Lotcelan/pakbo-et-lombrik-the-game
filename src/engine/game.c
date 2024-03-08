@@ -1,6 +1,6 @@
 #include "include/game.h"
 
-GameData* init_game(int width, int height, const char* title) {
+GameData* init_game(int width, int height, const char* title, int capped_fps) {
     GameData* gameData = (GameData*)malloc(sizeof(GameData));
 
     gameData->state = LOADING;
@@ -31,6 +31,10 @@ GameData* init_game(int width, int height, const char* title) {
     gameData->renderer = renderer;
     gameData->current_scene = NULL;
 
+    // Init framerate manager
+    FrameRateManager* frm = init_frm(capped_fps);
+    gameData->frm = frm;
+
     return gameData;
 
 }
@@ -39,4 +43,13 @@ void free_game(GameData* gameData) {
     SDL_DestroyRenderer(gameData->renderer);
     SDL_DestroyWindow(gameData->window);
     free(gameData);
+}
+
+void event_handler(GameData* gameData) {
+    while (SDL_PollEvent(&(gameData->event)) != 0) {
+        if ((gameData->event).type == SDL_QUIT) {
+            gameData->state = CLOSING;
+        }
+
+    }
 }
