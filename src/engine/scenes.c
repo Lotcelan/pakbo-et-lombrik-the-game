@@ -112,13 +112,12 @@ Scene* init_scene(GameData* game, char* title) {
         return NULL;
     }
 
-    // Do something with the loaded JSON data
-    // For example, printing it
     return new;
 
 }
 
 void render_scene(GameData* game) {
+    printf("Rendering scene\n");
     // Using game->renderer, render the scene : the background then all the textures
 
     // Load the background texture contained in game->current_scene->background and resize it to width and height of the window

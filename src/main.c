@@ -15,7 +15,7 @@ int main(int argc, char *argv[]) {
         return -1;
     }
 
-    GameData* game = init_game(800, 600, "SDL2 Window", 5);
+    GameData* game = init_game(800, 600, "SDL2 Window", 30);
 
     
     // Init scenes
