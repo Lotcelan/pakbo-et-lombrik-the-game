@@ -4,8 +4,11 @@ struct _weapon_t
 {
     char *name;
     int damage_value;
-    int *pv;
-    int current_pv;
+    int max_durability;
+    int current_durability;
+    int is_on_ground;
+    
+    
     
 };
 

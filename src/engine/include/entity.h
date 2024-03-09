@@ -17,14 +17,7 @@ typedef enum EntityType {
     
 } EntityType;
 
-// Exemple
- typedef enum Stats {
-    HP,
-    MaxHP,
-    Armor,
-    Attack,
-    STATS_AMOUNT
- } Stats;
+
 
 
 // On pourra en rajouter
@@ -33,15 +26,16 @@ typedef struct Entity {
     Mix_Chunk* sounds[4];
     TTF_Font* font;
     SDL_Rect position;
-    int stats[STATS_AMOUNT];
+    
     void (*update)(struct Entity* e);
-    int respawn_delay;
-
+    
     int x_position;
     int y_position;
     int x_velocity;
     int y_velocity;
-    int state; // for idle or injump ...
+    
+    
+    
 
     EntityType *entity_type;
 } Entity;

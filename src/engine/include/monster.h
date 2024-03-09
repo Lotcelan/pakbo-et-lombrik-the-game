@@ -3,9 +3,9 @@
 
 struct _monster_t{
     char *name;
-    int *hp;
-    int current_hp;
     int direction;
+    int max_hp;
+    int current_hp; // when current_hp  = 0, the entity is dead 
     Weapon_t *weapon;
 
 };
