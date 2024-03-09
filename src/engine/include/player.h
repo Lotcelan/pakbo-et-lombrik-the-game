@@ -7,8 +7,7 @@ struct _player_t{
     int *hp;
     int *state;
     int *double_jump;
-    int *direction;
-    int *speed;
+    int *direction; // looking right or left after a end of a run 
     Weapon_t *weapon;
 
 };

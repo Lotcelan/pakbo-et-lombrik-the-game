@@ -6,3 +6,5 @@ int delete_weapon(Weapon_t *weapon){
         return 1;
     } else {
         return 0;
+        }
+}

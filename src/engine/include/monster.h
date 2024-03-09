@@ -5,10 +5,7 @@ struct _monster_t{
     char *name;
     int *hp;
     int current_hp;
-    
     int direction;
-    int state;
-    
     Weapon_t *weapon;
 
 };

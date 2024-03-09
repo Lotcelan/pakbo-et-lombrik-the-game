@@ -36,6 +36,13 @@ typedef struct Entity {
     int stats[STATS_AMOUNT];
     void (*update)(struct Entity* e);
     int respawn_delay;
+
+    int x_position;
+    int y_position;
+    int x_velocity;
+    int y_velocity;
+    int state; // for idle or injump ...
+
     EntityType *entity_type;
 } Entity;
 
