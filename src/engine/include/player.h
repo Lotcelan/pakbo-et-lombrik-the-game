@@ -3,16 +3,13 @@
 
 struct _player_t{
     char *name;
-    int x_position;
-    int y_position;
-    int current_pv;
-    int *pv;
+    int current_hp;
+    int *hp;
     int *state;
     int *double_jump;
     int *direction;
     int *speed;
-    weapon_t *weapon;
-    SDL_Texture* sprite;
+    Weapon_t *weapon;
 
 };
 

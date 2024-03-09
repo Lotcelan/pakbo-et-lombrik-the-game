@@ -11,9 +11,9 @@
 
 typedef enum EntityType {
     // List of names of entities in the folder entities/
-    player;
-    monster;
-    weapon;
+    player,
+    monster,
+    weapon,
     
 } EntityType;
 

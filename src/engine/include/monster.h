@@ -3,12 +3,13 @@
 
 struct _monster_t{
     char *name;
-    int *pv;
-    int current_pv;
-    int x_position;
-    int y_position;
-    weapon_t *weapon;
-    SDL_Texture* sprite;
+    int *hp;
+    int current_hp;
+    
+    int direction;
+    int state;
+    
+    Weapon_t *weapon;
 
 };
 

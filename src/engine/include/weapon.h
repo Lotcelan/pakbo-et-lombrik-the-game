@@ -6,8 +6,9 @@ struct _weapon_t
     int damage_value;
     int *pv;
     int current_pv;
+    
 };
 
-typedef struct _weapon_t weapon_t;
+typedef struct _weapon_t Weapon_t;
 
-int delete_weapon(weapon_t *weapon);
+int delete_weapon(Weapon_t *weapon);
