@@ -1,70 +1,84 @@
-#include"graph.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
-#include <string.h>
+#incldude"graph.h"
 
 
-AdjListNode* newAdjListNode(char *dest, float weight) {
-    AdjListNode* newNode = (AdjListNode*)malloc(sizeof(AdjListNode));
-    newNode->dest = strdup(dest);
-    newNode->weight = weight;
+
+
+// Fonction pour créer un nœud
+Node* create_Node(int v) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->vertex = v;
     newNode->next = NULL;
     return newNode;
 }
 
+// Fonction pour créer un graphe
+Graph* create_Graph(int vertices) {
+    struct Graph* graph = (struct Graph*)malloc(sizeof(struct Graph));
+    graph->numVertices = vertices;
 
-Graph* createGraph(int num_vertices, bool directed) {
-    Graph* graph = (Graph*)malloc(sizeof(Graph));
-    graph->num_vertices = num_vertices;
-    graph->directed = directed;
+    // Allocation de la mémoire pour les listes d'adjacence
+    graph->adjLists = (struct Node**)malloc(vertices * sizeof(struct Node*));
 
-    graph->array = (AdjList*)malloc(num_vertices * sizeof(AdjList));
-
-    for (int i = 0; i < num_vertices; ++i)
-        graph->array[i].head = NULL;
+    // Initialisation des listes d'adjacence à NULL
+    for (int i = 0; i < vertices; i++) {
+        graph->adjLists[i] = NULL;
+    }
 
     return graph;
 }
 
-void addEdge(Graph* graph, char *src, char *dest, float weight) {
-    // Ajouter une arête de src à dest
-    AdjListNode* newNode = newAdjListNode(dest, weight);
-    newNode->next = graph->array[src].head;
-    graph->array[src].head = newNode;
+// Fonction pour ajouter une arête à un graphe non orienté
+void add_edge(struct Graph* graph, int src, int dest) {
+    // Ajout d'une arête de src à dest
+    struct Node* newNode = createNode(dest);
+    newNode->next = graph->adjLists[src];
+    graph->adjLists[src] = newNode;
 
-    // Si le graphe n'est pas orienté, ajouter également une arête de dest à src
-    if (!graph->directed) {
-        newNode = newAdjListNode(src, weight);
-        newNode->next = graph->array[dest].head;
-        graph->array[dest].head = newNode;
-    }
+    // Comme le graphe est non orienté, on ajoute également une arête de dest à src
+    newNode = createNode(src);
+    newNode->next = graph->adjLists[dest];
+    graph->adjLists[dest] = newNode;
 }
 
-void printGraph(Graph* graph) {
-    for (int v = 0; v < graph->num_vertices; ++v) {
-        AdjListNode* pCrawl = graph->array[v].head;
-        printf("\n Adjacency list of vertex %s\n head ", graph->array[v].head->dest);
-        while (pCrawl) {
-            printf("-> %s(%.2f)", pCrawl->dest, pCrawl->weight);
-            pCrawl = pCrawl->next;
+// Fonction pour afficher le graphe
+void print_Graph(struct Graph* graph) {
+    for (int v = 0; v < graph->numVertices; v++) {
+        struct Node* temp = graph->adjLists[v];
+        printf("Adjacency list of vertex %d\n ", v);
+        while (temp) {
+            printf("%d -> ", temp->vertex);
+            temp = temp->next;
         }
         printf("\n");
     }
 }
 
-// Exemple d'utilisation
+
+void get_neighbors(struct Graph* graph, int vertex) {
+    struct Node* temp = graph->adjLists[vertex];
+    printf("Neighbors of vertex %d are: ", vertex);
+    while (temp) {
+        printf("%d ", temp->vertex);
+        temp = temp->next;
+    }
+    printf("\n");
+}
 
 //int main() {
-//    int num_vertices = 5;
-//    Graph* graph = createGraph(num_vertices, false);
-//
-//    addEdge(graph, "A", "B", 2.5);
-//    addEdge(graph, "A", "C", 1.8);
-//    addEdge(graph, "B", "D", 3.2);
+//    int vertices = 5;
+//    struct Graph* graph = createGraph(vertices);
+//    addEdge(graph, 0, 1);
+//    addEdge(graph, 0, 4);
+//    addEdge(graph, 1, 2);
+//    addEdge(graph, 1, 3);
+//    addEdge(graph, 1, 4);
+//    addEdge(graph, 2, 3);
+//    addEdge(graph, 3, 4);
 //
 //    printGraph(graph);
+//    getNeighbors(graph, 1);
 //
 //    return 0;
 //}
-
