@@ -58,14 +58,17 @@ void print_Node(Node *node) {
 
 // Fonction pour afficher le graphe
 void print_Graph(Graph* graph) {
-    for (int v = 0; v < graph->numVertices; v++) {
-        Node* temp = graph->adjLists[v];
-        printf("Adjacency list of vertex %d\n ", v);
-        while (temp) {
-            printf("%d (%d) -> ", temp->vertex, temp->weight); // Affichage du poids
-            temp = temp->next;
+    for (int i = 0; i < graph->numVertices; i++) {
+        printf("%d -> [", i);
+        Node* current = graph->adjLists[i];
+        while (current != NULL) {
+            printf("%d", current->vertex);
+            if (current->next != NULL) {
+                printf(",");
+            }
+            current = current->next;
         }
-        printf("\n");
+        printf("]\n");
     }
 }
 
