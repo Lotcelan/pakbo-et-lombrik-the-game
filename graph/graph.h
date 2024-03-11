@@ -21,17 +21,30 @@ typedef struct _Graph Graph;
 
 Node* create_Node(int v, bool (*vertex_function(voide)));
 
-Graph* create_Graph(int vertices)
+Graph* create_Graph(int vertices);
 
-void add_edge(struct Graph* graph, int src, int dest)
+void add_edge(Graph* graph, int src, int dest);
 
-void print_Graph(struct Graph* graph)
+void print_Node(Node *node);
 
-void get_neighbors(struct Graph* graph, int vertex)
+void print_Graph(Graph* graph);
+
+Node* get_Node_from_Graph(Graph* graph, int vertex);
+
+Node *get_neighbors(Graph* graph, int vertex);
+
+void print_neighbors(Graph* graph, int vertex);
+
+bool has_edge(Graph* graph, int src, int dest);
 
 void delelete_edge(Graph* graph, char *src, char *dest);
 
-bool has_edge(Graph* graph, char *src, char *dest);
+
+
+List *get_vertex_sprites(Graph* graph, int vertex);
+
+bool (*get_vertex_function(Node* node))(void);
+
 
 float get_weight(Graph* graph, char *src, char *dest);
 
