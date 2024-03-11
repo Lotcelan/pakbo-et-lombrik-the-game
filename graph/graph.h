@@ -1,11 +1,11 @@
-
+#include"list.h"
 
 // Structure de nœud pour la liste d'adjacence
 struct _Node {
     int vertex;
     int weight;
     List *sprites;
-    bool (*vertex_function(void);
+    int (*vertex_function)(void);
     struct _Node* next;
 };
 
@@ -19,11 +19,11 @@ typedef struct _Node Node;
 
 typedef struct _Graph Graph;
 
-Node* create_Node(int v, bool (*vertex_function(voide)));
+Node* create_Node(int v, int weight, int (*vertex_function)(void));
 
 Graph* create_Graph(int vertices);
 
-void add_edge(Graph* graph, int src, int dest);
+void add_edge(Graph* graph, int src, int dest, int weight, int (*vertex_function)(void));
 
 void print_Node(Node *node);
 
@@ -35,16 +35,11 @@ Node *get_neighbors(Graph* graph, int vertex);
 
 void print_neighbors(Graph* graph, int vertex);
 
-bool has_edge(Graph* graph, int src, int dest);
+int has_edge(Graph* graph, int src, int dest);
 
-void delelete_edge(Graph* graph, char *src, char *dest);
-
-
+void delelete_edge(Graph* graph, int src, int dest);
 
 List *get_vertex_sprites(Graph* graph, int vertex);
-
-bool (*get_vertex_function(Node* node))(void);
-
 
 float get_weight(Graph* graph, char *src, char *dest);
 

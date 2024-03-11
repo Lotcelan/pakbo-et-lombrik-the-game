@@ -1,15 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#incldude"graph.h"
-#include"list.h"
+#include"graph.h"
+
 
 
 
 
 
 // Fonction pour créer un nœud
-Node* create_Node(int v, int weight) { // Modification pour inclure le poids
+Node* create_Node(int v, int weight, int (*vertex_function)(void)) { // Modification pour inclure le poids
     Node* newNode = (Node*)malloc(sizeof(Node));
     newNode->vertex = v;
     newNode->weight = weight; // Initialisation du poids
@@ -35,14 +35,14 @@ Graph* create_Graph(int vertices) {
 }
 
 // Fonction pour ajouter une arête à un graphe non orienté
-void add_edge(Graph* graph, int src, int dest, int weight, bool (*vertex_function(void))) { // Modification pour inclure le poids
+void add_edge(Graph* graph, int src, int dest, int weight, int (*vertex_function)(void)) { // Modification pour inclure le poids
     // Ajout d'une arête de src à dest
-    Node* newNode = createNode(dest, weight, vertex_function); // Création du nœud avec le poids
+    Node* newNode = create_Node(dest, weight, vertex_function); // Création du nœud avec le poids
     newNode->next = graph->adjLists[src];
     graph->adjLists[src] = newNode;
 
     // Comme le graphe est non orienté, on ajoute également une arête de dest à src
-    newNode = createNode(src, weight); // Création du nœud avec le poids
+    newNode = create_Node(src, weight, vertex_function); // Création du nœud avec le poids
     newNode->next = graph->adjLists[dest];
     graph->adjLists[dest] = newNode;
 }
@@ -53,7 +53,7 @@ void print_Node(Node *node) {
         return;
     }
     printf("%d -> ",node->vertex);
-    print_node(node->next);
+    print_Node(node->next);
 }
 
 // Fonction pour afficher le graphe
@@ -93,21 +93,21 @@ void print_neighbors(Graph* graph, int vertex) {
     return;
 }
 
-bool has_edge(Graph* graph, int src, int dest) {
+int has_edge(Graph* graph, int src, int dest) {
     Node *src_neighbors = get_neighbors(graph, src);
-    while(src_neigbors != NULL){
-        if(src_neibors->vertex == dest){
-            return true;
+    while(src_neighbors != NULL){
+        if(src_neighbors->vertex == dest){
+            return 1;
         }
-        src_neighbors = src_neigbors->next;
+        src_neighbors = src_neighbors->next;
     }
-    return false;
+    return 0;
     
 }
 
 List *get_vertex_sprites(Graph* graph, int vertex) {
     Node *node = get_Node_from_Graph(graph, vertex);
-    return node->sprites
+    return node->sprites;
 }
 
 void delete_edge(Graph* graph, int src, int dest) {
@@ -144,25 +144,27 @@ void delete_edge(Graph* graph, int src, int dest) {
     }
 }
 
-bool (*get_vertex_function(Node* node))(void) {
-    
-}
 
-//int main() {
-//    int vertices = 5;
-//    struct Graph* graph = createGraph(vertices);
-//    addEdge(graph, 0, 1, 10);
-//    addEdge(graph, 0, 4, 5);  
-//    addEdge(graph, 1, 2, 8);
-//    addEdge(graph, 1, 3, 12);
-//    addEdge(graph, 1, 4, 4);
-//    addEdge(graph, 2, 3, 7);
-//    addEdge(graph, 3, 4, 3);
-//
-//    printGraph(graph);
-//
-//    return 0;
-//}
+
+int main() {
+    int vertices = 5;
+    struct Graph* graph = create_Graph(vertices);
+    add_edge(graph, 0, 1, 10, NULL);
+    add_edge(graph, 0, 4, 5, NULL);
+    add_edge(graph, 1, 2, 8, NULL);
+    add_edge(graph, 1, 3, 12, NULL);
+    add_edge(graph, 1, 4, 4, NULL);
+    add_edge(graph, 2, 3, 7, NULL);
+    add_edge(graph, 3, 4, 3, NULL);
+
+    Node *node_1 = get_Node_from_Graph(graph, 1);
+    print_Node(node_1);
+    print_neighbors(graph, 1);
+
+    print_Graph(graph);
+
+    return 0;
+}
 
 
 
