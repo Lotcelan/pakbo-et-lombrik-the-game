@@ -1,175 +1,189 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
-#include"graph.h"
+#include <string.h>
+#include <dlfcn.h>
+#include"str2.h"
 
 
 
-
-
-
-// Fonction pour créer un nœud
-Node* create_Node(int v, int weight, int (*vertex_function)(void)) { // Modification pour inclure le poids
-    Node* newNode = (Node*)malloc(sizeof(Node));
-    newNode->vertex = v;
-    newNode->weight = weight; // Initialisation du poids
-    newNode->vertex_function = vertex_function;
+// Fonction pour créer un noeud
+Node* createNode(char* vertex, int weight, FunctionPointer func) {
+    Node* newNode = malloc(sizeof(Node));
+    newNode->vertex = vertex;
+    newNode->weight = weight;
     newNode->next = NULL;
+    newNode->func = func;  // Initialisez à la fonction passée
     return newNode;
 }
 
 // Fonction pour créer un graphe
-Graph* create_Graph(int vertices) {
-    Graph* graph = (Graph*)malloc(sizeof(Graph));
+Graph* createGraph(int vertices) {
+    Graph* graph = malloc(sizeof(Graph));
     graph->numVertices = vertices;
 
-    // Allocation de la mémoire pour les listes d'adjacence
-    graph->adjLists = (Node**)malloc(vertices * sizeof(Node*));
+    graph->adjLists = malloc(vertices * sizeof(Node*));
+    graph->vertices = malloc(vertices * sizeof(char*));
 
-    // Initialisation des listes d'adjacence à NULL
-    for (int i = 0; i < vertices; i++) {
+    int i;
+    for (i = 0; i < vertices; i++) {
         graph->adjLists[i] = NULL;
+        graph->vertices[i] = NULL;
     }
 
     return graph;
 }
 
-// Fonction pour ajouter une arête à un graphe non orienté
-void add_edge(Graph* graph, int src, int dest, int weight, int (*vertex_function)(void)) { // Modification pour inclure le poids
-    // Ajout d'une arête de src à dest
-    Node* newNode = create_Node(dest, weight, vertex_function); // Création du nœud avec le poids
-    newNode->next = graph->adjLists[src];
-    graph->adjLists[src] = newNode;
 
-    // Comme le graphe est non orienté, on ajoute également une arête de dest à src
-    newNode = create_Node(src, weight, vertex_function); // Création du nœud avec le poids
-    newNode->next = graph->adjLists[dest];
-    graph->adjLists[dest] = newNode;
+void addEdge(Graph* graph, char* src, char* dest, int weight, FunctionPointer func) {
+    // Vérifiez si une arête existe déjà
+    if (hasEdge(graph, src, dest)) {
+        // Si l'arête existe déjà, trouvez-la et mettez à jour le poids et la fonction
+        Node* temp = graph->adjLists[*src - 'A'];
+        while (temp != NULL) {
+            if (strcmp(temp->vertex, dest) == 0) {
+                temp->weight = weight;
+                temp->func = func;
+                return;
+            }
+            temp = temp->next;
+        }
+    } else {
+        // Si l'arête n'existe pas, créez une nouvelle arête
+        Node* newNode = createNode(dest, weight, func);
+        newNode->next = graph->adjLists[*src - 'A'];
+        graph->adjLists[*src - 'A'] = newNode;
+    }
 }
 
-void print_Node(Node *node) {
-    if(node == NULL){
-        printf("NULL\n");
+
+
+void maFonction() {
+    printf("Ceci est une fonction stockée dans un sommet.\n");
+}
+
+void maFonction_2(){
+    printf("nill");
+}
+
+void maFonction_3(){
+    printf("");
+}
+
+void printGraph(Graph* graph) {
+    Dl_info info;
+    for (int v = 0; v < graph->numVertices; v++) {
+        Node* temp = graph->adjLists[v];
+        while (temp) {
+            dladdr(temp->func, &info);
+            printf("%s -> %s [Fonction : %s]\n", graph->vertices[v], temp->vertex, info.dli_sname);
+            temp = temp->next;
+        }
+    }
+}
+
+Node* getVertex(Graph* graph, char* name) {
+    for (int i = 0; i < graph->numVertices; i++) {
+        if (strcmp(graph->vertices[i], name) == 0) {
+            return graph->adjLists[i];
+        }
+    }
+    return NULL;
+}
+
+void getNeighbors(Graph* graph, char* name) {
+    Node* vertex = getVertex(graph, name);
+    if (vertex == NULL) {
+        printf("Sommet non trouvé.\n");
         return;
     }
-    printf("%d -> ",node->vertex);
-    print_Node(node->next);
-}
-
-// Fonction pour afficher le graphe
-void print_Graph(Graph* graph) {
-    for (int i = 0; i < graph->numVertices; i++) {
-        printf("%d -> [", i);
-        Node* current = graph->adjLists[i];
-        while (current != NULL) {
-            printf("%d", current->vertex);
-            if (current->next != NULL) {
-                printf(",");
-            }
-            current = current->next;
-        }
-        printf("]\n");
+    printf("Les voisins du sommet %s sont :\n", name);
+    while (vertex != NULL) {
+        printf("%s \n", vertex->vertex);
+        vertex = vertex->next;
     }
 }
 
-Node* get_Node_from_Graph(Graph* graph, int vertex) {
-    for (int i = 0; i < graph->numVertices; i++) {
-        Node* current = graph->adjLists[i];
-        while (current != NULL) {
-            if (current->vertex == vertex) {
-                return current;
-            }
-            current = current->next;
-        }
+FunctionPointer getFunction(Graph* graph, char* name) {
+    Node* vertex = getVertex(graph, name);
+    if (vertex == NULL) {
+        printf("Sommet non trouvé.\n");
+        return NULL;
     }
-    return NULL; // Retourne NULL si le nœud n'est pas trouvé
+    return vertex->func;
 }
 
-Node *get_neighbors(Graph* graph, int vertex) {
-    // Renvoie un pointeur vers le premier nœud de la liste d'adjacence de ce sommet.
-    return graph->adjLists[vertex];
-}
-
-void print_neighbors(Graph* graph, int vertex) {
-    Node *head = get_neighbors(graph, vertex);
-    print_Node(head);
-    return;
-}
-
-int has_edge(Graph* graph, int src, int dest) {
-    Node *src_neighbors = get_neighbors(graph, src);
-    while(src_neighbors != NULL){
-        if(src_neighbors->vertex == dest){
+// Fonction pour vérifier si une arête existe
+int hasEdge(Graph* graph, char* vertex_src, char* vertex_dest) {
+    Node* vertex = getVertex(graph, vertex_src);
+    if (vertex == NULL) {
+        return 0;
+    }
+    while (vertex != NULL) {
+        if (strcmp(vertex->vertex, vertex_dest) == 0) {
             return 1;
         }
-        src_neighbors = src_neighbors->next;
+        vertex = vertex->next;
     }
     return 0;
-    
 }
 
-List *get_vertex_sprites(Graph* graph, int vertex) {
-    Node *node = get_Node_from_Graph(graph, vertex);
-    return node->sprites;
-}
-
-void delete_edge(Graph* graph, int src, int dest) {
-    // Suppression de l'arête de src à dest
+void deleteEdge(Graph* graph, char* src, char* dst) {
+    int i = *src - 'A';
+    Node* temp = graph->adjLists[i];
     Node* prev = NULL;
-    Node* curr = graph->adjLists[src];
-    while (curr != NULL && curr->vertex != dest) {
-        prev = curr;
-        curr = curr->next;
-    }
-    if (curr != NULL) {
-        if (prev != NULL) {
-            prev->next = curr->next;
-        } else {
-            graph->adjLists[src] = curr->next;
-        }
-        free(curr);
+
+    // Parcourir la liste d'adjacence du sommet src
+    while (temp != NULL && strcmp(temp->vertex, dst) != 0) {
+        prev = temp;
+        temp = temp->next;
     }
 
-    // Suppression de l'arête de dest à src
-    prev = NULL;
-    curr = graph->adjLists[dest];
-    while (curr != NULL && curr->vertex != src) {
-        prev = curr;
-        curr = curr->next;
+    // Si l'arête n'existe pas
+    if (temp == NULL) {
+        printf("Aucune arête trouvée entre %s et %s\n", src, dst);
+        return;
     }
-    if (curr != NULL) {
-        if (prev != NULL) {
-            prev->next = curr->next;
-        } else {
-            graph->adjLists[dest] = curr->next;
-        }
-        free(curr);
+
+    // Si l'arête est la première de la liste
+    if (prev == NULL) {
+        graph->adjLists[i] = temp->next;
+    } else {
+        prev->next = temp->next;
     }
+
+    free(temp);
 }
+
 
 
 
 int main() {
-    int vertices = 5;
-    struct Graph* graph = create_Graph(vertices);
-    add_edge(graph, 0, 1, 10, NULL);
-    add_edge(graph, 0, 4, 5, NULL);
-    add_edge(graph, 1, 2, 8, NULL);
-    add_edge(graph, 1, 3, 12, NULL);
-    add_edge(graph, 1, 4, 4, NULL);
-    add_edge(graph, 2, 3, 7, NULL);
-    add_edge(graph, 3, 4, 3, NULL);
+    Graph* graph = createGraph(3);
+    graph->vertices[0] = "A";
+    graph->vertices[1] = "B";
+    graph->vertices[2] = "C";
 
-    Node *node_1 = get_Node_from_Graph(graph, 1);
-    print_Node(node_1);
-    print_neighbors(graph, 1);
+    addEdge(graph, "A", "B", 1, maFonction);
+    addEdge(graph, "A", "B", 4, maFonction_2);
+    addEdge(graph, "B", "A", 4, maFonction_3);
+    addEdge(graph, "B", "C", 2, maFonction);
+    printGraph(graph);
 
-    print_Graph(graph);
+    printf("Before delete\n");
+
+    deleteEdge(graph, "B", "A");
+
+    printf("After delete\n");
+    printGraph(graph);
+    getNeighbors(graph, "A");
+
+    FunctionPointer func = getFunction(graph, "A");
+
+    
+    if (func != NULL) {
+        func();
+    }
+    
 
     return 0;
 }
-
-
-
-
-

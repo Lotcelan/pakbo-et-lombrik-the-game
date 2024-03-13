@@ -1,48 +1,43 @@
-#include"list.h"
 
-// Structure de nœud pour la liste d'adjacence
-struct _Node {
-    int vertex;
+// Définition de la structure pour un noeud
+typedef void (*FunctionPointer)();
+
+typedef struct Node {
+    char* vertex;
     int weight;
-    List *sprites;
-    int (*vertex_function)(void);
-    struct _Node* next;
-};
+    struct Node* next;
+    FunctionPointer func;  // Ajout d'un pointeur de fonction
+} Node;
 
-// Structure de graphe
-struct _Graph {
+// Définition de la structure pour le graphe
+typedef struct Graph {
     int numVertices;
-    struct _Node** adjLists; //tableau de pointeurs vers les listes d'adjacence. Chaque élément du tableau pointe vers le premier nœud de la liste d'adjacence d'un sommet particulier.
-};
+    Node** adjLists;
+    char** vertices;
+} Graph;
 
-typedef struct _Node Node;
-
-typedef struct _Graph Graph;
-
-Node* create_Node(int v, int weight, int (*vertex_function)(void));
-
-Graph* create_Graph(int vertices);
-
-void add_edge(Graph* graph, int src, int dest, int weight, int (*vertex_function)(void));
-
-void print_Node(Node *node);
-
-void print_Graph(Graph* graph);
-
-Node* get_Node_from_Graph(Graph* graph, int vertex);
-
-Node *get_neighbors(Graph* graph, int vertex);
-
-void print_neighbors(Graph* graph, int vertex);
-
-int has_edge(Graph* graph, int src, int dest);
-
-void delelete_edge(Graph* graph, int src, int dest);
-
-List *get_vertex_sprites(Graph* graph, int vertex);
-
-float get_weight(Graph* graph, char *src, char *dest);
+void addEdge(Graph* graph, char* src, char* dest, int weight, FunctionPointer func);
 
 
+
+Graph* createGraph(int vertices);
+
+Node* createNode(char* vertex, int weight, FunctionPointer func);
+
+void printGraph(Graph* graph);
+
+FunctionPointer getFunction(Graph* graph, char* name);
+
+void getNeighbors(Graph* graph, char* name);
+
+Node* getVertex(Graph* graph, char* name);
+
+int hasEdge(Graph* graph, char* vertex_src, char* vertex_dest);
+
+void maFonction();
+void maFonction_2();
+void maFonction_3();
+
+void deleteEdge(Graph* graph, char* src, char* dst);
 
 
