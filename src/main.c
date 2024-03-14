@@ -30,7 +30,16 @@ int main(int argc, char *argv[]) {
         - Render the entities
     */
 
+    // Variables for deltaT between each loop
+    int t0;
+    t0 = SDL_GetTicks();
+    int deltaT;
+
     while (game->state != CLOSING) {
+        // Calculate deltaT and set t0 to the current time
+        deltaT = SDL_GetTicks() - t0;
+        t0 = SDL_GetTicks(); 
+
         printf("hola\n");
         // event_handler(game);
         while (SDL_PollEvent(&(game->event)) != 0) {
