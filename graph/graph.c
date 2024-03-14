@@ -82,6 +82,8 @@ void printGraph(Graph* graph) {
 }
 
 Node* getVertex(Graph* graph, char* name) {
+    //Permet de récupérer le Node associé à la chaine de caractère
+    //et donc toutes les données stockées dans le sommet
     for (int i = 0; i < graph->numVertices; i++) {
         if (strcmp(graph->vertices[i], name) == 0) {
             return graph->adjLists[i];
@@ -90,7 +92,8 @@ Node* getVertex(Graph* graph, char* name) {
     return NULL;
 }
 
-void getNeighbors(Graph* graph, char* name) {
+void printNeighbors(Graph* graph, char* name){
+    //Affichage de tous les voisins, pratique pour le debug
     Node* vertex = getVertex(graph, name);
     if (vertex == NULL) {
         printf("Sommet non trouvé.\n");
@@ -103,7 +106,8 @@ void getNeighbors(Graph* graph, char* name) {
     }
 }
 
-FunctionPointer getFunction(Graph* graph, char* name) {
+FunctionPointer getFunction(Graph* graph, char* name){
+    //Permet de récu
     Node* vertex = getVertex(graph, name);
     if (vertex == NULL) {
         printf("Sommet non trouvé.\n");
@@ -111,6 +115,31 @@ FunctionPointer getFunction(Graph* graph, char* name) {
     }
     return vertex->func;
 }
+
+FunctionPointer getFunction(Graph* graph, char* src, char* dest){
+    // Trouver le noeud source
+    Node* srcNode = getVertex(graph, src);
+    if (srcNode == NULL) {
+        printf("Sommet source non trouvé.\n");
+        return NULL;
+    }
+
+    // Parcourir la liste des arêtes du noeud source
+    Node* temp = srcNode;
+    while (temp != NULL) {
+        // Si le sommet de destination est trouvé
+        if (strcmp(temp->vertex, dest) == 0) {
+            // Renvoyer la fonction associée à cette arête
+            return temp->func;
+        }
+        temp = temp->next;
+    }
+
+    // Si le sommet de destination n'est pas trouvé
+    printf("Sommet de destination non trouvé.\n");
+    return NULL;
+}
+
 
 // Fonction pour vérifier si une arête existe
 int hasEdge(Graph* graph, char* vertex_src, char* vertex_dest) {
@@ -156,6 +185,47 @@ void deleteEdge(Graph* graph, char* src, char* dst) {
 
 
 
+// Fonction pour créer un voisin
+Neighbor* createNeighbor(char* vertex) {
+    Neighbor* newNeighbor = malloc(sizeof(Neighbor));
+    newNeighbor->vertex = vertex;
+    newNeighbor->next = NULL;
+    return newNeighbor;
+}
+
+// Fonction pour obtenir les voisins d'un sommet
+Neighbor* getNeighbors(Graph* graph, char* src) {
+    // Trouver le noeud source
+    Node* srcNode = getVertex(graph, src);
+    if (srcNode == NULL) {
+        printf("Sommet source non trouvé.\n");
+        return NULL;
+    }
+
+    // Créer une liste de voisins
+    Neighbor* neighbors = NULL;
+    Neighbor* last = NULL;
+
+    Node* temp = srcNode;
+    while (temp != NULL) {
+        
+        Neighbor* newNeighbor = createNeighbor(temp->vertex);
+
+        
+        if (neighbors == NULL) {
+            neighbors = newNeighbor;
+        } else {
+            last->next = newNeighbor;
+        }
+        last = newNeighbor;
+
+        temp = temp->next;
+    }
+
+    return neighbors;
+}
+
+
 
 int main() {
     Graph* graph = createGraph(3);
@@ -164,7 +234,7 @@ int main() {
     graph->vertices[2] = "C";
 
     addEdge(graph, "A", "B", 1, maFonction);
-    addEdge(graph, "A", "B", 4, maFonction_2);
+    addEdge(graph, "A", "B", 4, maFonction_2); //Cette ligne écrase la précédente
     addEdge(graph, "B", "A", 4, maFonction_3);
     addEdge(graph, "B", "C", 2, maFonction);
     printGraph(graph);
@@ -175,9 +245,9 @@ int main() {
 
     printf("After delete\n");
     printGraph(graph);
-    getNeighbors(graph, "A");
+    printNeighbors(graph, "A");
 
-    FunctionPointer func = getFunction(graph, "A");
+    FunctionPointer func = getFunction(graph, "A", "B"); // renvoie maFonction_2
 
     
     if (func != NULL) {
