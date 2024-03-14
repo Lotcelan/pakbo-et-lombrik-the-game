@@ -43,4 +43,6 @@ void update_entities(List* entities);
 void update_self(Entity* e);
 void free_entity(Entity* e);
 
+void update_pos_speed(Entity *e, float a_x, float a_y, int dt);
+
 #endif
