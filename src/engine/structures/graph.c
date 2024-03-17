@@ -105,15 +105,6 @@ void printNeighbors(Graph* graph, char* name){
     }
 }
 
-FunctionPointer getFunction(Graph* graph, char* name){
-    //Permet de récu
-    Node* vertex = getVertex(graph, name);
-    if (vertex == NULL) {
-        printf("Sommet non trouvé.\n");
-        return NULL;
-    }
-    return vertex->func;
-}
 
 FunctionPointer getFunction(Graph* graph, char* src, char* dest){
     // Trouver le noeud source

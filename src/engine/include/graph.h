@@ -33,7 +33,7 @@ Node* createNode(char* vertex, int weight, FunctionPointer func);
 
 void printGraph(Graph* graph);
 
-FunctionPointer getFunction(Graph* graph, char* name);
+FunctionPointer getFunction(Graph* graph, char* src, char* dst);
 
 void printNeighbors(Graph* graph, char* name);
 
