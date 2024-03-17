@@ -2,8 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <dlfcn.h>
-#include"str2.h"
-
+#include "../include/graph.h"
 
 
 // Fonction pour créer un noeud
@@ -227,33 +226,33 @@ Neighbor* getNeighbors(Graph* graph, char* src) {
 
 
 
-int main() {
-    Graph* graph = createGraph(3);
-    graph->vertices[0] = "A";
-    graph->vertices[1] = "B";
-    graph->vertices[2] = "C";
+// int main() {
+//     Graph* graph = createGraph(3);
+//     graph->vertices[0] = "A";
+//     graph->vertices[1] = "B";
+//     graph->vertices[2] = "C";
 
-    addEdge(graph, "A", "B", 1, maFonction);
-    addEdge(graph, "A", "B", 4, maFonction_2); //Cette ligne écrase la précédente
-    addEdge(graph, "B", "A", 4, maFonction_3);
-    addEdge(graph, "B", "C", 2, maFonction);
-    printGraph(graph);
+//     addEdge(graph, "A", "B", 1, maFonction);
+//     addEdge(graph, "A", "B", 4, maFonction_2); //Cette ligne écrase la précédente
+//     addEdge(graph, "B", "A", 4, maFonction_3);
+//     addEdge(graph, "B", "C", 2, maFonction);
+//     printGraph(graph);
 
-    printf("Before delete\n");
+//     printf("Before delete\n");
 
-    deleteEdge(graph, "B", "A");
+//     deleteEdge(graph, "B", "A");
 
-    printf("After delete\n");
-    printGraph(graph);
-    printNeighbors(graph, "A");
+//     printf("After delete\n");
+//     printGraph(graph);
+//     printNeighbors(graph, "A");
 
-    FunctionPointer func = getFunction(graph, "A", "B"); // renvoie maFonction_2
+//     FunctionPointer func = getFunction(graph, "A", "B"); // renvoie maFonction_2
 
     
-    if (func != NULL) {
-        func();
-    }
+//     if (func != NULL) {
+//         func();
+//     }
     
 
-    return 0;
-}
+//     return 0;
+// }
