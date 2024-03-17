@@ -39,6 +39,7 @@ void free_scene(Scene* scene);
 void change_scene(void (*next)(void));
 SDL_Texture* load_texture(SDL_Renderer* renderer, char* path);
 
+void free_structure(Structure* s);
 void init_scene_with_json(GameData* game, json_t *root, Scene* scene);
 
 #endif

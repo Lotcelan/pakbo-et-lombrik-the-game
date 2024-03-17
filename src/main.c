@@ -15,7 +15,7 @@ int main(int argc, char *argv[]) {
         return -1;
     }
 
-    GameData* game = init_game(800, 600, "SDL2 Window", 30);
+    GameData* game = init_game(16, 16, 1024, 1024, "Pakbo é Lonbrik", 30);
 
     
     // Init scenes
@@ -36,6 +36,7 @@ int main(int argc, char *argv[]) {
     int deltaT;
 
     while (game->state != CLOSING) {
+        // downscale_render(game);
         // Calculate deltaT and set t0 to the current time
         deltaT = SDL_GetTicks() - t0;
         t0 = SDL_GetTicks(); 
@@ -57,6 +58,8 @@ int main(int argc, char *argv[]) {
         }
 
         render_scene(game);
+
+        // upscale_render(game);
 
         SDL_RenderPresent(game->renderer);
         cap_fps(game->frm);

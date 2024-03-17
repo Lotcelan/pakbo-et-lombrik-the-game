@@ -25,7 +25,7 @@ typedef struct FrameRateManager {
 FrameRateManager* init_frm(int capped_fps);
 void cap_fps(FrameRateManager* f);
 int get_fps(FrameRateManager* f);
-
+void destroyFrameRateManager(FrameRateManager* f);
 
 // Timer functions
 Timer* init_timer();
@@ -35,6 +35,5 @@ void pause_timer(Timer* t);
 void unpause_timer(Timer* t);
 int get_timer_ticks(Timer* t);
 bool time_elapsed(Timer* t, int ms);
-
 
 #endif

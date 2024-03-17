@@ -36,6 +36,10 @@ List *create_list(void *value, List *next)
 
 List *list_del_first( List *l, void delete(List*) ) 
     {
+        if (l == NULL)
+            {
+                return NULL ;
+            }
         List *p = l->next ;
         if (delete!=NULL) 
             {

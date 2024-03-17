@@ -22,8 +22,8 @@ typedef enum EntityType {
 
 // On pourra en rajouter
 typedef struct Entity {
-    SDL_Texture* textures[4];
-    Mix_Chunk* sounds[4];
+    // SDL_Texture* textures[4];
+    // Mix_Chunk* sounds[4];
     TTF_Font* font;
     SDL_Rect position;
     
