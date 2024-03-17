@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <dlfcn.h>
-#include"str2.h"
+#include"graph.h"
 
 
 
