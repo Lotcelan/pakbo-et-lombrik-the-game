@@ -69,15 +69,16 @@ void maFonction_3(){
 }
 
 void printGraph(Graph* graph) {
-    Dl_info info;
-    for (int v = 0; v < graph->numVertices; v++) {
-        Node* temp = graph->adjLists[v];
-        while (temp) {
-            dladdr(temp->func, &info);
-            printf("%s -> %s [Fonction : %s]\n", graph->vertices[v], temp->vertex, info.dli_sname);
-            temp = temp->next;
-        }
-    }
+    // Dl_info info;
+    // for (int v = 0; v < graph->numVertices; v++) {
+    //     Node* temp = graph->adjLists[v];
+    //     while (temp) {
+    //         dladdr(temp->func, &info);
+    //         printf("%s -> %s [Fonction : %s]\n", graph->vertices[v], temp->vertex, info.dli_sname);
+    //         temp = temp->next;
+    //     }
+    // }
+    printf("coucou je suis un graphe\n");
 }
 
 Node* getVertex(Graph* graph, char* name) {
