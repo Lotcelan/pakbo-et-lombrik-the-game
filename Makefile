@@ -27,12 +27,11 @@ DEPS := $(OBJS:.o=.d)
 # Default target
 .PHONY: all
 all: $(TARGET)
-# Copy all scenes/*/*.json to bin/scenes
 	@mkdir -p bin/scenes
 	@find src/scenes/ -name '*.json' -exec cp {} bin/scenes/ \;
 
 .PHONY: run
-run: $(TARGET)
+run: all
 	./$(TARGET)
 
 # Linking
