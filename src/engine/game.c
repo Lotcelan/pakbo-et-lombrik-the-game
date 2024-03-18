@@ -79,6 +79,14 @@ void set_dir() {
     // Récupérer le chemin de l'exécutable
 #if defined(_WIN32) || defined(_WIN64)
     _get_pgmptrs(&exec_path);
+#elif defined(__APPLE__)
+    uint32_t size = sizeof(path);
+    if (_NSGetExecutablePath(path, &size) == 0) {
+        exec_path = path;
+    } else {
+        perror("_NSGetExecutablePath");
+        exit(EXIT_FAILURE);
+    }
 #else
     ssize_t length = readlink("/proc/self/exe", path, sizeof(path) - 1);
     if (length != -1) {
