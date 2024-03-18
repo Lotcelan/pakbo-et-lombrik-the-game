@@ -71,14 +71,31 @@ void event_handler(GameData* gameData) {
 }
 
 
+
 void set_dir() {
-    // Change the directory to where the executable is
     char path[1024];
-    if (readlink("/proc/self/exe", path, 1024) == -1) {
-        printf("Error while reading the path of the executable\n");
-        exit(-1);
+    char *exec_path;
+
+    // Récupérer le chemin de l'exécutable
+#if defined(_WIN32) || defined(_WIN64)
+    _get_pgmptrs(&exec_path);
+#else
+    ssize_t length = readlink("/proc/self/exe", path, sizeof(path) - 1);
+    if (length != -1) {
+        path[length] = '\0';
+        exec_path = path;
+    } else {
+        perror("readlink");
+        exit(EXIT_FAILURE);
     }
-    char* dir = dirname(path);
-    chdir(dir);
-    
+#endif
+
+    // Extraire le répertoire du chemin de l'exécutable
+    char *dir = dirname(exec_path);
+
+    // Changer le répertoire de travail actuel
+    if (chdir(dir) != 0) {
+        perror("chdir");
+        exit(EXIT_FAILURE);
+    }
 }
