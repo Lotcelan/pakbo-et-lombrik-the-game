@@ -1,13 +1,12 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <libgen.h>
-#include <limits.h>
-#ifdef _WIN32
-    #include <windows.h>
-#elif __APPLE__
-    #include <mach-o/dyld.h>
+#ifdef __APPLE__
+#include <mach-o/dyld.h>
 #endif
 
 #include <SDL2/SDL.h>
