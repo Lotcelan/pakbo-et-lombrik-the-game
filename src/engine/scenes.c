@@ -80,15 +80,15 @@ Scene* init_scene(GameData* game, char* title) {
 
     // The path to the json file is in ../src/scenes/{title}/data.json
 
-    char* path = (char*)malloc(strlen(title) + 25);
+    char* path = (char*)malloc(strlen(title) + strlen("./scenes/.json") + 1);
     json_error_t error;
     
     if (path == NULL) {
         exit(-1);
     }
-    strcpy(path, "../src/scenes/");
+    strcpy(path, "./scenes/");
     strcat(path, title);
-    strcat(path, "/data.json");
+    strcat(path, ".json");
     FILE *file = fopen(path, "r");
     if (!file) {
         fprintf(stderr, "Failed to open file\n");

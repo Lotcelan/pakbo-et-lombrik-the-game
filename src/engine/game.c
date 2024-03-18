@@ -69,3 +69,16 @@ void event_handler(GameData* gameData) {
 
     }
 }
+
+
+void set_dir() {
+    // Change the directory to where the executable is
+    char path[1024];
+    if (readlink("/proc/self/exe", path, 1024) == -1) {
+        printf("Error while reading the path of the executable\n");
+        exit(-1);
+    }
+    char* dir = dirname(path);
+    chdir(dir);
+    
+}

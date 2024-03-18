@@ -1,5 +1,3 @@
-
-
 CC := gcc
 CFLAGS := -Wall -Wextra  -pedantic -MMD -MP
 LDFLAGS := -fsanitize=address
@@ -29,6 +27,9 @@ DEPS := $(OBJS:.o=.d)
 # Default target
 .PHONY: all
 all: $(TARGET)
+# Copy all scenes/*/*.json to bin/scenes
+	@mkdir -p bin/scenes
+	@find src/scenes/ -name '*.json' -exec cp {} bin/scenes/ \;
 
 .PHONY: run
 run: $(TARGET)
@@ -49,9 +50,6 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.c
 
 # Clean build files
 .PHONY: clean
-	rm -rf $(BUILDDIR)
-	rm -rf bin/*
-
 clean:
 	rm -rf $(BUILDDIR)
 	rm -rf bin/*

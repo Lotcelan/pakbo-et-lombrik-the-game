@@ -8,7 +8,7 @@
 #include "scenes/main_menu/main_menu.h"
 
 int main(int argc, char *argv[]) {
-    // set_dir(); -> todo
+    set_dir();
     // Initialize SDL
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {

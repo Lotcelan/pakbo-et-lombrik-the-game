@@ -1,6 +1,15 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <unistd.h>
+#include <libgen.h>
+#include <limits.h>
+#ifdef _WIN32
+    #include <windows.h>
+#elif __APPLE__
+    #include <mach-o/dyld.h>
+#endif
+
 #include <SDL2/SDL.h>
 #include "scenes.h"
 #include <stdbool.h>
@@ -39,8 +48,7 @@ typedef struct GameData {
 GameData* init_game(int width_amount, int height_amount, int final_width, int final_height, const char* title, int capped_fps);
 void event_handler(GameData* game);
 void free_game(GameData* game);
-void downscale_render(GameData* gameData);
-void upscale_render(GameData* gameData);
+void set_dir();
 
 
 #endif
