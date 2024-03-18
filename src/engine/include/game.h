@@ -31,6 +31,7 @@ typedef struct GameData {
 
     HashTable* resources;
     HashTable* fonts;
+    HashTable* scenes;
 
     FrameRateManager* frm;
 } GameData;

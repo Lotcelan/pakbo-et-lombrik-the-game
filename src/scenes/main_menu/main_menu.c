@@ -30,7 +30,12 @@ void event_handler_main_menu(GameData* game) {
             break;
         case SDL_MOUSEBUTTONDOWN:
             if (selectedMenuItem != -1) {
-                printf("Clicked: %s\n", menuItems[selectedMenuItem].name);
+                // printf("Clicked: %s\n", menuItems[selectedMenuItem].name);
+                if (menuItems[selectedMenuItem].name == "Play") {
+                    game->current_scene = get(game->scenes, "scene01", strcmp);
+                } else if (menuItems[selectedMenuItem].name == "Quit") {
+                    game->state = CLOSING;
+                }
             }
             break;
         default:

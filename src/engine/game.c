@@ -33,6 +33,9 @@ GameData* init_game(int width_amount, int height_amount, int final_width, int fi
     HashTable* fonts = createHashTable(10);
     gameData->fonts = fonts;
 
+    HashTable* scenes = createHashTable(10);
+    gameData->scenes = scenes;
+
     gameData->event = (SDL_Event){0};
     gameData->window = window;
     gameData->renderer = renderer;

@@ -24,6 +24,10 @@ int main(int argc, char *argv[]) {
     // Init scenes
     Scene* scene01 = init_scene01(game);
     Scene* main_menu = init_main_menu(game);
+
+    insert(game->scenes, "scene01", scene01);
+    insert(game->scenes, "main_menu", main_menu);
+    
     game->current_scene = main_menu;
 
     /* Main loop :
