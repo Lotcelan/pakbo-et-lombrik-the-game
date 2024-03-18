@@ -5,6 +5,7 @@
 #include "resources.h"
 
 #include "scenes/scene01/scene01.h"
+#include "scenes/main_menu/main_menu.h"
 
 int main(int argc, char *argv[]) {
     // set_dir(); -> todo
@@ -15,12 +16,15 @@ int main(int argc, char *argv[]) {
         return -1;
     }
 
+    TTF_Init();
+
     GameData* game = init_game(16, 16, 1024, 1024, "Pakbo é Lonbrik", 30);
 
     
     // Init scenes
     Scene* scene01 = init_scene01(game);
-    game->current_scene = scene01;
+    Scene* main_menu = init_main_menu(game);
+    game->current_scene = main_menu;
 
     /* Main loop :
         - Getting events
@@ -36,30 +40,33 @@ int main(int argc, char *argv[]) {
     int deltaT;
 
     while (game->state != CLOSING) {
-        // downscale_render(game);
         // Calculate deltaT and set t0 to the current time
         deltaT = SDL_GetTicks() - t0;
         t0 = SDL_GetTicks(); 
 
-        printf("hola\n");
+        SDL_SetRenderDrawColor(game->renderer, 0, 0, 0, 255);
+        SDL_RenderClear(game->renderer);
+
+        render_scene(game); // Peut paraître illogique de le mettre ici, mais tkt ca marche ^^'
+
         // event_handler(game);
         while (SDL_PollEvent(&(game->event)) != 0) {
             if ((game->event).type == SDL_QUIT) {
                 game->state = CLOSING;
             }
-        }
+            if (game->current_scene != NULL) {
+                game->current_scene->event_handler(game);
+            }
 
-        SDL_SetRenderDrawColor(game->renderer, 0, 0, 0, 255);
-        SDL_RenderClear(game->renderer);
+
+        }
 
         if (game->current_scene != NULL) {
-            update_entities(game->current_scene->entities);
+            // update_entities(game->current_scene->entities);
             game->current_scene->update(game);
         }
+        // Render entities ici
 
-        render_scene(game);
-
-        // upscale_render(game);
 
         SDL_RenderPresent(game->renderer);
         cap_fps(game->frm);

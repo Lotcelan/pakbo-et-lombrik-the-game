@@ -24,12 +24,13 @@ typedef struct GameData {
     Scene* current_scene;
     
     SDL_Window* window;
-    int final_width;
-    int final_height;
+    int width_amount;
+    int height_amount;
     SDL_Renderer* renderer;
     SDL_Event event;
 
     HashTable* resources;
+    HashTable* fonts;
 
     FrameRateManager* frm;
 } GameData;

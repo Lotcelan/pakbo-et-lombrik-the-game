@@ -30,13 +30,16 @@ GameData* init_game(int width_amount, int height_amount, int final_width, int fi
 
     displayHashTableResource(resources);
 
+    HashTable* fonts = createHashTable(10);
+    gameData->fonts = fonts;
+
     gameData->event = (SDL_Event){0};
     gameData->window = window;
     gameData->renderer = renderer;
     gameData->current_scene = NULL;
 
-    gameData->final_width = final_width;
-    gameData->final_height = final_height;
+    gameData->width_amount = width_amount;
+    gameData->height_amount = height_amount;
     // Init framerate manager
     FrameRateManager* frm = init_frm(capped_fps);
     gameData->frm = frm;
@@ -62,17 +65,4 @@ void event_handler(GameData* gameData) {
         }
 
     }
-}
-
-void upscale_render(GameData* gameData) {
-    // Upscale the render to the window size
-
-    SDL_RenderSetLogicalSize(gameData->renderer, gameData->final_width, gameData->final_height);
-}
-
-void downscale_render(GameData* gameData) {
-    // Upscale the render to the window size
-    int width, height;
-    SDL_GetWindowSize(gameData->window, &width, &height);
-    SDL_RenderSetLogicalSize(gameData->renderer, width, height);
 }

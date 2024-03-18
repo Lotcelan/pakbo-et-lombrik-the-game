@@ -5,10 +5,15 @@ void update_scene01(GameData* game) {
     return;
 }
 
+void event_handler_scene01(GameData* game) {
+    // handle the events
+    return;
+}
+
 Scene* init_scene01(GameData* game) {
-    printf("hola\n");
     Scene* scene = init_scene(game, "scene01");
     scene->update = update_scene01;
+    scene->event_handler = event_handler_scene01;
 
     return scene;
 }

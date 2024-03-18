@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 
 #include <stdbool.h>
 #include <stdio.h>
@@ -30,6 +31,7 @@ typedef struct Scene {
     char background[200];
     List* structures;
     void (*update)(GameData* game);
+    void (*event_handler)(GameData* game);
 
 } Scene;
 
