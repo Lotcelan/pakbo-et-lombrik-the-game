@@ -15,6 +15,8 @@
 #include "hashtable.h"
 #include "framerate.h"
 
+#include <math.h>
+
 #define CELL_WIDTH 16
 #define CELL_HEIGHT 16
 
@@ -26,6 +28,7 @@ typedef enum GameStatus {
     PAUSED,
     CLOSING,
 } GameStatus;
+
 
 typedef struct GameData {
     GameStatus state;

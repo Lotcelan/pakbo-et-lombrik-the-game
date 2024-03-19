@@ -6,6 +6,8 @@
 
 #include "scenes/scene01/scene01.h"
 #include "scenes/main_menu/main_menu.h"
+#include "scenes/spawn_level/spawn_level.h"
+
 
 int main(int argc, char *argv[]) {
     set_dir();
@@ -18,15 +20,17 @@ int main(int argc, char *argv[]) {
 
     TTF_Init();
 
-    GameData* game = init_game(16, 16, 1024, 1024, "Pakbo é Lonbrik", 30);
+    GameData* game = init_game(16, 8, 1024, 512, "Pakbo é Lonbrik", 30);
 
     
     // Init scenes
     Scene* scene01 = init_scene01(game);
     Scene* main_menu = init_main_menu(game);
+    Scene* spawn_level = init_spawn_level(game);
 
     insert(game->scenes, "scene01", scene01);
     insert(game->scenes, "main_menu", main_menu);
+    insert(game->scenes, "spawn_level", spawn_level);
     
     game->current_scene = main_menu;
 
@@ -71,6 +75,7 @@ int main(int argc, char *argv[]) {
         }
         // Render entities ici
 
+        render_screen_shake(game);
 
         SDL_RenderPresent(game->renderer);
         cap_fps(game->frm);

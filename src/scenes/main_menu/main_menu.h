@@ -8,5 +8,6 @@
 
 void update_main_menu(GameData* game);
 Scene* init_main_menu(GameData* game);
+void event_handler_main_menu(GameData* game);
 
 #endif

@@ -32,7 +32,7 @@ void event_handler_main_menu(GameData* game) {
             if (selectedMenuItem != -1) {
                 // printf("Clicked: %s\n", menuItems[selectedMenuItem].name);
                 if (menuItems[selectedMenuItem].name == "Play") {
-                    game->current_scene = get(game->scenes, "scene01", strcmp);
+                    game->current_scene = get(game->scenes, "spawn_level", strcmp);
                 } else if (menuItems[selectedMenuItem].name == "Quit") {
                     game->state = CLOSING;
                 }

@@ -90,6 +90,7 @@ Scene* init_scene(GameData* game, char* title) {
     strcat(path, title);
     strcat(path, ".json");
     FILE *file = fopen(path, "r");
+
     if (!file) {
         fprintf(stderr, "Failed to open file\n");
         return NULL;
@@ -108,7 +109,7 @@ Scene* init_scene(GameData* game, char* title) {
         fprintf(stderr, "JSON error on line %d: %s\n", error.line, error.text);
         return NULL;
     }
-
+    new->screen_shake = NULL;
     return new;
 
 }
@@ -163,7 +164,53 @@ void free_structure(Structure* s) {
 
 void free_scene(Scene* scene) {
     // Free all the entities and structures of the scene
+    if (scene->screen_shake != NULL) {
+        free(scene->screen_shake);
+    }
     list_delete(scene->entities, free_entity);
     list_delete(scene->structures, free_structure);
     free(scene);
+}
+
+void render_screen_shake(GameData* game) {
+
+    Scene* scene = game->current_scene;
+    if (scene->screen_shake == NULL) {
+        return;
+    }
+    if (scene->screen_shake->active) {
+        if (scene->screen_shake->time < scene->screen_shake->duration) {
+            scene->screen_shake->time++;
+            int x_offset = scene->screen_shake->intensity * 16 * ((sin(scene->screen_shake->time * 0.5) <= 0) ? -1 : 1);
+            int y_offset = scene->screen_shake->intensity * 16 * ((cos(scene->screen_shake->time * 0.5) <= 0) ? -1 : 1);
+            printf("hiii\n");
+            SDL_RenderSetScale(game->renderer, 2, 2);
+
+        } else {
+            scene->screen_shake->active = false;
+            scene->screen_shake->time = 0;
+            destroy_screen_shake(game);
+            SDL_RenderSetScale(game->renderer, 1, 1);
+        }
+    }
+}
+
+void destroy_screen_shake(GameData* game) {
+    Scene* scene = game->current_scene;
+    if (scene->screen_shake != NULL) {
+        free(scene->screen_shake);
+        scene->screen_shake = NULL;
+    }
+}
+
+ScreenShake* init_screen_shake(int duration, int intensity) {
+    ScreenShake* s = (ScreenShake*)malloc(sizeof(ScreenShake));
+    if (s == NULL) {
+        exit(-1);
+    }
+    s->active = false;
+    s->duration = duration;
+    s->intensity = intensity;
+    s->time = 0;
+    return s;
 }

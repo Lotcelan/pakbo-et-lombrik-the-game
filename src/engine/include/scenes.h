@@ -15,6 +15,13 @@
 #include "linked_list.h"
 #include "assets.h"
 
+typedef struct ScreenShake {
+    bool active;
+    int duration;
+    int intensity;
+    int time;
+} ScreenShake;
+
 typedef struct GameData GameData;
 
 typedef struct Structure {
@@ -32,6 +39,7 @@ typedef struct Scene {
     List* structures;
     void (*update)(GameData* game);
     void (*event_handler)(GameData* game);
+    ScreenShake* screen_shake;
 
 } Scene;
 
@@ -43,5 +51,9 @@ SDL_Texture* load_texture(SDL_Renderer* renderer, char* path);
 
 void free_structure(Structure* s);
 void init_scene_with_json(GameData* game, json_t *root, Scene* scene);
+
+void render_screen_shake(GameData* game);
+ScreenShake* init_screen_shake(int duration, int intensity);
+void destroy_screen_shake(GameData* game);
 
 #endif
