@@ -151,11 +151,6 @@ void render_scene(GameData* game) {
     // todo
 }
 
-void free_structure(Structure* s) {
-    SDL_DestroyTexture(s->texture);
-    free(s);
-}
-
 void free_scene(Scene* scene) {
     // Free all the entities and structures of the scene
     if (scene->screen_shake != NULL) {
@@ -215,6 +210,7 @@ void change_scene(GameData* game, char* next) {
         fprintf(stderr, "Scene %s not found\n", next);
         return;
     }
+    destroy_render_stack(game);
     game->current_scene = next_scene;
     game->current_scene->populate(game);
 }

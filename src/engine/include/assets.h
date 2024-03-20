@@ -20,6 +20,7 @@ typedef struct RenderEntry {
     void* key;
     bool is_temporary;
     void (*render)(GameData* game, void* key);
+    void (*destroy)(void* key);
 } RenderEntry;
 
 typedef struct Text {
@@ -64,7 +65,12 @@ Structure* init_structure(GameData* game, char* identifier, char* resource, int 
 Rectangle* init_rectangle(int x, int y, int w, int h, SDL_Color outline_color, SDL_Color fill_color);
 Texture* init_texture_from_memory(GameData* game, char* name, int x, int y, bool is_temporary);
 
-void push_render_stack(GameData* game, void* key, void (*render)(GameData*, void*), bool is_temporary);
+void free_structure(Structure* s);
+void free_text(Text* t);
+void free_rectangle(Rectangle* r);
+void free_texture(Texture* t);
+
+void push_render_stack(GameData* game, void* key, void (*render)(GameData*, void*), void (*destroy)(void*), bool is_temporary);
 void push_render_stack_text(GameData* game, Text* text, bool is_temporary);
 void push_render_stack_structure(GameData* game, Structure* structure, bool is_temporary);
 void push_render_stack_texture(GameData* game, Texture* texture, bool is_temporary);

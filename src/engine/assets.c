@@ -59,7 +59,7 @@ void render_rectangle(GameData* game, void* key) {
     SDL_RenderDrawRect(game->renderer, &outlineRect);
 }
 
-void push_render_stack(GameData* game, void* key, void (*render)(GameData*, void*), bool is_temporary) {
+void push_render_stack(GameData* game, void* key, void (*render)(GameData*, void*), void (*destroy)(void*), bool is_temporary) {
     RenderEntry* entry = (RenderEntry*)malloc(sizeof(RenderEntry));
     if (entry == NULL) {
         exit(-1);
@@ -67,7 +67,20 @@ void push_render_stack(GameData* game, void* key, void (*render)(GameData*, void
     entry->key = key;
     entry->render = render;
     entry->is_temporary = is_temporary;
+    entry->destroy = destroy;
     printf("pushing to render stack %p\n", entry);
+
+    // Assume the push does not add an entry if element is already in the list
+    List* current = game->current_scene->render_stack;
+    while (current != NULL) {
+        RenderEntry* current_entry = (RenderEntry*)(current->value);
+        if (current_entry != NULL) {
+            if (current_entry->key == key) {
+                return;
+            }
+        }
+        current = current->next;
+    }
 
     game->current_scene->render_stack = append_end(entry, game->current_scene->render_stack);
 }
@@ -100,6 +113,14 @@ Text* init_text(GameData* game, char* text, SDL_Color color, int x, int y, TTF_F
     return t;
 }
 
+void free_text(Text* t) {
+    if (t->texture != NULL) {
+        SDL_DestroyTexture(t->texture);
+        printf("text : %p\n", t);
+        free(t);
+    }
+}
+
 Structure* init_structure(GameData* game, char* identifier, char* resource, int x, int y, int allow_pass_through, char* teleport_to_scene) {
     Structure* s = (Structure*)malloc(sizeof(Structure));
     if (s == NULL) {
@@ -116,6 +137,12 @@ Structure* init_structure(GameData* game, char* identifier, char* resource, int 
     return s;
 }
 
+void free_structure(Structure* s) {
+    SDL_DestroyTexture(s->texture);
+    free(s);
+}
+
+
 Rectangle* init_rectangle(int x, int y, int w, int h, SDL_Color outline_color, SDL_Color fill_color) {
     Rectangle* r = (Rectangle*)malloc(sizeof(Rectangle));
     if (r == NULL) {
@@ -128,6 +155,10 @@ Rectangle* init_rectangle(int x, int y, int w, int h, SDL_Color outline_color, S
     r->outline_color = outline_color;
     r->fill_color = fill_color;
     return r;
+}
+
+void free_rectangle(Rectangle* r) {
+    free(r);
 }
 
 Texture* init_texture_from_memory(GameData* game, char* name, int x, int y, bool is_temporary) {
@@ -146,24 +177,29 @@ Texture* init_texture_from_memory(GameData* game, char* name, int x, int y, bool
     dstRect->y = y;
     SDL_QueryTexture(t->texture, NULL, NULL, &dstRect->w, &dstRect->h);
     t->dstRect = dstRect;
-
     return t;
 }
 
+void free_texture(Texture* t) {
+    SDL_DestroyTexture(t->texture);
+    free(t->dstRect);
+    free(t);
+}
+
 void push_render_stack_text(GameData* game, Text* text, bool is_temporary) {
-    push_render_stack(game, text, render_text, is_temporary);
+    push_render_stack(game, text, render_text, free_text, is_temporary);
 }
 
 void push_render_stack_structure(GameData* game, Structure* structure, bool is_temporary) {
-    push_render_stack(game, structure, render_structure, is_temporary);
+    push_render_stack(game, structure, render_structure, free_structure, is_temporary);
 }
 
 void push_render_stack_texture(GameData* game, Texture* texture, bool is_temporary) {
-    push_render_stack(game, texture, render_texture, is_temporary);
+    push_render_stack(game, texture, render_texture, free_texture, is_temporary);
 }
 
 void push_render_stack_rect(GameData* game, Rectangle* rect, bool is_temporary) {
-    push_render_stack(game, rect, render_rectangle, is_temporary);
+    push_render_stack(game, rect, render_rectangle, free_rectangle, is_temporary);
 }
 
 void render_stack(GameData* game) {
@@ -186,7 +222,7 @@ void render_stack(GameData* game) {
                     prev->next = current->next;
                 }
                 current = current->next;
-                free(temp);
+                ((RenderEntry*)temp->value)->destroy(((RenderEntry*)temp->value)->key);
             } else {
                 printf("je ne suis pas temporaire\n");
                 prev = current;
@@ -203,7 +239,7 @@ void destroy_render_stack(GameData* game) {
         while (current != NULL) {
             List* temp = current;
             current = current->next;
-            free(temp);
+            ((RenderEntry*)temp->value)->destroy(((RenderEntry*)temp->value)->key);
         }
     }
     return;
