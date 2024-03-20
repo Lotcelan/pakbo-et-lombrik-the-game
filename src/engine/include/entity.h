@@ -32,7 +32,8 @@ typedef struct Entity {
     // vitesse
     int x_velocity;
     int y_velocity;
-    int etat;   // entier qui correspond à l'indice de l'animation qu'on veut afficher
+    // entier qui correspond à l'indice de l'animation qu'on veut afficher
+    int etat;
     // modifie l'entier self.etat pour mettre a jour l'animation de l'entité
     void (*update_sprite)(struct Entity*, int);
     // tableau contenant les différentes animations 
@@ -72,5 +73,5 @@ void update_self(Entity* e);
 void update_pos_speed(Entity *e, float a_x, float a_y, int dt);
 
 void update_animation(Sprite* sprite, float delta);
-
+void print_entity(Entity* e);
 #endif

@@ -67,4 +67,10 @@ void update_animation(Sprite* sprite, float delta){
         sprite->timer = 1/sprite->framerate;    // on reset le timer
     }
     sprite->timer -= d;
-};
+}
+
+void print_entity(Entity* e){
+    printf("position : (%d, %d)\n", e->x_position, e->y_position);
+    printf("velocité : (%d, %d)\n", e->x_velocity, e->y_velocity);
+    printf("état : %d\n", e->etat);
+}
