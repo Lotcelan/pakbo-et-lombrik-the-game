@@ -17,7 +17,12 @@ typedef enum EntityType {
     
 } EntityType;
 
-
+typedef struct sprite {
+    float framerate;    // dans l'idéal c'est le meme opur chaque sprite, sert a reset le timer
+    float timer;    // état du timer (mis a jour à chaque tour de boucle)
+    SDL_Texture* spriteSheet;   // une grande texture contenant toutes les frames cote à cote
+    List* frames;   // liste chainée de coordonnées vis à vis du tileSet
+} Sprite;
 
 
 // On pourra en rajouter
