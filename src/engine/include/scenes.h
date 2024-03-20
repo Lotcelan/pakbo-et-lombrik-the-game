@@ -18,7 +18,6 @@
 
 
 typedef struct ScreenShake {
-    bool active;
     int duration;
     int intensity;
     int time;

@@ -27,7 +27,6 @@ SDL_Texture* loadTextureFromMemory(GameData* game, char* resource) {
 }
 
 void render_texture(GameData* game, void* key) {
-    printf("aaaa\n");
 
     Texture* texture = (Texture*)key;
     if (texture == NULL) {
@@ -68,7 +67,6 @@ void push_render_stack(GameData* game, void* key, void (*render)(GameData*, void
     entry->render = render;
     entry->is_temporary = is_temporary;
     entry->destroy = destroy;
-    printf("pushing to render stack %p\n", entry);
 
     // Assume the push does not add an entry if element is already in the list
     List* current = game->current_scene->render_stack;
@@ -116,7 +114,6 @@ Text* init_text(GameData* game, char* text, SDL_Color color, int x, int y, TTF_F
 void free_text(Text* t) {
     if (t->texture != NULL) {
         SDL_DestroyTexture(t->texture);
-        printf("text : %p\n", t);
         free(t);
     }
 }
@@ -211,7 +208,6 @@ void render_stack(GameData* game) {
         List* current = game->current_scene->render_stack;
         List* prev = NULL;
         while (current != NULL) {
-            printf("%p\n", current->value);
             ((RenderEntry*)current->value)->render(game, ((RenderEntry*)current->value)->key);
             if ( ((RenderEntry*)current->value)->is_temporary ) {
                 List* temp = current;
@@ -224,7 +220,6 @@ void render_stack(GameData* game) {
                 current = current->next;
                 ((RenderEntry*)temp->value)->destroy(((RenderEntry*)temp->value)->key);
             } else {
-                printf("je ne suis pas temporaire\n");
                 prev = current;
                 current = current->next;
             }

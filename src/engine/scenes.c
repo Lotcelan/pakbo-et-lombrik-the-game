@@ -107,6 +107,23 @@ Scene* init_scene(GameData* game, char* title) {
 }
 
 void render_scene(GameData* game) {
+
+    if (game->current_scene->screen_shake != NULL) {
+        ScreenShake* shake = game->current_scene->screen_shake;
+        if (shake->time < shake->duration) {
+            int shakeOffsetX = ((int)(sin(shake->time) * shake->intensity));
+            int shakeOffsetY = ((int)(sin(shake->time) * shake->intensity));
+            printf("Shake offset: %d, %d\n", shakeOffsetX, shakeOffsetY);
+
+            SDL_RenderSetLogicalSize(game->renderer, CELL_WIDTH * game->width_amount + shakeOffsetX, CELL_HEIGHT * game->height_amount );
+            shake->time++;
+        } else {
+            SDL_RenderSetLogicalSize(game->renderer, CELL_WIDTH * game->width_amount, CELL_HEIGHT * game->height_amount);
+            destroy_screen_shake(game);
+        }
+    } else {
+        SDL_RenderSetLogicalSize(game->renderer, CELL_WIDTH * game->width_amount, CELL_HEIGHT * game->height_amount);
+    }
     render_stack(game);
     
     // // Using game->renderer, render the scene : the background then all the textures
@@ -167,7 +184,6 @@ void render_screen_shake(GameData* game) {
     if (scene->screen_shake == NULL) {
         return;
     }
-    if (scene->screen_shake->active) {
         if (scene->screen_shake->time < scene->screen_shake->duration) {
             scene->screen_shake->time++;
             int x_offset = scene->screen_shake->intensity * 16 * ((sin(scene->screen_shake->time * 0.5) <= 0) ? -1 : 1);
@@ -176,12 +192,10 @@ void render_screen_shake(GameData* game) {
             SDL_RenderSetScale(game->renderer, 2, 2);
 
         } else {
-            scene->screen_shake->active = false;
             scene->screen_shake->time = 0;
             destroy_screen_shake(game);
             SDL_RenderSetScale(game->renderer, 1, 1);
         }
-    }
 }
 
 void destroy_screen_shake(GameData* game) {
@@ -197,7 +211,6 @@ ScreenShake* init_screen_shake(int duration, int intensity) {
     if (s == NULL) {
         exit(-1);
     }
-    s->active = false;
     s->duration = duration;
     s->intensity = intensity;
     s->time = 0;
