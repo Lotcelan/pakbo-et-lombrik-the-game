@@ -30,10 +30,14 @@ void event_handler_spawn_level(GameData* game) {
     return;
 }
 
+void populate_spawn_level(GameData* game) {
+    push_background_structures(game);
+}
+
 Scene* init_spawn_level(GameData* game) {
     Scene* scene = init_scene(game, "spawn_level");
     scene->update = update_spawn_level;
     scene->event_handler = event_handler_spawn_level;
-
+    scene->populate = populate_spawn_level;
     return scene;
 }

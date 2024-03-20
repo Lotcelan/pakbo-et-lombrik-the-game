@@ -6,6 +6,9 @@
 #include <string.h>
 
 HashTable* init_resources();
+extern unsigned char src_assets_resized_background_png[];
+extern int src_assets_resized_background_png_len;
+
 extern unsigned char src_assets_black_png[];
 extern int src_assets_black_png_len;
 

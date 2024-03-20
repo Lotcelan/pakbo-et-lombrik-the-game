@@ -1,6 +1,6 @@
 {
     "name": "Main Menu",
-    "background" : "src_assets_background",
+    "background" : "src_assets_resized_background",
     "structures" : [
     ],
     "entities" : [

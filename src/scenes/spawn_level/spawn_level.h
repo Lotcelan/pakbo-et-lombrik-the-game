@@ -8,6 +8,7 @@
 
 void update_spawn_level(GameData* game);
 void event_handler_spawn_level(GameData* game);
+void populate_spawn_level(GameData* game);
 Scene* init_spawn_level(GameData* game);
 
 #endif

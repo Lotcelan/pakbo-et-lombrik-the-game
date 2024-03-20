@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
     insert(game->scenes, "main_menu", main_menu);
     insert(game->scenes, "spawn_level", spawn_level);
     
-    game->current_scene = main_menu;
+    change_scene(game, "main_menu");
 
     /* Main loop :
         - Getting events
@@ -55,7 +55,6 @@ int main(int argc, char *argv[]) {
         SDL_SetRenderDrawColor(game->renderer, 0, 0, 0, 255);
         SDL_RenderClear(game->renderer);
 
-        render_scene(game); // Peut paraître illogique de le mettre ici, mais tkt ca marche ^^'
 
         // event_handler(game);
         while (SDL_PollEvent(&(game->event)) != 0) {
@@ -75,7 +74,8 @@ int main(int argc, char *argv[]) {
         }
         // Render entities ici
 
-        render_screen_shake(game);
+        render_scene(game);
+        // render_screen_shake(game);
 
         SDL_RenderPresent(game->renderer);
         cap_fps(game->frm);

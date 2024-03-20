@@ -1,5 +1,5 @@
 CC := gcc
-CFLAGS := -Wall -Wextra  -pedantic -MMD -MP
+CFLAGS := -Wall -Wextra  -pedantic -MMD -MP -g3
 LDFLAGS := -fsanitize=address -lm
 
 # Libs

@@ -1,22 +1,6 @@
 #include "include/scenes.h"
 #include "include/game.h"
 
-Structure* init_structure(GameData* game, char* identifier, char* resource, int x, int y, int allow_pass_through, char* teleport_to_scene) {
-    Structure* s = (Structure*)malloc(sizeof(Structure));
-    if (s == NULL) {
-        exit(-1);
-    }
-    s->identifier = identifier;
-    s->texture = loadTextureFromMemory(game, resource);
-    s->position.x = x * CELL_WIDTH;
-    s->position.y = y * CELL_HEIGHT;
-    SDL_QueryTexture(s->texture, NULL, NULL, &s->position.w, &s->position.h);
-
-    s->allow_pass_through = allow_pass_through;
-    s->teleport_to_scene = teleport_to_scene;
-    return s;
-}
-
 void init_scene_with_json(GameData* game, json_t *root, Scene* scene) {
     const char *name = json_string_value(json_object_get(root, "name"));
     const char *background = json_string_value(json_object_get(root, "background"));
@@ -31,11 +15,11 @@ void init_scene_with_json(GameData* game, json_t *root, Scene* scene) {
     json_t* value;
 
     json_array_foreach(structures, index, value) {
-        int x = json_integer_value(json_object_get(value, "x"));
-        int y = json_integer_value(json_object_get(value, "y"));
+        // int x = json_integer_value(json_object_get(value, "x"));
+        // int y = json_integer_value(json_object_get(value, "y"));
         char *resource = json_string_value(json_object_get(value, "resource"));
-        int allow_pass_through = json_integer_value(json_object_get(value, "allow_pass_through"));
-        char *teleport_to_scene = json_string_value(json_object_get(value, "teleport_to_scene"));
+        // int allow_pass_through = json_integer_value(json_object_get(value, "allow_pass_through"));
+        // char *teleport_to_scene = json_string_value(json_object_get(value, "teleport_to_scene"));
 
         // printf("Structure %zu: x=%d, y=%d, resource=%s, allow_pass_through=%d, teleport_to_scene=%s\n",
             //    index, x, y, resource, allow_pass_through, teleport_to_scene);
@@ -72,9 +56,17 @@ void init_scene_with_json(GameData* game, json_t *root, Scene* scene) {
 Scene* init_scene(GameData* game, char* title) {
     Scene* new = (Scene*)malloc(sizeof(Scene));
 
+    new->render_stack = NULL;
+
     if (new == NULL) {
         exit(-1);
     }
+    HashTable* objects = createHashTable(15);
+    if (objects == NULL) {
+        exit(-1);
+    }
+    new->objects = objects;
+
 
     strcpy(new->title, title);
 
@@ -115,43 +107,45 @@ Scene* init_scene(GameData* game, char* title) {
 }
 
 void render_scene(GameData* game) {
-    // Using game->renderer, render the scene : the background then all the textures
-
-    // Load the background texture contained in game->current_scene->background and resize it to width and height of the window
-    // Then render it at (0, 0)
-
-    int width, height;
-    SDL_RenderGetLogicalSize(game->renderer, &width, &height);
+    render_stack(game);
     
-    SDL_Texture* backgroundTexture = loadTextureFromMemory(game, game->current_scene->background);
-    if (backgroundTexture == NULL) {
-        fprintf(stderr, "Failed to load background texture\n");
-        return;
-    }
+    // // Using game->renderer, render the scene : the background then all the textures
 
-    // Get the dimensions of the background texture
-    int backgroundWidth, backgroundHeight;
-    SDL_QueryTexture(backgroundTexture, NULL, NULL, &backgroundWidth, &backgroundHeight);
+    // // Load the background texture contained in game->current_scene->background and resize it to width and height of the window
+    // // Then render it at (0, 0)
 
-    // Render the background texture
-    SDL_Rect backgroundRect = {0, 0, width, height};
-    SDL_RenderCopyEx(game->renderer, backgroundTexture, NULL, &backgroundRect, 0, NULL, SDL_FLIP_NONE);
+    // int width, height;
+    // SDL_RenderGetLogicalSize(game->renderer, &width, &height);
+    
+    // SDL_Texture* backgroundTexture = loadTextureFromMemory(game, game->current_scene->background);
+    // if (backgroundTexture == NULL) {
+    //     fprintf(stderr, "Failed to load background texture\n");
+    //     return;
+    // }
 
-    // Clean up
-    SDL_DestroyTexture(backgroundTexture);
+    // // Get the dimensions of the background texture
+    // int backgroundWidth, backgroundHeight;
+    // SDL_QueryTexture(backgroundTexture, NULL, NULL, &backgroundWidth, &backgroundHeight);
+
+    // // Render the background texture
+    // SDL_Rect backgroundRect = {0, 0, width, height};
+    // SDL_RenderCopyEx(game->renderer, backgroundTexture, NULL, &backgroundRect, 0, NULL, SDL_FLIP_NONE);
+
+    // // Clean up
+    // SDL_DestroyTexture(backgroundTexture);
 
 
-    // Render all the structures
-    List* current = game->current_scene->structures;
-    while (current != NULL) {
-        Structure* s = (Structure*)current->value;
-        if (s == NULL) {
-            break;
-        }
-        SDL_Rect rect = s->position;
-        SDL_RenderCopy(game->renderer, s->texture, NULL, &rect);
-        current = current->next;
-    }
+    // // Render all the structures
+    // List* current = game->current_scene->structures;
+    // while (current != NULL) {
+    //     Structure* s = (Structure*)current->value;
+    //     if (s == NULL) {
+    //         break;
+    //     }
+    //     SDL_Rect rect = s->position;
+    //     SDL_RenderCopy(game->renderer, s->texture, NULL, &rect);
+    //     current = current->next;
+    // }
 
     // Render all the entities
     // todo
@@ -213,4 +207,14 @@ ScreenShake* init_screen_shake(int duration, int intensity) {
     s->intensity = intensity;
     s->time = 0;
     return s;
+}
+
+void change_scene(GameData* game, char* next) {
+    Scene* next_scene = get(game->scenes, next, strcmp);
+    if (next_scene == NULL) {
+        fprintf(stderr, "Scene %s not found\n", next);
+        return;
+    }
+    game->current_scene = next_scene;
+    game->current_scene->populate(game);
 }
