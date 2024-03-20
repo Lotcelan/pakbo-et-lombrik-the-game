@@ -57,6 +57,14 @@ void update_pos_speed(Entity *e, float a_x, float a_y, int dt) {
 
 }
 
-void update_animation(Entity entite, float delta){
-    
+void update_animation(Sprite* sprite, float delta){
+    int d = delta;
+    // cette boucle sert a gérer les cas ou delta est assez grand pour passer plusieurs frames
+    // (exemple : si il y a un lag, l'animation est pas ralentie)
+    while (d - sprite->timer > 0){      
+        d = d - sprite->timer;
+        sprite->frames = sprite->frames->next;
+        sprite->timer = 1/sprite->framerate;    // on reset le timer
+    }
+    sprite->timer -= d;
 };
