@@ -21,19 +21,19 @@ typedef struct sprite {
     float framerate;    // dans l'idéal c'est le meme opur chaque sprite, sert a reset le timer
     float timer;    // état du timer (mis a jour à chaque tour de boucle)
     SDL_Texture* spriteSheet;   // une grande texture contenant toutes les frames cote à cote
-    List* frames;   // liste chainée de coordonnées vis à vis du tileSet
+    List* frames;   // liste chainée CYCLIQUE de coordonnées vis à vis du tileSet
                     //les valeurs des maillons sont des quadruplets [x1, y1, x2, y2] 
 } Sprite;
 
 
 // On pourra en rajouter
-typedef struct Entity {
+typedef struct Entity_old {
     SDL_Texture* textures[4];
     Mix_Chunk* sounds[4];
     TTF_Font* font;
     SDL_Rect position;
     
-    void (*update)(struct Entity* e);
+    void (*update)(struct Entity_old* e);
     
     int x_position;
     int y_position;
@@ -42,9 +42,9 @@ typedef struct Entity {
 
     EntityType *entity_type;
     int respawn_delay;
-} Entity;
+} Entity_old;
 
-typedef struct Entity_2 {
+typedef struct Entity {
     // position
     int x_position;
     int y_position;
@@ -53,11 +53,11 @@ typedef struct Entity_2 {
     int y_velocity;
     int etat;   // entier qui correspond à l'indice de l'animation qu'on veut afficher
     // modifie l'entier self.etat pour mettre a jour l'animation de l'entité
-    void (*update_sprite)(struct Entity_2*, int);
+    void (*update_sprite)(struct Entity*, int);
     // liste des différentes animations 
     Sprite** animations;
     // le pointeur vers la frame actuelle est donc accessible par : Entity->animations[etat]->value
-} Entity_2;
+} Entity;
 
 
 Entity* init_entity(char* entity, int respawn_delay, int x, int y);

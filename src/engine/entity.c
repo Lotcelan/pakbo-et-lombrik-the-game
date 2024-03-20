@@ -56,3 +56,7 @@ void update_pos_speed(Entity *e, float a_x, float a_y, int dt) {
     e->y_position += dt*(e->y_velocity);
 
 }
+
+void update_animation(Entity entite, float delta){
+    
+};
