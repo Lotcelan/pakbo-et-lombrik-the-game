@@ -21,6 +21,10 @@ typedef struct sprite {
     float framerate;    // dans l'idéal c'est le meme opur chaque sprite, sert a reset le timer
     float timer;    // état du timer (mis a jour à chaque tour de boucle)
     SDL_Texture* spriteSheet;   // une grande texture contenant toutes les frames cote à cote
+    // les champs width et height permettent de simplifier les coordonnonées dans la liste frames 
+    int width;  // nombre de pixels de large pour une frame de l'animation
+    int height;     // nombre de pixels de haut pour une frame de l'animation
+    // exemple : lom bric aura certainement height = width = 16 (son sprite étant un carré de taille 16)
     List* frames;   // liste chainée CYCLIQUE de coordonnées vis à vis du tileSet
                     //les valeurs des maillons sont des quadruplets [x1, y1, x2, y2] 
 } Sprite;
@@ -30,8 +34,8 @@ typedef struct Entity {
     int x_position;
     int y_position;
     // vitesse
-    int x_velocity;
-    int y_velocity;
+    float x_velocity;
+    float y_velocity;
     // entier qui correspond à l'indice de l'animation qu'on veut afficher
     int etat;
     // modifie l'entier self.etat pour mettre a jour l'animation de l'entité
@@ -40,7 +44,6 @@ typedef struct Entity {
     Sprite** animations;
     // le pointeur vers la frame actuelle est donc accessible par : Entity->animations[etat]->value
 
-    // le temps qu'on modifie le main histoire qu'il marche encore
     void (*update)(struct Entity*);
 } Entity;
 
