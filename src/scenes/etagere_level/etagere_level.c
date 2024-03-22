@@ -1,7 +1,10 @@
 #include "etagere_level.h"
 
 void update_etagere_level(GameData* game) {
-    // update the scene
+    SDL_Point* toolbox_position = get(game->current_scene->objects, "toolbox_position", strcmp);
+
+    Texture* toolbox = init_texture_from_memory(game, "src_assets_toolbox", toolbox_position->x, toolbox_position->y);
+    push_render_stack_texture(game, toolbox, true);  // volontaire que ce soit true ici
     return;
 }
 
@@ -17,6 +20,10 @@ void event_handler_etagere_level(GameData* game) {
                     printf("Screen shake: %p\n", screen_shake);
                     game->current_scene->screen_shake = screen_shake;
                     break;
+                case SDLK_r:
+                    SDL_Point* toolbox_position = get(game->current_scene->objects, "toolbox_position", strcmp);
+                    toolbox_position->x = (rand() % game->width_amount) * 16;
+                    toolbox_position->y = (rand() % game->height_amount) * 16;
                 default:
                     break;
             }
@@ -32,6 +39,12 @@ void event_handler_etagere_level(GameData* game) {
 
 void populate_etagere_level(GameData* game) {
     push_background_structures(game);
+
+    SDL_Point* toolbox_position = get(game->current_scene->objects, "toolbox_position", strcmp);
+
+    Texture* toolbox = init_texture_from_memory(game, "src_assets_toolbox", toolbox_position->x, toolbox_position->y);
+    push_render_stack_texture(game, toolbox, true);  // volontaire que ce soit true ici
+
 }
 
 Scene* init_etagere_level(GameData* game) {
@@ -39,5 +52,12 @@ Scene* init_etagere_level(GameData* game) {
     scene->update = update_etagere_level;
     scene->event_handler = event_handler_etagere_level;
     scene->populate = populate_etagere_level;
+
+    SDL_Point* toolbox_position = malloc(sizeof(SDL_Point));
+    toolbox_position->x = 100;
+    toolbox_position->y = 100;
+
+    insert(scene->objects, "toolbox_position", toolbox_position);
+
     return scene;
 }

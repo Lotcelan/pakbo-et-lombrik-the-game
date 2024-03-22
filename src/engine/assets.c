@@ -158,7 +158,7 @@ void free_rectangle(Rectangle* r) {
     free(r);
 }
 
-Texture* init_texture_from_memory(GameData* game, char* name, int x, int y, bool is_temporary) {
+Texture* init_texture_from_memory(GameData* game, char* name, int x, int y) {
     Texture* t = (Texture*)malloc(sizeof(Texture));
     if (t == NULL) {
         exit(-1);
@@ -241,7 +241,7 @@ void destroy_render_stack(GameData* game) {
 }
 
 void push_background_structures(GameData* game) {
-    Texture* background = init_texture_from_memory(game, game->current_scene->background, 0, 0, false);
+    Texture* background = init_texture_from_memory(game, game->current_scene->background, 0, 0);
     push_render_stack_texture(game, background, false);
 
     List* current = game->current_scene->structures;

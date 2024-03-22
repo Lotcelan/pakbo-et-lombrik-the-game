@@ -30,6 +30,9 @@ extern int src_assets_door_png_len;
 extern unsigned char src_assets_wall_jpg[];
 extern int src_assets_wall_jpg_len;
 
+extern unsigned char src_assets_toolbox_png[];
+extern int src_assets_toolbox_png_len;
+
 extern unsigned char src_assets_block_circles_png[];
 extern int src_assets_block_circles_png_len;
 
