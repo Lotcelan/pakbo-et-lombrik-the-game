@@ -7,7 +7,7 @@
 #include "scenes/scene01/scene01.h"
 #include "scenes/main_menu/main_menu.h"
 #include "scenes/spawn_level/spawn_level.h"
-
+#include "scenes/etagere_level/etagere_level.h"
 
 int main(int argc, char *argv[]) {
     set_dir();
@@ -27,10 +27,12 @@ int main(int argc, char *argv[]) {
     Scene* scene01 = init_scene01(game);
     Scene* main_menu = init_main_menu(game);
     Scene* spawn_level = init_spawn_level(game);
+    Scene* etagere_level = init_etagere_level(game);
 
     insert(game->scenes, "scene01", scene01);
     insert(game->scenes, "main_menu", main_menu);
     insert(game->scenes, "spawn_level", spawn_level);
+    insert(game->scenes, "etagere_level", etagere_level);
     
     change_scene(game, "main_menu");
 
