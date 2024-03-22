@@ -116,11 +116,12 @@ Scene* init_scene(GameData* game, char* title) {
 
 }
 
-void render_scene(GameData* game) {
+void render_scene(GameData* game, float delta) {
     // Using game->renderer, render the scene : the background then all the textures
 
     // Load the background texture contained in game->current_scene->background and resize it to width and height of the window
     // Then render it at (0, 0)
+    // delta is the tick time between previous frame and current frame
 
     int width, height;
     SDL_GetWindowSize(game->window, &width, &height);
@@ -161,6 +162,24 @@ void render_scene(GameData* game) {
     }
 
     // Render all the entities
-    // todo
+    // /!\ PAS ENCORE TESTÉ /!\ 
+    List* liste_entites = game->current_scene->entities;
+    Entity* e;
+    Sprite* sprite;
+    while (liste_entites != NULL){
+        e = liste_entites->value;
+        sprite = get_sprite(e);
+        // on met a jour l'animation de l'entité, en général :
+            // soit on change l'état de e en fonction de conditions relatives à l'entité e en question
+            // soit (si on n'a pas changé d'etat) on met a jour le sprite de e (le timer notamment)
+        sprite->update_sprite(e, delta);
+        
+        // zone de la sprite sheet à afficher
+        // rappel : sprite->frames est une liste de coordonnées
+        SDL_Rect spriteRect = {.x = sprite->frames->value[0]*sprite->width, .y = sprite->frames->value[1]*sprite->height, .w = sprite->width, .h = sprite->height};
+        // position du sprite à l'écran
+        SDL_Rect destRect = {.x = e->x_position, .y = e->y_position, .w = sprite->width, .h = sprite->height};
+        // On affiche la bonne frame au bon endroit
+        SDL_RenderCopy(game->renderer, sprite->spriteSheet, spriteRect, destRect);
+    }
 }
-

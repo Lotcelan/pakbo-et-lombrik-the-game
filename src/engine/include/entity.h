@@ -26,7 +26,7 @@ typedef struct sprite {
     int height;     // nombre de pixels de haut pour une frame de l'animation
     // exemple : lom bric aura certainement height = width = 16 (son sprite étant un carré de taille 16)
     List* frames;   // liste chainée CYCLIQUE de coordonnées vis à vis du tileSet
-                    //les valeurs des maillons sont des quadruplets [x1, y1, x2, y2] 
+                    //les valeurs des maillons sont des quadruplets [x, y]
 } Sprite;
 
 typedef struct Entity {
@@ -39,10 +39,10 @@ typedef struct Entity {
     // entier qui correspond à l'indice de l'animation qu'on veut afficher
     int etat;
     // modifie l'entier self.etat pour mettre a jour l'animation de l'entité
-    void (*update_sprite)(struct Entity*, int);
+    void (*update_sprite)(struct Entity*, float);
     // tableau contenant les différentes animations 
     Sprite** animations;
-    // le pointeur vers la frame actuelle est donc accessible par : Entity->animations[etat]->value
+    // le pointeur vers le sprite actuel est donc accessible par : Entity->animations[etat]
 
     void (*update)(struct Entity*);
 } Entity;
@@ -68,7 +68,7 @@ typedef struct Entity_old {
 
 
 
-
+Sprite* get_sprite(Entity* e);
 Entity* init_entity(char* entity, int respawn_delay, int x, int y);
 void free_entity(Entity* e);
 void update_entities(List* entities);

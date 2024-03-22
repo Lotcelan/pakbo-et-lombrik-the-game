@@ -14,6 +14,11 @@ void update_entities(List* entities) {
     map(update_self, entities);
 }
 
+// /!\ PAS ENCORE TESTÉE /!\ 
+Sprite* get_sprite(Entity* e){
+    return e->animations[etat];
+}
+
 void update_pos_speed(Entity *e, float a_x, float a_y, int dt) {    
      /*
     Still have to change the function to add the if statements.
