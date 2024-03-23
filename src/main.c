@@ -10,6 +10,7 @@
 #include "scenes/etagere_level/etagere_level.h"
 
 int main(int argc, char *argv[]) {
+    printf("oskouuuur \n");
     set_dir();
     // Initialize SDL
 

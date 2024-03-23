@@ -6,20 +6,23 @@
 void event_handler_main_menu(GameData* game) {
     int* selectedMenuItem = get(game->current_scene->objects, "selectedMenuItem", strcmp);
     const char *main_menu_options[] = {"Play", "Options", "Quit"};
+    SDL_Rect* menuItemsRect;
+    SDL_Point point;
     switch (game->event.type) {
         case SDL_MOUSEMOTION:
             if (selectedMenuItem == NULL) {
                 printf("selectedMenuItem is NULL\n");
                 exit(-1);
             }
-            SDL_Rect* menuItemsRect = get(game->current_scene->objects, "menuItemsRect", strcmp);
+            menuItemsRect = get(game->current_scene->objects, "menuItemsRect", strcmp);
             if (menuItemsRect == NULL) {
                 printf("menuItemsRect is NULL\n");
                 exit(-1);
             }
             *selectedMenuItem = -1;
             for (int i = 0; i < NUM_MENU_ITEMS; i++) {
-                SDL_Point point = {game->event.motion.x, game->event.motion.y};
+                point.x = game->event.motion.x;
+                point.y = game->event.motion.y;
                 printf("x: %d, y: %d\n", game->event.motion.x, game->event.motion.y);
                 if (SDL_PointInRect(&point, &menuItemsRect[i])) {
                     *selectedMenuItem = i;

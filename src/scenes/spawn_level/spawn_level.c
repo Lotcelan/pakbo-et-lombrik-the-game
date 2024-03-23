@@ -6,6 +6,7 @@ void update_spawn_level(GameData* game) {
 }
 
 void event_handler_spawn_level(GameData* game) {
+    ScreenShake* screen_shake;
     switch (game->event.type) {
         case SDL_KEYDOWN:
             switch (game->event.key.keysym.sym) {
@@ -13,7 +14,7 @@ void event_handler_spawn_level(GameData* game) {
                 //     game->running = 0;
                 //     break;
                 case SDLK_h:
-                    ScreenShake* screen_shake = init_screen_shake(10, 10);
+                    screen_shake = init_screen_shake(10, 10);
                     printf("Screen shake: %p\n", screen_shake);
                     game->current_scene->screen_shake = screen_shake;
                     break;
