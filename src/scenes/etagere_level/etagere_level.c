@@ -16,7 +16,7 @@ void event_handler_etagere_level(GameData* game) {
                 //     game->running = 0;
                 //     break;
                 case SDLK_h:
-                    ScreenShake* screen_shake = init_screen_shake(10, 10);
+                    ScreenShake* screen_shake = init_screen_shake(10, 100);
                     printf("Screen shake: %p\n", screen_shake);
                     game->current_scene->screen_shake = screen_shake;
                     break;
@@ -54,8 +54,8 @@ Scene* init_etagere_level(GameData* game) {
     scene->populate = populate_etagere_level;
 
     SDL_Point* toolbox_position = malloc(sizeof(SDL_Point));
-    toolbox_position->x = 100;
-    toolbox_position->y = 100;
+    toolbox_position->x = 0;
+    toolbox_position->y = 0;
 
     insert(scene->objects, "toolbox_position", toolbox_position);
 

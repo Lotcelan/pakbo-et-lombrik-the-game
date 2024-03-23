@@ -18,6 +18,9 @@ extern int src_assets_black_png_len;
 extern unsigned char src_assets_sol_eclaire_png[];
 extern int src_assets_sol_eclaire_png_len;
 
+extern unsigned char src_assets_blurred_brick_background_with_floor_png[];
+extern int src_assets_blurred_brick_background_with_floor_png_len;
+
 extern unsigned char src_assets_random_block_png[];
 extern int src_assets_random_block_png_len;
 

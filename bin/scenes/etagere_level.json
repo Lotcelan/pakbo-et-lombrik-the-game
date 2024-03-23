@@ -1,6 +1,6 @@
 {
     "name": "Exemple level",
-    "background" : "src_assets_birck_background",
+    "background" : "src_assets_blurred_brick_background_with_floor",
     "structures" : [
         {
             "identifier" : "floor06",
