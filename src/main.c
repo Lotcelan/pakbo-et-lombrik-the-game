@@ -55,6 +55,7 @@ int main(int argc, char *argv[]) {
         deltaT = SDL_GetTicks() - t0;
         t0 = SDL_GetTicks(); 
 
+
         SDL_SetRenderDrawColor(game->renderer, 0, 0, 0, 255);
         SDL_RenderClear(game->renderer);
 

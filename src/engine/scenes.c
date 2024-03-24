@@ -106,7 +106,13 @@ Scene* init_scene(GameData* game, char* title) {
 
 }
 
-void render_scene(GameData* game) {
+void render_scene(GameData* game, float delta) {
+    // Using game->renderer, render the scene : the background then all the textures
+
+    // Load the background texture contained in game->current_scene->background and resize it to width and height of the window
+    // Then render it at (0, 0)
+    // delta is the tick time between previous frame and current frame
+
 
     if (game->current_scene->screen_shake != NULL) {
         ScreenShake* shake = game->current_scene->screen_shake;
@@ -125,47 +131,27 @@ void render_scene(GameData* game) {
         SDL_RenderSetLogicalSize(game->renderer, CELL_WIDTH * game->width_amount, CELL_HEIGHT * game->height_amount);
     }
     render_stack(game);
-    
-    // // Using game->renderer, render the scene : the background then all the textures
-
-    // // Load the background texture contained in game->current_scene->background and resize it to width and height of the window
-    // // Then render it at (0, 0)
-
-    // int width, height;
-    // SDL_RenderGetLogicalSize(game->renderer, &width, &height);
-    
-    // SDL_Texture* backgroundTexture = loadTextureFromMemory(game, game->current_scene->background);
-    // if (backgroundTexture == NULL) {
-    //     fprintf(stderr, "Failed to load background texture\n");
-    //     return;
-    // }
-
-    // // Get the dimensions of the background texture
-    // int backgroundWidth, backgroundHeight;
-    // SDL_QueryTexture(backgroundTexture, NULL, NULL, &backgroundWidth, &backgroundHeight);
-
-    // // Render the background texture
-    // SDL_Rect backgroundRect = {0, 0, width, height};
-    // SDL_RenderCopyEx(game->renderer, backgroundTexture, NULL, &backgroundRect, 0, NULL, SDL_FLIP_NONE);
-
-    // // Clean up
-    // SDL_DestroyTexture(backgroundTexture);
-
-
-    // // Render all the structures
-    // List* current = game->current_scene->structures;
-    // while (current != NULL) {
-    //     Structure* s = (Structure*)current->value;
-    //     if (s == NULL) {
-    //         break;
-    //     }
-    //     SDL_Rect rect = s->position;
-    //     SDL_RenderCopy(game->renderer, s->texture, NULL, &rect);
-    //     current = current->next;
-    // }
-
-    // Render all the entities
-    // todo
+     // Render all the entities
+    // /!\ PAS ENCORE TESTÉ /!\ 
+    List* liste_entites = game->current_scene->entities;
+    Entity* e;
+    Sprite* sprite;
+    while (liste_entites != NULL){
+        e = liste_entites->value;
+        sprite = get_sprite(e);
+        // on met a jour l'animation de l'entité, en général :
+            // soit on change l'état de e en fonction de conditions relatives à l'entité e en question
+            // soit (si on n'a pas changé d'etat) on met a jour le sprite de e (le timer notamment)
+        sprite->update_sprite(e, delta);
+        
+        // zone de la sprite sheet à afficher
+        // rappel : sprite->frames est une liste de coordonnées
+        SDL_Rect spriteRect = {.x = sprite->frames->value[0]*sprite->width, .y = sprite->frames->value[1]*sprite->height, .w = sprite->width, .h = sprite->height};
+        // position du sprite à l'écran
+        SDL_Rect destRect = {.x = e->x_position, .y = e->y_position, .w = sprite->width, .h = sprite->height};
+        // On affiche la bonne frame au bon endroit
+        SDL_RenderCopy(game->renderer, sprite->spriteSheet, spriteRect, destRect);
+    }
 }
 
 void free_scene(Scene* scene) {
@@ -178,33 +164,10 @@ void free_scene(Scene* scene) {
     free(scene);
 }
 
-void render_screen_shake(GameData* game) {
 
-    Scene* scene = game->current_scene;
-    if (scene->screen_shake == NULL) {
-        return;
-    }
-        if (scene->screen_shake->time < scene->screen_shake->duration) {
-            scene->screen_shake->time++;
-            int x_offset = scene->screen_shake->intensity * 16 * ((sin(scene->screen_shake->time * 0.5) <= 0) ? -1 : 1);
-            int y_offset = scene->screen_shake->intensity * 16 * ((cos(scene->screen_shake->time * 0.5) <= 0) ? -1 : 1);
-            printf("hiii\n");
-            SDL_RenderSetScale(game->renderer, 2, 2);
 
-        } else {
-            scene->screen_shake->time = 0;
-            destroy_screen_shake(game);
-            SDL_RenderSetScale(game->renderer, 1, 1);
-        }
-}
 
-void destroy_screen_shake(GameData* game) {
-    Scene* scene = game->current_scene;
-    if (scene->screen_shake != NULL) {
-        free(scene->screen_shake);
-        scene->screen_shake = NULL;
-    }
-}
+
 
 ScreenShake* init_screen_shake(int duration, int intensity) {
     ScreenShake* s = (ScreenShake*)malloc(sizeof(ScreenShake));
@@ -217,6 +180,14 @@ ScreenShake* init_screen_shake(int duration, int intensity) {
     return s;
 }
 
+void destroy_screen_shake(GameData* game) {
+    Scene* scene = game->current_scene;
+    if (scene->screen_shake != NULL) {
+        free(scene->screen_shake);
+        scene->screen_shake = NULL;
+    }
+}
+
 void change_scene(GameData* game, char* next) {
     Scene* next_scene = get(game->scenes, next, strcmp);
     if (next_scene == NULL) {
@@ -227,3 +198,4 @@ void change_scene(GameData* game, char* next) {
     game->current_scene = next_scene;
     game->current_scene->populate(game);
 }
+

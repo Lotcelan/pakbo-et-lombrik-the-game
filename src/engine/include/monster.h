@@ -1,5 +1,6 @@
 #include<SDL2/SDL.h>
 #include"weapon.h"
+#include"entity.h"
 
 struct _monster_t{
     char *name;
@@ -7,6 +8,7 @@ struct _monster_t{
     int max_hp;
     int current_hp; // when current_hp  = 0, the entity is dead 
     Weapon_t *weapon;
+    Entity *entity;
 
 };
 
