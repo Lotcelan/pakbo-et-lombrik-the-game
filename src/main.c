@@ -78,7 +78,7 @@ int main(int argc, char *argv[]) {
         }
         // Render entities ici
 
-        render_scene(game);
+        render_scene(game, deltaT);
         // render_screen_shake(game);
 
         SDL_RenderPresent(game->renderer);

@@ -42,7 +42,7 @@ typedef struct Scene {
 } Scene;
 
 Scene* init_scene(GameData* game, char* title); // Title = nom de la scène = nom du dossier dans scenes/
-void render_scene(GameData* game);
+void render_scene(GameData* game, float delta);
 void free_scene(Scene* scene);
 void change_scene(GameData* game, char* next);
 SDL_Texture* load_texture(SDL_Renderer* renderer, char* path);
