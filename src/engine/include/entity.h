@@ -47,11 +47,10 @@ typedef struct Entity {
     void (*update)(struct Entity*);
 } Entity;
 
-
-// Ancienne représentation des entités
-typedef struct Entity_old {
-    SDL_Texture* textures[4];
-    Mix_Chunk* sounds[4];
+// On pourra en rajouter
+typedef struct Entity {
+    // SDL_Texture* textures[4];
+    // Mix_Chunk* sounds[4];
     TTF_Font* font;
     SDL_Rect position;
     

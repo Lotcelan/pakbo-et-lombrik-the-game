@@ -1,0 +1,114 @@
+{
+    "name": "Exemple level",
+    "background" : "src_assets_black",
+    "structures" : [
+        {
+            "identifier" : "floor06",
+            "x" : 0,
+            "y" : 6,
+            "resource" : "src_assets_random_block",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "none"
+        },
+        {
+            "identifier" : "floor07",
+            "x" : 0,
+            "y" : 7,
+            "resource" : "src_assets_random_block",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "none"
+        },
+        {
+            "identifier" : "floor16",
+            "x" : 1,
+            "y" : 6,
+            "resource" : "src_assets_random_block",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "none"
+        },
+        {
+            "identifier" : "floor17",
+            "x" : 1,
+            "y" : 7,
+            "resource" : "src_assets_random_block",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "none"
+        },
+        {
+            "identifier" : "floor26",
+            "x" : 2,
+            "y" : 6,
+            "resource" : "src_assets_random_block",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "none"
+        },
+        {
+            "identifier" : "floor27",
+            "x" : 2,
+            "y" : 7,
+            "resource" : "src_assets_random_block",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "none"
+        },
+        {
+            "identifier" : "floor36",
+            "x" : 3,
+            "y" : 6,
+            "resource" : "src_assets_random_block",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "none"
+        },
+        {
+            "identifier" : "floor37",
+            "x" : 3,
+            "y" : 7,
+            "resource" : "src_assets_random_block",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "none"
+        },
+        {
+            "identifier" : "floor46",
+            "x" : 4,
+            "y" : 6,
+            "resource" : "src_assets_random_block",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "none"
+        },
+        {
+            "identifier" : "floor47",
+            "x" : 4,
+            "y" : 7,
+            "resource" : "src_assets_random_block",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "none"
+        },
+        {
+            "identifier" : "floor56",
+            "x" : 5,
+            "y" : 6,
+            "resource" : "src_assets_random_block",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "none"
+        },
+        {
+            "identifier" : "floor57",
+            "x" : 5,
+            "y" : 7,
+            "resource" : "src_assets_random_block",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "none"
+        },
+        {
+            "identifier" : "door01",
+            "x" : 5,
+            "y" : 5,
+            "resource" : "src_assets_door",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "none"
+        }
+
+    ],
+    "entities" : [
+
+    ]
+}

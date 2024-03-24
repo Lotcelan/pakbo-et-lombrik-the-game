@@ -15,7 +15,7 @@ struct _player_t{
     int current_hp; // when current_hp  = 0, the entity is dead 
     Weapon_t *weapon;
     Entity *entity;
-    
+
 };
 
 typedef struct _player_t player_t;

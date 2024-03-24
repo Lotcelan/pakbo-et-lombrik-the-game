@@ -33,8 +33,8 @@ Les primitives implémentées sont :
 ## Scènes
 
 Un dossier contenant une scène doit avoir :
-- data.json : Cf juste après
-- nom_de_scene.c/h : Contiendra la logique de la scène
+- {nom_de_scene}.json : Cf juste après
+- {nom_de_scene}.c/h : Contiendra la logique de la scène
 
 <details>
 <summary>Format de data.json</summary>
@@ -42,19 +42,19 @@ Le fichier `data.json` doit suivre ce format :
 ```json
 {
     "name": "Exemple level", // The name can not be 'none'
-    "background" : "background.png", // In the assets folder
+    "background" : "src_assets_{name_of_the_file}", // Key of the resource hashmap
     "structures" : [
         {
-            "x" : 0,
-            "y" : 0,
-            "texture" : "wall.png",
+            "x" : 0, // Grid position
+            "y" : 0, // Grid position
+            "texture" : "src_assets_wall",
             "allow_pass_through" : 8, // On 4 bits : first bit : left, then cyclig clockwise
             "teleport_to_scene" : "none"
         },
         {
-            "x" : 100,
-            "y" : 100,
-            "texture" : "door.png",
+            "x" : 10,
+            "y" : 5,
+            "texture" : "src_assets_door",
             "allow_pass_through" : 8,
             "teleport_to_scene" : "scene02"
         }
@@ -83,15 +83,22 @@ Et si (par exemple) a vaut 1 alors le joueur peut passer à travers l'objet s'il
     <summary>Format nom_de_scene.c/h</summary>
 
 ```c
-void update_nom_de_scene() {
+void update_nom_de_scene(GameData* game) {
     // update the scene
     return;
 }
 
-Scene* init_scene01() {
+void event_handler(GameData* game) {
+    // update the scene
+    return;
+}
+
+
+Scene* init_scene01(GameData* game) {
     Scene* scene = init_scene("nom_de_scene"); // Le nom ici DOIT ABSOLUMENT CORRESPONDRE au nom du dossier dans lequel le fichier .c est stocké
     
     scene->update = update_nom_de_scene;
+    scene->event_handler = event_handler;
     return scene;
 }
 
@@ -100,3 +107,5 @@ Scene* init_scene01() {
 
 
 ## Entités
+
+Ca arrive fort

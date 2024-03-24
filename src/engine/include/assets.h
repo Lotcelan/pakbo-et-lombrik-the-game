@@ -8,14 +8,45 @@
 
 typedef struct GameData GameData;
 
-typedef struct {
+typedef struct Structure {
+    char* identifier;
+    SDL_Texture* texture;
+    SDL_Rect position;
+    int allow_pass_through;
+    char* teleport_to_scene;
+} Structure;
+
+typedef struct RenderEntry {
+    void* key;
+    bool is_temporary;
+    void (*render)(GameData* game, void* key);
+    void (*destroy)(void* key);
+} RenderEntry;
+
+typedef struct Text {
+    char* text;
+    SDL_Color color;
+    SDL_Rect position;
+    TTF_Font* font;
+    SDL_Texture* texture;
+} Text;
+
+typedef struct Texture {
     char* name;
-    char* path;
     SDL_Texture* texture;
     SDL_Surface* surface;
-    SDL_Rect srcRect;
-    SDL_Rect dstRect;
+    SDL_Rect* srcRect;
+    SDL_Rect* dstRect;
 } Texture;
+
+typedef struct Rectangle {
+    int x;
+    int y;
+    int w;
+    int h;
+    SDL_Color outline_color;
+    SDL_Color fill_color;
+} Rectangle;
 
 typedef struct MemTexture {
     int size;
@@ -23,6 +54,31 @@ typedef struct MemTexture {
 } MemTexture;
 
 SDL_Texture* loadTextureFromMemory(GameData* game, char* resource);
+
+void render_texture(GameData* game, void* key);
+void render_structure(GameData* game, void* key);
+void render_text(GameData* game, void* key);
+void render_rectangle(GameData* game, void* key);
+
+Text* init_text(GameData* game, char* text, SDL_Color color, int x, int y, TTF_Font* font);
+Structure* init_structure(GameData* game, char* identifier, char* resource, int x, int y, int allow_pass_through, char* teleport_to_scene);
+Rectangle* init_rectangle(int x, int y, int w, int h, SDL_Color outline_color, SDL_Color fill_color);
+Texture* init_texture_from_memory(GameData* game, char* name, int x, int y);
+
+void free_structure(Structure* s);
+void free_text(Text* t);
+void free_rectangle(Rectangle* r);
+void free_texture(Texture* t);
+
+void push_render_stack(GameData* game, void* key, void (*render)(GameData*, void*), void (*destroy)(void*), bool is_temporary);
+void push_render_stack_text(GameData* game, Text* text, bool is_temporary);
+void push_render_stack_structure(GameData* game, Structure* structure, bool is_temporary);
+void push_render_stack_texture(GameData* game, Texture* texture, bool is_temporary);
+void push_render_stack_rect(GameData* game, Rectangle* rect, bool is_temporary);
+void push_background_structures(GameData* game);
+void render_stack(GameData* game);
+void destroy_render_stack(GameData* game);
+
 
 /*
 SDL_Surface* surface = IMG_Load("path_to_image.png");
