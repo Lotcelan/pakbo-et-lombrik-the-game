@@ -48,7 +48,7 @@ typedef struct Entity {
 } Entity;
 
 // On pourra en rajouter
-typedef struct Entity {
+typedef struct Entity_old {
     // SDL_Texture* textures[4];
     // Mix_Chunk* sounds[4];
     TTF_Font* font;
