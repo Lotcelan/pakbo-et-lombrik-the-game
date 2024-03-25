@@ -10,7 +10,7 @@ FrameRateManager* init_frm(int capped_fps) {
 }
 
 
-Timer* init_timer() {
+Timer* init_timer(void) {
     Timer* timer = (Timer*)malloc(sizeof(Timer));
     timer->started = false;
     timer->paused = false;

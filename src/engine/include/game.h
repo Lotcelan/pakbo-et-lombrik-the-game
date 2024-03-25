@@ -50,7 +50,7 @@ typedef struct GameData {
 GameData* init_game(int width_amount, int height_amount, int final_width, int final_height, const char* title, int capped_fps);
 void event_handler(GameData* game);
 void free_game(GameData* game);
-void set_dir();
+void set_dir(void);
 
 
 #endif

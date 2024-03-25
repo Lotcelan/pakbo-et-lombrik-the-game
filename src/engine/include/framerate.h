@@ -28,7 +28,7 @@ int get_fps(FrameRateManager* f);
 void destroyFrameRateManager(FrameRateManager* f);
 
 // Timer functions
-Timer* init_timer();
+Timer* init_timer(void);
 void start_timer(Timer* t);
 void stop_timer(Timer* t);
 void pause_timer(Timer* t);
