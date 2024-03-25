@@ -68,7 +68,7 @@ void removeFrom(HashTable* hashtable, void* key) {
     }
 }
 
-void* get(HashTable* hashtable, void* key, int (*cmp)(void*, void*)) {
+void* get(HashTable* hashtable, void* key, int (*cmp)(const char*, const char*)) {
     unsigned int index = hash(key, hashtable->size);
     Entry* entry = hashtable->table[index];
 

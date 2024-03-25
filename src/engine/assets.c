@@ -3,7 +3,7 @@
 SDL_Texture* loadTextureFromMemory(GameData* game, char* resource) {
     // Load texture from memory
     // displayHashTableResource(game->resources);
-    MemTexture* resource_texture = (MemTexture*)get(game->resources, resource, strcmp);
+    MemTexture* resource_texture = (MemTexture*)get(game->resources, resource, &strcmp);
     if (resource_texture == NULL) {
         printf("Resource not found: %s\n", resource);
         return NULL;
