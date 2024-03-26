@@ -12,9 +12,6 @@ void map(void* (*f)(void*), List* list) {
 	return;
 }
 
-
-
-
 int length(List *list)
     {
         int length = 0 ;

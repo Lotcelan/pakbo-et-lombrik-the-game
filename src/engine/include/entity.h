@@ -47,32 +47,9 @@ typedef struct Entity {
     void (*update)(struct Entity*);
 } Entity;
 
-// On pourra en rajouter
-typedef struct Entity_old {
-    // SDL_Texture* textures[4];
-    // Mix_Chunk* sounds[4];
-    TTF_Font* font;
-    SDL_Rect position;
-    
-    void (*update)(struct Entity_old* e);
-    
-    int x_position;
-    int y_position;
-    int x_velocity;
-    int y_velocity;
-
-    EntityType *entity_type;
-    int respawn_delay;
-} Entity_old;
-
-
-
 Sprite* get_sprite(Entity* e);
 Entity* init_entity(char* entity, int respawn_delay, int x, int y);
-void free_entity(Entity* e);
-void update_entities(List* entities);
-void update_self(Entity* e);
-void update_pos_speed(Entity *e, float a_x, float a_y, int dt);
+void free_entity(void* e);
 
 void update_animation(Sprite* sprite, float delta);
 void print_entity(Entity* e);

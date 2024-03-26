@@ -131,8 +131,8 @@ void render_scene(GameData* game, float delta) {
         SDL_RenderSetLogicalSize(game->renderer, CELL_WIDTH * game->width_amount, CELL_HEIGHT * game->height_amount);
     }
     render_stack(game);
-     // Render all the entities
-    // /!\ PAS ENCORE TESTÉ /!\ 
+    // Render all the entities
+    // /!\ PAS ENCORE TESTÉ
     List* liste_entites = game->current_scene->entities;
     Entity* e;
     Sprite* sprite;

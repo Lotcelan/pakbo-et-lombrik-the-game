@@ -111,10 +111,11 @@ Text* init_text(GameData* game, char* text, SDL_Color color, int x, int y, TTF_F
     return t;
 }
 
-void free_text(Text* t) {
-    if (t->texture != NULL) {
-        SDL_DestroyTexture(t->texture);
-        free(t);
+void free_text(void* t) {
+    Text* t2 = (Text*)t;
+    if (t2->texture != NULL) {
+        SDL_DestroyTexture(t2->texture);
+        free(t2);
     }
 }
 
@@ -134,9 +135,10 @@ Structure* init_structure(GameData* game, char* identifier, char* resource, int 
     return s;
 }
 
-void free_structure(Structure* s) {
-    SDL_DestroyTexture(s->texture);
-    free(s);
+void free_structure(void* s) {
+    Structure* s2 = (Structure*)s;
+    SDL_DestroyTexture(s2->texture);
+    free(s2);
 }
 
 
@@ -154,7 +156,7 @@ Rectangle* init_rectangle(int x, int y, int w, int h, SDL_Color outline_color, S
     return r;
 }
 
-void free_rectangle(Rectangle* r) {
+void free_rectangle(void* r) {
     free(r);
 }
 
@@ -177,10 +179,11 @@ Texture* init_texture_from_memory(GameData* game, char* name, int x, int y) {
     return t;
 }
 
-void free_texture(Texture* t) {
-    SDL_DestroyTexture(t->texture);
-    free(t->dstRect);
-    free(t);
+void free_texture(void* t) {
+    Texture* t2 = (Texture*)t;
+    SDL_DestroyTexture(t2->texture);
+    free(t2->dstRect);
+    free(t2);
 }
 
 void push_render_stack_text(GameData* game, Text* text, bool is_temporary) {

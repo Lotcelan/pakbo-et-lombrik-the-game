@@ -65,10 +65,10 @@ Structure* init_structure(GameData* game, char* identifier, char* resource, int 
 Rectangle* init_rectangle(int x, int y, int w, int h, SDL_Color outline_color, SDL_Color fill_color);
 Texture* init_texture_from_memory(GameData* game, char* name, int x, int y);
 
-void free_structure(Structure* s);
-void free_text(Text* t);
-void free_rectangle(Rectangle* r);
-void free_texture(Texture* t);
+void free_structure(void* s);
+void free_text(void* t);
+void free_rectangle(void* r);
+void free_texture(void* t);
 
 void push_render_stack(GameData* game, void* key, void (*render)(GameData*, void*), void (*destroy)(void*), bool is_temporary);
 void push_render_stack_text(GameData* game, Text* text, bool is_temporary);
