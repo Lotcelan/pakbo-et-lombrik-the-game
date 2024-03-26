@@ -119,7 +119,7 @@ void free_text(void* t) {
     }
 }
 
-Structure* init_structure(GameData* game, char* identifier, char* resource, int x, int y, int allow_pass_through, char* teleport_to_scene) {
+Structure* init_structure(GameData* game, const char* identifier, const char* resource, int x, int y, int allow_pass_through, const char* teleport_to_scene) {
     Structure* s = (Structure*)malloc(sizeof(Structure));
     if (s == NULL) {
         exit(-1);

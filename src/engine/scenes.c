@@ -17,7 +17,7 @@ void init_scene_with_json(GameData* game, json_t *root, Scene* scene) {
     json_array_foreach(structures, index, value) {
         // int x = json_integer_value(json_object_get(value, "x"));
         // int y = json_integer_value(json_object_get(value, "y"));
-        char *resource = json_string_value(json_object_get(value, "resource"));
+        const char *resource = json_string_value(json_object_get(value, "resource"));
         // int allow_pass_through = json_integer_value(json_object_get(value, "allow_pass_through"));
         // char *teleport_to_scene = json_string_value(json_object_get(value, "teleport_to_scene"));
 

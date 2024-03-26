@@ -48,7 +48,6 @@ typedef struct Entity {
 } Entity;
 
 Sprite* get_sprite(Entity* e);
-Entity* init_entity(char* entity, int respawn_delay, int x, int y);
 void free_entity(void* e);
 
 void update_animation(Sprite* sprite, float delta);

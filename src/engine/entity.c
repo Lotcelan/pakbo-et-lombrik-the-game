@@ -1,13 +1,10 @@
 #include "include/entity.h"
 
 // TODO
-Entity* init_entity(char* entity, int respawn_delay, int x, int y) {
-    return NULL;
-}
-
-// TODO
 void free_entity(void* entite) {
-    Entity* e = (Entity*)entite;
+    // Entity* e = (Entity*)entite;
+    free(entite);
+    return;
 }
 
 // /!\ PAS ENCORE TESTÉE
