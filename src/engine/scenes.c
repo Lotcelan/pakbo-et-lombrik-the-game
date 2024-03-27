@@ -38,9 +38,7 @@ void init_scene_with_json(GameData* game, json_t *root, Scene* scene) {
     List* entities_list = NULL;
 
     json_array_foreach(entities, index, value) {
-        Entity* e = init_entity(json_string_value(json_object_get(value, "entity")),
-                                json_integer_value(json_object_get(value, "respawn_delay")),
-                                json_integer_value(json_object_get(value, "x")),
+        Entity* e = init_entity(json_integer_value(json_object_get(value, "x")),
                                 json_integer_value(json_object_get(value, "y")));
         append(e, &entities_list);
         int x = json_integer_value(json_object_get(value, "x"));

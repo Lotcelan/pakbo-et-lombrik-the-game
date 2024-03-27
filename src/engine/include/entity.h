@@ -43,9 +43,9 @@ typedef struct Entity {
     void (*update_sprite)(struct Entity*, float);
     // tableau contenant les différentes animations 
     Sprite** animations;
-    // le pointeur vers le sprite actuel est donc accessible par : Entity->animations[etat]
+    // le pointeur vers le sprite actuel est donc accessible par : self->animations[self->etat]
 
-    void (*update)(struct Entity*);
+    //void (*update)(struct Entity*);
 } Entity;
 
 Sprite* get_sprite(Entity* e);
@@ -53,4 +53,5 @@ void free_entity(void* e);
 
 void update_animation(Sprite* sprite, float delta);
 void print_entity(Entity* e);
+Entity* init_entity(int x, int y);
 #endif

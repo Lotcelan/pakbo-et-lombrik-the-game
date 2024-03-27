@@ -28,3 +28,10 @@ void print_entity(Entity* e){
     printf("velocité : (%.2f, %.2f)\n", e->x_velocity, e->y_velocity);
     printf("état : %d\n", e->etat);
 }
+
+Entity* init_entity(int x, int y){
+    Entity* res = malloc(sizeof(Entity));
+    res->x_position = x;
+    res->y_position = y;
+    return res;
+}
