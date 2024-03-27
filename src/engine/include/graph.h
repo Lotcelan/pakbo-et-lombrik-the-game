@@ -1,6 +1,6 @@
 
 // Définition de la structure pour un noeud
-typedef void (*FunctionPointer)();
+typedef void (*FunctionPointer)(void);
 
 typedef struct Node {
     char* vertex;
@@ -41,9 +41,9 @@ Node* getVertex(Graph* graph, char* name);
 
 int hasEdge(Graph* graph, char* vertex_src, char* vertex_dest);
 
-void maFonction();
-void maFonction_2();
-void maFonction_3();
+void maFonction(void);
+void maFonction_2(void);
+void maFonction_3(void);
 
 void deleteEdge(Graph* graph, char* src, char* dst);
 

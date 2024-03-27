@@ -84,7 +84,7 @@ void push_render_stack(GameData* game, void* key, void (*render)(GameData*, void
 }
 
 
-Text* init_text(GameData* game, char* text, SDL_Color color, int x, int y, TTF_Font* font) {
+Text* init_text(GameData* game, const char* text, SDL_Color color, int x, int y, TTF_Font* font) {
     Text* t = (Text*)malloc(sizeof(Text));
     if (t == NULL) {
         exit(-1);

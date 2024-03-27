@@ -56,15 +56,15 @@ void addEdge(Graph* graph, char* src, char* dest, int weight, FunctionPointer fu
 
 
 
-void maFonction() {
+void maFonction(void) {
     printf("Ceci est une fonction stockée dans un sommet.\n");
 }
 
-void maFonction_2(){
+void maFonction_2(void){
     printf("nill");
 }
 
-void maFonction_3(){
+void maFonction_3(void){
     printf("");
 }
 

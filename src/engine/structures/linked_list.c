@@ -442,7 +442,7 @@ List *prefix_cyclic_non_delete(List *list, int n)
         return create_list_cyclic(p->value, prefix_cyclic_non_delete(p->next, n-1)) ;
     }
 
-void list_cyclic_delete(List *list, void delete(List*))
+void list_cyclic_delete(List *list, void delete(void*))
     {
         while (list != NULL)
             {
