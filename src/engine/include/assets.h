@@ -24,7 +24,7 @@ typedef struct RenderEntry {
 } RenderEntry;
 
 typedef struct Text {
-    char* text;
+    const char* text;
     SDL_Color color;
     SDL_Rect position;
     TTF_Font* font;
