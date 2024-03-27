@@ -4,7 +4,6 @@
 void free_entity(void* entite) {
     // Entity* e = (Entity*)entite;
     free(entite);
-    return;
 }
 
 // /!\ PAS ENCORE TESTÉE
@@ -15,7 +14,7 @@ Sprite* get_sprite(Entity* e){
 void update_animation(Sprite* sprite, float delta){
     int d = delta;
     // cette boucle sert a gérer les cas ou delta est assez grand pour passer plusieurs frames
-    // (exemple : si il y a un lag, l'animation est pas ralentie)
+    // (exemple : si il y a un lag, on va vouloir sauter une frame)
     while (d - sprite->timer > 0){      
         d = d - sprite->timer;
         sprite->frames = sprite->frames->next;

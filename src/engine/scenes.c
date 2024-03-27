@@ -142,15 +142,16 @@ void render_scene(GameData* game, float delta) {
         // on met a jour l'animation de l'entité, en général :
             // soit on change l'état de e en fonction de conditions relatives à l'entité e en question
             // soit (si on n'a pas changé d'etat) on met a jour le sprite de e (le timer notamment)
-        sprite->update_sprite(e, delta);
+        e->update_sprite(e, delta);
         
         // zone de la sprite sheet à afficher
         // rappel : sprite->frames est une liste de coordonnées
-        SDL_Rect spriteRect = {.x = sprite->frames->value[0]*sprite->width, .y = sprite->frames->value[1]*sprite->height, .w = sprite->width, .h = sprite->height};
+        int* frame = sprite->frames->value;
+        SDL_Rect spriteRect = {.x = frame[0]*sprite->width, .y = frame[1]*sprite->height, .w = sprite->width, .h = sprite->height};
         // position du sprite à l'écran
         SDL_Rect destRect = {.x = e->x_position, .y = e->y_position, .w = sprite->width, .h = sprite->height};
         // On affiche la bonne frame au bon endroit
-        SDL_RenderCopy(game->renderer, sprite->spriteSheet, spriteRect, destRect);
+        SDL_RenderCopy(game->renderer, sprite->spriteSheet, &spriteRect, &destRect);
     }
 }
 
