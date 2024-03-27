@@ -9,11 +9,11 @@
 typedef struct GameData GameData;
 
 typedef struct Structure {
-    char* identifier;
+    const char* identifier;
     SDL_Texture* texture;
     SDL_Rect position;
     int allow_pass_through;
-    char* teleport_to_scene;
+    const char* teleport_to_scene;
 } Structure;
 
 typedef struct RenderEntry {
@@ -53,7 +53,7 @@ typedef struct MemTexture {
     unsigned char* data;
 } MemTexture;
 
-SDL_Texture* loadTextureFromMemory(GameData* game, char* resource);
+SDL_Texture* loadTextureFromMemory(GameData* game, const char* resource);
 
 void render_texture(GameData* game, void* key);
 void render_structure(GameData* game, void* key);

@@ -1,6 +1,6 @@
 #include "include/assets.h"
 
-SDL_Texture* loadTextureFromMemory(GameData* game, char* resource) {
+SDL_Texture* loadTextureFromMemory(GameData* game, const char* resource) {
     // Load texture from memory
     // displayHashTableResource(game->resources);
     MemTexture* resource_texture = (MemTexture*)get(game->resources, resource, &strcmp);
