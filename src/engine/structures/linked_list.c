@@ -31,7 +31,7 @@ List *create_list(void *value, List *next)
         return list ;
     }
 
-List *list_del_first( List *l, void delete(List*) ) 
+List *list_del_first( List *l, void delete(void*) ) 
     {
         if (l == NULL)
             {
@@ -73,7 +73,7 @@ List *reverse(List *list)
         return new_list ;
     }
 
-List *list_del_i_element(List *l, int ind, void delete(List*))
+List *list_del_i_element(List *l, int ind, void delete(void*))
     {
         int len = length(l) ;
         if (ind>len)
@@ -115,7 +115,7 @@ void delete_all_non_struct(List *l)
         free(l) ;
     }
 
-List *merge(List *list1, List *list2, void delete(List*), int comparaison(void*, void*))
+List *merge(List *list1, List *list2, void delete(void*), int comparaison(void*, void*))
 {
     if (list1 == NULL)
     {
@@ -150,7 +150,7 @@ int compare_int(void *a, void *b)
         return 0 ;
     }
 
-List *prefix(List *list, int n, void delete(List*))
+List *prefix(List *list, int n, void delete(void*))
     {   
         if (n == 0)
             {
@@ -162,7 +162,7 @@ List *prefix(List *list, int n, void delete(List*))
         return create_list(val, pre) ;
     }
 
-List *suffix(List *list, int n, void delete(List*))
+List *suffix(List *list, int n, void delete(void*))
     {
         if (n == 0)
             {
@@ -191,7 +191,7 @@ List *prefix_non_delete(List *list, int n)
         return create_list(p->value, prefix_non_delete(p->next, n-1)) ;
     }
 
-void list_delete(List *list, void delete(List*))
+void list_delete(List *list, void delete(void*))
     {
         while (list != NULL)
             {
@@ -200,7 +200,7 @@ void list_delete(List *list, void delete(List*))
         print_list(list) ;
     }
 
-List *merge_sort(List *list, void delete(List*), int comparaison(void*, void*))
+List *merge_sort(List *list, void delete(void*), int comparaison(void*, void*))
     {
         if (length(list) <= 1)
             {
@@ -291,7 +291,7 @@ void print_list_cyclic(List *list)
         printf("] \n \n") ;
     }
 
-List *list_cyclic_del_first( List *l, void delete(List*) )
+List *list_cyclic_del_first( List *l, void delete(void*) )
     {
         List *move = l ;
         if (move->next == l)
@@ -328,7 +328,7 @@ int lengh_cyclic(List *list)
         return 0 ;
     }
 
-List *append_cyclic_end(void *value, List *list, void delete(List*)) 
+List *append_cyclic_end(void *value, List *list, void delete(void*)) 
     {
         if (list == NULL)
             {
@@ -352,7 +352,7 @@ List *append_cyclic_first(void *value, List *list)
         return create_list_cyclic(value, list) ;
     }
 
-List *reverse_cyclic(List *list, void delete(List*))
+List *reverse_cyclic(List *list, void delete(void*))
     {
         if (list == NULL)
             {
@@ -370,7 +370,7 @@ List *reverse_cyclic(List *list, void delete(List*))
         return new_list ;
     }
 
-List *list_cyclic_del_i_element(List *l, int ind, void delete(List*))
+List *list_cyclic_del_i_element(List *l, int ind, void delete(void*))
     {
         int len = lengh_cyclic(l) ;
         if (ind>len)
@@ -385,7 +385,7 @@ List *list_cyclic_del_i_element(List *l, int ind, void delete(List*))
         return create_list_cyclic(l->value, list_cyclic_del_i_element(list_cyclic_del_first(l, delete), ind, delete)) ;
     }
 
-List *merge_cyclic(List *list1, List *list2, void delete(List*), int comparaison(void*, void*))
+List *merge_cyclic(List *list1, List *list2, void delete(void*), int comparaison(void*, void*))
 {
     if (list1 == NULL)
     {
@@ -450,7 +450,7 @@ void list_cyclic_delete(List *list, void delete(List*))
             }
     }
 
-List *merge_sort_cyclic(List *list, void delete(List*), int comparaison(void*, void*))
+List *merge_sort_cyclic(List *list, void delete(void*), int comparaison(void*, void*))
     {
         if (lengh_cyclic(list) <= 1)
             {
@@ -469,7 +469,7 @@ List *merge_sort_cyclic(List *list, void delete(List*), int comparaison(void*, v
             } 
     }
 
-List *map_list_cyclic(List *list, void *f(void *a), void delete(List*))
+List *map_list_cyclic(List *list, void *f(void *a), void delete(void*))
     {
         if (list == NULL)
             {

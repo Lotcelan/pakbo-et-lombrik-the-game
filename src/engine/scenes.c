@@ -143,6 +143,7 @@ void render_scene(GameData* game, float delta) {
             // soit on change l'état de e en fonction de conditions relatives à l'entité e en question
             // soit (si on n'a pas changé d'etat) on met a jour le sprite de e (le timer notamment)
         e->update_sprite(e, delta);
+    
         
         // zone de la sprite sheet à afficher
         // rappel : sprite->frames est une liste de coordonnées

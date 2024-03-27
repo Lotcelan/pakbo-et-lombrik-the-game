@@ -38,7 +38,8 @@ typedef struct Entity {
     float y_velocity;
     // entier qui correspond à l'indice de l'animation qu'on veut afficher
     int etat;
-    // modifie l'entier self.etat pour mettre a jour l'animation de l'entité
+    // modifie l'entité self.etat pour mettre a jour l'animation de l'entité
+    // le flottant correspond au deltaT (temps depuis la frame précédente, en secondes)
     void (*update_sprite)(struct Entity*, float);
     // tableau contenant les différentes animations 
     Sprite** animations;
