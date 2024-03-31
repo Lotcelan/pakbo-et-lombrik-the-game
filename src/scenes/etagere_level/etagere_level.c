@@ -11,6 +11,7 @@ void update_etagere_level(GameData* game) {
 void event_handler_etagere_level(GameData* game) {
     ScreenShake* screen_shake;
     SDL_Point* toolbox_position;
+    Dialog* dialog;
     switch (game->event.type) {
         case SDL_KEYDOWN:
             switch (game->event.key.keysym.sym) {
@@ -26,6 +27,11 @@ void event_handler_etagere_level(GameData* game) {
                     toolbox_position = get(game->current_scene->objects, "toolbox_position", strcmp);
                     toolbox_position->x = (rand() % game->width_amount) * 16;
                     toolbox_position->y = (rand() % game->height_amount) * 16;
+                    break;
+                case SDLK_t:
+                    dialog = get_dialog_from_json("test");
+                    game->current_dialog = dialog;
+                    break;
                 default:
                     break;
             }
@@ -58,6 +64,8 @@ Scene* init_etagere_level(GameData* game) {
     SDL_Point* toolbox_position = malloc(sizeof(SDL_Point));
     toolbox_position->x = 0;
     toolbox_position->y = 0;
+
+
 
     insert(scene->objects, "toolbox_position", toolbox_position);
 

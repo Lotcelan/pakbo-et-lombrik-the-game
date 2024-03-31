@@ -15,6 +15,7 @@
 #include "linked_list.h"
 #include "hashtable.h"
 #include "assets.h"
+#include "dialogs.h"
 
 
 typedef struct ScreenShake {

@@ -21,6 +21,8 @@
 #define CELL_HEIGHT 16
 
 typedef struct Scene Scene;
+typedef struct Dialog Dialog;
+
 
 typedef enum GameStatus {
     RUNNING,
@@ -33,7 +35,8 @@ typedef enum GameStatus {
 typedef struct GameData {
     GameStatus state;
     Scene* current_scene;
-    
+    Dialog* current_dialog;
+
     SDL_Window* window;
     int width_amount;
     int height_amount;

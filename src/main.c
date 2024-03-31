@@ -37,6 +37,15 @@ int main(int argc, char *argv[]) {
     
     change_scene(game, "main_menu");
 
+
+    TTF_Font* font = TTF_OpenFont("../src/assets/Suifak.otf", 24);
+    if (font == NULL) {
+        printf("TTF_OpenFont: %s\n", TTF_GetError());
+        return NULL;
+    }
+
+    insert(game->fonts, "suifak", font);
+
     /* Main loop :
         - Getting events
         - Updating the entities logic with the event
@@ -44,6 +53,8 @@ int main(int argc, char *argv[]) {
         - Render the scene
         - Render the entities
     */
+
+
 
     // Variables for deltaT between each loop
     int t0;
@@ -60,27 +71,41 @@ int main(int argc, char *argv[]) {
         SDL_RenderClear(game->renderer);
 
 
-        // event_handler(game);
-        while (SDL_PollEvent(&(game->event)) != 0) {
-            if ((game->event).type == SDL_QUIT) {
-                game->state = CLOSING;
+        if (game->current_dialog == NULL) {
+
+            // event_handler(game);
+            while (SDL_PollEvent(&(game->event)) != 0) {
+                if ((game->event).type == SDL_QUIT) {
+                    game->state = CLOSING;
+                }
+                if (game->current_scene != NULL) {
+                    game->current_scene->event_handler(game);
+                }
+
+
             }
+
             if (game->current_scene != NULL) {
-                game->current_scene->event_handler(game);
+                // update_entities(game->current_scene->entities);
+                game->current_scene->update(game);
+            }
+            // Render entities ici
+
+            render_scene(game, deltaT);
+            // render_screen_shake(game);
+
+        } else {
+            // Peut être à revoir, peut sûrement être abuse (peut être pour skip frames)
+            while (SDL_PollEvent(&(game->event)) != 0) {
+                if ((game->event).type == SDL_QUIT) {
+                    game->state = CLOSING;
+                }
+                dialog_event_handler(game);
             }
 
-
+            update_dialog(game);
+            render_dialog(game);
         }
-
-        if (game->current_scene != NULL) {
-            // update_entities(game->current_scene->entities);
-            game->current_scene->update(game);
-        }
-        // Render entities ici
-
-        render_scene(game, deltaT);
-        // render_screen_shake(game);
-
         SDL_RenderPresent(game->renderer);
         cap_fps(game->frm);
     }

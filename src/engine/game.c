@@ -40,6 +40,7 @@ GameData* init_game(int width_amount, int height_amount, int final_width, int fi
     gameData->window = window;
     gameData->renderer = renderer;
     gameData->current_scene = NULL;
+    gameData->current_dialog = NULL;
 
     gameData->width_amount = width_amount;
     gameData->height_amount = height_amount;

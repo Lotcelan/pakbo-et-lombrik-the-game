@@ -29,6 +29,7 @@ DEPS := $(OBJS:.o=.d)
 all: $(TARGET)
 	@mkdir -p bin/scenes
 	@find src/scenes/ -name '*.json' -exec cp {} bin/scenes/ \;
+	@cp src/assets/dialogs.json bin/
 
 .PHONY: run
 run: all

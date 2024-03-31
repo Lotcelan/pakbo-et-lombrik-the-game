@@ -231,6 +231,17 @@ void render_stack(GameData* game) {
     return;
 }
 
+void render_no_destroy(GameData* game) {
+    if (game->current_scene != NULL) {
+        List* current = game->current_scene->render_stack;
+        while (current != NULL) {
+            ((RenderEntry*)current->value)->render(game, ((RenderEntry*)current->value)->key);
+            current = current->next;
+        }
+    }
+    return;
+}
+
 void destroy_render_stack(GameData* game) {
     if (game->current_scene != NULL) {
         List* current = game->current_scene->render_stack;

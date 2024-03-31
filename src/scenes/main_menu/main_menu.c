@@ -86,7 +86,7 @@ void update_main_menu(GameData* game) {
         }
 
 
-        Text* text = init_text(game, main_menu_options[i], (SDL_Color){255, 255, 255, (int)SDL_GetTicks() % 256}, 50, 55 + i*60, get(game->fonts, "main_menu", strcmp));        
+        Text* text = init_text(game, main_menu_options[i], (SDL_Color){255, 255, 255, (int)SDL_GetTicks() % 256}, 50, 55 + i*60, get(game->fonts, "suifak", strcmp));        
         push_render_stack_text(game, text, true);
     
 
@@ -141,17 +141,6 @@ Scene* init_main_menu(GameData* game) {
     scene->update = update_main_menu;
     scene->event_handler = event_handler_main_menu;
     scene->populate = populate;
-
-
-    TTF_Font* font = TTF_OpenFont("../src/assets/Suifak.otf", 24);
-    if (font == NULL) {
-        printf("TTF_OpenFont: %s\n", TTF_GetError());
-        return NULL;
-    }
-
-    insert(game->fonts, "main_menu", font);
-
-    
 
     return scene;
 }

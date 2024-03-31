@@ -10,11 +10,9 @@ typedef struct List {
     struct List* next;
 } List;
 
-// For compatibility's sake (currently)
-List* init_linked_list(void* value);
-void append(void* value, List** pList);
-void map(void* (*f)(void*), List* list);
 
+void* head(List *list);
+List* tail(List *list);
 
 // Final primitives
 int length(List *list);

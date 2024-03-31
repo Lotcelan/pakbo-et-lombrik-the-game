@@ -77,6 +77,7 @@ void push_render_stack_texture(GameData* game, Texture* texture, bool is_tempora
 void push_render_stack_rect(GameData* game, Rectangle* rect, bool is_temporary);
 void push_background_structures(GameData* game);
 void render_stack(GameData* game);
+void render_no_destroy(GameData* game);
 void destroy_render_stack(GameData* game);
 
 
