@@ -72,7 +72,7 @@ void event_handler(GameData* gameData) {
 
 
 
-void set_dir() {
+void set_dir(void) {
     char path[1024];
     char *exec_path;
 

@@ -17,7 +17,7 @@ void init_scene_with_json(GameData* game, json_t *root, Scene* scene) {
     json_array_foreach(structures, index, value) {
         // int x = json_integer_value(json_object_get(value, "x"));
         // int y = json_integer_value(json_object_get(value, "y"));
-        char *resource = json_string_value(json_object_get(value, "resource"));
+        const char *resource = json_string_value(json_object_get(value, "resource"));
         // int allow_pass_through = json_integer_value(json_object_get(value, "allow_pass_through"));
         // char *teleport_to_scene = json_string_value(json_object_get(value, "teleport_to_scene"));
 
@@ -38,9 +38,7 @@ void init_scene_with_json(GameData* game, json_t *root, Scene* scene) {
     List* entities_list = NULL;
 
     json_array_foreach(entities, index, value) {
-        Entity* e = init_entity(json_string_value(json_object_get(value, "entity")),
-                                json_integer_value(json_object_get(value, "respawn_delay")),
-                                json_integer_value(json_object_get(value, "x")),
+        Entity* e = init_entity(json_integer_value(json_object_get(value, "x")),
                                 json_integer_value(json_object_get(value, "y")));
         append(e, &entities_list);
         int x = json_integer_value(json_object_get(value, "x"));
@@ -131,8 +129,8 @@ void render_scene(GameData* game, float delta) {
         SDL_RenderSetLogicalSize(game->renderer, CELL_WIDTH * game->width_amount, CELL_HEIGHT * game->height_amount);
     }
     render_stack(game);
-     // Render all the entities
-    // /!\ PAS ENCORE TESTÉ /!\ 
+    // Render all the entities
+    // /!\ PAS ENCORE TESTÉ
     List* liste_entites = game->current_scene->entities;
     Entity* e;
     Sprite* sprite;
@@ -140,17 +138,18 @@ void render_scene(GameData* game, float delta) {
         e = liste_entites->value;
         sprite = get_sprite(e);
         // on met a jour l'animation de l'entité, en général :
-            // soit on change l'état de e en fonction de conditions relatives à l'entité e en question
-            // soit (si on n'a pas changé d'etat) on met a jour le sprite de e (le timer notamment)
-        sprite->update_sprite(e, delta);
-        
+        // soit on change l'état de e en fonction de conditions relatives à l'entité e en question
+        // soit (si on n'a pas changé d'etat) on met a jour le sprite de e (le timer notamment)
+        e->update_animation(e, delta);
+
         // zone de la sprite sheet à afficher
         // rappel : sprite->frames est une liste de coordonnées
-        SDL_Rect spriteRect = {.x = sprite->frames->value[0]*sprite->width, .y = sprite->frames->value[1]*sprite->height, .w = sprite->width, .h = sprite->height};
+        int* frame = e->sprite->currentFrame->value;
+        SDL_Rect spriteRect = {.x = frame[0]*sprite->width, .y = frame[1]*sprite->height, .w = sprite->width, .h = sprite->height};
         // position du sprite à l'écran
         SDL_Rect destRect = {.x = e->x_position, .y = e->y_position, .w = sprite->width, .h = sprite->height};
         // On affiche la bonne frame au bon endroit
-        SDL_RenderCopy(game->renderer, sprite->spriteSheet, spriteRect, destRect);
+        SDL_RenderCopy(game->renderer, sprite->spriteSheet, &spriteRect, &destRect);
     }
 }
 

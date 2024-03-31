@@ -26,7 +26,7 @@ void destroyHashTable(HashTable* hashtable) {
     free(hashtable);
 }
 
-unsigned int hash(void* key, int size) {
+unsigned int hash(const char* key, int size) {
     unsigned char* str = (unsigned char*)key;
     unsigned int hash = 5381;
     int c;
@@ -68,7 +68,7 @@ void removeFrom(HashTable* hashtable, void* key) {
     }
 }
 
-void* get(HashTable* hashtable, void* key, int (*cmp)(void*, void*)) {
+void* get(HashTable* hashtable, const char* key, int (*cmp)(const char*, const char*)) {
     unsigned int index = hash(key, hashtable->size);
     Entry* entry = hashtable->table[index];
 
@@ -82,7 +82,7 @@ void* get(HashTable* hashtable, void* key, int (*cmp)(void*, void*)) {
     return NULL;
 }
 
-int contains(HashTable* hashtable, void* key, int (*cmp)(void*, void*)) {
+int contains(HashTable* hashtable, void* key, int (*cmp)(const char*, const char*)) {
     return get(hashtable, key, cmp) != NULL;
 }
 

@@ -9,6 +9,6 @@
 void update_scene01(GameData* game);
 void populate_scene01(GameData* game);
 void event_handler_scene01(GameData* game);
-Scene* init_scene01();
+Scene* init_scene01(GameData* game);
 
 #endif
