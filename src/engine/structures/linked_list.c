@@ -38,7 +38,6 @@ List *create_list(void *value, List *next)
 
 List *list_del_first( List *l, void delete(void*) ) 
     {
-        printf("g\n");
         if (l == NULL)
             {
                 return NULL ;
@@ -46,7 +45,7 @@ List *list_del_first( List *l, void delete(void*) )
         List *p = tail(l) ;
         if (delete!=NULL) 
             {
-                delete(l) ;
+                delete(l->value) ;
             }
         return p ;
     }
@@ -199,7 +198,6 @@ List *prefix_non_delete(List *list, int n)
 
 void list_delete(List *list, void delete(void*))
     {
-        printf("f\n");
         while (list != NULL)
             {
                 list = list_del_first(list, delete) ;

@@ -65,12 +65,9 @@ Dialog* create_dialog_from_json(json_t* root, Dialog* previous) {
     json_t* options_json = json_object_get(root, "options");
     size_t index;
     json_t* value;
-    printf("begin\n");
     json_array_foreach(options_json, index, value) {
-        printf("Adding %s\n", json_string_value(value));
         options = append_first(strdup(json_string_value(value)), options);
     }
-    printf("affecting : %p\n", options);
     result->options = options;
     json_t* branches_json = json_object_get(root, "branches");
     index = 0;
@@ -81,7 +78,6 @@ Dialog* create_dialog_from_json(json_t* root, Dialog* previous) {
 
     result->branches = branches;
 
-    printf("In the end %p\n", result->options);
     return result;
 }
 
@@ -152,7 +148,7 @@ void render_dialog(GameData* game) {
     SDL_GetWindowSize(game->window, &win_w, &win_h);
     
 
-    Rectangle* blur = init_rectangle(0, 0, win_w, win_h, (SDL_Color){0, 0, 0, 128}, (SDL_Color){0, 0, 0, 128});
+    Rectangle* blur = init_rectangle(0, 0, win_w, win_h, (SDL_Color){0, 0, 0, 1}, (SDL_Color){0, 0, 0, 1});
     render_rectangle(game, blur);
 
     TTF_Font* font = (TTF_Font*)get(game->fonts, game->current_dialog->font_name, strcmp);
@@ -186,27 +182,21 @@ void destroy_dialog(void* d) {
 void destroy_dialog_down(void* d) {
     Dialog* dialog = (Dialog*)d;
     
-    printf("e\n");
     if (dialog == NULL) {
         return;
     }
-    if (dialog->branches != NULL) {
-        printf("d\n");
-        list_delete(dialog->branches, destroy_dialog_down); // On free des Dialog*
-    }
 
     if (dialog->message != NULL) {
-        printf("a\n");
         free(dialog->message);
     }
     if (dialog->font_name != NULL) {
-        printf("b\n");
         free(dialog->font_name);
     }
     if (dialog->options != NULL) {
-        printf("c\n");
-        print_list(dialog->options); // On free des char*
         list_delete(dialog->options, free); // On free des char*
+    }
+    if (dialog->branches != NULL) {
+        list_delete(dialog->branches, destroy_dialog_down); // On free des Dialog*
     }
     free(dialog);
 }
