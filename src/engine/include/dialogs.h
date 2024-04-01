@@ -11,6 +11,7 @@ typedef struct Dialog {
     List* options; // Liste de char*
     List* branches; // Liste de Dialog*
     struct Dialog* previous; // Pour détruire les dialogue, si NULL on est la racine
+    int selected_option;
 } Dialog;
 
 Dialog* init_dialog(char* message, char* font_name, List* options, List* branches, Dialog* previous);

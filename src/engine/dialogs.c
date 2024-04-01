@@ -10,6 +10,7 @@ Dialog* init_dialog(char* message, char* font_name, List* options, List* branche
     dialog->options = options;
     dialog->branches = branches;
     dialog->previous = previous;
+    dialog->selected_option = 0;
     return dialog;
 }
 
@@ -68,7 +69,7 @@ Dialog* create_dialog_from_json(json_t* root, Dialog* previous) {
     json_array_foreach(options_json, index, value) {
         options = append_first(strdup(json_string_value(value)), options);
     }
-    result->options = options;
+    result->options = reverse(options);
     json_t* branches_json = json_object_get(root, "branches");
     index = 0;
     value = NULL;
@@ -76,7 +77,7 @@ Dialog* create_dialog_from_json(json_t* root, Dialog* previous) {
         branches = append_first(create_dialog_from_json(value, result), branches);
     }
 
-    result->branches = branches;
+    result->branches = reverse(branches);
 
     return result;
 }
@@ -121,11 +122,22 @@ void dialog_event_handler(GameData* game) {
                 game->current_dialog = NULL;
             } else {
                 // On affiche le premier branch pour tester
-                Dialog* next = head(game->current_dialog->branches); // Changer la logique de head
+                Dialog* next = get_i_element(game->current_dialog->branches, game->current_dialog->selected_option); // Changer la logique de head
                 if (next == NULL) {
                     destroy_dialog(game->current_dialog);
                 }
                 game->current_dialog = next;
+                game->current_dialog->selected_option = 0;
+            }
+        }
+        if (game->event.key.keysym.sym == SDLK_UP) {
+            if (game->current_dialog->selected_option > 0) {
+                game->current_dialog->selected_option--;
+            }
+        }
+        if (game->event.key.keysym.sym == SDLK_DOWN) {
+            if (game->current_dialog->selected_option < length(game->current_dialog->options) - 1) {
+                game->current_dialog->selected_option++;
             }
         }
     }
@@ -145,19 +157,39 @@ void render_dialog(GameData* game) {
     render_no_destroy(game); // On "freeze" le temps
 
     int win_h, win_w; 
-    SDL_GetWindowSize(game->window, &win_w, &win_h);
-    
+    SDL_RenderGetLogicalSize(game->renderer, &win_w, &win_h); // On récupère la taille de la fenêtre (en pixels
 
-    Rectangle* blur = init_rectangle(0, 0, win_w, win_h, (SDL_Color){0, 0, 0, 1}, (SDL_Color){0, 0, 0, 1});
-    render_rectangle(game, blur);
+    // Create a rectangle that takes up half the screen
+    Rectangle* box = init_rectangle(0, 0, win_w, win_h / 2, (SDL_Color){0, 0, 0, 1}, (SDL_Color){0, 0, 0, 1});
+    render_rectangle(game, box);
 
     TTF_Font* font = (TTF_Font*)get(game->fonts, game->current_dialog->font_name, strcmp);
 
+    if (font == NULL) {
+        fprintf(stderr, "Font not found\n");
+        return;
+    }
 
-    SDL_Color color = {255, 255, 255, 255};
-    // On affiche le message
-    Text* text = init_text(game, game->current_dialog->message, color, 0, 0, font);
-    render_text(game, text);
+    SDL_Color color = (SDL_Color){255, 255, 255, 255};
+
+    // Display the message within the box
+    Text* text = init_text(game, game->current_dialog->message, color, box->x, box->y, font);
+    render_wrap_text(game, text, game->width_amount*CELL_WIDTH);
+
+    // Display the dialog's options line by line underneath the box
+    int option_y = box->y + box->h;
+    int i = 0;
+    for (List* h = game->current_dialog->options; h != NULL; h = tail(h)) {
+        if (i == game->current_dialog->selected_option) {
+            color = (SDL_Color){255, 0, 0, 255};
+        } else {
+            color = (SDL_Color){255, 255, 255, 255};
+        }
+        Text* option_text = init_text(game, head(h), color, CELL_WIDTH, option_y, font);
+        render_text(game, option_text);
+        option_y += CELL_HEIGHT; // Move the y-coordinate down for the next option
+        i++;
+    }
 
 }
 

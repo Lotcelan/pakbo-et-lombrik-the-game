@@ -46,6 +46,13 @@ int main(int argc, char *argv[]) {
 
     insert(game->fonts, "suifak", font);
 
+    font = TTF_OpenFont("../src/assets/Suifak.otf", 12);
+    if (font == NULL) {
+        printf("TTF_OpenFont: %s\n", TTF_GetError());
+        return NULL;
+    }
+    insert(game->fonts, "suifak_small", font);
+
     /* Main loop :
         - Getting events
         - Updating the entities logic with the event

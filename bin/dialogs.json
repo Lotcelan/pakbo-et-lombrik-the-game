@@ -1,23 +1,23 @@
 {
     "test" : {
         "message" : "Hello, World!",
-        "font_name" : "suifak",
+        "font_name" : "suifak_small",
         "options" : [ "option1", "option2" ],
         "branches" : [
             {
                 "message" : "branch1",
-                "font_name" : "suifak",
+                "font_name" : "suifak_small",
                 "options" : [],
                 "branches" : []
             }, 
             {
                 "message" : "branch2",
-                "font_name" : "suifak",
+                "font_name" : "suifak_small",
                 "options" : [ "suivant"],
                 "branches" : [
                     {
                         "message" : "Tu as appuyé sur suivant",
-                        "font_name" : "suifak",
+                        "font_name" : "suifak_small",
                         "options" : [],
                         "branches" : []
                     }

@@ -22,6 +22,7 @@ List *list_del_first( List *l, void delete(void*));
 List *append_end(void *value, List *list);
 List *append_first(void *value, List *list);
 List *reverse(List *list);
+void* get_i_element(List *list, int i);
 List *list_del_i_element(List *l, int ind, void delete(void*));
 void print_list(List *list);
 void delete_all_non_struct(List *l);

@@ -48,6 +48,24 @@ void render_text(GameData* game, void* key) {
     SDL_RenderCopy(game->renderer, text->texture, NULL, &text->position);
 }
 
+void render_wrap_text(GameData* game, void* key, int wrap_length) {
+    Text* text = (Text*)key;
+    SDL_Surface* textSurface = TTF_RenderText_Blended_Wrapped(text->font, text->text, text->color, wrap_length);
+    if (textSurface == NULL) {
+        printf("TTF_RenderText_Solid: %s\n", TTF_GetError());
+        return;
+    }
+    text->texture = SDL_CreateTextureFromSurface(game->renderer, textSurface);
+    if (text->texture == NULL) {
+        printf("SDL_CreateTextureFromSurface: %s\n", SDL_GetError());
+        return;
+    }
+    SDL_QueryTexture(text->texture, NULL, NULL, &text->position.w, &text->position.h);
+
+    SDL_FreeSurface(textSurface);
+    SDL_RenderCopy(game->renderer, text->texture, NULL, &text->position);
+}
+
 void render_rectangle(GameData* game, void* key) {
     Rectangle* rect = (Rectangle*)key;
     SDL_SetRenderDrawColor(game->renderer, rect->fill_color.r, rect->fill_color.g, rect->fill_color.b, rect->fill_color.a);

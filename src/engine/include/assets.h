@@ -60,6 +60,8 @@ void render_structure(GameData* game, void* key);
 void render_text(GameData* game, void* key);
 void render_rectangle(GameData* game, void* key);
 
+void render_wrap_text(GameData* game, void* key, int wrap_length);
+
 Text* init_text(GameData* game, const char* text, SDL_Color color, int x, int y, TTF_Font* font);
 Structure* init_structure(GameData* game, const char* identifier, const char* resource, int x, int y, int allow_pass_through, const char* teleport_to_scene);
 Rectangle* init_rectangle(int x, int y, int w, int h, SDL_Color outline_color, SDL_Color fill_color);

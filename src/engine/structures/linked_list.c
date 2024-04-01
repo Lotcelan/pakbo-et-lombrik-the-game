@@ -66,6 +66,11 @@ List *append_first(void *value, List *list)
 
 List *reverse(List *list)
     {
+        if (list == NULL)
+            {
+                return NULL ;
+            }
+        
         void *first_element = list->value ;
         List *new_list = create_list(first_element, NULL) ;
         list = list->next ;
@@ -76,6 +81,20 @@ List *reverse(List *list)
                 list = list->next ;
             }
         return new_list ;
+    }
+
+void* get_i_element(List *list, int i)
+    {
+        if (list == NULL)
+            {
+                return NULL ;
+            }
+
+        if (i == 0)
+            {
+                return list->value ;
+            }
+        return get_i_element(list->next, i-1) ;
     }
 
 List *list_del_i_element(List *l, int ind, void delete(void*))
