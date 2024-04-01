@@ -160,7 +160,7 @@ void render_dialog(GameData* game) {
     SDL_RenderGetLogicalSize(game->renderer, &win_w, &win_h); // On récupère la taille de la fenêtre (en pixels
 
     // Create a rectangle that takes up half the screen
-    Rectangle* box = init_rectangle(0, 0, win_w, win_h / 2, (SDL_Color){0, 0, 0, 1}, (SDL_Color){0, 0, 0, 1});
+    Rectangle* box = init_rectangle(CELL_WIDTH, CELL_HEIGHT, win_w - CELL_WIDTH*2, win_h / 2, (SDL_Color){10, 10, 255, 255}, (SDL_Color){10, 10, 75, 255});
     render_rectangle(game, box);
 
     TTF_Font* font = (TTF_Font*)get(game->fonts, game->current_dialog->font_name, strcmp);
@@ -173,15 +173,16 @@ void render_dialog(GameData* game) {
     SDL_Color color = (SDL_Color){255, 255, 255, 255};
 
     // Display the message within the box
-    Text* text = init_text(game, game->current_dialog->message, color, box->x, box->y, font);
-    render_wrap_text(game, text, game->width_amount*CELL_WIDTH);
+    Text* text = init_text(game, game->current_dialog->message, color, box->x + 5, box->y + 5, font);
+    render_wrap_text(game, text, box->w - CELL_WIDTH);
 
     // Display the dialog's options line by line underneath the box
     int option_y = box->y + box->h;
     int i = 0;
     for (List* h = game->current_dialog->options; h != NULL; h = tail(h)) {
         if (i == game->current_dialog->selected_option) {
-            color = (SDL_Color){255, 0, 0, 255};
+            int r = sin(SDL_GetTicks() / 100.0) * 50 + 255 - 50;
+            color = (SDL_Color){255, 0, 0, r};
         } else {
             color = (SDL_Color){255, 255, 255, 255};
         }
