@@ -33,13 +33,14 @@ void print_entity(Entity* e){
     printf("état : %d\n", e->etat);
 }
 
-Entity* init_entity(int x, int y){
+Entity* init_entity(int x, int y, int framerate, SDL_Texture* spriteSheet, int width, int height, int* nbFrames, int* lockSprite){
     Entity* res = malloc(sizeof(Entity));
     res->x_position = x;
     res->y_position = y;
     res->x_velocity = 0;
     res->y_velocity = 0;
     res->etat = 0;
+    res->sprite = init_sprite(framerate, spriteSheet, width, height, nbFrames, lockSprite);
     return res;
 }
 
@@ -48,13 +49,14 @@ Entity* init_entity(int x, int y){
 // nbFrames[i] est le nombre de frames de l'animation de l'état i
 // (toutes les frames de l'entité ont les memes dimentions sinon c'est chiant)
 // à terme on va virer ce paramètre et la fonction init_sprite lira la sprite sheet pour déterminer automatiquement la longueur des animations
-Sprite* init_sprite(int framerate, SDL_Texture* spriteSheet, int width, int height, int* nbFrames){
+Sprite* init_sprite(int framerate, SDL_Texture* spriteSheet, int width, int height, int* nbFrames, int* lockSprite){
     Sprite* res = malloc(sizeof(Sprite));
     res->framerate = framerate;
     res->timer = 1/framerate;
     res->spriteSheet = spriteSheet;
     res->width = width;
     res->height = height;
+    res->LockSprite = lockSprite;
     // partie à automatiser, création de List**frames :
     // on cherche le nb d'animations différentes de l'entité (deja automatisé)
     int sswidth, ssheight;  //ss pour spriteSheet

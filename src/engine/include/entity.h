@@ -28,6 +28,10 @@ typedef struct sprite {
     List** frames;  // tableau de listes chainées CYCLIQUES de coordonnées vis à vis du spriteSheet
                     // les valeurs des maillons sont des quadruplets [x, y]
     List* currentFrame; // la valeur est un tableau de taille 2 de forme [x, y]
+    // LockSprite : tableau d'entiers associant a chaque état un booléen
+    // 0 si l'animation boucle
+    // un entier si l'animation doit se jouer jusqu'au bout (exemple : coup d'épée)
+    int* LockSprite; 
 } Sprite;
 
 typedef struct Entity {
