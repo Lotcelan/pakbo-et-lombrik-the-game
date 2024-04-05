@@ -58,6 +58,6 @@ void free_entity(void* e);
 
 void update_frame(Entity* e, float delta);
 void print_entity(Entity* e);
-Entity* init_entity(int x, int y);
-Sprite* init_sprite(int framerate, SDL_Texture* spriteSheet, int width, int height, int* nbFrames);
+Entity* init_entity(int x, int y, int framerate, SDL_Texture* spriteSheet, int width, int height, int* nbFrames, int* lock_liste);
+Sprite* init_sprite(int framerate, SDL_Texture* spriteSheet, int width, int height, int* nbFrames, int* lock_liste);
 #endif

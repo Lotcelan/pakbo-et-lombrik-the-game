@@ -51,6 +51,10 @@ void populate_etagere_level(GameData* game) {
 
 Scene* init_etagere_level(GameData* game) {
     Scene* scene = init_scene(game, "etagere_level");
+    // instance de lombric (test pour l'affichage des entités)
+    Entity* lb = malloc(sizeof(Entity));
+    Sprite* lb_sprite = malloc(sizeof(Sprite));
+    lb_sprite->spriteSheet = loadTextureFromMemory("src_assets_lombric_walk");
     scene->update = update_etagere_level;
     scene->event_handler = event_handler_etagere_level;
     scene->populate = populate_etagere_level;

@@ -38,9 +38,10 @@ void init_scene_with_json(GameData* game, json_t *root, Scene* scene) {
     List* entities_list = NULL;
 
     json_array_foreach(entities, index, value) {
-        Entity* e = init_entity(json_integer_value(json_object_get(value, "x")),
-                                json_integer_value(json_object_get(value, "y")));
-        append(e, &entities_list);
+        // la partie entités dans un json arrive plus tard
+        // Entity* e = init_entity(json_integer_value(json_object_get(value, "x")),
+        //                         json_integer_value(json_object_get(value, "y")));
+        // append(e, &entities_list);
         int x = json_integer_value(json_object_get(value, "x"));
         int y = json_integer_value(json_object_get(value, "y"));
         int respawn_delay = json_integer_value(json_object_get(value, "respawn_delay"));
@@ -137,16 +138,17 @@ void render_scene(GameData* game, float delta) {
     while (liste_entites != NULL){
         e = liste_entites->value;
         sprite = get_sprite(e);
-        // si on peut (l'animation n'est pas lock -- voir sprite.LockSprite) on met a jour l'animation de l'entité, en général :
+        // si on peut (l'animation n'est pas lock -- voir sprite.Lock) on met a jour l'animation de l'entité, en général :
         // soit on change l'état de e en fonction de conditions relatives à l'entité e en question
         // soit (si on n'a pas changé d'etat) on met a jour le sprite de e (le timer notamment)
-        if !(e->sprite->Lock]){
+        if (e->sprite->Lock){
+            e->sprite->Lock -= 1;
+        }
+        else{
             e->update_animation(e, delta);
             e->sprite->Lock = e->sprite->Lock_liste[e->etat];
         }
-        else{
-            e->sprite->Lock -= 1;
-        }
+        
         // zone de la sprite sheet à afficher
         // rappel : sprite->frames est une liste de coordonnées
         int* frame = e->sprite->currentFrame->value;    // tableau de taille 2 : [x, y]
