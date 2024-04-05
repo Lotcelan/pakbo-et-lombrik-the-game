@@ -140,10 +140,13 @@ void render_scene(GameData* game, float delta) {
         // si on peut (l'animation n'est pas lock -- voir sprite.LockSprite) on met a jour l'animation de l'entité, en général :
         // soit on change l'état de e en fonction de conditions relatives à l'entité e en question
         // soit (si on n'a pas changé d'etat) on met a jour le sprite de e (le timer notamment)
-        if !(e->sprite->LockSprite[e->etat]]){
+        if !(e->sprite->Lock]){
             e->update_animation(e, delta);
+            e->sprite->Lock = e->sprite->Lock_liste[e->etat];
         }
-
+        else{
+            e->sprite->Lock -= 1;
+        }
         // zone de la sprite sheet à afficher
         // rappel : sprite->frames est une liste de coordonnées
         int* frame = e->sprite->currentFrame->value;    // tableau de taille 2 : [x, y]

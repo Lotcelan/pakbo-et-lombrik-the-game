@@ -31,7 +31,8 @@ typedef struct sprite {
     // LockSprite : tableau d'entiers associant a chaque état un booléen
     // 0 si l'animation boucle
     // un entier si l'animation doit se jouer jusqu'au bout (exemple : coup d'épée)
-    int* LockSprite; 
+    int* Lock_liste;
+    int Lock;
 } Sprite;
 
 typedef struct Entity {
