@@ -51,10 +51,22 @@ void populate_etagere_level(GameData* game) {
 
 Scene* init_etagere_level(GameData* game) {
     Scene* scene = init_scene(game, "etagere_level");
-    // instance de lombric (test pour l'affichage des entités)
-    Entity* lb = malloc(sizeof(Entity));
-    Sprite* lb_sprite = malloc(sizeof(Sprite));
-    lb_sprite->spriteSheet = loadTextureFromMemory("src_assets_lombric_walk");
+
+    // test pour l'affichage des entités
+    // instance de lombric
+    // Entity* lb = malloc(sizeof(Entity));
+    int* nbs = malloc(sizeof(int));
+    nbs[0] = 8;
+    int* lock = malloc(sizeof(int));
+    lock[0] = 0;
+    SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_lombric_walk");
+    // Sprite* lb_sprite = init_sprite(12, spritesheet, 16, 16, nbs, lock);
+    Entity* lombric = init_entity(10, 10, 12, spritesheet, 16, 16, nbs, lock);
+    int* t = lombric->sprite->frames[0]->value;
+    int* cf = lombric->sprite->currentFrame->next->value;
+    printf("\n\n%d, %d\nnext frame : %d, %d\n\n", t[0], t[1], cf[0], cf[1]);
+    scene->entities = append_first(lombric, scene->entities);
+
     scene->update = update_etagere_level;
     scene->event_handler = event_handler_etagere_level;
     scene->populate = populate_etagere_level;

@@ -1,5 +1,6 @@
 #include "include/entity.h"
 
+
 // TODO
 void free_entity(void* entite) {
     // Entity* e = (Entity*)entite;
@@ -70,10 +71,12 @@ Sprite* init_sprite(int framerate, SDL_Texture* spriteSheet, int width, int heig
     // on remplit les champs de List** frames (non automatisé)
     for (int etat = 0 ; etat<nb_etats ; etat++){
         current = NULL;
+        printf("\n\n");
         for (int i = nbFrames[etat] ; i>0 ; i--){
-            co[0] = i;
+            printf("%d, %d\n", i-1, etat);
+            co[0] = i-1;
             co[1] = etat;
-            current = create_list_cyclic(co, current);
+            current = append_cyclic_first(co, current);
         }
         frames[etat] = current;
     }

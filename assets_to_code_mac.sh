@@ -62,7 +62,7 @@ done
 sed -i '' 's/unsigned int/int/g' "$source_file"
 
 # Write the function to list all images and their sizes
-echo "HashTable* init_resources() {" >> "$source_file"
+echo "HashTable* init_resources(void) {" >> "$source_file"
 echo "    HashTable* resources = createHashTable(10);" >> "$source_file"
 
 # Add entries for each image

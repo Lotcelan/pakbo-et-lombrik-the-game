@@ -1,6 +1,6 @@
 CC := gcc
 CFLAGS := -Wall -Wextra  -pedantic -MMD -MP -g3
-LDFLAGS := -fsanitize=address,undefined -lm
+LDFLAGS := -lm
 
 # Libs
 CFLAGS += $(shell pkg-config --cflags sdl2)

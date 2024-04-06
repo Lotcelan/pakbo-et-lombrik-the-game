@@ -157,6 +157,7 @@ void render_scene(GameData* game, float delta) {
         SDL_Rect destRect = {.x = e->x_position, .y = e->y_position, .w = sprite->width, .h = sprite->height};
         // On affiche la bonne frame au bon endroit
         SDL_RenderCopy(game->renderer, sprite->spriteSheet, &spriteRect, &destRect);
+        liste_entites = liste_entites->next;
     }
 }
 
