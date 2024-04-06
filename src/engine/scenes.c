@@ -141,17 +141,20 @@ void render_scene(GameData* game, float delta) {
         // si on peut (l'animation n'est pas lock -- voir sprite.Lock) on met a jour l'animation de l'entité, en général :
         // soit on change l'état de e en fonction de conditions relatives à l'entité e en question
         // soit (si on n'a pas changé d'etat) on met a jour le sprite de e (le timer notamment)
-        if (e->sprite->Lock){
-            e->sprite->Lock -= 1;
+        
+        //e->update_animation(e, delta);
+        if (sprite->Lock){
+            sprite->Lock -= 1;
+            update_frame(e, delta);
         }
         else{
             e->update_animation(e, delta);
-            e->sprite->Lock = e->sprite->Lock_liste[e->etat];
+           sprite->Lock = sprite->Lock_liste[e->etat];
         }
-        
         // zone de la sprite sheet à afficher
         // rappel : sprite->frames est une liste de coordonnées
         int* frame = e->sprite->currentFrame->value;    // tableau de taille 2 : [x, y]
+        // printf("\n\n%d, %d\n\n", frame[0], frame[1]);
         SDL_Rect spriteRect = {.x = frame[0]*sprite->width, .y = frame[1]*sprite->height, .w = sprite->width, .h = sprite->height};
         // position du sprite à l'écran
         SDL_Rect destRect = {.x = e->x_position, .y = e->y_position, .w = sprite->width, .h = sprite->height};

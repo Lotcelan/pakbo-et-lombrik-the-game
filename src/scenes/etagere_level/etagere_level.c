@@ -49,6 +49,10 @@ void populate_etagere_level(GameData* game) {
 
 }
 
+void test(Entity* e, float delta){
+    return;
+}
+
 Scene* init_etagere_level(GameData* game) {
     Scene* scene = init_scene(game, "etagere_level");
 
@@ -62,6 +66,7 @@ Scene* init_etagere_level(GameData* game) {
     SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_lombric_walk");
     // Sprite* lb_sprite = init_sprite(12, spritesheet, 16, 16, nbs, lock);
     Entity* lombric = init_entity(10, 10, 12, spritesheet, 16, 16, nbs, lock);
+    lombric->update_animation = test;
     int* t = lombric->sprite->frames[0]->value;
     int* cf = lombric->sprite->currentFrame->next->value;
     printf("\n\n%d, %d\nnext frame : %d, %d\n\n", t[0], t[1], cf[0], cf[1]);

@@ -58,9 +58,9 @@ Sprite* init_sprite(int framerate, SDL_Texture* spriteSheet, int width, int heig
     res->width = width;
     res->height = height;
     res->Lock_liste = lock_liste;
-    res->Lock = 0;
-    // partie à automatiser, création de List**frames :
-    // on cherche le nb d'animations différentes de l'entité (deja automatisé)
+    res->Lock = lock_liste[0];
+    
+    // on cherche le nb d'animations différentes de l'entité 
     int sswidth, ssheight;  //ss pour spriteSheet
     SDL_QueryTexture(spriteSheet, NULL, NULL, &sswidth, &ssheight);
     printf("entity.c : %d, %d\n", sswidth, ssheight);
