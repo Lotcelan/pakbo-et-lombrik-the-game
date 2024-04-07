@@ -480,3 +480,5 @@ List *map_list_cyclic(List *list, void *f(void *a), void delete(void*))
         element = f(element);
         return create_list_cyclic(element, map_list_cyclic(list, f, delete)) ;
     }
+
+

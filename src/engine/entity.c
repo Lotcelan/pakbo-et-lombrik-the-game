@@ -17,15 +17,24 @@ Sprite* get_sprite(Entity* e){
 // en revanche, update_sprite sera appelée par cette dernière en général (quasiment tout le temps)
 // update_frame sert à aficher la frame suivante si besoin (d'ou l'utilisation de delta)
 void update_frame(Entity* e, float delta){
-    int d = delta;
-    // cette boucle sert a gérer les cas ou delta est assez grand pour passer plusieurs frames d'un coup
-    // (exemple : si il y a un lag, on va vouloir sauter une frame)
-    while (d - e->sprite->timer > 0){
-        d = d - e->sprite->timer;
+    // int d = delta;
+    // // cette boucle sert a gérer les cas ou delta est assez grand pour passer plusieurs frames d'un coup
+    // // (exemple : si il y a un lag, on va vouloir sauter une frame)
+    // while (d - e->sprite->timer > 0){
+    //     d = d - e->sprite->timer;
+    //     e->sprite->currentFrame = e->sprite->currentFrame->next;
+    //     e->sprite->timer = 1/e->sprite->framerate;    // on reset le timer
+    // }
+    // e->sprite->timer -= d;
+
+    //delta en ms
+    if(delta > e->sprite->timer){
         e->sprite->currentFrame = e->sprite->currentFrame->next;
-        e->sprite->timer = 1/e->sprite->framerate;    // on reset le timer
+        e->sprite->timer = 1000/(e->sprite->framerate);
     }
-    e->sprite->timer -= d;
+    else{
+        e->sprite->timer = e->sprite->timer - delta;
+    }
 }
 
 void print_entity(Entity* e){
@@ -54,6 +63,7 @@ Sprite* init_sprite(int framerate, SDL_Texture* spriteSheet, int width, int heig
     Sprite* res = malloc(sizeof(Sprite));
     res->framerate = framerate;
     res->timer = 1/framerate;
+    res->timer = res->timer*1000;   // on passe le timer en ms
     res->spriteSheet = spriteSheet;
     res->width = width;
     res->height = height;
@@ -63,17 +73,14 @@ Sprite* init_sprite(int framerate, SDL_Texture* spriteSheet, int width, int heig
     // on cherche le nb d'animations différentes de l'entité 
     int sswidth, ssheight;  //ss pour spriteSheet
     SDL_QueryTexture(spriteSheet, NULL, NULL, &sswidth, &ssheight);
-    printf("entity.c : %d, %d\n", sswidth, ssheight);
     int nb_etats = ssheight/res->height;
     List** frames = malloc(nb_etats*sizeof(List));
     List* current;
-    int co[2];
     // on remplit les champs de List** frames (non automatisé)
     for (int etat = 0 ; etat<nb_etats ; etat++){
         current = NULL;
-        printf("\n\n");
         for (int i = nbFrames[etat] ; i>0 ; i--){
-            printf("%d, %d\n", i-1, etat);
+            int* co = malloc(2*sizeof(int));
             co[0] = i-1;
             co[1] = etat;
             current = append_cyclic_first(co, current);
