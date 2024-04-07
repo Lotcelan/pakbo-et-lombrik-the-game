@@ -5,7 +5,7 @@
 #include "engine/include/assets.h"
 #include <string.h>
 
-HashTable* init_resources();
+HashTable* init_resources(void);
 extern unsigned char src_assets_resized_background_png[];
 extern int src_assets_resized_background_png_len;
 
