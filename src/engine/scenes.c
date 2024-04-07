@@ -131,7 +131,6 @@ void render_scene(GameData* game, float delta) {
     }
     render_stack(game);
     // Render all the entities
-    // /!\ PAS ENCORE TESTÉ
     List* liste_entites = game->current_scene->entities;
     Entity* e;
     Sprite* sprite;

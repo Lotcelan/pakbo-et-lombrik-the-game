@@ -3,11 +3,17 @@
 
 // TODO
 void free_entity(void* entite) {
-    // Entity* e = (Entity*)entite;
-    free(entite);
+    Entity* e = (Entity*)entite;
+    for (int i = 0 ; i < length_cyclic(e->sprite->Lock_liste) ; i++){
+        list_cyclic_delete(e->sprite->frames[i], &free);
+    }
+    free(e->sprite->frames);
+    list_cyclic_delete(e->sprite->Lock_liste, &free);
+    SDL_DestroyTexture(e->sprite->spriteSheet);
+    free(e->sprite);
+    free(e);
 }
 
-// /!\ PAS ENCORE TESTÉE (mais normalement elle fonctionne vu la compliexité du bousin)
 Sprite* get_sprite(Entity* e){
     return e->sprite;
 }
