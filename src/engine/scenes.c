@@ -148,8 +148,12 @@ void render_scene(GameData* game, float delta) {
             update_frame(e, delta);
         }
         else{
+            int etat_old = e->etat;
             e->update_animation(e, delta);
-           sprite->Lock = sprite->Lock_liste[e->etat];
+            sprite->Lock = sprite->Lock_liste[e->etat];
+            if (e->etat == etat_old){
+                update_frame(e, delta);
+            }
         }
         // zone de la sprite sheet à afficher
         // rappel : sprite->frames est une liste de coordonnées

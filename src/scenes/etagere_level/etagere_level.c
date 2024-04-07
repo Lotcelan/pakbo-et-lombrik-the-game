@@ -50,7 +50,6 @@ void populate_etagere_level(GameData* game) {
 }
 
 void test(Entity* e, float delta){
-    update_frame(e, delta);
     return;
 }
 
