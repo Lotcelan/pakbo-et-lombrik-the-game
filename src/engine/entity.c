@@ -4,11 +4,13 @@
 // TODO
 void free_entity(void* entite) {
     Entity* e = (Entity*)entite;
-    for (int i = 0 ; i < length_cyclic(e->sprite->Lock_liste) ; i++){
+    int width, height;
+    SDL_QueryTexture(e->sprite->spriteSheet, NULL, NULL, &width, &height);
+    for (int i = 0 ; i < (height/e->sprite->height) ; i++){
         list_cyclic_delete(e->sprite->frames[i], &free);
     }
     free(e->sprite->frames);
-    list_cyclic_delete(e->sprite->Lock_liste, &free);
+    free(e->sprite->Lock_liste);
     SDL_DestroyTexture(e->sprite->spriteSheet);
     free(e->sprite);
     free(e);
