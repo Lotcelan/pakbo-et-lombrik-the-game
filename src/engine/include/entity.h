@@ -38,6 +38,8 @@ typedef struct sprite {
     // un entier si l'animation doit se jouer jusqu'au bout (exemple : coup d'épée)
     int* Lock_liste;
     int Lock;
+    // orientation permet de ne pas avoir a faire un sprite qui regarde a droite et un sprite qui regarde a gauche
+    SDL_RendererFlip orientation;
 } Sprite;
 
 typedef struct Entity {
