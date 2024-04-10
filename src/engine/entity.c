@@ -83,7 +83,7 @@ Sprite* init_sprite(int framerate, SDL_Texture* spriteSheet, int width, int heig
     res->height = height;
     res->Lock_liste = lock_liste;
     res->Lock = lock_liste[0];
-    res->orientation = SDL_FLIP_HORIZONTAL;
+    res->orientation = SDL_FLIP_NONE;
     
     // on cherche le nb d'animations différentes de l'entité 
     int sswidth, ssheight;  //ss pour spriteSheet
