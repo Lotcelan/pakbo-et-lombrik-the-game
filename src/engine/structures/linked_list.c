@@ -335,18 +335,18 @@ List *list_cyclic_del_first( List *l, void delete(void*) )
         return p ;
     }
 
-int lengh_cyclic(List *list)
+int length_cyclic(List *list)
     {
         if (list != NULL)
         {
-            int lengh = 1 ;
+            int length = 1 ;
             List *p = list ;
             while (p->next != list) 
                 {
-                    lengh ++ ;
+                    length ++ ;
                     p = p->next ;
                 }
-            return lengh ;
+            return length ;
         }
         return 0 ;
     }
@@ -395,7 +395,7 @@ List *reverse_cyclic(List *list, void delete(void*))
 
 List *list_cyclic_del_i_element(List *l, int ind, void delete(void*))
     {
-        int len = lengh_cyclic(l) ;
+        int len = length_cyclic(l) ;
         if (ind>len)
             {
                 return l ;
@@ -437,7 +437,7 @@ List *merge_cyclic(List *list1, List *list2, void delete(void*), int comparaison
 
 List *suffix_cyclic_non_delete(List *list, int n, List *first)
     {
-        int len = lengh_cyclic(first) ;
+        int len = length_cyclic(first) ;
         if (n >= len)
             {
                 return NULL ;
@@ -475,13 +475,13 @@ void list_cyclic_delete(List *list, void delete(void*))
 
 List *merge_sort_cyclic(List *list, void delete(void*), int comparaison(void*, void*))
     {
-        if (lengh_cyclic(list) <= 1)
+        if (length_cyclic(list) <= 1)
             {
                 return list ;
             }
         else
             {
-                int len = lengh_cyclic(list) ;
+                int len = length_cyclic(list) ;
                 List *begin = prefix_cyclic_non_delete(list, (len/2)) ;
                 List *end = suffix_cyclic_non_delete(list, (len/2), list) ;
                 List *l1 = merge_sort_cyclic(begin, delete, comparaison) ;
@@ -503,3 +503,5 @@ List *map_list_cyclic(List *list, void *f(void *a), void delete(void*))
         element = f(element);
         return create_list_cyclic(element, map_list_cyclic(list, f, delete)) ;
     }
+
+

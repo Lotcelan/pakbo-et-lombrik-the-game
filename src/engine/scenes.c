@@ -35,19 +35,32 @@ void init_scene_with_json(GameData* game, json_t *root, Scene* scene) {
     }
 
     json_t* entities = json_object_get(root, "entities");
-    List* entities_list = NULL;
 
     json_array_foreach(entities, index, value) {
-        Entity* e = init_entity(json_integer_value(json_object_get(value, "x")),
-                                json_integer_value(json_object_get(value, "y")));
-        append_first(e, entities_list);
+        // la partie entités dans un json arrive plus tard
+        // Entity* e = init_entity(json_integer_value(json_object_get(value, "x")),
+        //                         json_integer_value(json_object_get(value, "y")));
+        // append(e, &entities_list);
         int x = json_integer_value(json_object_get(value, "x"));
         int y = json_integer_value(json_object_get(value, "y"));
-        int respawn_delay = json_integer_value(json_object_get(value, "respawn_delay"));
-        const char *entity = json_string_value(json_object_get(value, "entity"));
+        // int respawn_delay = json_integer_value(json_object_get(value, "respawn_delay"));
+        const char *entity = json_string_value(json_object_get(value, "identifier"));
 
-        // printf("Entity %zu: x=%d, y=%d, respawn_delay=%d, entity=%s\n",
-        //        index, x, y, respawn_delay, entity);
+
+        printf("%p\n", get(game->entities, entity, strcmp));
+        EntityInitFunc* func = (EntityInitFunc*)get(game->entities, entity, strcmp);
+        printKeys(game->entities);
+        if (func != NULL) {
+            
+        
+            Entity* e = (*func)(game, x, y); // initialisation de l'entité
+
+            scene->entities = append_first(e, scene->entities);
+            // printf("Entity %zu: x=%d, y=%d, respawn_delay=%d, entity=%s\n",
+            //        index, x, y, respawn_delay, entity);
+        } else {
+            fprintf(stderr, "Entity %s not found\n", entity);
+        }
     }
 }
 
@@ -111,6 +124,9 @@ void render_scene(GameData* game, float delta) {
     // Then render it at (0, 0)
     // delta is the tick time between previous frame and current frame
 
+    if (game->current_scene == NULL) {
+        return;
+    }
 
     if (game->current_scene->screen_shake != NULL) {
         ScreenShake* shake = game->current_scene->screen_shake;
@@ -130,26 +146,39 @@ void render_scene(GameData* game, float delta) {
     }
     render_stack(game);
     // Render all the entities
-    // /!\ PAS ENCORE TESTÉ
     List* liste_entites = game->current_scene->entities;
     Entity* e;
     Sprite* sprite;
     while (liste_entites != NULL){
         e = liste_entites->value;
         sprite = get_sprite(e);
-        // on met a jour l'animation de l'entité, en général :
+        // si on peut (l'animation n'est pas lock -- voir sprite.Lock) on met a jour l'animation de l'entité, en général :
         // soit on change l'état de e en fonction de conditions relatives à l'entité e en question
         // soit (si on n'a pas changé d'etat) on met a jour le sprite de e (le timer notamment)
-        e->update_animation(e, delta);
-
+        
+        //e->update_animation(e, delta);
+        if (sprite->Lock){
+            sprite->Lock -= 1;
+            update_frame(e, delta);
+        }
+        else{
+            int etat_old = e->etat;
+            e->update_animation(e, delta);
+            sprite->Lock = sprite->Lock_liste[e->etat];
+            if (e->etat == etat_old){
+                update_frame(e, delta);
+            }
+        }
         // zone de la sprite sheet à afficher
         // rappel : sprite->frames est une liste de coordonnées
-        int* frame = e->sprite->currentFrame->value;
+        int* frame = e->sprite->currentFrame->value;    // tableau de taille 2 : [x, y]
+        // printf("\n\n%d, %d\n\n", frame[0], frame[1]);
         SDL_Rect spriteRect = {.x = frame[0]*sprite->width, .y = frame[1]*sprite->height, .w = sprite->width, .h = sprite->height};
         // position du sprite à l'écran
         SDL_Rect destRect = {.x = e->x_position, .y = e->y_position, .w = sprite->width, .h = sprite->height};
         // On affiche la bonne frame au bon endroit
         SDL_RenderCopy(game->renderer, sprite->spriteSheet, &spriteRect, &destRect);
+        liste_entites = liste_entites->next;
     }
 }
 

@@ -28,13 +28,16 @@ GameData* init_game(int width_amount, int height_amount, int final_width, int fi
     HashTable* resources = init_resources();
     gameData->resources = resources;
 
-    displayHashTableResource(resources);
+    // displayHashTableResource(resources);
 
     HashTable* fonts = createHashTable(10);
     gameData->fonts = fonts;
 
     HashTable* scenes = createHashTable(10);
     gameData->scenes = scenes;
+
+    HashTable* entities = createHashTable(10);
+    gameData->entities = entities;
 
     gameData->event = (SDL_Event){0};
     gameData->window = window;
@@ -57,6 +60,9 @@ GameData* init_game(int width_amount, int height_amount, int final_width, int fi
 void free_game(GameData* gameData) {
     destroyFrameRateManager(gameData->frm);
     destroyHashTable(gameData->resources);
+    destroyHashTable(gameData->fonts);
+    destroyHashTable(gameData->scenes);
+    destroyHashTable(gameData->entities);
     SDL_DestroyRenderer(gameData->renderer);
     SDL_DestroyWindow(gameData->window);
     free(gameData);
@@ -77,7 +83,6 @@ void set_dir(void) {
     char path[1024];
     char *exec_path;
 
-    // Récupérer le chemin de l'exécutable
 #if defined(_WIN32) || defined(_WIN64)
     _get_pgmptrs(&exec_path);
 #elif defined(__APPLE__)
@@ -99,10 +104,7 @@ void set_dir(void) {
     }
 #endif
 
-    // Extraire le répertoire du chemin de l'exécutable
     char *dir = dirname(exec_path);
-
-    // Changer le répertoire de travail actuel
     if (chdir(dir) != 0) {
         perror("chdir");
         exit(EXIT_FAILURE);

@@ -41,7 +41,7 @@ void print_list_cyclic(List *list) ;
 
 List *list_cyclic_del_first( List *l, void delete(void*) ) ;
 
-int lengh_cyclic(List *list) ;
+int length_cyclic(List *list) ;
 
 List *append_cyclic_end(void *value, List *list, void delete(void*)) ;
 

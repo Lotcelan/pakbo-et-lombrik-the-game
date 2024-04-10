@@ -1,6 +1,6 @@
 CC := gcc
 CFLAGS := -Wall -Wextra  -pedantic -MMD -MP -g3
-LDFLAGS := -fsanitize=address,undefined -lm
+LDFLAGS := -lm
 
 # Libs
 CFLAGS += $(shell pkg-config --cflags sdl2)
@@ -20,7 +20,7 @@ BUILDDIR := build
 TARGET := bin/game
 
 # Source files
-SRCS := $(wildcard $(SRCDIR)/*.c) $(wildcard $(SRCDIR)/engine/*.c) $(wildcard $(SRCDIR)/engine/structures/*.c) $(wildcard $(SRCDIR)/scenes/**/*.c)
+SRCS := $(wildcard $(SRCDIR)/*.c) $(wildcard $(SRCDIR)/engine/*.c) $(wildcard $(SRCDIR)/engine/structures/*.c) $(wildcard $(SRCDIR)/scenes/**/*.c) $(wildcard $(SRCDIR)/entities/**/*.c)
 OBJS := $(patsubst $(SRCDIR)/%.c,$(BUILDDIR)/%.o,$(SRCS))
 DEPS := $(OBJS:.o=.d)
 

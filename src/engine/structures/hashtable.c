@@ -86,6 +86,19 @@ int contains(HashTable* hashtable, void* key, int (*cmp)(const char*, const char
     return get(hashtable, key, cmp) != NULL;
 }
 
+void replace(HashTable* hashtable, const char* key, void* value, int (*cmp)(const char*, const char*)) {
+    unsigned int index = hash(key, hashtable->size);
+    Entry* entry = hashtable->table[index];
+
+    while (entry != NULL) {
+        if (cmp(entry->key, key) == 0) {
+            entry->value = value;
+            return;
+        }
+        entry = entry->next;
+    }
+}
+
 void clear(HashTable* hashtable) {
     for (int i = 0; i < hashtable->size; i++) {
         Entry* entry = hashtable->table[i];
@@ -127,6 +140,18 @@ void displayHashTableResource(HashTable* hashtable) {
             printf("(%s, %d | ", (char*)entry->key, ((MemTexture*)entry->value)->size);
             printImageArray((unsigned char*)((MemTexture*)entry->value)->data);
             printf(") ");
+            entry = entry->next;
+        }
+        printf("\n");
+    }
+}
+
+void printKeys(HashTable* hashtable) {
+    for (int i = 0; i < hashtable->size; i++) {
+        Entry* entry = hashtable->table[i];
+        printf("Bucket %d: ", i);
+        while (entry != NULL) {
+            printf("%s, ", (char*)entry->key);
             entry = entry->next;
         }
         printf("\n");

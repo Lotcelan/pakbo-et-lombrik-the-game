@@ -14,6 +14,7 @@
 #include <stdbool.h>
 #include "hashtable.h"
 #include "framerate.h"
+#include "entity.h"
 
 #include <math.h>
 
@@ -46,6 +47,7 @@ typedef struct GameData {
     HashTable* resources;
     HashTable* fonts;
     HashTable* scenes;
+    HashTable* entities; // FONCTIONS d'initialisation
 
     FrameRateManager* frm;
 } GameData;
