@@ -36,7 +36,7 @@ convert_to_byte_array() {
     # Extract variable name from xxd output
     local variable_name
     variable_name=$(echo "$xxd_output" | grep -op '(?<=unsigned char )\w*(?=\[\])')
-    echo $variable_name
+
     # Define output variable name for both .c and .h files
     local output_variable="${variable_name}"
     local output_size="${variable_name}_len"
@@ -59,7 +59,7 @@ find "$src_dir" -type f \( -iname \*.jpg -o -iname \*.jpeg -o -iname \*.png -o -
     convert_to_byte_array "$file"
 done
 
-sed -i '' 's/unsigned int/int/g' "$source_file"
+sed -i 's/unsigned int/int/g' "$source_file"
 
 # Write the function to list all images and their sizes
 echo "HashTable* init_resources(void) {" >> "$source_file"

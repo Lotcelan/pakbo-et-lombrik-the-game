@@ -36,7 +36,7 @@ convert_to_byte_array() {
     # Extract variable name from xxd output
     local variable_name
     variable_name=$(echo "$xxd_output" | ggrep -oP '(?<=unsigned char )\w*(?=\[\])')
-    echo $variable_name
+
     # Define output variable name for both .c and .h files
     local output_variable="${variable_name}"
     local output_size="${variable_name}_len"
