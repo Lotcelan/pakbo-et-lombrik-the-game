@@ -91,7 +91,7 @@ Entity* init_player(GameData* game, int x, int y) {
     
     SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_lombric_walk"); // to change
 
-    Entity* player = init_entity(x, y, get_fps(game->frm), spritesheet, 16, 16, nbs, lock, update_player, event_handler_player, update_animation_player);
+    Entity* player = init_entity(x, y, 14, spritesheet, 16, 16, nbs, lock, update_player, event_handler_player, update_animation_player);
 
     bool* is_going_down = malloc(sizeof(bool));
     *is_going_down = false;

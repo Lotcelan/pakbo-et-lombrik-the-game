@@ -28,7 +28,6 @@ int main(int argc, char *argv[]) {
     // Init entities MUST DO IT BEFORE INIT SCENES
     EntityInitFunc* i_p = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
     *i_p = init_player;
-    printf("i_p : %p\n", i_p);
     insert(game->entities, "player", i_p);
     printKeys(game->entities);
 
@@ -52,7 +51,7 @@ int main(int argc, char *argv[]) {
     TTF_Font* font = TTF_OpenFont("../src/assets/Suifak.otf", 24);
     if (font == NULL) {
         printf("TTF_OpenFont: %s\n", TTF_GetError());
-        return NULL;
+        return 0;
     }
 
     insert(game->fonts, "suifak", font);
@@ -60,7 +59,7 @@ int main(int argc, char *argv[]) {
     font = TTF_OpenFont("../src/assets/Suifak.otf", 12);
     if (font == NULL) {
         printf("TTF_OpenFont: %s\n", TTF_GetError());
-        return NULL;
+        return 0;
     }
     insert(game->fonts, "suifak_small", font);
 
