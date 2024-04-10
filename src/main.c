@@ -9,6 +9,8 @@
 #include "scenes/spawn_level/spawn_level.h"
 #include "scenes/etagere_level/etagere_level.h"
 
+#include "entities/player/player.h"
+
 int main(int argc, char *argv[]) {
     printf("oskouuuur \n");
     set_dir();
@@ -23,6 +25,14 @@ int main(int argc, char *argv[]) {
 
     GameData* game = init_game(16, 8, 1024, 512, "Pakbo é Lonbrik", 30);
 
+    // Init entities MUST DO IT BEFORE INIT SCENES
+    EntityInitFunc* i_p = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
+    *i_p = init_player;
+    printf("i_p : %p\n", i_p);
+    insert(game->entities, "player", i_p);
+    printKeys(game->entities);
+
+
     
     // Init scenes
     Scene* scene01 = init_scene01(game);
@@ -34,7 +44,8 @@ int main(int argc, char *argv[]) {
     insert(game->scenes, "main_menu", main_menu);
     insert(game->scenes, "spawn_level", spawn_level);
     insert(game->scenes, "etagere_level", etagere_level);
-    
+
+
     change_scene(game, "main_menu");
 
     /* Main loop :
@@ -67,6 +78,12 @@ int main(int argc, char *argv[]) {
             }
             if (game->current_scene != NULL) {
                 game->current_scene->event_handler(game);
+                List* current = game->current_scene->entities;
+                while (current != NULL) {
+                    Entity* e = (Entity*)current->value;
+                    e->event_handler(e, game);
+                    current = current->next;
+                }
             }
 
 
@@ -75,6 +92,12 @@ int main(int argc, char *argv[]) {
         if (game->current_scene != NULL) {
             // update_entities(game->current_scene->entities);
             game->current_scene->update(game);
+            List* current = game->current_scene->entities;
+            while (current != NULL) {
+                Entity* e = (Entity*)current->value;
+                e->update(e, deltaT);
+                current = current->next;
+            }
         }
         // Render entities ici
 

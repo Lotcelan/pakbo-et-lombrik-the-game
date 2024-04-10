@@ -74,6 +74,11 @@ void cap_fps(FrameRateManager* frm) {
 
 }
 
+int get_fps(FrameRateManager* frm) {
+    return frm->cappedFPS;
+
+}
+
 void destroyFrameRateManager(FrameRateManager* frm) {
     free(frm->timer);
     free(frm);

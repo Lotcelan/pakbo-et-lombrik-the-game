@@ -52,7 +52,7 @@ void print_entity(Entity* e){
     printf("état : %d\n", e->etat);
 }
 
-Entity* init_entity(int x, int y, int framerate, SDL_Texture* spriteSheet, int width, int height, int* nbFrames, int* lock_liste){
+Entity* init_entity(int x, int y, int framerate, SDL_Texture* spriteSheet, int width, int height, int* nbFrames, int* lock_liste, void (*update)(Entity* e, float d), void (*event_handler)(Entity* e, GameData* game), void (*update_animation)(Entity* e, float delta)) {
     Entity* res = malloc(sizeof(Entity));
     res->x_position = x;
     res->y_position = y;
@@ -60,6 +60,11 @@ Entity* init_entity(int x, int y, int framerate, SDL_Texture* spriteSheet, int w
     res->y_velocity = 0;
     res->etat = 0;
     res->sprite = init_sprite(framerate, spriteSheet, width, height, nbFrames, lock_liste);
+    res->update = update;
+    res->event_handler = event_handler;
+    res->update_animation = update_animation;
+    HashTable* objects = createHashTable(10);
+    res->objects = objects;
     return res;
 }
 

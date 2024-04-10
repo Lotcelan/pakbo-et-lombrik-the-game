@@ -1,24 +1,9 @@
 #include<SDL2/SDL.h>
-#include"../weapon/weapon.h"
 
-struct _player_t{
-    char *name;
-    int x_position;
-    int y_position;
-    int current_pv;
-    int *pv;
-    int *state;
-    int *double_jump;
-    int *direction;
-    int *speed;
-    weapon_t *weapon;
-    SDL_Texture* sprite;
+#include"../../engine/include/game.h"
+#include"../../engine/include/entity.h"
 
-};
-
-typedef struct _player_t player_t;
-
-void damaged_player(player_t *player, int damage_value);
-int delete_player(player_t *player);
-int get_x(player_t *player);
-int get_y(player_t *player);
+void update_player(Entity*, float delta_t);
+void event_handler_player(Entity*, GameData* game);
+void update_animation_player(Entity* e, float delta);
+Entity* init_player(GameData* game, int x, int y);

@@ -49,27 +49,27 @@ void populate_etagere_level(GameData* game) {
 
 }
 
-void test(Entity* e, float delta){
-    return;
-}
+// void test(Entity* e, float delta){
+//     return;
+// }
 
 Scene* init_etagere_level(GameData* game) {
     Scene* scene = init_scene(game, "etagere_level");
 
     // test pour l'affichage des entités
     // début tests Sacha
-    int* nbs = malloc(sizeof(int));
-    nbs[0] = 8;
-    int* lock = malloc(sizeof(int));
-    lock[0] = 0;
-    SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_lombric_walk");
-    // Sprite* lb_sprite = init_sprite(12, spritesheet, 16, 16, nbs, lock);
-    Entity* lombric = init_entity(15, 10, 15, spritesheet, 16, 16, nbs, lock);
-    lombric->update_animation = test;
-    int* t = lombric->sprite->frames[0]->value;
-    int* cf = lombric->sprite->currentFrame->next->value;
-    printf("\n\n%d, %d\nnext frame : %d, %d\n\n", t[0], t[1], cf[0], cf[1]);
-    scene->entities = append_first(lombric, scene->entities);
+    // int* nbs = malloc(sizeof(int));
+    // nbs[0] = 8;
+    // int* lock = malloc(sizeof(int));
+    // lock[0] = 0;
+    // SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_lombric_walk");
+    // // Sprite* lb_sprite = init_sprite(12, spritesheet, 16, 16, nbs, lock);
+    // Entity* lombric = init_entity(15, 10, 15, spritesheet, 16, 16, nbs, lock);
+    // lombric->update_animation = test;
+    // int* t = lombric->sprite->frames[0]->value;
+    // int* cf = lombric->sprite->currentFrame->next->value;
+    // printf("\n\n%d, %d\nnext frame : %d, %d\n\n", t[0], t[1], cf[0], cf[1]);
+    // scene->entities = append_first(lombric, scene->entities);
     // fin tests Sacha
 
     scene->update = update_etagere_level;

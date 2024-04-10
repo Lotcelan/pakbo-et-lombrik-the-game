@@ -35,7 +35,6 @@ void init_scene_with_json(GameData* game, json_t *root, Scene* scene) {
     }
 
     json_t* entities = json_object_get(root, "entities");
-    List* entities_list = NULL;
 
     json_array_foreach(entities, index, value) {
         // la partie entités dans un json arrive plus tard
@@ -44,11 +43,24 @@ void init_scene_with_json(GameData* game, json_t *root, Scene* scene) {
         // append(e, &entities_list);
         int x = json_integer_value(json_object_get(value, "x"));
         int y = json_integer_value(json_object_get(value, "y"));
-        int respawn_delay = json_integer_value(json_object_get(value, "respawn_delay"));
-        const char *entity = json_string_value(json_object_get(value, "entity"));
+        // int respawn_delay = json_integer_value(json_object_get(value, "respawn_delay"));
+        const char *entity = json_string_value(json_object_get(value, "identifier"));
 
-        // printf("Entity %zu: x=%d, y=%d, respawn_delay=%d, entity=%s\n",
-        //        index, x, y, respawn_delay, entity);
+
+        printf("%p\n", get(game->entities, entity, strcmp));
+        EntityInitFunc* func = (EntityInitFunc*)get(game->entities, entity, strcmp);
+        printKeys(game->entities);
+        if (func != NULL) {
+            
+        
+            Entity* e = (*func)(game, x, y); // initialisation de l'entité
+
+            scene->entities = append_first(e, scene->entities);
+            // printf("Entity %zu: x=%d, y=%d, respawn_delay=%d, entity=%s\n",
+            //        index, x, y, respawn_delay, entity);
+        } else {
+            fprintf(stderr, "Entity %s not found\n", entity);
+        }
     }
 }
 
@@ -112,6 +124,9 @@ void render_scene(GameData* game, float delta) {
     // Then render it at (0, 0)
     // delta is the tick time between previous frame and current frame
 
+    if (game->current_scene == NULL) {
+        return;
+    }
 
     if (game->current_scene->screen_shake != NULL) {
         ScreenShake* shake = game->current_scene->screen_shake;
