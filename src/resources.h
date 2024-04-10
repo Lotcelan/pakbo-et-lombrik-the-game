@@ -15,6 +15,9 @@ extern int src_assets_sol_png_len;
 extern unsigned char src_assets_plateforme_surelevee_png[];
 extern int src_assets_plateforme_surelevee_png_len;
 
+extern unsigned char src_assets_dirt_png[];
+extern int src_assets_dirt_png_len;
+
 extern unsigned char src_assets_lombric_walk_png[];
 extern int src_assets_lombric_walk_png_len;
 
