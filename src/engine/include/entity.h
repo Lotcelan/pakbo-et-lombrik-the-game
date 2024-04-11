@@ -5,6 +5,7 @@
 #include "game.h"
 #include "linked_list.h"
 #include "hashtable.h"
+#include "collisions.h"
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -12,7 +13,7 @@
 #include <SDL2/SDL_ttf.h>
 
 typedef struct GameData GameData;
-
+typedef struct Box Box;
 
 typedef enum EntityType {
     // List of names of entities in the folder entities/
@@ -53,16 +54,21 @@ typedef struct Entity {
     int etat;
     // modifie l'entité self.etat pour mettre a jour l'animation de l'entité
     // le flottant correspond au deltaT (temps depuis la frame précédente, en secondes)
-    void (*update_animation)(struct Entity*, float);
+    void (*update_animation)(struct Entity* e, float d);
     // sprite (framerate, timer, spriteSheet, width, height)
     Sprite* sprite;
 
-    void (*update)(struct Entity*, float delta_t);
-    void (*event_handler)(struct Entity*, GameData*);
+    void (*update)(GameData* game, struct Entity* e, float delta_t);
+    void (*event_handler)(struct Entity* e, GameData* game);
     HashTable* objects;
+
+    Box* collision_box;
+    Box* hurt_box;
+    Box* hit_box;
 } Entity;
 
 typedef Entity* (*EntityInitFunc)(GameData*, int, int);
+
 
 
 Sprite* get_sprite(Entity* e);
@@ -70,6 +76,6 @@ void free_entity(void* e);
 
 void update_frame(Entity* e, float delta);
 void print_entity(Entity* e);
-Entity* init_entity(int x, int y, int framerate, SDL_Texture* spriteSheet, int width, int height, int* nbFrames, int* lock_liste, void (*update)(Entity* e, float d), void (*event_handler)(Entity* e, GameData* game), void (*update_animation)(Entity* e, float delta));
+Entity* init_entity(int x, int y, int framerate, SDL_Texture* spriteSheet, int width, int height, int* nbFrames, int* lock_liste, void (*update)(GameData* game, Entity* e, float d), void (*event_handler)(Entity* e, GameData* game), void (*update_animation)(Entity* e, float delta));
 Sprite* init_sprite(int framerate, SDL_Texture* spriteSheet, int width, int height, int* nbFrames, int* lock_liste);
 #endif

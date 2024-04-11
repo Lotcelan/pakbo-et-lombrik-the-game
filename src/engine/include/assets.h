@@ -5,8 +5,10 @@
 #include <string.h>
 #include "game.h"
 #include "../../resources.h"
+#include "collisions.h"
 
 typedef struct GameData GameData;
+typedef struct Box Box;
 
 typedef struct Structure {
     const char* identifier;
@@ -14,6 +16,7 @@ typedef struct Structure {
     SDL_Rect position;
     int allow_pass_through;
     const char* teleport_to_scene;
+    Box* collision_box;
 } Structure;
 
 typedef struct RenderEntry {

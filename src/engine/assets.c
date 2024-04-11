@@ -150,12 +150,17 @@ Structure* init_structure(GameData* game, const char* identifier, const char* re
 
     s->allow_pass_through = allow_pass_through;
     s->teleport_to_scene = teleport_to_scene;
+    s->collision_box = NULL;
+
+    s->collision_box = init_rect_box_from_structure(game, s);
+    printf("initialized coll box : %d %d %d %d\n", s->collision_box->zone.x, s->collision_box->zone.y, s->collision_box->zone.w, s->collision_box->zone.h);
     return s;
 }
 
 void free_structure(void* s) {
     Structure* s2 = (Structure*)s;
     SDL_DestroyTexture(s2->texture);
+    free_box(s2->collision_box);
     free(s2);
 }
 
@@ -210,6 +215,10 @@ void push_render_stack_text(GameData* game, Text* text, bool is_temporary) {
 
 void push_render_stack_structure(GameData* game, Structure* structure, bool is_temporary) {
     push_render_stack(game, structure, render_structure, free_structure, is_temporary);
+
+    // for debug
+    // Rectangle* collision_rectangle = init_rectangle(structure->collision_box->zone.x, structure->collision_box->zone.y, structure->collision_box->zone.w, structure->collision_box->zone.h, (SDL_Color){255, 0, 0, 255}, (SDL_Color){0, 0, 0, 0});
+    // push_render_stack_rect(game, collision_rectangle, is_temporary);
 }
 
 void push_render_stack_texture(GameData* game, Texture* texture, bool is_temporary) {

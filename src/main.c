@@ -114,7 +114,7 @@ int main(int argc, char *argv[]) {
             List* current = game->current_scene->entities;
             while (current != NULL) {
                 Entity* e = (Entity*)current->value;
-                e->update(e, deltaT);
+                e->update(game, e, deltaT);
                 current = current->next;
             }
         }
