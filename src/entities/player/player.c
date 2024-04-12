@@ -42,18 +42,18 @@ void event_handler_player(Entity* player, GameData* game) {
             switch (event.key.keysym.sym) {
                 case SDLK_UP:
                     // *is_going_up = true;
-                    player->y_velocity = -0.1;
+                    player->y_velocity = -100;
                     break;
                 case SDLK_DOWN:
                     // *is_going_down = true;
-                    player->y_velocity = 0.1;
+                    player->y_velocity = 100;
                     break;
                 case SDLK_LEFT:
                     // *is_going_left = true;
-                    player->x_velocity = -0.1;
+                    player->x_velocity = -100;
                     break;
                 case SDLK_RIGHT:
-                    player->x_velocity = 0.1;    
+                    player->x_velocity = 100;    
                     // *is_going_right = true;
                     break;
                 default:
