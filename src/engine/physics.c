@@ -22,3 +22,32 @@ void update_entity_movement(GameData* game, Entity* e, float delta_t) {
     }
 
 }
+
+void follow_player(GameData* game, Entity* e) {
+    if (game->current_scene == NULL) {
+        return;
+    }
+    Entity* player = game->player;
+    if (player == NULL) {
+        return;
+    }
+    int player_x = player->x_position;
+    int player_y = player->y_position;
+    int e_x = e->x_position;
+    int e_y = e->y_position;
+    if (player_x > e_x) {
+        e->x_velocity = 0.05;
+    } else if (player_x < e_x) {
+        e->x_velocity = -0.05;
+    } else {
+        e->x_velocity = 0;
+    }
+    if (player_y > e_y) {
+        e->y_velocity = 0.05;
+    } else if (player_y < e_y) {
+        e->y_velocity = -0.05;
+    } else {
+        e->y_velocity = 0;
+    }
+
+}

@@ -51,6 +51,8 @@ GameData* init_game(int width_amount, int height_amount, int final_width, int fi
     FrameRateManager* frm = init_frm(capped_fps);
     gameData->frm = frm;
 
+    Entity* player = NULL;
+
     SDL_RenderSetLogicalSize(renderer, CELL_WIDTH * width_amount, CELL_HEIGHT * height_amount);
 
     return gameData;

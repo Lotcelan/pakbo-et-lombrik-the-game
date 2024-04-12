@@ -148,38 +148,17 @@ void render_scene(GameData* game, float delta) {
     // Render all the entities
     List* liste_entites = game->current_scene->entities;
     Entity* e;
-    Sprite* sprite;
     while (liste_entites != NULL){
         e = liste_entites->value;
-        sprite = get_sprite(e);
-        // si on peut (l'animation n'est pas lock -- voir sprite.Lock) on met a jour l'animation de l'entité, en général :
-        // soit on change l'état de e en fonction de conditions relatives à l'entité e en question
-        // soit (si on n'a pas changé d'etat) on met a jour le sprite de e (le timer notamment)
-        
-        //e->update_animation(e, delta);
-        if (sprite->Lock){
-            sprite->Lock -= 1;
-            update_frame(e, delta);
-        }
-        else{
-            int etat_old = e->etat;
-            e->update_animation(e, delta);
-            sprite->Lock = sprite->Lock_liste[e->etat];
-            if (e->etat == etat_old){
-                update_frame(e, delta);
-            }
-        }
-        // zone de la sprite sheet à afficher
-        // rappel : sprite->frames est une liste de coordonnées
-        int* frame = e->sprite->currentFrame->value;    // tableau de taille 2 : [x, y]
-        // printf("\n\n%d, %d\n\n", frame[0], frame[1]);
-        SDL_Rect spriteRect = {.x = frame[0]*sprite->width, .y = frame[1]*sprite->height, .w = sprite->width, .h = sprite->height};
-        // position du sprite à l'écran
-        SDL_Rect destRect = {.x = e->x_position, .y = e->y_position, .w = sprite->width, .h = sprite->height};
-        // On affiche la bonne frame au bon endroit
-        SDL_RenderCopyEx(game->renderer, sprite->spriteSheet, &spriteRect, &destRect, 0, NULL, sprite->orientation);
+        render_entity(game, e, delta);
         liste_entites = liste_entites->next;
     }
+    if (game->player != NULL) {
+        if (game->player->x_position != -1 && game->player->y_position != -1) {
+            render_entity(game, game->player, delta);
+        }
+    }
+
 }
 
 void free_scene(Scene* scene) {

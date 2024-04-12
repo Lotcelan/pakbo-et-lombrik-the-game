@@ -66,6 +66,39 @@ void render_wrap_text(GameData* game, void* key, int wrap_length) {
     SDL_RenderCopy(game->renderer, text->texture, NULL, &text->position);
 }
 
+void render_entity(GameData* game, Entity* e, float delta) {
+        Sprite* sprite;
+
+       sprite = get_sprite(e);
+        // si on peut (l'animation n'est pas lock -- voir sprite.Lock) on met a jour l'animation de l'entité, en général :
+        // soit on change l'état de e en fonction de conditions relatives à l'entité e en question
+        // soit (si on n'a pas changé d'etat) on met a jour le sprite de e (le timer notamment)
+        
+        //e->update_animation(e, delta);
+        if (sprite->Lock){
+            sprite->Lock -= 1;
+            update_frame(e, delta);
+        }
+        else{
+            int etat_old = e->etat;
+            e->update_animation(e, delta);
+            sprite->Lock = sprite->Lock_liste[e->etat];
+            if (e->etat == etat_old){
+                update_frame(e, delta);
+            }
+        }
+
+        // zone de la sprite sheet à afficher
+        // rappel : sprite->frames est une liste de coordonnées
+        int* frame = e->sprite->currentFrame->value;    // tableau de taille 2 : [x, y]
+        // printf("\n\n%d, %d\n\n", frame[0], frame[1]);
+        SDL_Rect spriteRect = {.x = frame[0]*sprite->width, .y = frame[1]*sprite->height, .w = sprite->width, .h = sprite->height};
+        // position du sprite à l'écran
+        SDL_Rect destRect = {.x = e->x_position, .y = e->y_position, .w = sprite->width, .h = sprite->height};
+        // On affiche la bonne frame au bon endroit
+        SDL_RenderCopyEx(game->renderer, sprite->spriteSheet, &spriteRect, &destRect, 0, NULL, sprite->orientation);
+}
+
 void render_rectangle(GameData* game, void* key) {
     Rectangle* rect = (Rectangle*)key;
     SDL_SetRenderDrawColor(game->renderer, rect->fill_color.r, rect->fill_color.g, rect->fill_color.b, rect->fill_color.a);
@@ -227,7 +260,7 @@ void push_render_stack_texture(GameData* game, Texture* texture, bool is_tempora
 
 void push_render_stack_rect(GameData* game, Rectangle* rect, bool is_temporary) {
     push_render_stack(game, rect, render_rectangle, free_rectangle, is_temporary);
-}
+}   
 
 void render_stack(GameData* game) {
     if (game == NULL) {

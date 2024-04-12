@@ -10,6 +10,7 @@
 #include "scenes/etagere_level/etagere_level.h"
 
 #include "entities/player/player.h"
+#include "entities/canard01/canard01.h"
 
 int main(int argc, char *argv[]) {
     printf("oskouuuur \n");
@@ -27,11 +28,13 @@ int main(int argc, char *argv[]) {
 
     // Init entities MUST DO IT BEFORE INIT SCENES
     EntityInitFunc* i_p = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
-    *i_p = init_player;
-    insert(game->entities, "player", i_p);
+    *i_p = init_canard01;
+    insert(game->entities, "canard01", i_p);
     printKeys(game->entities);
 
-
+    // potentiellement systeme de sauvegarde plus tard (donc init avec valeurs différentes)
+    Entity* player = init_player(game, -1, -1); // -1 -1 convention pour dire que l'on ne l'affiche pas
+    game->player = player;
     
     // Init scenes
     Scene* scene01 = init_scene01(game);
@@ -97,12 +100,18 @@ int main(int argc, char *argv[]) {
             }
             if (game->current_scene != NULL) {
                 game->current_scene->event_handler(game);
+
+                if (game->player != NULL) {
+                    game->player->event_handler(game->player, game);
+                }
+                // tout ceci devrait être inutile en théorie (a part pour les PNJ avec lesquels on peut intéragir)
                 List* current = game->current_scene->entities;
                 while (current != NULL) {
                     Entity* e = (Entity*)current->value;
                     e->event_handler(e, game);
                     current = current->next;
                 }
+
             }
 
 
@@ -111,6 +120,11 @@ int main(int argc, char *argv[]) {
         if (game->current_scene != NULL) {
             // update_entities(game->current_scene->entities);
             game->current_scene->update(game);
+
+            if (game->player != NULL) {
+                game->player->update(game, game->player, deltaT);
+            }
+
             List* current = game->current_scene->entities;
             while (current != NULL) {
                 Entity* e = (Entity*)current->value;

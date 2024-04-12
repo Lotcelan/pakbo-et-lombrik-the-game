@@ -7,5 +7,5 @@
 
 
 void update_entity_movement(GameData* game, Entity* e, float delta_t);
-
+void follow_player(GameData* game, Entity* e);
 #endif

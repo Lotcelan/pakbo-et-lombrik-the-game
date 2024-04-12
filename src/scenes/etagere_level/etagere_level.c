@@ -53,6 +53,10 @@ void populate_etagere_level(GameData* game) {
     Texture* toolbox = init_texture_from_memory(game, "src_assets_toolbox", toolbox_position->x, toolbox_position->y);
     push_render_stack_texture(game, toolbox, true);  // volontaire que ce soit true ici
 
+
+    // On s'occupe de ça dans populate
+    game->player->x_position = 50;
+    game->player->y_position = 50;
 }
 
 // void test(Entity* e, float delta){

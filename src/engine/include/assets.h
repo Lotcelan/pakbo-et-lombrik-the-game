@@ -6,9 +6,11 @@
 #include "game.h"
 #include "../../resources.h"
 #include "collisions.h"
+#include "entity.h"
 
 typedef struct GameData GameData;
 typedef struct Box Box;
+typedef struct Entity Entity;
 
 typedef struct Structure {
     const char* identifier;
@@ -63,6 +65,7 @@ void render_structure(GameData* game, void* key);
 void render_text(GameData* game, void* key);
 void render_rectangle(GameData* game, void* key);
 
+void render_entity(GameData* game, Entity* e, float delta);
 void render_wrap_text(GameData* game, void* key, int wrap_length);
 
 Text* init_text(GameData* game, const char* text, SDL_Color color, int x, int y, TTF_Font* font);

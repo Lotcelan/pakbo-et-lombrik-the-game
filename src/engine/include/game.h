@@ -49,6 +49,8 @@ typedef struct GameData {
     HashTable* scenes;
     HashTable* entities; // FONCTIONS d'initialisation
 
+    Entity* player; // on sépar le joueur du reste des entités
+
     FrameRateManager* frm;
 } GameData;
 
