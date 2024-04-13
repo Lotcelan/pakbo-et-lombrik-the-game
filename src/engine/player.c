@@ -11,4 +11,3 @@ int delete_player(player_t *player){
         return 0;
     }
 }
-

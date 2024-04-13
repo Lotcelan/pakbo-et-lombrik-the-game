@@ -262,4 +262,4 @@ void update_entity_boxes(Entity* e) {
     
     // printf("after change : %d, %d, %d, %d\n", e->collision_box->zone.x, e->collision_box->zone.y, e->collision_box->zone.w, e->collision_box->zone.h);
     // todo : other boxes
-
+}
