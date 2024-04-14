@@ -216,7 +216,7 @@ bool are_colliding(Box* a, Box* b) {
     SDL_Rect zone1 = a->zone;
     SDL_Rect zone2 = b->zone;
     
-    printf("Comparing A : %d, %d, %d, %d AND B : %d, %d, %d, %d\n", zone1.x, zone1.y, zone1.w, zone1.h, zone2.x, zone2.y, zone2.w, zone2.h);
+    // printf("Comparing A : %d, %d, %d, %d AND B : %d, %d, %d, %d\n", zone1.x, zone1.y, zone1.w, zone1.h, zone2.x, zone2.y, zone2.w, zone2.h);
 
     if (SDL_HasIntersection(&zone1, &zone2)) {
         return true;
@@ -259,6 +259,16 @@ void update_entity_boxes(Entity* e) {
 
     e->collision_box->zone.x = e->x_position;
     e->collision_box->zone.y = e->y_position;
+
+    if (e->hurt_box != NULL) {
+        e->hurt_box->zone.x = e->x_position;
+        e->hurt_box->zone.y = e->y_position;
+    }
+
+    if (e->hit_box != NULL) {
+        e->hit_box->zone.x = e->x_position;
+        e->hit_box->zone.y = e->y_position;
+    }
     
     // printf("after change : %d, %d, %d, %d\n", e->collision_box->zone.x, e->collision_box->zone.y, e->collision_box->zone.w, e->collision_box->zone.h);
     // todo : other boxes

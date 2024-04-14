@@ -1,6 +1,7 @@
 #include "engine/include/game.h"
 #include "engine/include/scenes.h"
 #include "engine/include/entity.h"
+#include "engine/include/hud.h"
 
 #include "resources.h"
 
@@ -135,6 +136,7 @@ int main(int argc, char *argv[]) {
         // Render entities ici
 
             render_scene(game, deltaT);
+            render_hud(game);
             // render_screen_shake(game);
 
         } else {

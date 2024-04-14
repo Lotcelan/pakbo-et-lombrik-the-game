@@ -56,6 +56,12 @@ void event_handler_player(Entity* player, GameData* game) {
                     player->x_velocity = 100;    
                     // *is_going_right = true;
                     break;
+                case SDLK_u:
+                    player->current_hp += 1;
+                    break;
+                case SDLK_d:
+                    player->current_hp -= 1;
+                    break;
                 default:
                     break;
             }
@@ -101,23 +107,8 @@ Entity* init_player(GameData* game, int x, int y) {
     
     SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_lombric_walk"); // to change
 
-    Entity* player = init_entity(x, y, 14, spritesheet, 16, 16, nbs, lock, update_player, event_handler_player, update_animation_player);
+    Entity* player = init_entity(x, y, 14, spritesheet, 16, 16, nbs, lock, update_player, event_handler_player, update_animation_player, 6);
 
-    bool* is_going_down = malloc(sizeof(bool));
-    *is_going_down = false;
-    insert(player->objects, "is_going_down", is_going_down);
-
-    bool* is_going_up = malloc(sizeof(bool));
-    *is_going_up = false;
-    insert(player->objects, "is_going_up", is_going_up);
-
-    bool* is_going_left = malloc(sizeof(bool));
-    *is_going_left = false;
-    insert(player->objects, "is_going_left", is_going_left);
-
-    bool* is_going_right = malloc(sizeof(bool));
-    *is_going_right = false;
-    insert(player->objects, "is_going_right", is_going_right);
 
     return player;
 }

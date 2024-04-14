@@ -65,6 +65,11 @@ typedef struct Entity {
     Box* collision_box;
     Box* hurt_box;
     Box* hit_box;
+
+    int max_hp;
+    int current_hp;
+
+    int damage_delay; // amount of `ms` to wait before being able to receive damage again
 } Entity;
 
 typedef Entity* (*EntityInitFunc)(GameData*, int, int);
@@ -76,6 +81,8 @@ void free_entity(void* e);
 
 void update_frame(Entity* e, float delta);
 void print_entity(Entity* e);
-Entity* init_entity(int x, int y, int framerate, SDL_Texture* spriteSheet, int width, int height, int* nbFrames, int* lock_liste, void (*update)(GameData* game, Entity* e, float d), void (*event_handler)(Entity* e, GameData* game), void (*update_animation)(Entity* e, float delta));
+Entity* init_entity(int x, int y, int framerate, SDL_Texture* spriteSheet, int width, int height, int* nbFrames, int* lock_liste, void (*update)(GameData* game, Entity* e, float d), void (*event_handler)(Entity* e, GameData* game), void (*update_animation)(Entity* e, float delta), int max_hp);
 Sprite* init_sprite(int framerate, SDL_Texture* spriteSheet, int width, int height, int* nbFrames, int* lock_liste);
+void damage_entity(Entity* e, int damage);
+
 #endif

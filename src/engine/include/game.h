@@ -16,6 +16,7 @@
 #include "framerate.h"
 #include "entity.h"
 
+
 #include <math.h>
 
 #define CELL_WIDTH 16

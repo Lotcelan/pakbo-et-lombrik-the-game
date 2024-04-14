@@ -10,8 +10,8 @@ void update_entity_movement(GameData* game, Entity* e, float delta_t) {
     int prev_y = e->y_position;
     
     // todo : normalisation de la vitesse en diagonale avec un /sqrt(2)
-    int delta_x = ceil(delta_t * e->x_velocity / 1000); // delta_t en ms
-    int delta_y = ceil(delta_t * e->y_velocity / 1000);
+    int delta_x = floor(delta_t * e->x_velocity / 1000); // delta_t en ms
+    int delta_y = floor(delta_t * e->y_velocity / 1000);
 
     e->x_position = e->x_position + delta_x;
     e->y_position = e->y_position + delta_y;
@@ -31,8 +31,8 @@ void update_gravity(GameData* game, Entity* e, float delta_t) {
         return;
     }
 
-    float gravity = 9.8; // This can be adjusted to your liking
-    e->y_velocity += gravity * delta_t / 1000; // Apply gravity to the entity's velocity
+    float gravity = 9.8;
+    e->y_velocity += gravity * delta_t / 1000;
 
     int prev_y = e->y_position;
     
@@ -61,16 +61,16 @@ void follow_player(GameData* game, Entity* e) {
     int e_x = e->x_position;
     int e_y = e->y_position;
     if (player_x > e_x) {
-        e->x_velocity = 0.5;
+        e->x_velocity = 50;
     } else if (player_x < e_x) {
-        e->x_velocity = -0.5;
+        e->x_velocity = -50;
     } else {
         e->x_velocity = 0;
     }
     if (player_y > e_y) {
-        e->y_velocity = 0.5;
+        e->y_velocity = 50;
     } else if (player_y < e_y) {
-        e->y_velocity = -0.5;
+        e->y_velocity = -50;
     } else {
         e->y_velocity = 0;
     }

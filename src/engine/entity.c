@@ -52,7 +52,7 @@ void print_entity(Entity* e){
     printf("état : %d\n", e->etat);
 }
 
-Entity* init_entity(int x, int y, int framerate, SDL_Texture* spriteSheet, int width, int height, int* nbFrames, int* lock_liste, void (*update)(GameData* game, Entity* e, float d), void (*event_handler)(Entity* e, GameData* game), void (*update_animation)(Entity* e, float delta)) {
+Entity* init_entity(int x, int y, int framerate, SDL_Texture* spriteSheet, int width, int height, int* nbFrames, int* lock_liste, void (*update)(GameData* game, Entity* e, float d), void (*event_handler)(Entity* e, GameData* game), void (*update_animation)(Entity* e, float delta), int max_hp) {
     Entity* res = malloc(sizeof(Entity));
     res->x_position = x;
     res->y_position = y;
@@ -66,9 +66,14 @@ Entity* init_entity(int x, int y, int framerate, SDL_Texture* spriteSheet, int w
     HashTable* objects = createHashTable(10);
     res->objects = objects;
 
+    res->max_hp = max_hp;
+    res->current_hp = max_hp;
+
     res->collision_box = init_rect_box(x,y,width, height);
-    res->hurt_box = NULL;
-    res->hit_box = NULL;
+    res->hurt_box = res->collision_box; // could be different later, but weird
+    res->hit_box = init_rect_box(x,y,width, height); // s'adaptera au sprite
+
+    res->damage_delay = -1;
     return res;
 }
 
@@ -109,4 +114,12 @@ Sprite* init_sprite(int framerate, SDL_Texture* spriteSheet, int width, int heig
     res->frames = frames;
     res->currentFrame = frames[0];
     return res;
+}
+
+
+void damage_entity(Entity* e, int damage){
+    if(e->damage_delay < 0){
+        e->current_hp -= damage;
+        e->damage_delay = 1500;
+    }
 }

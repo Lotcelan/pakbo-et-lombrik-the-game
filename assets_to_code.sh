@@ -20,7 +20,7 @@ echo "#include \"engine/include/hashtable.h\"" >> "$header_file"
 echo "#include \"engine/include/assets.h\"" >> "$header_file"
 echo "#include <string.h>" >> "$header_file"
 echo "" >> "$header_file"
-echo "HashTable* init_resources(void);" >> "$header_file"
+echo "HashTable* init_resources();" >> "$header_file"
 
 # Write the source file
 echo "#include \"resources.h\"" >> "$source_file"

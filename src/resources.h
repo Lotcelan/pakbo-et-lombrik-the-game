@@ -5,7 +5,7 @@
 #include "engine/include/assets.h"
 #include <string.h>
 
-HashTable* init_resources(void);
+HashTable* init_resources();
 extern unsigned char src_assets_birck_background_png[];
 extern int src_assets_birck_background_png_len;
 
@@ -66,6 +66,9 @@ extern int src_assets_door_png_len;
 extern unsigned char src_assets_wall_jpg[];
 extern int src_assets_wall_jpg_len;
 
+extern unsigned char src_assets_blurred_brick_background_with_floor_copie_png[];
+extern int src_assets_blurred_brick_background_with_floor_copie_png_len;
+
 extern unsigned char src_assets_toolbox_png[];
 extern int src_assets_toolbox_png_len;
 
@@ -86,9 +89,6 @@ extern int src_assets_plateforme_surelevee_png_len;
 
 extern unsigned char src_assets_blurred_brick_background_with_floor_copie_3_png[];
 extern int src_assets_blurred_brick_background_with_floor_copie_3_png_len;
-
-extern unsigned char src_assets_blurred_brick_background_with_floor_copie_png[];
-extern int src_assets_blurred_brick_background_with_floor_copie_png_len;
 
 extern unsigned char src_assets_tentacula_png[];
 extern int src_assets_tentacula_png_len;
