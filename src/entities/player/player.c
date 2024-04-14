@@ -1,7 +1,7 @@
 #include <SDL2/SDL.h>
 #include "player.h"
 
-
+// SECTION ENTITE
 void update_player(GameData* game, Entity* player, float delta_t) {
     if (player == NULL) {
         return;
@@ -51,9 +51,11 @@ void event_handler_player(Entity* player, GameData* game) {
                 case SDLK_LEFT:
                     // *is_going_left = true;
                     player->x_velocity = -100;
+                    player->sprite->orientation = SDL_FLIP_HORIZONTAL;
                     break;
                 case SDLK_RIGHT:
                     player->x_velocity = 100;    
+                    player->sprite->orientation = SDL_FLIP_NONE;
                     // *is_going_right = true;
                     break;
                 case SDLK_u:
@@ -109,6 +111,12 @@ Entity* init_player(GameData* game, int x, int y) {
 
     Entity* player = init_entity(x, y, 14, spritesheet, 16, 16, nbs, lock, update_player, event_handler_player, update_animation_player, 6);
 
+    WeaponInitFunc* init_sword = get(game->weapons, "basic_sword", strcmp);
+    if (init_sword == NULL) {
+        printf("Error: weapon not found\n");
+        return NULL;
+    }
+    player->weapon = (*init_sword)(game);
 
     return player;
 }

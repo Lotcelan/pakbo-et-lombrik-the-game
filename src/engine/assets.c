@@ -112,6 +112,8 @@ void render_entity(GameData* game, Entity* e, float delta) {
 
     // On affiche la bonne frame au bon endroit
     SDL_RenderCopyEx(game->renderer, sprite->spriteSheet, &spriteRect, &destRect, 0, NULL, sprite->orientation);
+
+    render_weapon(game, e, delta);
 }
 
 void render_rectangle(GameData* game, void* key) {

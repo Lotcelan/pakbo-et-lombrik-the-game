@@ -22,4 +22,5 @@ bool are_colliding(Box* a, Box* b);
 bool is_entity_colliding_with_structures(Entity* e, List* structures);
 void free_box(Box* box);
 void update_entity_boxes(Entity* e);
+void enlarge_entity_hitbox(Entity* e, Box* new_hitbox);
 #endif

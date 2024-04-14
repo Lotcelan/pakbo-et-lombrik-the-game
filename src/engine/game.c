@@ -39,6 +39,9 @@ GameData* init_game(int width_amount, int height_amount, int final_width, int fi
     HashTable* entities = createHashTable(10);
     gameData->entities = entities;
 
+    HashTable* weapons = createHashTable(10);
+    gameData->weapons = weapons;
+
     gameData->event = (SDL_Event){0};
     gameData->window = window;
     gameData->renderer = renderer;

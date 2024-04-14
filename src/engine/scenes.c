@@ -49,7 +49,7 @@ void init_scene_with_json(GameData* game, json_t *root, Scene* scene) {
 
         printf("%p\n", get(game->entities, entity, strcmp));
         EntityInitFunc* func = (EntityInitFunc*)get(game->entities, entity, strcmp);
-        printKeys(game->entities);
+        // printKeys(game->entities);
         if (func != NULL) {
             
         

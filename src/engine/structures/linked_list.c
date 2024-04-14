@@ -36,6 +36,35 @@ List *create_list(void *value, List *next)
         return list ;
     }
 
+List* delete_compare(List* l, void* value, int compare(void*, void*), void delete(void*)) {
+    if (l == NULL) {
+        return NULL;
+    }
+    if (l->next == NULL) {
+        if (compare(l->value, value) == 1) {
+            if (delete != NULL) {
+                delete(l->value);
+            }
+            free(l);
+            return NULL;
+        }
+        return l;
+    }
+    if (compare(l->value, value) == 1) {
+        List* next = l->next;
+        if (delete != NULL) {
+            delete(l->value);
+        }
+        free(l);
+        return delete_compare(next, value, compare, delete);
+    }
+    l->next = delete_compare(l->next, value, compare, delete);
+    return l;
+
+
+}
+
+
 List *list_del_first( List *l, void delete(void*) ) 
     {
         if (l == NULL)

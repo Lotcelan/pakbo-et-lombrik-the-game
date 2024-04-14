@@ -7,6 +7,7 @@
 #include "../../resources.h"
 #include "collisions.h"
 #include "entity.h"
+#include "weapon.h"
 
 typedef struct GameData GameData;
 typedef struct Box Box;

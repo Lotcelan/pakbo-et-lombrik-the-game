@@ -25,7 +25,6 @@
 typedef struct Scene Scene;
 typedef struct Dialog Dialog;
 
-
 typedef enum GameStatus {
     RUNNING,
     LOADING,
@@ -49,6 +48,7 @@ typedef struct GameData {
     HashTable* fonts;
     HashTable* scenes;
     HashTable* entities; // FONCTIONS d'initialisation
+    HashTable* weapons; // FONCTIONS d'initialisation
 
     Entity* player; // on sépar le joueur du reste des entités
 

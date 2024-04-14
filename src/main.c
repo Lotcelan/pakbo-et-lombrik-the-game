@@ -13,6 +13,8 @@
 #include "entities/player/player.h"
 #include "entities/canard01/canard01.h"
 
+#include "weapons/basic_sword/basic_sword.h"    
+
 int main(int argc, char *argv[]) {
     printf("oskouuuur \n");
     set_dir();
@@ -27,16 +29,22 @@ int main(int argc, char *argv[]) {
 
     GameData* game = init_game(16, 8, 1024, 512, "Pakbo é Lonbrik", 30);
 
+    // Init weapons MUST DO IT BEFORE ENTITIES
+    WeaponInitFunc* i_w = (WeaponInitFunc*)malloc(sizeof(WeaponInitFunc));
+    *i_w = init_basic_sword;
+    insert(game->weapons, "basic_sword", i_w);
+
     // Init entities MUST DO IT BEFORE INIT SCENES
     EntityInitFunc* i_p = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
     *i_p = init_canard01;
     insert(game->entities, "canard01", i_p);
-    printKeys(game->entities);
+    // printKeys(game->entities);
 
     // potentiellement systeme de sauvegarde plus tard (donc init avec valeurs différentes)
     Entity* player = init_player(game, -1, -1); // -1 -1 convention pour dire que l'on ne l'affiche pas
     game->player = player;
     
+
     // Init scenes
     Scene* scene01 = init_scene01(game);
     Scene* main_menu = init_main_menu(game);
@@ -104,6 +112,9 @@ int main(int argc, char *argv[]) {
 
                 if (game->player != NULL) {
                     game->player->event_handler(game->player, game);
+                    if (game->player->weapon != NULL) {
+                        game->player->weapon->event_handler(game, game->player->weapon, game->player);
+                    }
                 }
                 // tout ceci devrait être inutile en théorie (a part pour les PNJ avec lesquels on peut intéragir)
                 List* current = game->current_scene->entities;
@@ -111,6 +122,9 @@ int main(int argc, char *argv[]) {
                     Entity* e = (Entity*)current->value;
                     e->event_handler(e, game);
                     current = current->next;
+                    if (e->weapon != NULL) {
+                        e->weapon->event_handler(game, e->weapon, e);
+                    }
                 }
 
             }
@@ -124,6 +138,9 @@ int main(int argc, char *argv[]) {
 
             if (game->player != NULL) {
                 game->player->update(game, game->player, deltaT);
+                if (game->player->weapon != NULL) {
+                    game->player->weapon->update(game, game->player, deltaT);
+                }
             }
 
             List* current = game->current_scene->entities;

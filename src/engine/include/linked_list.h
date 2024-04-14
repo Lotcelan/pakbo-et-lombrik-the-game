@@ -26,6 +26,7 @@ void* get_i_element(List *list, int i);
 List *list_del_i_element(List *l, int ind, void delete(void*));
 void print_list(List *list);
 void delete_all_non_struct(List *l);
+List* delete_compare(List* l, void* value, int compare(void*, void*), void delete(void*));
 List *merge(List *list1, List *list2, void delete(void*), int comparaison(void*, void*));
 int compare_int(void *a, void *b);
 List *prefix(List *list, int n, void delete(void*));

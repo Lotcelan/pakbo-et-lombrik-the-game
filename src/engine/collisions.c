@@ -273,3 +273,39 @@ void update_entity_boxes(Entity* e) {
     // printf("after change : %d, %d, %d, %d\n", e->collision_box->zone.x, e->collision_box->zone.y, e->collision_box->zone.w, e->collision_box->zone.h);
     // todo : other boxes
 }
+
+void enlarge_entity_hitbox(Entity* e, Box* new_hitbox) {
+    // non indépendant du type de zone
+    if (e == NULL || new_hitbox == NULL) {
+        return;
+    }
+    if (e->hit_box == NULL) {
+        e->hit_box = new_hitbox;
+        return;
+    }
+    SDL_Rect old_hitbox = e->hit_box->zone;
+    SDL_Rect new_hitbox_rect = new_hitbox->zone;
+
+    int min_x = old_hitbox.x;
+    int max_x = old_hitbox.x + old_hitbox.w;
+    int min_y = old_hitbox.y;
+    int max_y = old_hitbox.y + old_hitbox.h;
+
+    if (new_hitbox_rect.x < min_x) {
+        min_x = new_hitbox_rect.x;
+    }
+    if (new_hitbox_rect.x + new_hitbox_rect.w > max_x) {
+        max_x = new_hitbox_rect.x + new_hitbox_rect.w;
+    }
+    if (new_hitbox_rect.y < min_y) {
+        min_y = new_hitbox_rect.y;
+    }
+    if (new_hitbox_rect.y + new_hitbox_rect.h > max_y) {
+        max_y = new_hitbox_rect.y + new_hitbox_rect.h;
+    }
+
+    e->hit_box->zone.x = min_x;
+    e->hit_box->zone.y = min_y;
+    e->hit_box->zone.w = max_x - min_x;
+    e->hit_box->zone.h = max_y - min_y;
+}

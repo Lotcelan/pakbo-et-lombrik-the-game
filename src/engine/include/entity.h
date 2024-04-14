@@ -6,14 +6,17 @@
 #include "linked_list.h"
 #include "hashtable.h"
 #include "collisions.h"
+#include "weapon.h"
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_mixer.h>
 #include <SDL2/SDL_ttf.h>
 
+
 typedef struct GameData GameData;
 typedef struct Box Box;
+typedef struct Weapon Weapon;
 
 typedef enum EntityType {
     // List of names of entities in the folder entities/
@@ -70,11 +73,11 @@ typedef struct Entity {
     int current_hp;
 
     int damage_delay; // amount of `ms` to wait before being able to receive damage again
+
+    Weapon* weapon;
 } Entity;
 
 typedef Entity* (*EntityInitFunc)(GameData*, int, int);
-
-
 
 Sprite* get_sprite(Entity* e);
 void free_entity(void* e);
@@ -83,6 +86,7 @@ void update_frame(Entity* e, float delta);
 void print_entity(Entity* e);
 Entity* init_entity(int x, int y, int framerate, SDL_Texture* spriteSheet, int width, int height, int* nbFrames, int* lock_liste, void (*update)(GameData* game, Entity* e, float d), void (*event_handler)(Entity* e, GameData* game), void (*update_animation)(Entity* e, float delta), int max_hp);
 Sprite* init_sprite(int framerate, SDL_Texture* spriteSheet, int width, int height, int* nbFrames, int* lock_liste);
-void damage_entity(Entity* e, int damage);
-
+void damage_entity(GameData* game, Entity* e, int damage, bool should_add_delay);
+int compare_entities(void* e1, void* e2);
+void clear_entities(GameData* game);
 #endif

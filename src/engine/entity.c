@@ -74,6 +74,7 @@ Entity* init_entity(int x, int y, int framerate, SDL_Texture* spriteSheet, int w
     res->hit_box = init_rect_box(x,y,width, height); // s'adaptera au sprite
 
     res->damage_delay = -1;
+    res->weapon = NULL;
     return res;
 }
 
@@ -117,9 +118,35 @@ Sprite* init_sprite(int framerate, SDL_Texture* spriteSheet, int width, int heig
 }
 
 
-void damage_entity(Entity* e, int damage){
+void damage_entity(GameData* game, Entity* e, int damage, bool should_add_delay){
+    // Si on veut que sur le dégât un délai soit appliquer, on met should_add_delay à true
     if(e->damage_delay < 0){
         e->current_hp -= damage;
-        e->damage_delay = 1500;
+        if (should_add_delay) {
+            e->damage_delay = 1500;
+        }
     }
+
+    // if (e->current_hp <= 0){
+    //     game->current_scene->entities = delete_compare(game->current_scene->entities, e, compare_entities, free_entity);   
+    // }
+}
+
+void clear_entities(GameData* game){
+    List* current = game->current_scene->entities;
+    while (current != NULL){
+        Entity* e = (Entity*)current->value;
+        if (e->current_hp <= 0){
+            game->current_scene->entities = delete_compare(game->current_scene->entities, e, compare_entities, free_entity);
+            current = game->current_scene->entities;
+            continue;
+        }
+        current = current->next;
+    }
+}
+
+int compare_entities(void* e1, void* e2){
+    Entity* ent1 = (Entity*)e1;
+    Entity* ent2 = (Entity*)e2;
+    return (int)(ent1 == ent2);
 }
