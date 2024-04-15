@@ -98,34 +98,55 @@ void event_handler_player(Entity* player, GameData* game) {
 }
 
 void update_animation_player(Entity* e, float delta) {
+    if (strcmp(e->weapon->name, "basic_sword") == 0) {
+        bool* is_attacking = get(e->weapon->objects, "is_attacking", strcmp);
+        int* attack_duration = get(e->weapon->objects, "attack_duration", strcmp);
+        if (is_attacking != NULL) {
+            // printf("%d, %d\n", *is_attacking, *attack_duration);
+            if (*is_attacking) {
+                if (attack_duration != NULL) {
+                    if (*attack_duration > 0) {
+                        e->etat = 2;
+                        return;
+                    } 
+                }
+            }
+        }
+    }
+    
     if (e->x_velocity != 0){
         e->etat = 1;
+        return;
     }
-    else{
-        e->etat = 0;
-    }
+    
+    
+    e->etat = 0;
+    
 
     return;
 }
 
 Entity* init_player(GameData* game, int x, int y) {
-    int* nbs = malloc(2*sizeof(int));
+    int* nbs = malloc(3*sizeof(int));
     nbs[0] = 7;
     nbs[1] = 8;
-    int* lock = malloc(2*sizeof(int));
+    nbs[2] = 5;
+    int* lock = malloc(3*sizeof(int));
     lock[0] = 0;
     lock[1] = 1;
+    lock[2] = 1;
     
     SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_lombric"); // to change
 
     Entity* player = init_entity(x, y, 14, spritesheet, 16, 16, nbs, lock, update_player, event_handler_player, update_animation_player, 6);
 
-    WeaponInitFunc* arbalete = get(game->weapons, "arbalete", strcmp);
-    if (arbalete == NULL) {
+    // WeaponInitFunc* arbalete = get(game->weapons, "arbalete", strcmp);
+    WeaponInitFunc* basic_sword = get(game->weapons, "basic_sword", strcmp);
+    if (basic_sword == NULL) {
         printf("Error: weapon not found\n");
         return NULL;
     }
-    player->weapon = (*arbalete)(game);
+    player->weapon = (*basic_sword)(game);
 
     return player;
 }

@@ -150,6 +150,7 @@ void render_scene(GameData* game, float delta) {
     Entity* e;
     while (liste_entites != NULL){
         e = liste_entites->value;
+        
         render_entity(game, e, delta);
         liste_entites = liste_entites->next;
     }

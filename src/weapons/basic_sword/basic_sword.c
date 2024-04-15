@@ -46,18 +46,21 @@ void update_basic_dword(GameData* game, Entity* e, float delta_t) {
 void event_handler_basic_sword(GameData* game, Weapon* weapon, Entity* e) {
     // If "x" pressed, attack
     int* attack_duration = get(weapon->objects, "attack_duration", strcmp);
+    bool* is_attacking = get(weapon->objects, "is_attacking", strcmp);
+    if (is_attacking == NULL) {
+        return;
+    }
+    
     switch (game->event.type) {
         case SDL_KEYDOWN:
             if (game->event.key.keysym.sym == SDLK_x) {
                 // Attack
-                bool* is_attacking = get(weapon->objects, "is_attacking", strcmp);
                 if (is_attacking != NULL) {
                     if (!(*is_attacking)) {
                         *is_attacking = true;
                         *attack_duration = 250;
                     }
                 }
-
             }
             break;
     }
