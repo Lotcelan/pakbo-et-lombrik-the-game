@@ -75,6 +75,7 @@ typedef struct Entity {
     int damage_delay; // amount of `ms` to wait before being able to receive damage again
 
     Weapon* weapon;
+    struct Entity* parent; // CAN BE USEFUL (for projectiles for instance)
 } Entity;
 
 typedef Entity* (*EntityInitFunc)(GameData*, int, int);

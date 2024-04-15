@@ -75,6 +75,8 @@ Entity* init_entity(int x, int y, int framerate, SDL_Texture* spriteSheet, int w
 
     res->damage_delay = -1;
     res->weapon = NULL;
+
+    res->parent = NULL;
     return res;
 }
 

@@ -38,7 +38,6 @@ void update_basic_dword(GameData* game, Entity* e, float delta_t) {
         }
     }
 
-    clear_entities(game);
 
 
     return;

@@ -7,6 +7,7 @@ void update_arbalete(GameData* game, Entity* e, float delta_t) {
 
     bool* is_shooting = get(e->weapon->objects, "is_shooting", strcmp);
     int* attack_duration = get(e->weapon->objects, "attack_duration", strcmp);
+    List* projectiles = get(e->weapon->objects, "projectiles", strcmp);
 
     if (is_shooting == NULL || attack_duration == NULL) {
         return;
@@ -17,25 +18,30 @@ void update_arbalete(GameData* game, Entity* e, float delta_t) {
     if (*is_shooting) {
         if (*attack_duration == -1) {
             *attack_duration = 1000;
-            List* projectiles = get(e->weapon->objects, "projectiles", strcmp);
-            if (projectiles == NULL) {
-                return;
-            }
+            
             EntityInitFunc* projectile_func = get(game->entities, "projectile_arrow", strcmp);
             if (projectile_func == NULL) {
                 return;
             }
             Entity* projectile = (*projectile_func)(game, e->x_position, e->y_position);
+            projectile->parent = e;
+            int sign = 1;
+            if (e->sprite->orientation == SDL_FLIP_HORIZONTAL) {
+                sign = -1;
+                projectile->sprite->orientation = SDL_FLIP_HORIZONTAL;
+            }
+            projectile->x_velocity = e->x_velocity + sign * 100;
+            
             replace(e->weapon->objects, "projectiles", append_first(projectile, projectiles), strcmp);
-            *is_shooting = false;
         } else {
             *attack_duration -= delta_t;
             if (*attack_duration <= 0) {
                 *attack_duration = -1;
             }
         }
+        *is_shooting = false;
     } else {
-        *attack_duration = -1;
+        *attack_duration -= delta_t;
         if (*attack_duration <= 0) {
             *attack_duration = -1;
         }
@@ -57,8 +63,26 @@ void update_arbalete(GameData* game, Entity* e, float delta_t) {
     //     }
     // }
 
-    clear_entities(game);
 
+    List* current = get(e->weapon->objects, "projectiles", strcmp);
+    while (current != NULL) {
+        Entity* projectile = (Entity*)(current->value);
+        if (projectile != NULL) {
+            projectile->update(game, projectile, delta_t);
+        }
+        current = current->next;
+    }
+
+    current = get(e->weapon->objects, "projectiles", strcmp);
+    while (current != NULL){
+        Entity* entity = (Entity*)current->value;
+        if (entity->current_hp <= 0){
+            replace(e->weapon->objects, "projectiles", delete_compare(get(e->weapon->objects, "projectiles", strcmp), entity, compare_entities, free_entity), strcmp);
+            current = get(e->weapon->objects, "projectiles", strcmp);
+            continue;
+        }
+        current = current->next;
+    }
 
     return;
 }
@@ -72,9 +96,8 @@ void event_handler_arbalete(GameData* game, Weapon* weapon, Entity* e) {
             if (game->event.key.keysym.sym == SDLK_x) {
                 // Attack
                 if (is_shooting != NULL) {
-                    if (!(*is_shooting)) {
-                        *is_shooting = true;
-                    }
+                    *is_shooting = true;
+                    
                 }
 
             }

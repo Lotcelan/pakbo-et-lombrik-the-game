@@ -160,7 +160,10 @@ int main(int argc, char *argv[]) {
                 current = current->next;
             }
         }
-        // Render entities ici
+
+            clear_entities(game);
+
+
 
             render_scene(game, deltaT);
             render_hud(game);

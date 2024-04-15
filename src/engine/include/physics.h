@@ -6,7 +6,7 @@
 #include "collisions.h"
 
 
-void update_entity_movement(GameData* game, Entity* e, float delta_t);
+void update_entity_movement(GameData* game, Entity* e, float delta_t, bool gravity_enabled);
 void follow_player(GameData* game, Entity* e);
 void update_gravity(GameData* game, Entity* e, float delta_t);
 

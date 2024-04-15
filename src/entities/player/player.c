@@ -29,7 +29,7 @@ void update_player(GameData* game, Entity* player, float delta_t) {
     // }
     // return;
 
-    update_entity_movement(game, player, delta_t);
+    update_entity_movement(game, player, delta_t, true);
 }
 void event_handler_player(Entity* player, GameData* game) {
     SDL_Event event = game->event;

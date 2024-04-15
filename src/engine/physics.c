@@ -1,7 +1,9 @@
 #include "./include/physics.h"
 
-void update_entity_movement(GameData* game, Entity* e, float delta_t) {
-    update_gravity(game, e, delta_t);
+void update_entity_movement(GameData* game, Entity* e, float delta_t, bool gravity_enabled) {
+    if (gravity_enabled) {
+        update_gravity(game, e, delta_t);
+    }
     
     if (game->current_scene == NULL) {
         return;

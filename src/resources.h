@@ -18,6 +18,9 @@ extern int src_assets_bouth_png_len;
 extern unsigned char src_assets_duck_blue_png[];
 extern int src_assets_duck_blue_png_len;
 
+extern unsigned char src_assets_projectile_arrow_png[];
+extern int src_assets_projectile_arrow_png_len;
+
 extern unsigned char src_assets_resized_background_png[];
 extern int src_assets_resized_background_png_len;
 

@@ -87,6 +87,9 @@ int contains(HashTable* hashtable, void* key, int (*cmp)(const char*, const char
 }
 
 void replace(HashTable* hashtable, const char* key, void* value, int (*cmp)(const char*, const char*)) {
+    if (hashtable == NULL) {
+        return;
+    }
     unsigned int index = hash(key, hashtable->size);
     Entry* entry = hashtable->table[index];
 
