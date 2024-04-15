@@ -112,7 +112,6 @@ Sprite* init_sprite(int framerate, SDL_Texture* spriteSheet, int width, int heig
             co[1] = etat;
             current = append_cyclic_first(co, current);
         }
-        printf("etat %d initialisé\n", etat);
         frames[etat] = current;
     }
     res->frames = frames;
