@@ -43,10 +43,12 @@ void event_handler_player(Entity* player, GameData* game) {
                 case SDLK_UP:
                     // *is_going_up = true;
                     player->y_velocity = -100;
+                    player->etat = 0;
                     break;
                 case SDLK_DOWN:
                     // *is_going_down = true;
                     player->y_velocity = 100;
+                    player->etat = 0;
                     break;
                 case SDLK_LEFT:
                     // *is_going_left = true;
@@ -96,21 +98,27 @@ void event_handler_player(Entity* player, GameData* game) {
 }
 
 void update_animation_player(Entity* e, float delta) {
-    
+    if (e->x_velocity != 0){
+        e->etat = 1;
+    }
+    else{
+        e->etat = 0;
+    }
 
     return;
 }
 
 Entity* init_player(GameData* game, int x, int y) {
-    int* nbs = malloc(sizeof(int));
-    nbs[0] = 8;
-    int* lock = malloc(sizeof(int));
+    int* nbs = malloc(2*sizeof(int));
+    nbs[0] = 7;
+    nbs[1] = 8;
+    int* lock = malloc(2*sizeof(int));
     lock[0] = 0;
+    lock[1] = 1;
     
-    SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_lombric_walk"); // to change
+    SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_lombric"); // to change
 
     Entity* player = init_entity(x, y, 14, spritesheet, 16, 16, nbs, lock, update_player, event_handler_player, update_animation_player, 6);
-
     WeaponInitFunc* init_sword = get(game->weapons, "basic_sword", strcmp);
     if (init_sword == NULL) {
         printf("Error: weapon not found\n");
