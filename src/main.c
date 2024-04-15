@@ -12,8 +12,10 @@
 
 #include "entities/player/player.h"
 #include "entities/canard01/canard01.h"
+#include "entities/projectile_arrow/projectile_arrow.h"
 
 #include "weapons/basic_sword/basic_sword.h"    
+#include "weapons/arbalete/arbalete.h"
 
 int main(int argc, char *argv[]) {
     printf("oskouuuur \n");
@@ -34,10 +36,18 @@ int main(int argc, char *argv[]) {
     *i_w = init_basic_sword;
     insert(game->weapons, "basic_sword", i_w);
 
+    WeaponInitFunc* i_a = (WeaponInitFunc*)malloc(sizeof(WeaponInitFunc));
+    *i_a = init_arbalete;
+    insert(game->weapons, "arbalete", i_a);
+
     // Init entities MUST DO IT BEFORE INIT SCENES
     EntityInitFunc* i_p = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
     *i_p = init_canard01;
     insert(game->entities, "canard01", i_p);
+
+    EntityInitFunc* i_arrow = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
+    *i_arrow = init_projectile_arrow;
+    insert(game->entities, "projectile_arrow", i_arrow);
     // printKeys(game->entities);
 
     // potentiellement systeme de sauvegarde plus tard (donc init avec valeurs différentes)

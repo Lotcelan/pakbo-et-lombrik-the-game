@@ -111,12 +111,12 @@ Entity* init_player(GameData* game, int x, int y) {
 
     Entity* player = init_entity(x, y, 14, spritesheet, 16, 16, nbs, lock, update_player, event_handler_player, update_animation_player, 6);
 
-    WeaponInitFunc* init_sword = get(game->weapons, "basic_sword", strcmp);
-    if (init_sword == NULL) {
+    WeaponInitFunc* arbalete = get(game->weapons, "arbalete", strcmp);
+    if (arbalete == NULL) {
         printf("Error: weapon not found\n");
         return NULL;
     }
-    player->weapon = (*init_sword)(game);
+    player->weapon = (*arbalete)(game);
 
     return player;
 }
