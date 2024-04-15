@@ -21,7 +21,9 @@ void update_entity_movement(GameData* game, Entity* e, float delta_t, bool gravi
     if (is_entity_colliding_with_structures(e, game->current_scene->structures)) {
         
         e->x_position = prev_x;
+        e->x_velocity = 0;
         e->y_position = prev_y;
+        e->y_velocity = 0;
         update_entity_boxes(e);
     }
 
