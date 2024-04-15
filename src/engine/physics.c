@@ -4,7 +4,6 @@ void update_entity_movement(GameData* game, Entity* e, float delta_t, bool gravi
     if (gravity_enabled) {
         update_gravity(game, e, delta_t);
     }
-    
     if (game->current_scene == NULL) {
         return;
     }
@@ -33,21 +32,13 @@ void update_gravity(GameData* game, Entity* e, float delta_t) {
         return;
     }
 
-    float gravity = 9.8;
-    e->y_velocity += gravity * delta_t / 1000;
-
+    float gravity = 250;
     int prev_y = e->y_position;
-    
-    // todo : normalisation de la vitesse en diagonale avec un /sqrt(2)
-    int delta_y = ceil(delta_t * e->y_velocity / 1000);
-
-    e->y_position = e->y_position + delta_y;
-    update_entity_boxes(e);
-
+    e->y_velocity += gravity * delta_t / 1000;
     if (is_entity_colliding_with_structures(e, game->current_scene->structures)) {
         e->y_position = prev_y;
-        update_entity_boxes(e);
     }
+    
 }
 
 void follow_player(GameData* game, Entity* e) {

@@ -51,8 +51,8 @@ typedef struct Entity {
     int x_position;
     int y_position;
     // vitesse
-    float x_velocity;
-    float y_velocity;
+    double x_velocity;
+    double y_velocity;
     // entier qui correspond à l'indice de l'animation qu'on veut afficher
     int etat;
     // modifie l'entité self.etat pour mettre a jour l'animation de l'entité

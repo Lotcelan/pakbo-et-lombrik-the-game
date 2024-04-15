@@ -234,7 +234,7 @@ bool is_entity_colliding_with_structures(Entity* e, List* structures) {
     // printf("structures : %p\n", structures);
     List* current = structures;
     while (current != NULL) {
-        // printf("Checking %d\n", ((Structure*)(current->value))->position.x);
+        // ("Checking %d\n", ((Structure*)(current->value))->position.x);
         Box* struct_box = ((Structure*)(current->value))->collision_box;
         if (are_colliding(entity_box, struct_box)) {
             return true;

@@ -43,12 +43,10 @@ void event_handler_player(Entity* player, GameData* game) {
                 case SDLK_UP:
                     // *is_going_up = true;
                     player->y_velocity = -100;
-                    player->etat = 0;
                     break;
                 case SDLK_DOWN:
                     // *is_going_down = true;
                     player->y_velocity = 100;
-                    player->etat = 0;
                     break;
                 case SDLK_LEFT:
                     // *is_going_left = true;
