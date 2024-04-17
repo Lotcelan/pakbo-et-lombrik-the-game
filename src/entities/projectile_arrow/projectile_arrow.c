@@ -19,7 +19,7 @@ void update_projectile_arrow(GameData* game, Entity* projectile_arrow, float del
         Entity* entity = (Entity*)(current_entity->value);
         if (!compare_entities(entity, projectile_arrow->parent)) {
             if (are_colliding(projectile_arrow->hit_box, entity->hurt_box)) {
-                damage_entity(game, entity, projectile_arrow->parent->weapon->damage_value, !compare_entities(game->player, projectile_arrow->parent));
+                damage_entity(game, entity, projectile_arrow->parent->weapon->damage_value, !compare_entities(game->player, projectile_arrow->parent), 100);
                 projectile_arrow->current_hp = -1;
                 break;
             }

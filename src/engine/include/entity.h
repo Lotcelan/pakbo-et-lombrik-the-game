@@ -77,7 +77,8 @@ typedef struct Entity {
     int current_hp;
 
     int damage_delay; // amount of `ms` to wait before being able to receive damage again
-
+    int stagger_duration; // amount of `ms` to wait before being able to move again
+    
     Weapon* weapon;
     struct Entity* parent; // CAN BE USEFUL (for projectiles for instance)
 } Entity;
@@ -91,7 +92,7 @@ void update_frame(Entity* e, float delta);
 void print_entity(Entity* e);
 Entity* init_entity(int x, int y, int framerate, SDL_Texture* spriteSheet, int width, int height, int* nbFrames, int* lock_liste, void (*update)(GameData* game, Entity* e, float d), void (*event_handler)(Entity* e, GameData* game), void (*update_animation)(Entity* e, float delta), int max_hp, bool should_have_hitbox);
 Sprite* init_sprite(int framerate, SDL_Texture* spriteSheet, int width, int height, int* nbFrames, int* lock_liste);
-void damage_entity(GameData* game, Entity* e, int damage, bool should_add_delay);
+void damage_entity(GameData* game, Entity* e, int damage, bool should_add_delay, int stagger_duration);
 int compare_entities(void* e1, void* e2);
 void clear_entities(GameData* game);
 void change_entity_coordinates(Entity* e, int x, int y);

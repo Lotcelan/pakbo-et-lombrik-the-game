@@ -30,7 +30,7 @@ void update_basic_dword(GameData* game, Entity* e, float delta_t) {
                 if (current->value != e) { // inutile si c'est le joueur qui a l'épée
                     if (are_colliding(e->hit_box, ((Entity*)(current->value))->hurt_box)) {
                         bool should_delay = e != game->player;
-                        damage_entity(game, (Entity*)current->value, e->weapon->damage_value, should_delay);
+                        damage_entity(game, (Entity*)current->value, e->weapon->damage_value, should_delay, 250);
                     }
                 }
                 current = current->next;
@@ -88,9 +88,12 @@ void render_basic_sword(GameData* game, Entity* e, float delta_t) {
 
             if (!(*has_hitbox_changed)) {
                 Box* sword_box = init_rect_box(rect.x, rect.y, rect.w, rect.h);
+                Box* e_box = init_rect_box(e->x_position, e->y_position, e->collision_box->zone.w, e->collision_box->zone.h);
+                enlarge_entity_hitbox(e, e_box);
                 enlarge_entity_hitbox(e, sword_box);
                 *has_hitbox_changed = true;
                 free_box(sword_box);
+                free_box(e_box);
             }
             
             SDL_SetRenderDrawColor(game->renderer, 255, 255, 255, 255);

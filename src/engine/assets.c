@@ -71,6 +71,9 @@ void render_entity(GameData* game, Entity* e, float delta) {
     if (e->damage_delay > 0){
         e->damage_delay -= delta;
     }
+    if (e->stagger_duration > 0){
+        e->stagger_duration -= delta;
+    }
     
     Sprite* sprite;
 
