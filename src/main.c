@@ -3,6 +3,7 @@
 #include "engine/include/hud.h"
 #include "engine/include/scenes.h"
 #include "entities/canard01/canard01.h"
+#include "entities/blue_canard_boss/blue_canard_boss.h"
 #include "entities/player/player.h"
 #include "entities/projectile_arrow/projectile_arrow.h"
 #include "resources.h"
@@ -10,6 +11,7 @@
 #include "scenes/main_menu/main_menu.h"
 #include "scenes/scene01/scene01.h"
 #include "scenes/spawn_level/spawn_level.h"
+#include "scenes/simple_arena/simple_arena.h"
 #include "weapons/arbalete/arbalete.h"
 #include "weapons/basic_sword/basic_sword.h"
 
@@ -44,6 +46,10 @@ int main(int argc, char* argv[]) {
 	EntityInitFunc* i_arrow = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
 	*i_arrow = init_projectile_arrow;
 	insert(game->entities, "projectile_arrow", i_arrow);
+
+    EntityInitFunc* i_bcb = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
+    *i_bcb = init_blue_canard_boss;
+    insert(game->entities, "blue_canard_boss", i_bcb);
 	// printKeys(game->entities);
 
 	// potentiellement systeme de sauvegarde plus tard (donc init avec valeurs différentes)
@@ -55,11 +61,13 @@ int main(int argc, char* argv[]) {
 	Scene* main_menu = init_main_menu(game);
 	Scene* spawn_level = init_spawn_level(game);
 	Scene* etagere_level = init_etagere_level(game);
+    Scene* simple_arena = init_simple_arena(game);
 
 	insert(game->scenes, "scene01", scene01);
 	insert(game->scenes, "main_menu", main_menu);
 	insert(game->scenes, "spawn_level", spawn_level);
 	insert(game->scenes, "etagere_level", etagere_level);
+    insert(game->scenes, "simple_arena", simple_arena);
 
 	change_scene(game, "main_menu");
 
@@ -105,6 +113,7 @@ int main(int argc, char* argv[]) {
 				if ((game->event).type == SDL_QUIT) {
 					game->state = CLOSING;
 				}
+                SDL_PumpEvents();
 				if (game->current_scene != NULL) {
 					game->current_scene->event_handler(game);
 

@@ -37,61 +37,38 @@ void event_handler_player(Entity* player, GameData* game) {
     // bool* is_going_up = get(player->objects, "is_going_up", strcmp);
     // bool* is_going_left = get(player->objects, "is_going_left", strcmp);
     // bool* is_going_right = get(player->objects, "is_going_right", strcmp);
-    switch (event.type) {
-        case SDL_KEYDOWN:
-            switch (event.key.keysym.sym) {
-                case SDLK_UP:
-                    // *is_going_up = true;
-                    player->y_velocity = -250;
-                    break;
-                case SDLK_DOWN:
-                    // *is_going_down = true;
-                    player->y_velocity = 100;
-                    break;
-                case SDLK_LEFT:
-                    // *is_going_left = true;
-                    player->x_velocity = -100;
-                    player->sprite->orientation = SDL_FLIP_HORIZONTAL;
-                    break;
-                case SDLK_RIGHT:
-                    player->x_velocity = 100;    
-                    player->sprite->orientation = SDL_FLIP_NONE;
-                    // *is_going_right = true;
-                    break;
-                case SDLK_u:
-                    player->current_hp += 1;
-                    break;
-                case SDLK_d:
-                    player->current_hp -= 1;
-                    break;
-                default:
-                    break;
-            }
-            break;
-        case SDL_KEYUP:
-            switch (event.key.keysym.sym) {
-                case SDLK_UP:
-                    // *is_going_up = true;
-                    player->y_velocity = 0;
-                    break;
-                case SDLK_DOWN:
-                    // *is_going_down = true;
-                    player->y_velocity = 0;
-                    break;
-                case SDLK_LEFT:
-                    // *is_going_left = true;
-                    player->x_velocity = 0;
-                    break;
-                case SDLK_RIGHT:
-                    player->x_velocity = 0;    
-                    // *is_going_right = true;
-                    break;
-                default:
-                    break;
-            }
-            break;
-        default:
-            break;
+    if (game->keyboardState[SDL_SCANCODE_SPACE] && game->keyboardState[SDL_SCANCODE_RIGHT]) {
+        printf("dash\n");
+        player->x_velocity += 100;
+    } else if (game->keyboardState[SDL_SCANCODE_SPACE] && game->keyboardState[SDL_SCANCODE_LEFT]) {
+        player->x_velocity += -100;
+    }   
+    
+    
+    if (game->keyboardState[SDL_SCANCODE_UP]) {
+        player->y_velocity = -250;
+    } else if (game->keyboardState[SDL_SCANCODE_DOWN]) {
+        player->y_velocity = 100;
+    } else {
+        player->y_velocity = 0;
+    }
+
+    if (game->keyboardState[SDL_SCANCODE_LEFT]) {
+        player->x_velocity = -100;
+        player->sprite->orientation = SDL_FLIP_HORIZONTAL;
+    } else if (game->keyboardState[SDL_SCANCODE_RIGHT]) {
+        player->x_velocity = 100;
+        player->sprite->orientation = SDL_FLIP_NONE;
+    } else {
+        player->x_velocity = 0;
+    }
+
+    if (game->keyboardState[SDL_SCANCODE_U]) {
+        player->current_hp += 1;
+    }
+
+    if (game->keyboardState[SDL_SCANCODE_D]) {
+        player->current_hp -= 1;
     }
 }
 
@@ -125,14 +102,16 @@ void update_animation_player(Entity* e, float delta) {
 }
 
 Entity* init_player(GameData* game, int x, int y) {
-    int* nbs = malloc(3*sizeof(int));
+    int* nbs = malloc(4*sizeof(int));
     nbs[0] = 7;
     nbs[1] = 8;
     nbs[2] = 5;
-    int* lock = malloc(3*sizeof(int));
+    nbs[3] = 1;
+    int* lock = malloc(4*sizeof(int));
     lock[0] = 0;
     lock[1] = 1;
     lock[2] = 1;
+    lock[3] = 1;
     
     SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_lombric"); // to change
 

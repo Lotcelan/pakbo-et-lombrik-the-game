@@ -45,8 +45,20 @@ void update_entity_movement(GameData* game, Entity* e, float delta_t, bool gravi
     //     break;
     // }
     bool is_colliding = false;
-    int delta_x = delta_t * e->x_velocity / 1000; // delta_t en ms
-    int delta_y = delta_t * e->y_velocity / 1000; // delta_t en ms
+    int delta_x, delta_y;
+
+    // double velocityMagnitude = sqrt(e->x_velocity * e->x_velocity + e->y_velocity * e->y_velocity);
+    // if (velocityMagnitude > 0) {
+    //     double normalizedXVelocity = e->x_velocity / velocityMagnitude;
+    //     double normalizedYVelocity = e->y_velocity / velocityMagnitude;
+
+    //     delta_x = delta_t * normalizedXVelocity / 1000; // delta_t en ms
+    //     delta_y = delta_t * normalizedYVelocity / 1000; // delta_t en ms
+    // }
+    // printf("Delta X : %d, Delta Y : %d\n", delta_x, delta_y);
+
+    delta_x = delta_t * e->x_velocity / 1000; // delta_t en ms
+    delta_y = delta_t * e->y_velocity / 1000; // delta_t en ms
     int sign_x = delta_x > 0 ? 1 : -1;
     int sign_y = delta_y > 0 ? 1 : -1;
     int temp_prev = 0;
@@ -119,7 +131,6 @@ void update_gravity(GameData* game, Entity* e, float delta_t) {
     }
 
     float gravity = 250;
-    int prev_y = e->y_position;
     e->y_velocity += gravity * delta_t / 1000;
     // if (is_entity_colliding_with_structures(e, game->current_scene->structures)) {
     //     e->y_position = prev_y;

@@ -40,7 +40,7 @@ void event_handler_main_menu(GameData* game) {
                 // printf("Clicked: %s\n", menuItems[selectedMenuItem].name);
                 if (strcmp(main_menu_options[*selectedMenuItem], "Play")==0) {
                     // game->current_scene = get(game->scenes, "spawn_level", strcmp);
-                    change_scene(game, "etagere_level");
+                    change_scene(game, "simple_arena");
                 } else if (strcmp(main_menu_options[*selectedMenuItem], "Quit")==0) {
                     game->state = CLOSING;
                 }

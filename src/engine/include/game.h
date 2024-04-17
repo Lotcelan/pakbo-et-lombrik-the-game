@@ -43,6 +43,8 @@ typedef struct GameData {
     int height_amount;
     SDL_Renderer* renderer;
     SDL_Event event;
+    const Uint8* keyboardState;
+
 
     HashTable* resources;
     HashTable* fonts;
