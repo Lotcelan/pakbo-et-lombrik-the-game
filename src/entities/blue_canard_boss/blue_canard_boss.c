@@ -7,11 +7,14 @@ void update_blue_canard_boss(GameData* game, Entity* blue_canard_boss, float del
         return;
     }
 
-    follow_player(game, blue_canard_boss);
+    follow_player(game, blue_canard_boss, 50, 50);
     update_entity_movement(game, blue_canard_boss, delta_t, true);
     if (are_colliding(blue_canard_boss->hit_box, game->player->hurt_box)) {
-        damage_entity(game, game->player, 1, 1000, -1);
+        damage_entity(game, game->player, 2, 1000, -1);
     }
+
+
+
     return;
 }
 void event_handler_blue_canard_boss(Entity* blue_canard_boss, GameData* game) {
@@ -31,6 +34,13 @@ Entity* init_blue_canard_boss(GameData* game, int x, int y) {
     SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_blue_canard_boss"); // to change
 
     Entity* blue_canard_boss = init_entity(x, y, 14, spritesheet, 32, 32, nbs, lock, update_blue_canard_boss, event_handler_blue_canard_boss, update_animation_blue_canard_boss, 12, true);
+
+    WeaponInitFunc* weapon_init = get(game->weapons, "blue_duck_boss_laser", strcmp);
+    if (weapon_init == NULL) {
+        printf("Error: weapon not found\n");
+        return NULL;
+    }
+    blue_canard_boss->weapon = (*weapon_init)(game);
 
     return blue_canard_boss;
 }

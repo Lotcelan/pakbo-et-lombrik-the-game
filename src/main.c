@@ -6,6 +6,7 @@
 #include "entities/blue_canard_boss/blue_canard_boss.h"
 #include "entities/player/player.h"
 #include "entities/projectile_arrow/projectile_arrow.h"
+#include "entities/projectile_laser/projectile_laser.h"
 #include "resources.h"
 #include "scenes/etagere_level/etagere_level.h"
 #include "scenes/main_menu/main_menu.h"
@@ -14,6 +15,7 @@
 #include "scenes/simple_arena/simple_arena.h"
 #include "weapons/arbalete/arbalete.h"
 #include "weapons/basic_sword/basic_sword.h"
+#include "weapons/blue_duck_boss_laser/blue_duck_boss_laser.h"
 
 int main(int argc, char* argv[]) {
 	printf("oskouuuur \n");
@@ -38,6 +40,10 @@ int main(int argc, char* argv[]) {
 	*i_a = init_arbalete;
 	insert(game->weapons, "arbalete", i_a);
 
+    WeaponInitFunc* i_bdbl = (WeaponInitFunc*)malloc(sizeof(WeaponInitFunc));
+    *i_bdbl = init_blue_duck_boss_laser;
+    insert(game->weapons, "blue_duck_boss_laser", i_bdbl);
+
 	// Init entities MUST DO IT BEFORE INIT SCENES
 	EntityInitFunc* i_p = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
 	*i_p = init_canard01;
@@ -46,6 +52,10 @@ int main(int argc, char* argv[]) {
 	EntityInitFunc* i_arrow = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
 	*i_arrow = init_projectile_arrow;
 	insert(game->entities, "projectile_arrow", i_arrow);
+
+    EntityInitFunc* i_laser = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
+	*i_laser = init_projectile_laser;
+	insert(game->entities, "projectile_laser", i_laser);
 
     EntityInitFunc* i_bcb = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
     *i_bcb = init_blue_canard_boss;
@@ -151,6 +161,9 @@ int main(int argc, char* argv[]) {
 				while (current != NULL) {
 					Entity* e = (Entity*)current->value;
 					e->update(game, e, deltaT);
+                    if (e->weapon != NULL) {
+                        e->weapon->update(game, e, deltaT);
+                    }
 					current = current->next;
 				}
 			}

@@ -87,6 +87,9 @@ extern int src_assets_hp_dead_png_len;
 extern unsigned char src_assets_hp_half_png[];
 extern int src_assets_hp_half_png_len;
 
+extern unsigned char src_assets_projectile_laser_png[];
+extern int src_assets_projectile_laser_png_len;
+
 extern unsigned char src_assets_block_circles_png[];
 extern int src_assets_block_circles_png_len;
 

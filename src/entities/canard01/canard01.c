@@ -7,7 +7,7 @@ void update_canard01(GameData* game, Entity* canard01, float delta_t) {
         return;
     }
 
-    follow_player(game, canard01);
+    follow_player(game, canard01, 50, 50);
     update_entity_movement(game, canard01, delta_t, true);
     if (are_colliding(canard01->hit_box, game->player->hurt_box)) {
         damage_entity(game, game->player, 1, 1000, -1);

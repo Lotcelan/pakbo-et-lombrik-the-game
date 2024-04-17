@@ -1,7 +1,7 @@
 #include "./include/physics.h"
 
-void update_entity_movement(GameData* game, Entity* e, float delta_t, bool gravity_enabled) {
-
+bool update_entity_movement(GameData* game, Entity* e, float delta_t, bool gravity_enabled) {
+    // returns true if it has collided with something
     
     if (gravity_enabled) {
         update_gravity(game, e, delta_t);
@@ -11,7 +11,7 @@ void update_entity_movement(GameData* game, Entity* e, float delta_t, bool gravi
     }
 
     if (e->x_velocity == 0 && e->y_velocity == 0 || e->x_position == -1 && e->y_position == -1) {
-        return;
+        return false;
     }
 
     int prev_x = e->x_position;
@@ -46,7 +46,7 @@ void update_entity_movement(GameData* game, Entity* e, float delta_t, bool gravi
     // }
     bool is_colliding = false;
     int delta_x, delta_y;
-
+    bool result = false;
     // double velocityMagnitude = sqrt(e->x_velocity * e->x_velocity + e->y_velocity * e->y_velocity);
     // if (velocityMagnitude > 0) {
     //     double normalizedXVelocity = e->x_velocity / velocityMagnitude;
@@ -92,6 +92,7 @@ void update_entity_movement(GameData* game, Entity* e, float delta_t, bool gravi
     if (has_collided) {
         e->x_velocity = 0;
     }
+    result = result || has_collided;
     has_collided = false;
     is_colliding = false;
     prev_x = e->x_position;
@@ -122,6 +123,9 @@ void update_entity_movement(GameData* game, Entity* e, float delta_t, bool gravi
     if (has_collided) {
         e->y_velocity = 0;
     }
+    result = result || has_collided;
+
+    return result;
 
 }
 
@@ -139,7 +143,7 @@ void update_gravity(GameData* game, Entity* e, float delta_t) {
     
 }
 
-void follow_player(GameData* game, Entity* e) {
+void follow_player(GameData* game, Entity* e, int x_speed, int y_speed) {
     if (game->current_scene == NULL) {
         return;
     }
@@ -152,16 +156,16 @@ void follow_player(GameData* game, Entity* e) {
     int e_x = e->x_position;
     int e_y = e->y_position;
     if (player_x > e_x) {
-        e->x_velocity = 50;
+        e->x_velocity = x_speed;
     } else if (player_x < e_x) {
-        e->x_velocity = -50;
+        e->x_velocity = -x_speed;
     } else {
         e->x_velocity = 0;
     }
     if (player_y > e_y) {
-        e->y_velocity = 50;
+        e->y_velocity = y_speed;
     } else if (player_y < e_y) {
-        e->y_velocity = -50;
+        e->y_velocity = -y_speed;
     } else {
         e->y_velocity = 0;
     }
