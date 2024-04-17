@@ -1,12 +1,19 @@
 #include "./include/physics.h"
 
 void update_entity_movement(GameData* game, Entity* e, float delta_t, bool gravity_enabled) {
+
+    
     if (gravity_enabled) {
         update_gravity(game, e, delta_t);
     }
     if (game->current_scene == NULL) {
         return;
     }
+
+    if (e->x_velocity == 0 && e->y_velocity == 0 || e->x_position == -1 && e->y_position == -1) {
+        return;
+    }
+
     int prev_x = e->x_position;
     int prev_y = e->y_position;
     
@@ -48,11 +55,11 @@ void update_entity_movement(GameData* game, Entity* e, float delta_t, bool gravi
     bool has_collided = false;
 
     while (delta_x >= 0) {
-        e->x_position = e->x_position + sign_x * delta_x;
+        // e->x_position = e->x_position + sign_x * delta_x;
         // printf("Je pourrai être en X : %d\n", e->x_position);
-        update_entity_boxes(e, prev_x, prev_y);
-        temp_prev = e->x_position;
-        
+        // update_entity_boxes(e, prev_x, prev_y);
+        // temp_prev = e->x_position;
+        change_entity_coordinates(e, e->x_position + sign_x * delta_x, e->y_position);
 
         if (is_entity_colliding_with_structures(e, game->current_scene->structures)) {
             is_colliding = true;
@@ -61,8 +68,9 @@ void update_entity_movement(GameData* game, Entity* e, float delta_t, bool gravi
             break;
         }
         if (is_colliding) {
-            e->x_position = prev_x;
-            update_entity_boxes(e, temp_prev, prev_y);
+            change_entity_coordinates(e, e->prev_collision_box->zone.x, e->prev_collision_box->zone.y);
+
+            // update_entity_boxes(e, temp_prev, prev_y);
             // prev_x = e->x_position;
             delta_x--; // d'ici a ce qu'on fasse du raymarching :)
             is_colliding = false;
@@ -77,10 +85,12 @@ void update_entity_movement(GameData* game, Entity* e, float delta_t, bool gravi
     prev_x = e->x_position;
     prev_y = e->y_position; // useless
     while (delta_y >= 0) {
-        e->y_position = e->y_position + sign_y * delta_y;
+        // e->y_position = e->y_position + sign_y * delta_y;
         // printf("Je pourrai être en Y : %d, delta = %d\n", e->y_position, delta_y);
-        update_entity_boxes(e, prev_x, prev_y);
-        temp_prev = e->y_position;
+        // update_entity_boxes(e, prev_x, prev_y);
+        // temp_prev = e->y_position;
+        change_entity_coordinates(e, e->x_position, e->y_position + sign_y * delta_y);
+
         if (is_entity_colliding_with_structures(e, game->current_scene->structures)) {
             is_colliding = true;
             has_collided = true;
@@ -88,8 +98,9 @@ void update_entity_movement(GameData* game, Entity* e, float delta_t, bool gravi
             break;
         }
         if (is_colliding) {
-            e->y_position = prev_y;
-            update_entity_boxes(e, prev_x, temp_prev);
+            // e->y_position = prev_y;
+            // update_entity_boxes(e, prev_x, temp_prev);
+            change_entity_coordinates(e, e->x_position, e->prev_collision_box->zone.y);
             // prev_y = e->y_position;
             delta_y--; // d'ici a ce qu'on fasse du raymarching :)
             is_colliding = false;

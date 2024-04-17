@@ -42,7 +42,7 @@ void event_handler_player(Entity* player, GameData* game) {
             switch (event.key.keysym.sym) {
                 case SDLK_UP:
                     // *is_going_up = true;
-                    player->y_velocity = -100;
+                    player->y_velocity = -250;
                     break;
                 case SDLK_DOWN:
                     // *is_going_down = true;
@@ -138,7 +138,7 @@ Entity* init_player(GameData* game, int x, int y) {
 
     Entity* player = init_entity(x, y, 14, spritesheet, 16, 16, nbs, lock, update_player, event_handler_player, update_animation_player, 6, false);
 
-    // WeaponInitFunc* arbalete = get(game->weapons, "arbalete", strcmp);
+    WeaponInitFunc* arbalete = get(game->weapons, "arbalete", strcmp);
     WeaponInitFunc* basic_sword = get(game->weapons, "basic_sword", strcmp);
     if (basic_sword == NULL) {
         printf("Error: weapon not found\n");

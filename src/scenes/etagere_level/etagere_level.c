@@ -57,7 +57,7 @@ void populate_etagere_level(GameData* game) {
     // On s'occupe de ça dans populate
     game->player->x_position = 50;
     game->player->y_position = 10;
-    update_entity_boxes(game->player, 0, 0);
+    update_entity_boxes(game->player);
 }
 
 // void test(Entity* e, float delta){

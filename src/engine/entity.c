@@ -70,17 +70,37 @@ Entity* init_entity(int x, int y, int framerate, SDL_Texture* spriteSheet, int w
     res->current_hp = max_hp;
 
     res->collision_box = init_rect_box(x,y,width, height);
+    res->prev_collision_box = copy_box(res->collision_box);
     res->hurt_box = copy_box(res->collision_box); // could be different later, but weird
+    res->prev_hurt_box = copy_box(res->hurt_box);
     if (should_have_hitbox) {
         res->hit_box = init_rect_box(x,y,width, height); // s'adaptera au sprite
+        res->prev_hit_box = copy_box(res->hit_box);
     } else {
         res->hit_box = NULL;
+        res->prev_hit_box = NULL;
     }
     res->damage_delay = -1;
     res->weapon = NULL;
 
     res->parent = NULL;
     return res;
+}
+
+void change_entity_coordinates(Entity* e, int x, int y) {
+    free(e->prev_collision_box);
+    free(e->prev_hurt_box);
+    free(e->prev_hit_box);
+
+    e->prev_collision_box = copy_box(e->collision_box);
+    e->prev_hurt_box = copy_box(e->hurt_box);
+    e->prev_hit_box = copy_box(e->hit_box);
+
+    
+    e->x_position = x;
+    e->y_position = y;
+    update_entity_boxes(e);
+
 }
 
 // init_Sprite renvoie un sprite

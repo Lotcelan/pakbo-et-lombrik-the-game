@@ -69,6 +69,10 @@ typedef struct Entity {
     Box* hurt_box;
     Box* hit_box;
 
+    Box* prev_collision_box; // Useful in many scenarios
+    Box* prev_hurt_box;
+    Box* prev_hit_box;
+
     int max_hp;
     int current_hp;
 
@@ -90,4 +94,5 @@ Sprite* init_sprite(int framerate, SDL_Texture* spriteSheet, int width, int heig
 void damage_entity(GameData* game, Entity* e, int damage, bool should_add_delay);
 int compare_entities(void* e1, void* e2);
 void clear_entities(GameData* game);
+void change_entity_coordinates(Entity* e, int x, int y);
 #endif
