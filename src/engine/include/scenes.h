@@ -27,6 +27,12 @@ typedef struct ScreenShake {
 typedef struct GameData GameData;
 typedef struct Structure Structure;
 
+typedef struct ObjectEntry {
+    void* value;
+    void (*destroy_value) (void* value);
+} ObjectEntry;
+
+
 typedef struct Scene {
     char title[200];
     List* render_stack;

@@ -162,6 +162,19 @@ void render_scene(GameData* game, float delta) {
 
 }
 
+void free_scene_(Scene* scene){
+    // Destroy the hashtable "object"
+    Entry* entry = scene->objects->table;
+    while (entry != NULL) {
+        Entry* next = entry->next;
+        free(entry->key);
+        ((ObjectEntry*) (entry->value))->destroy_value (entry->value);
+        free(entry);
+        entry = next;
+    }
+    free(scene->objects);
+}
+
 void free_scene(Scene* scene) {
     // Free all the entities and structures of the scene
     if (scene->screen_shake != NULL) {
@@ -203,6 +216,7 @@ void change_scene(GameData* game, char* next) {
         return;
     }
     destroy_render_stack(game);
+    // game->current_scene->destroy_scene;
     game->current_scene = next_scene;
     game->current_scene->populate(game);
 }
