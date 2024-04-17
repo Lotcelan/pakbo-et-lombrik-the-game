@@ -166,7 +166,7 @@ void free_scene_(Scene* scene){
     // Destroy the hashtable "object"
     Entry* entry = scene->objects->table;
     while (entry != NULL) {
-        Entry* next = entry->next;
+        Entry* next = (Entry*)(entry->next);
         free(entry->key);
         ((ObjectEntry*) (entry->value))->destroy_value (entry->value);
         free(entry);

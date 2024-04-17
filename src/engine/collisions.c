@@ -316,8 +316,8 @@ Box* copy_box(Box* a) {
         return NULL;
     }
     new_box->zone = a->zone;
-    printf("Origin box : %d, %d, %d, %d\n", a->zone.x, a->zone.y, a->zone.w, a->zone.h);
-    printf("New box : %d, %d, %d, %d\n", new_box->zone.x, new_box->zone.y, new_box->zone.w, new_box->zone.h);
+    // printf("Origin box : %d, %d, %d, %d\n", a->zone.x, a->zone.y, a->zone.w, a->zone.h);
+    // printf("New box : %d, %d, %d, %d\n", new_box->zone.x, new_box->zone.y, new_box->zone.w, new_box->zone.h);
     return new_box;
 
 }
