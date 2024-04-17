@@ -30,7 +30,7 @@ Entity* init_canard01(GameData* game, int x, int y) {
     
     SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_duck_purple"); // to change
 
-    Entity* canard01 = init_entity(x, y, 14, spritesheet, 16, 16, nbs, lock, update_canard01, event_handler_canard01, update_animation_canard01, 6);
+    Entity* canard01 = init_entity(x, y, 14, spritesheet, 16, 16, nbs, lock, update_canard01, event_handler_canard01, update_animation_canard01, 6, true);
 
     return canard01;
 }

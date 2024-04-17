@@ -45,7 +45,7 @@ Entity* init_projectile_arrow(GameData* game, int x, int y) {
     
     SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_projectile_arrow"); // to change
 
-    Entity* projectile_arrow = init_entity(x, y, 1, spritesheet, 16, 16, nbs, lock, update_projectile_arrow, event_handler_projectile_arrow, update_animation_projectile_arrow, 1);
+    Entity* projectile_arrow = init_entity(x, y, 1, spritesheet, 16, 16, nbs, lock, update_projectile_arrow, event_handler_projectile_arrow, update_animation_projectile_arrow, 1, true);
 
     return projectile_arrow;
 }

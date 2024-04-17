@@ -136,7 +136,7 @@ Entity* init_player(GameData* game, int x, int y) {
     
     SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_lombric"); // to change
 
-    Entity* player = init_entity(x, y, 14, spritesheet, 16, 16, nbs, lock, update_player, event_handler_player, update_animation_player, 6);
+    Entity* player = init_entity(x, y, 14, spritesheet, 16, 16, nbs, lock, update_player, event_handler_player, update_animation_player, 6, false);
 
     // WeaponInitFunc* arbalete = get(game->weapons, "arbalete", strcmp);
     WeaponInitFunc* basic_sword = get(game->weapons, "basic_sword", strcmp);

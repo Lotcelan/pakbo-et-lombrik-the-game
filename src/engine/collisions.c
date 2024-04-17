@@ -213,6 +213,10 @@ Box* init_rect_box_from_structure(GameData* game, Structure* s) {
 }
 
 bool are_colliding(Box* a, Box* b) {
+    if (a == NULL || b == NULL) {
+        return false;
+    }
+    
     SDL_Rect zone1 = a->zone;
     SDL_Rect zone2 = b->zone;
     
@@ -235,6 +239,29 @@ bool is_entity_colliding_with_structures(Entity* e, List* structures) {
     List* current = structures;
     while (current != NULL) {
         // ("Checking %d\n", ((Structure*)(current->value))->position.x);
+        // int allow_pass_through = ((Structure*)(current->value))->allow_pass_through;
+        // bool left_allow = (allow_pass_through) >> 3 == 1;
+        // bool up_allow = (allow_pass_through << 1 ) >> 3 == 1;
+        // bool right_allow = (allow_pass_through << 2) >> 3 == 1;
+        // bool down_allow = (allow_pass_through << 3) >> 3 == 1;
+
+        // if (left_allow && e->x_velocity > 0 && are_colliding(entity_box, ((Structure*)(current->value))->collision_box)) {
+        //     current = current->next;
+        //     continue;
+        // }
+        // if (up_allow && e->y_velocity > 0 && are_colliding(entity_box, ((Structure*)(current->value))->collision_box)) {
+        //     current = current->next;
+        //     continue;
+        // }
+        // if (right_allow && e->x_velocity < 0 && are_colliding(entity_box, ((Structure*)(current->value))->collision_box)) {
+        //     current = current->next;
+        //     continue;
+        // }
+        // if (down_allow && e->y_velocity < 0 && are_colliding(entity_box, ((Structure*)(current->value))->collision_box)) {
+        //     current = current->next;
+        //     continue;
+        // }
+
         Box* struct_box = ((Structure*)(current->value))->collision_box;
         if (are_colliding(entity_box, struct_box)) {
             return true;
@@ -248,30 +275,51 @@ void free_box(Box* box) {
     free(box);
 }
 
-void update_entity_boxes(Entity* e) {
+void update_entity_boxes(Entity* e, int prev_x, int prev_y) {
     // non indépendant du type de zone
     if (e == NULL) {
         return;
     }
-    if (e->collision_box == NULL) {
-        return;
+    int delta_x, delta_y;
+    delta_x = e->x_position - prev_x;
+    delta_y = e->y_position - prev_y;
+    printf("delta_x : %d, delta_y : %d\n", delta_x, delta_y);
+
+    if (e->collision_box != NULL) {
+
+        e->collision_box->zone.x += delta_x;
+        e->collision_box->zone.y += delta_y;
     }
 
-    e->collision_box->zone.x = e->x_position;
-    e->collision_box->zone.y = e->y_position;
 
     if (e->hurt_box != NULL) {
-        e->hurt_box->zone.x = e->x_position;
-        e->hurt_box->zone.y = e->y_position;
+        e->hurt_box->zone.x += delta_x;
+        e->hurt_box->zone.y += delta_y;
     }
 
     if (e->hit_box != NULL) {
-        e->hit_box->zone.x = e->x_position;
-        e->hit_box->zone.y = e->y_position;
+
+        e->hit_box->zone.x += delta_x;
+        e->hit_box->zone.y += delta_y;
     }
     
     // printf("after change : %d, %d, %d, %d\n", e->collision_box->zone.x, e->collision_box->zone.y, e->collision_box->zone.w, e->collision_box->zone.h);
     // todo : other boxes
+}
+
+Box* copy_box(Box* a) {
+    if (a == NULL) {
+        return NULL;
+    }
+    Box* new_box = malloc(sizeof(Box));
+    if (new_box == NULL) {
+        return NULL;
+    }
+    new_box->zone = a->zone;
+    printf("Origin box : %d, %d, %d, %d\n", a->zone.x, a->zone.y, a->zone.w, a->zone.h);
+    printf("New box : %d, %d, %d, %d\n", new_box->zone.x, new_box->zone.y, new_box->zone.w, new_box->zone.h);
+    return new_box;
+
 }
 
 void enlarge_entity_hitbox(Entity* e, Box* new_hitbox) {
@@ -280,32 +328,25 @@ void enlarge_entity_hitbox(Entity* e, Box* new_hitbox) {
         return;
     }
     if (e->hit_box == NULL) {
-        e->hit_box = new_hitbox;
+        e->hit_box = copy_box(new_hitbox);
         return;
+        
     }
     SDL_Rect old_hitbox = e->hit_box->zone;
     SDL_Rect new_hitbox_rect = new_hitbox->zone;
+    int min_x, max_x, min_y, max_y;
+    
+    min_x = old_hitbox.x < new_hitbox_rect.x ? old_hitbox.x : new_hitbox_rect.x;
+    min_y = old_hitbox.y < new_hitbox_rect.y ? old_hitbox.y : new_hitbox_rect.y;
 
-    int min_x = old_hitbox.x;
-    int max_x = old_hitbox.x + old_hitbox.w;
-    int min_y = old_hitbox.y;
-    int max_y = old_hitbox.y + old_hitbox.h;
-
-    if (new_hitbox_rect.x < min_x) {
-        min_x = new_hitbox_rect.x;
-    }
-    if (new_hitbox_rect.x + new_hitbox_rect.w > max_x) {
-        max_x = new_hitbox_rect.x + new_hitbox_rect.w;
-    }
-    if (new_hitbox_rect.y < min_y) {
-        min_y = new_hitbox_rect.y;
-    }
-    if (new_hitbox_rect.y + new_hitbox_rect.h > max_y) {
-        max_y = new_hitbox_rect.y + new_hitbox_rect.h;
-    }
+    max_x = old_hitbox.x + old_hitbox.w > new_hitbox_rect.x + new_hitbox_rect.w ? old_hitbox.x + old_hitbox.w : new_hitbox_rect.x + new_hitbox_rect.w;
+    max_y = old_hitbox.y + old_hitbox.h > new_hitbox_rect.y + new_hitbox_rect.h ? old_hitbox.y + old_hitbox.h : new_hitbox_rect.y + new_hitbox_rect.h;
 
     e->hit_box->zone.x = min_x;
     e->hit_box->zone.y = min_y;
     e->hit_box->zone.w = max_x - min_x;
     e->hit_box->zone.h = max_y - min_y;
+    printf("With old box : %d, %d, %d, %d\n", old_hitbox.x, old_hitbox.y, old_hitbox.w, old_hitbox.h);
+    printf("With new box : %d, %d, %d, %d\n", new_hitbox_rect.x, new_hitbox_rect.y, new_hitbox_rect.w, new_hitbox_rect.h);
+    printf("Result : %d, %d, %d, %d\n", e->hit_box->zone.x, e->hit_box->zone.y, e->hit_box->zone.w, e->hit_box->zone.h);
 }

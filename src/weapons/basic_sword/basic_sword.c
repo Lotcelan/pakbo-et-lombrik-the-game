@@ -74,8 +74,10 @@ void render_basic_sword(GameData* game, Entity* e, float delta_t) {
     }
 
     bool* is_attacking = get(e->weapon->objects, "is_attacking", strcmp);
-    if (is_attacking != NULL) {
-            // printf("Attacking\n");
+    bool* has_hitbox_changed = get(e->weapon->objects, "has_hitbox_changed", strcmp);
+
+    if (is_attacking != NULL && has_hitbox_changed != NULL) {
+        // printf("Attacking\n");
         if (*is_attacking) {
             SDL_Rect rect;
             if (e->sprite->orientation == SDL_FLIP_NONE) {
@@ -84,14 +86,24 @@ void render_basic_sword(GameData* game, Entity* e, float delta_t) {
                 rect = (SDL_Rect){.x=e->x_position-24,.y= e->y_position + 8, .w=24, .h=4};
             }
 
-            Box* sword_box = init_rect_box(rect.x, rect.y, rect.w, rect.h);
-            enlarge_entity_hitbox(e, sword_box);
-            free_box(sword_box);
-
+            if (!(*has_hitbox_changed)) {
+                Box* sword_box = init_rect_box(rect.x, rect.y, rect.w, rect.h);
+                enlarge_entity_hitbox(e, sword_box);
+                *has_hitbox_changed = true;
+                free_box(sword_box);
+            }
+            
             SDL_SetRenderDrawColor(game->renderer, 255, 255, 255, 255);
             SDL_RenderFillRect(game->renderer, &rect);
+        } else {
+            if (compare_entities(e, game->player)) {
+                e->hit_box = NULL;
+                *has_hitbox_changed = false;
+            } else {
+                *has_hitbox_changed = false;
+                e->hit_box = init_rect_box_from_entity(game, e);
+            }
         }
-
     }
     return;
 }
@@ -114,6 +126,10 @@ Weapon* init_basic_sword(GameData* game) {
     int* attack_duration = (int*)malloc(sizeof(int));
     *attack_duration = -1;
     insert(weapon->objects, "attack_duration", attack_duration);
+
+    bool* has_hitbox_changed = (bool*)malloc(sizeof(bool));
+    *has_hitbox_changed = false;
+    insert(weapon->objects, "has_hitbox_changed", has_hitbox_changed);
 
     return weapon;
 }

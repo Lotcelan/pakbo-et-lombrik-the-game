@@ -63,7 +63,7 @@
             "x" : 2,
             "y" : 5,
             "resource" : "src_assets_plateforme_surelevee",
-            "allow_pass_through" : 0,
+            "allow_pass_through" : 10,
             "teleport_to_scene" : "none"
         }
 

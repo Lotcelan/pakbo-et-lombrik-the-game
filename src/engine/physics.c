@@ -1,9 +1,9 @@
 #include "./include/physics.h"
 
 void update_entity_movement(GameData* game, Entity* e, float delta_t, bool gravity_enabled) {
-    if (gravity_enabled) {
-        update_gravity(game, e, delta_t);
-    }
+    // if (gravity_enabled) {
+    //     update_gravity(game, e, delta_t);
+    // }
     if (game->current_scene == NULL) {
         return;
     }
@@ -11,21 +11,85 @@ void update_entity_movement(GameData* game, Entity* e, float delta_t, bool gravi
     int prev_y = e->y_position;
     
     // todo : normalisation de la vitesse en diagonale avec un /sqrt(2)
-    int delta_x = floor(delta_t * e->x_velocity / 1000); // delta_t en ms
-    int delta_y = floor(delta_t * e->y_velocity / 1000);
-
-    e->x_position = e->x_position + delta_x;
-    e->y_position = e->y_position + delta_y;
-    update_entity_boxes(e);
-
-    if (is_entity_colliding_with_structures(e, game->current_scene->structures)) {
+    // int delta_x = floor(delta_t * e->x_velocity / 1000); // delta_t en ms
+    // int sign_x = delta_x > 0 ? 1 : -1;
+    // for (int current = 0; current < delta_x; current++) {
+    //     e->x_position = e->x_position + delta_x + sign_x * current;
+    //     update_entity_boxes(e);
         
-        e->x_position = prev_x;
-        e->x_velocity = 0;
-        e->y_position = prev_y;
-        e->y_velocity = 0;
-        update_entity_boxes(e);
+    //     if (is_entity_colliding_with_structures(e, game->current_scene->structures)) {
+    //         e->x_position = prev_x;
+    //         update_entity_boxes(e);
+    //         continue;
+    //     }
+    //     break;
+    // }
+    // int delta_y = floor(delta_t * e->y_velocity / 1000); // delta_t en ms
+    // int sign_y = delta_y > 0 ? 1 : -1;
+    // for (int current = 0; current < delta_y; current++) {
+    //     e->y_position = e->y_position + delta_y + sign_y * current;
+    //     printf("Prev : %d, Current : %d, Delta : %d\n", prev_y, e->y_position, delta_y);
+    //     update_entity_boxes(e);
+    //     if (is_entity_colliding_with_structures(e, game->current_scene->structures)) {
+    //         e->y_position = prev_y;
+    //         update_entity_boxes(e);
+    //         continue;
+    //     }
+    //     break;
+    // }
+    bool is_colliding = false;
+    int delta_x = delta_t * e->x_velocity / 1000; // delta_t en ms
+    int delta_y = delta_t * e->y_velocity / 1000; // delta_t en ms
+    int sign_x = delta_x > 0 ? 1 : -1;
+    int sign_y = delta_y > 0 ? 1 : -1;
+    int temp_prev = 0;
+    delta_x = abs(delta_x);
+    delta_y = abs(delta_y);
+
+    while (delta_x >= 0) {
+        e->x_position = e->x_position + sign_x * delta_x;
+        // printf("Je pourrai être en X : %d\n", e->x_position);
+        update_entity_boxes(e, prev_x, prev_y);
+        temp_prev = e->x_position;
+        
+
+        if (is_entity_colliding_with_structures(e, game->current_scene->structures)) {
+            is_colliding = true;
+        } else {
+            break;
+        }
+        if (is_colliding) {
+            update_entity_boxes(e, temp_prev, prev_y);
+            e->x_position = prev_x;
+            // prev_x = e->x_position;
+            delta_x--; // d'ici a ce qu'on fasse du raymarching :)
+            is_colliding = false;
+            
+        }
     }
+    is_colliding = false;
+    prev_x = e->x_position;
+    prev_y = e->y_position; // useless
+    while (delta_y >= 0) {
+        e->y_position = e->y_position + sign_y * delta_y;
+        // printf("Je pourrai être en Y : %d, delta = %d\n", e->y_position, delta_y);
+        update_entity_boxes(e, prev_x, prev_y);
+        temp_prev = e->y_position;
+        if (is_entity_colliding_with_structures(e, game->current_scene->structures)) {
+            is_colliding = true;
+        } else {
+            break;
+        }
+        if (is_colliding) {
+            e->y_position = prev_y;
+            update_entity_boxes(e, prev_x, temp_prev);
+            // prev_y = e->y_position;
+            delta_y--; // d'ici a ce qu'on fasse du raymarching :)
+            is_colliding = false;
+            
+        }
+    }
+
 
 }
 
@@ -39,6 +103,7 @@ void update_gravity(GameData* game, Entity* e, float delta_t) {
     e->y_velocity += gravity * delta_t / 1000;
     if (is_entity_colliding_with_structures(e, game->current_scene->structures)) {
         e->y_position = prev_y;
+        update_entity_boxes(e, e->x_position, prev_y);
     }
     
 }
