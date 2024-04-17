@@ -29,8 +29,8 @@ void update_basic_dword(GameData* game, Entity* e, float delta_t) {
             while (current != NULL) {
                 if (current->value != e) { // inutile si c'est le joueur qui a l'épée
                     if (are_colliding(e->hit_box, ((Entity*)(current->value))->hurt_box)) {
-                        bool should_delay = e != game->player;
-                        damage_entity(game, (Entity*)current->value, e->weapon->damage_value, should_delay, 250);
+                        // bool should_delay = e != game->player;
+                        damage_entity(game, (Entity*)current->value, e->weapon->damage_value, 250, 250);
                     }
                 }
                 current = current->next;
@@ -114,7 +114,7 @@ void render_basic_sword(GameData* game, Entity* e, float delta_t) {
 Weapon* init_basic_sword(GameData* game) {
     Weapon* weapon = (Weapon*)malloc(sizeof(Weapon));
     weapon->name = "basic_sword";
-    weapon->damage_value = 1;
+    weapon->damage_value = 2;
     weapon->max_durability = -1; // Infinite durability
     weapon->current_durability = -1;
     weapon->update = update_basic_dword;

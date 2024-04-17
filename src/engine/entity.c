@@ -140,7 +140,7 @@ Sprite* init_sprite(int framerate, SDL_Texture* spriteSheet, int width, int heig
 	return res;
 }
 
-void damage_entity(GameData* game, Entity* e, int damage, bool should_add_delay, int stagger_duration) {
+void damage_entity(GameData* game, Entity* e, int damage, int delay, int stagger_duration) {
 	// Si on veut que sur le dégât un délai soit appliquer, on met should_add_delay à true
 	if (e->damage_delay < 0) {
 		e->current_hp -= damage;
@@ -151,8 +151,8 @@ void damage_entity(GameData* game, Entity* e, int damage, bool should_add_delay,
             game->current_scene->screen_shake = shake;
         }
         
-		if (should_add_delay) {
-			e->damage_delay = 1500;
+		if (delay >= 0) {
+			e->damage_delay = delay;
 		}
 	}
 
