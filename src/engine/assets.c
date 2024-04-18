@@ -89,6 +89,7 @@ void render_entity(GameData* game, Entity* e, float delta) {
         int etat_old = e->etat;
         e->update_animation(e, delta);
         sprite->Lock = sprite->Lock_liste[e->etat];
+        printf("old : etat : %d for width %d and height %d\n", etat_old, e->etat, sprite->width, sprite->height);
         if (e->etat == etat_old){
             update_frame(e, delta);
         }

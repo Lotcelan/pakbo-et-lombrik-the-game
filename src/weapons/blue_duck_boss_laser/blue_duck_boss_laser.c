@@ -23,14 +23,25 @@ void update_blue_duck_boss_laser(GameData* game, Entity* e, float delta_t) {
             if (projectile_func == NULL) {
                 return;
             }
-            Entity* projectile = (*projectile_func)(game, e->x_position, e->y_position);
+            Entity* projectile = (*projectile_func)(game, e->x_position + 16, e->y_position + 16);
             projectile->parent = e;
             int sign = 1;
             if (e->sprite->orientation == SDL_FLIP_HORIZONTAL) {
                 sign = -1;
                 projectile->sprite->orientation = SDL_FLIP_HORIZONTAL;
             }
-            projectile->x_velocity = e->x_velocity + sign * 100;
+            int player_x = game->player->x_position;
+            int player_y = game->player->y_position;
+            int e_x = e->x_position + 16;
+            int e_y = e->y_position + 16;
+            // compute the x and y velocity to reach the player
+
+            float distance = sqrt(pow(player_x - e_x, 2) + pow(player_y - e_y, 2));
+            projectile->y_velocity = (player_y - e_y) / distance * 100;
+            projectile->x_velocity = (player_x - e_x) / distance * 100;
+
+            
+            
             
             replace(e->weapon->objects, "projectiles", append_first(projectile, projectiles), strcmp);
         } else {
@@ -70,7 +81,7 @@ void update_blue_duck_boss_laser(GameData* game, Entity* e, float delta_t) {
         Entity* projectile = (Entity*)(current->value);
         if (projectile != NULL) {
             projectile->update(game, projectile, delta_t);
-            projectile->update_animation(projectile, delta_t);
+            // projectile->update_animation(projectile, delta_t);
         }
         current = current->next;
     }

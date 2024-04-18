@@ -8,20 +8,30 @@ void update_projectile_laser(GameData* game, Entity* projectile_laser, float del
     }
 
     bool* is_exploding = get(projectile_laser->objects, "is_exploding", strcmp);
+
+    if (*is_exploding) {
+        
+        printf("%d\n", ((int*)(projectile_laser->sprite->currentFrame->value))[0]);
+    }
+
     if (is_exploding != NULL) {
-        if (*is_exploding) {
+        if (*is_exploding && ((int*)(projectile_laser->sprite->currentFrame->value))[0]  == 3) {
+            printf("je dead ca\n");
             projectile_laser->current_hp = -1;
+            
             return;
         }
     }
 
-    follow_player(game, projectile_laser, 200, 200);
+    // follow_player(game, projectile_laser, 200, 200);
     bool has_collided = update_entity_movement(game, projectile_laser, delta_t, false);
 
 
     if (has_collided) {
         if (is_exploding != NULL) {
             *is_exploding = true;
+            projectile_laser->x_velocity = 0;
+            projectile_laser->y_velocity = 0;
             return;
         }
     }
@@ -39,6 +49,8 @@ void update_projectile_laser(GameData* game, Entity* projectile_laser, float del
                 if (is_exploding != NULL) {
                     printf("exploding\n");
                     *is_exploding = true;
+                    projectile_laser->x_velocity = 0;
+                    projectile_laser->y_velocity = 0;
                     return;
                 }
                 break;
@@ -57,7 +69,8 @@ void update_animation_projectile_laser(Entity* e, float delta) {
     bool* is_exploding = get(e->objects, "is_exploding", strcmp);
     if (is_exploding != NULL) {
         if (*is_exploding) {
-            e->etat = 2;
+            printf("exploding\n");
+            e->etat = 1;
         }
     }
 
@@ -68,18 +81,19 @@ Entity* init_projectile_laser(GameData* game, int x, int y) {
     printf("initiating projectile_laser\n");
     int* nbs = malloc(2*sizeof(int));
     nbs[0] = 1;
-    nbs[1] = 1;
+    nbs[1] = 4;
     int* lock = malloc(2*sizeof(int));
     lock[0] = 0;
-    lock[0] = 1;
+    lock[1] = 1;
     
     SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_projectile_laser"); // to change
 
-    Entity* projectile_laser = init_entity(x, y, 1, spritesheet, 5, 5, nbs, lock, update_projectile_laser, event_handler_projectile_laser, update_animation_projectile_laser, 9999, true);
+    Entity* projectile_laser = init_entity(x, y, 14, spritesheet, 5, 5, nbs, lock, update_projectile_laser, event_handler_projectile_laser, update_animation_projectile_laser, 9999, true);
 
     bool* is_exploding = malloc(sizeof(bool));
     *is_exploding = false;
     insert(projectile_laser->objects, "is_exploding", is_exploding);
+
 
     return projectile_laser;
 }
