@@ -1,11 +1,13 @@
 #include "scene01.h"
 
 void update_scene01(GameData* game) {
+    (void)game;
     // update the scene
     return;
 }
 
 void event_handler_scene01(GameData* game) {
+    (void)game;
     // handle the events
     return;
 }

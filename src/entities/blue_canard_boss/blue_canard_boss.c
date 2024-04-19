@@ -18,10 +18,14 @@ void update_blue_canard_boss(GameData* game, Entity* blue_canard_boss, float del
     return;
 }
 void event_handler_blue_canard_boss(Entity* blue_canard_boss, GameData* game) {
+    (void)blue_canard_boss;
+    (void)game;
     return;
 }
 
 void update_animation_blue_canard_boss(Entity* e, float delta) {
+    (void)e;
+    (void)delta;
     return;
 }
 

@@ -2,7 +2,7 @@
 #include "include/game.h"
 
 void init_scene_with_json(GameData* game, json_t *root, Scene* scene) {
-    const char *name = json_string_value(json_object_get(root, "name"));
+    // const char *name = json_string_value(json_object_get(root, "name"));
     const char *background = json_string_value(json_object_get(root, "background"));
 
     strcpy(scene->background, background);
@@ -164,15 +164,19 @@ void render_scene(GameData* game, float delta) {
 
 void free_scene_(Scene* scene){
     // Destroy the hashtable "object"
-    Entry* entry = scene->objects->table;
-    while (entry != NULL) {
-        Entry* next = (Entry*)(entry->next);
-        free(entry->key);
-        ((ObjectEntry*) (entry->value))->destroy_value (entry->value);
-        free(entry);
-        entry = next;
-    }
-    free(scene->objects);
+    // Entry** entry = (Entry**)(scene->objects->table);
+    // il faudra faire un for sur la longueur du Entry**, puis pour chacun des entry[i] faire Entry* current = entry[i] et itérer dessus
+    
+    // while (entry != NULL) {
+    //     Entry* next = (Entry*)(entry->next);
+    //     free(entry->key);
+    //     ((ObjectEntry*) (entry->value))->destroy_value (entry->value);
+    //     free(entry);
+    //     entry = next;
+    // }
+    // free(scene->objects);
+    (void)scene;
+    return;
 }
 
 void free_scene(Scene* scene) {

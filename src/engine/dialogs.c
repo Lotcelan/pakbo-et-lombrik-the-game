@@ -144,6 +144,7 @@ void dialog_event_handler(GameData* game) {
 }
 
 void update_dialog(GameData* game) {
+    (void)game;
     return;
 }
 

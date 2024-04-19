@@ -2,6 +2,7 @@
 
 void update_spawn_level(GameData* game) {
     // update the scene
+    (void)game;
     return;
 }
 

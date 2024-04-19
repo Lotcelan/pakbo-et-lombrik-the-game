@@ -15,10 +15,14 @@ void update_canard01(GameData* game, Entity* canard01, float delta_t) {
     return;
 }
 void event_handler_canard01(Entity* canard01, GameData* game) {
+    (void)canard01;
+    (void)game;
     return;
 }
 
 void update_animation_canard01(Entity* e, float delta) {
+    (void)e;
+    (void)delta;
     return;
 }
 

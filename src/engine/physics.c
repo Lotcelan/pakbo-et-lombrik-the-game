@@ -7,15 +7,15 @@ bool update_entity_movement(GameData* game, Entity* e, float delta_t, bool gravi
         update_gravity(game, e, delta_t);
     }
     if (game->current_scene == NULL) {
-        return;
-    }
-
-    if (e->x_velocity == 0 && e->y_velocity == 0 || e->x_position == -1 && e->y_position == -1) {
         return false;
     }
 
-    int prev_x = e->x_position;
-    int prev_y = e->y_position;
+    if ((e->x_velocity == 0 && e->y_velocity == 0) || (e->x_position == -1 && e->y_position == -1)) {
+        return false;
+    }
+
+    // int prev_x = e->x_position;
+    // int prev_y = e->y_position;
     
     // todo : normalisation de la vitesse en diagonale avec un /sqrt(2)
     // int delta_x = floor(delta_t * e->x_velocity / 1000); // delta_t en ms
@@ -61,7 +61,6 @@ bool update_entity_movement(GameData* game, Entity* e, float delta_t, bool gravi
     delta_y = delta_t * e->y_velocity / 1000; // delta_t en ms
     int sign_x = delta_x > 0 ? 1 : -1;
     int sign_y = delta_y > 0 ? 1 : -1;
-    int temp_prev = 0;
     delta_x = abs(delta_x);
     delta_y = abs(delta_y);
     bool has_collided = false;
@@ -95,8 +94,7 @@ bool update_entity_movement(GameData* game, Entity* e, float delta_t, bool gravi
     result = result || has_collided;
     has_collided = false;
     is_colliding = false;
-    prev_x = e->x_position;
-    prev_y = e->y_position; // useless
+
     while (delta_y >= 0) {
         // e->y_position = e->y_position + sign_y * delta_y;
         // printf("Je pourrai être en Y : %d, delta = %d\n", e->y_position, delta_y);

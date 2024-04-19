@@ -244,10 +244,10 @@ bool is_entity_colliding_with_structures(Entity* e, List* structures) {
 		    continue;
 		}
 
-		bool left_allow = (allow_pass_through & 0b1000) >> 3 == 1;
-		bool up_allow = (allow_pass_through & 0b0100) >> 2 == 1;
-		bool right_allow = (allow_pass_through & 0b0010) >> 1 == 1;
-		bool down_allow = (allow_pass_through & 0b0001) == 1;
+		bool left_allow = (allow_pass_through & 0x8) >> 3 == 1;
+		bool up_allow = (allow_pass_through & 0x4) >> 2 == 1;
+		bool right_allow = (allow_pass_through & 0x2) >> 1 == 1;
+		bool down_allow = (allow_pass_through & 0x1) == 1;
 
 		// printf("Allow pass through : %d, %d, %d, %d, %d\n", allow_pass_through, allow_pass_through & 0b1000, allow_pass_through & 0b0100, allow_pass_through & 0b0010, allow_pass_through & 0b0001);
 

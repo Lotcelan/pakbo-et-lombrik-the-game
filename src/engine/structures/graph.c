@@ -65,10 +65,12 @@ void maFonction_2(void){
 }
 
 void maFonction_3(void){
-    printf("");
+    // printf("");
+    return;
 }
 
 void printGraph(Graph* graph) {
+    (void)graph;
     // Dl_info info;
     // for (int v = 0; v < graph->numVertices; v++) {
     //     Node* temp = graph->adjLists[v];

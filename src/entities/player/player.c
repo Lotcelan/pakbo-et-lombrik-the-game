@@ -32,7 +32,7 @@ void update_player(GameData* game, Entity* player, float delta_t) {
     update_entity_movement(game, player, delta_t, true);
 }
 void event_handler_player(Entity* player, GameData* game) {
-    SDL_Event event = game->event;
+    SDL_Event event = game->event; // potentiellement avec switch
     // bool* is_going_down = get(player->objects, "is_going_down", strcmp);
     // bool* is_going_up = get(player->objects, "is_going_up", strcmp);
     // bool* is_going_left = get(player->objects, "is_going_left", strcmp);

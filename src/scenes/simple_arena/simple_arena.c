@@ -1,7 +1,7 @@
 #include "simple_arena.h"
 
 void update_simple_arena(GameData* game) {
-
+    (void)game;
     return;
 }
 
