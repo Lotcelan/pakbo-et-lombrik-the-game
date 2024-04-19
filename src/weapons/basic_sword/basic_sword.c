@@ -59,7 +59,7 @@ void event_handler_basic_sword(GameData* game, Weapon* weapon, Entity* e) {
                 if (is_attacking != NULL) {
                     if (!(*is_attacking)) {
                         *is_attacking = true;
-                        *attack_duration = 250;
+                        *attack_duration = BASIC_SWORD_ATTACK_DURATION;
                     }
                 }
             }
@@ -82,21 +82,40 @@ void render_basic_sword(GameData* game, Entity* e, float delta_t) {
         // printf("Attacking\n");
         if (*is_attacking) {
             SDL_Rect rect;
-            if (e->sprite->orientation == SDL_FLIP_NONE) {
-                rect = (SDL_Rect){.x = e->x_position + 16, .y = e->y_position + 8, .w=24, .h=4};
-            } else  {
-                rect = (SDL_Rect){.x=e->x_position-24,.y= e->y_position + 8, .w=24, .h=4};
+            int* attack_duration = get(e->weapon->objects, "attack_duration", strcmp);
+
+            if (attack_duration == NULL) {
+                return;
             }
 
-            if (!(*has_hitbox_changed)) {
-                Box* sword_box = init_rect_box(rect.x, rect.y, rect.w, rect.h);
-                Box* e_box = init_rect_box(e->x_position, e->y_position, e->collision_box->zone.w, e->collision_box->zone.h);
-                enlarge_entity_hitbox(e, e_box);
-                enlarge_entity_hitbox(e, sword_box);
-                *has_hitbox_changed = true;
-                free_box(sword_box);
-                free_box(e_box);
+            int shockwave_length = 20; // en attack_duration = BASIC_SWORD_ATTACK_DURATION le décalage est de 0, en attack_duration = 0, le décalge est de shockwave_length
+
+            if (e->sprite->orientation == SDL_FLIP_NONE) {
+                rect = (SDL_Rect){.x = e->x_position + 16, .y = e->y_position + 8, .w=1, .h=8};
+                rect.x += floor((float)shockwave_length * (1.0 - ((float)(*attack_duration) / (float)BASIC_SWORD_ATTACK_DURATION)));
+            } else  {
+                rect = (SDL_Rect){.x=e->x_position-1,.y= e->y_position + 8, .w=1, .h=8};
+                rect.x -= floor((float)shockwave_length * (1.0 - ((float)(*attack_duration) / (float)BASIC_SWORD_ATTACK_DURATION)));
             }
+
+
+            // if (e->sprite->orientation == SDL_FLIP_NONE) {
+            //     rect = (SDL_Rect){.x = e->x_position + 16, .y = e->y_position + 8, .w=24, .h=4};
+            // } else  {
+            //     rect = (SDL_Rect){.x=e->x_position-24,.y= e->y_position + 8, .w=24, .h=4};
+            // }
+
+
+            // if (!(*has_hitbox_changed)) {
+            e->hit_box = NULL;
+            Box* sword_box = init_rect_box(rect.x, rect.y, rect.w, rect.h);
+            Box* e_box = init_rect_box(e->x_position, e->y_position, e->collision_box->zone.w, e->collision_box->zone.h);
+            enlarge_entity_hitbox(e, e_box);
+            enlarge_entity_hitbox(e, sword_box);
+            *has_hitbox_changed = true;
+            free_box(sword_box);
+            free_box(e_box);
+            // }
             
             SDL_SetRenderDrawColor(game->renderer, 255, 255, 255, 255);
             SDL_RenderFillRect(game->renderer, &rect);
