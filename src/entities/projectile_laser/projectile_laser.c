@@ -62,10 +62,13 @@ void update_projectile_laser(GameData* game, Entity* projectile_laser, float del
     return;
 }
 void event_handler_projectile_laser(Entity* projectile_laser, GameData* game) {
+    (void)projectile_laser;
+    (void)game;
     return;
 }
 
 void update_animation_projectile_laser(Entity* e, float delta) {
+    (void)delta;
     bool* is_exploding = get(e->objects, "is_exploding", strcmp);
     if (is_exploding != NULL) {
         if (*is_exploding) {

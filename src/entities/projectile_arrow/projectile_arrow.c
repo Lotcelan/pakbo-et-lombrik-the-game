@@ -30,10 +30,14 @@ void update_projectile_arrow(GameData* game, Entity* projectile_arrow, float del
     return;
 }
 void event_handler_projectile_arrow(Entity* projectile_arrow, GameData* game) {
+    (void)projectile_arrow;
+    (void)game;
     return;
 }
 
 void update_animation_projectile_arrow(Entity* e, float delta) {
+    (void)e;
+    (void)delta;
     return;
 }
 

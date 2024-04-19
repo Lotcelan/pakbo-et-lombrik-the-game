@@ -25,9 +25,9 @@ void update_blue_duck_boss_laser(GameData* game, Entity* e, float delta_t) {
             }
             Entity* projectile = (*projectile_func)(game, e->x_position + 16, e->y_position + 16);
             projectile->parent = e;
-            int sign = 1;
+            // int sign = 1;
             if (e->sprite->orientation == SDL_FLIP_HORIZONTAL) {
-                sign = -1;
+                // sign = -1;
                 projectile->sprite->orientation = SDL_FLIP_HORIZONTAL;
             }
             int player_x = game->player->x_position;
@@ -101,7 +101,9 @@ void update_blue_duck_boss_laser(GameData* game, Entity* e, float delta_t) {
 }
 
 void event_handler_blue_duck_boss_laser(GameData* game, Weapon* weapon, Entity* e) {
-
+    (void)game;
+    (void)e;
+    (void)weapon;
 }
 
 void render_blue_duck_boss_laser(GameData* game, Entity* e, float delta_t) {
@@ -126,6 +128,7 @@ void render_blue_duck_boss_laser(GameData* game, Entity* e, float delta_t) {
 }
 
 Weapon* init_blue_duck_boss_laser(GameData* game) {
+    (void)game;
     Weapon* weapon = (Weapon*)malloc(sizeof(Weapon));
     weapon->name = "blue_duck_boss_laser";
     weapon->damage_value = 2;

@@ -89,7 +89,8 @@ void update_arbalete(GameData* game, Entity* e, float delta_t) {
 
 void event_handler_arbalete(GameData* game, Weapon* weapon, Entity* e) {
     // If "x" pressed, attack
-    int* attack_duration = get(weapon->objects, "attack_duration", strcmp);
+    (void)e;
+    // int* attack_duration = get(weapon->objects, "attack_duration", strcmp);
     bool* is_shooting = get(weapon->objects, "is_shooting", strcmp);
     switch (game->event.type) {
         case SDL_KEYDOWN:
@@ -127,6 +128,7 @@ void render_arbalete(GameData* game, Entity* e, float delta_t) {
 }
 
 Weapon* init_arbalete(GameData* game) {
+    (void)game;
     Weapon* weapon = (Weapon*)malloc(sizeof(Weapon));
     weapon->name = "arbalete";
     weapon->damage_value = 1;

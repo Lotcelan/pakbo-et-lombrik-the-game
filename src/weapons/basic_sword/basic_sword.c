@@ -45,6 +45,7 @@ void update_basic_dword(GameData* game, Entity* e, float delta_t) {
 
 void event_handler_basic_sword(GameData* game, Weapon* weapon, Entity* e) {
     // If "x" pressed, attack
+    (void)e;
     int* attack_duration = get(weapon->objects, "attack_duration", strcmp);
     bool* is_attacking = get(weapon->objects, "is_attacking", strcmp);
     if (is_attacking == NULL) {
@@ -67,6 +68,7 @@ void event_handler_basic_sword(GameData* game, Weapon* weapon, Entity* e) {
 }
 
 void render_basic_sword(GameData* game, Entity* e, float delta_t) {
+    (void)delta_t;
     // Do nothing
     // for now just draw a rectangle
     if (e == NULL) {
@@ -112,6 +114,7 @@ void render_basic_sword(GameData* game, Entity* e, float delta_t) {
 }
 
 Weapon* init_basic_sword(GameData* game) {
+    (void)game;
     Weapon* weapon = (Weapon*)malloc(sizeof(Weapon));
     weapon->name = "basic_sword";
     weapon->damage_value = 2;

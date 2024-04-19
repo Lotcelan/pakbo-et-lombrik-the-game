@@ -32,7 +32,7 @@ void update_player(GameData* game, Entity* player, float delta_t) {
     update_entity_movement(game, player, delta_t, true);
 }
 void event_handler_player(Entity* player, GameData* game) {
-    SDL_Event event = game->event; // potentiellement avec switch
+    // SDL_Event event = game->event; // potentiellement avec switch
     // bool* is_going_down = get(player->objects, "is_going_down", strcmp);
     // bool* is_going_up = get(player->objects, "is_going_up", strcmp);
     // bool* is_going_left = get(player->objects, "is_going_left", strcmp);
@@ -73,6 +73,7 @@ void event_handler_player(Entity* player, GameData* game) {
 }
 
 void update_animation_player(Entity* e, float delta) {
+    (void)delta;
     if (strcmp(e->weapon->name, "basic_sword") == 0) {
         bool* is_attacking = get(e->weapon->objects, "is_attacking", strcmp);
         int* attack_duration = get(e->weapon->objects, "attack_duration", strcmp);
@@ -117,7 +118,7 @@ Entity* init_player(GameData* game, int x, int y) {
 
     Entity* player = init_entity(x, y, 14, spritesheet, 16, 16, nbs, lock, update_player, event_handler_player, update_animation_player, 6, false);
 
-    WeaponInitFunc* arbalete = get(game->weapons, "arbalete", strcmp);
+    // WeaponInitFunc* arbalete = get(game->weapons, "arbalete", strcmp);
     WeaponInitFunc* basic_sword = get(game->weapons, "basic_sword", strcmp);
     if (basic_sword == NULL) {
         printf("Error: weapon not found\n");
