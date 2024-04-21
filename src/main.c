@@ -7,12 +7,14 @@
 #include "entities/player/player.h"
 #include "entities/projectile_arrow/projectile_arrow.h"
 #include "entities/projectile_laser/projectile_laser.h"
+#include "entities/medic_hub/medic_hub.h"
 #include "resources.h"
 #include "scenes/etagere_level/etagere_level.h"
 #include "scenes/main_menu/main_menu.h"
 #include "scenes/scene01/scene01.h"
 #include "scenes/spawn_level/spawn_level.h"
 #include "scenes/simple_arena/simple_arena.h"
+#include "scenes/hub_level/hub_level.h"
 #include "weapons/arbalete/arbalete.h"
 #include "weapons/basic_sword/basic_sword.h"
 #include "weapons/blue_duck_boss_laser/blue_duck_boss_laser.h"
@@ -62,6 +64,10 @@ int main(int argc, char* argv[]) {
     EntityInitFunc* i_bcb = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
     *i_bcb = init_blue_canard_boss;
     insert(game->entities, "blue_canard_boss", i_bcb);
+
+	EntityInitFunc* i_medic_hub = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
+	*i_medic_hub = init_medic_hub;
+	insert(game->entities, "medic_hub", i_medic_hub);
 	// printKeys(game->entities);
 
 	// potentiellement systeme de sauvegarde plus tard (donc init avec valeurs différentes)
@@ -74,12 +80,14 @@ int main(int argc, char* argv[]) {
 	Scene* spawn_level = init_spawn_level(game);
 	Scene* etagere_level = init_etagere_level(game);
     Scene* simple_arena = init_simple_arena(game);
+	Scene* hub_level = init_hub_level(game);
 
 	insert(game->scenes, "scene01", scene01);
 	insert(game->scenes, "main_menu", main_menu);
 	insert(game->scenes, "spawn_level", spawn_level);
 	insert(game->scenes, "etagere_level", etagere_level);
     insert(game->scenes, "simple_arena", simple_arena);
+	insert(game->scenes, "hub_level", hub_level);
 
 	change_scene(game, "main_menu");
 

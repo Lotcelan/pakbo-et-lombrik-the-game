@@ -53,7 +53,7 @@ void init_scene_with_json(GameData* game, json_t *root, Scene* scene) {
         if (func != NULL) {
             
         
-            Entity* e = (*func)(game, x, y); // initialisation de l'entité
+            Entity* e = (*func)(game, x * CELL_WIDTH, y* CELL_HEIGHT); // initialisation de l'entité
 
             scene->entities = append_first(e, scene->entities);
             // printf("Entity %zu: x=%d, y=%d, respawn_delay=%d, entity=%s\n",

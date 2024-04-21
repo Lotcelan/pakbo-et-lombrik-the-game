@@ -24,5 +24,24 @@
                 ]
             }
         ]
+    },
+    "medic_hub_test" : {
+        "message" : "Bienvenue Lom Bric",
+        "font_name" : "suifak_small",
+        "options" : [ "Bonjour", "JU-JU-JUUUUUL" ],
+        "branches" : [
+            {
+                "message" : "Bisous !",
+                "font_name" : "suifak_small",
+                "options" : [],
+                "branches" : []
+            }, 
+            {
+                "message" : "AU DD",
+                "font_name" : "suifak_small",
+                "options" : [],
+                "branches" : []
+            }
+        ]
     }
 }

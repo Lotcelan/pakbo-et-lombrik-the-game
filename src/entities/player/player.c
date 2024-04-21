@@ -29,6 +29,12 @@ void update_player(GameData* game, Entity* player, float delta_t) {
     // }
     // return;
 
+    if (player->current_hp <= 0) {
+        // Sacha ce sera ici que tu feras un change_scene(game, "game_over");, là je fais direct le chgt vers le hub
+        change_scene(game, "hub_level");
+        return;
+    }
+
     update_entity_movement(game, player, delta_t, true);
 }
 void event_handler_player(Entity* player, GameData* game) {
