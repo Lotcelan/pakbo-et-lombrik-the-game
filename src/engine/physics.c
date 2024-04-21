@@ -160,12 +160,12 @@ void follow_player(GameData* game, Entity* e, int x_speed, int y_speed) {
     } else {
         e->x_velocity = 0;
     }
-    if (player_y > e_y) {
-        e->y_velocity = y_speed;
-    } else if (player_y < e_y) {
-        e->y_velocity = -y_speed;
-    } else {
-        e->y_velocity = 0;
-    }
+    // if (player_y > e_y) {
+    //     e->y_velocity = y_speed;
+    // } else if (player_y < e_y) {
+    //     e->y_velocity = -y_speed;
+    // } else {
+    //     e->y_velocity = 0;
+    // }
 
 }
