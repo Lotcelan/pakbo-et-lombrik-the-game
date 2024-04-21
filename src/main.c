@@ -74,6 +74,7 @@ int main(int argc, char* argv[]) {
 	Scene* spawn_level = init_spawn_level(game);
 	Scene* etagere_level = init_etagere_level(game);
     Scene* simple_arena = init_simple_arena(game);
+	Scene* game_over = init_scene_game_over(game);
 
 	insert(game->scenes, "scene01", scene01);
 	insert(game->scenes, "main_menu", main_menu);
@@ -120,6 +121,8 @@ int main(int argc, char* argv[]) {
 		SDL_RenderClear(game->renderer);
 
 		if (game->current_dialog == NULL) {
+			if 
+			
 			// event_handler(game);
 			while (SDL_PollEvent(&(game->event)) != 0) {
 				if ((game->event).type == SDL_QUIT) {
