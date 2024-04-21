@@ -3,6 +3,7 @@
 #include "engine/include/hud.h"
 #include "engine/include/scenes.h"
 #include "entities/canard01/canard01.h"
+#include "entities/duck_orange/duck_orange.h"
 #include "entities/blue_canard_boss/blue_canard_boss.h"
 #include "entities/player/player.h"
 #include "entities/projectile_arrow/projectile_arrow.h"
@@ -68,7 +69,10 @@ int main(int argc, char* argv[]) {
 	EntityInitFunc* i_medic_hub = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
 	*i_medic_hub = init_medic_hub;
 	insert(game->entities, "medic_hub", i_medic_hub);
-	// printKeys(game->entities);
+	
+	EntityInitFunc* i_duck_orange = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
+	*i_duck_orange = init_duck_orange;
+	insert(game->entities, "duck_orange", i_duck_orange);
 
 	// potentiellement systeme de sauvegarde plus tard (donc init avec valeurs différentes)
 	Entity* player = init_player(game, -1, -1);	 // -1 -1 convention pour dire que l'on ne l'affiche pas
