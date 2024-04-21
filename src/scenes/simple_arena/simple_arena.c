@@ -25,6 +25,13 @@ void event_handler_simple_arena(GameData* game) {
 void populate_simple_arena(GameData* game) {
     push_background_structures(game);
     change_entity_coordinates(game->player, 50, 10);
+
+    for (int i = 0; i < 500; i++) {
+        EntityInitFunc* duck = get(game->entities, "duck_green", strcmp);
+        Entity* e = (*duck)(game, (rand() %  16) * CELL_WIDTH, (rand() % 9) * CELL_HEIGHT);
+        game->current_scene->entities = append_first(e, game->current_scene->entities);
+    }
+    
 }
 
 // void test(Entity* e, float delta){

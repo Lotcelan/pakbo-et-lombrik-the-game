@@ -68,6 +68,9 @@ void render_wrap_text(GameData* game, void* key, int wrap_length) {
 
 void render_entity(GameData* game, Entity* e, float delta) {
     // je sais ca peut paraitre bizarre de le faire ici, mais finalement ca fait sens
+    if (e == game->player) {
+        printf("Delay : %d\n", e->damage_delay);
+    }
     if (e->damage_delay > 0){
         e->damage_delay -= delta;
     }

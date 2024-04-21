@@ -53,6 +53,7 @@ void render_scene(GameData* game, float delta);
 void free_scene(Scene* scene);
 void change_scene(GameData* game, char* next);
 SDL_Texture* load_texture(SDL_Renderer* renderer, char* path);
+void destroy_entities_list(List* entities);
 
 void init_scene_with_json(GameData* game, json_t *root, Scene* scene);
 
