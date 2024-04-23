@@ -96,12 +96,12 @@ int main(int argc, char* argv[]) {
     Scene* simple_arena = init_simple_arena(game);
 	Scene* hub_level = init_hub_level(game);
 
-	insert(game->scenes, "scene01", scene01, free_scene);
-	insert(game->scenes, "main_menu", main_menu, free_scene);
-	insert(game->scenes, "spawn_level", spawn_level, free_scene);
-	insert(game->scenes, "etagere_level", etagere_level, free_scene);
-    insert(game->scenes, "simple_arena", simple_arena, free_scene);
-	insert(game->scenes, "hub_level", hub_level, free_scene);
+	insert(game->scenes, "scene01", scene01, free_scene_void);
+	insert(game->scenes, "main_menu", main_menu, free_scene_void);
+	insert(game->scenes, "spawn_level", spawn_level, free_scene_void);
+	insert(game->scenes, "etagere_level", etagere_level, free_scene_void);
+    insert(game->scenes, "simple_arena", simple_arena, free_scene_void);
+	insert(game->scenes, "hub_level", hub_level, free_scene_void);
 
 	change_scene(game, "main_menu");
 
@@ -111,14 +111,14 @@ int main(int argc, char* argv[]) {
 		return 0;
 	}
 
-	insert(game->fonts, "suifak", font, TTF_CloseFont);
+	insert(game->fonts, "suifak", font, destroy_font);
 
 	font = TTF_OpenFont("../src/assets/Suifak.otf", 12);
 	if (font == NULL) {
 		printf("TTF_OpenFont: %s\n", TTF_GetError());
 		return 0;
 	}
-	insert(game->fonts, "suifak_small", font, TTF_CloseFont);
+	insert(game->fonts, "suifak_small", font, destroy_font);
 
 	/* Main loop :
 		- Getting events

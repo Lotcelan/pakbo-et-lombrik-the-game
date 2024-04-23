@@ -180,6 +180,7 @@ int compare_entities(void* e1, void* e2) {
 	return (int)(ent1 == ent2);
 }
 
-void free_entity_list(List* lst) {
-	list_delete(lst, free_entity);
+void free_entity_list(void* lst) {
+	List* l = (List*)lst;
+	list_delete(l, free_entity);
 }

@@ -370,12 +370,17 @@ void push_background_structures(GameData* game) {
 
 }
 
-void free_mem_texture(MemTexture* t) {
-    if (t == NULL) {
+void free_mem_texture(void* t) {
+    MemTexture* t2 = (MemTexture*)t;
+    if (t2 == NULL) {
         return;
     }
-    if (t->data != NULL) {
-        free(t->data);
+    if (t2->data != NULL) {
+        free(t2->data);
     }
-    free(t);
+    free(t2);
+}
+
+void destroy_font(void* f) {
+    TTF_CloseFont((TTF_Font*)f);
 }

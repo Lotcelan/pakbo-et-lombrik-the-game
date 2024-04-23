@@ -96,6 +96,6 @@ void damage_entity(GameData* game, Entity* e, int damage, int delay, int stagger
 int compare_entities(void* e1, void* e2);
 void clear_entities(GameData* game);
 void change_entity_coordinates(Entity* e, int x, int y);
-void free_entity_list(List* lst);
+void free_entity_list(void* lst);
 
 #endif

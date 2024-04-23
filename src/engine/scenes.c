@@ -189,7 +189,9 @@ void free_scene(Scene* scene) {
     free(scene);
 }
 
-
+void free_scene_void(void* scene) {
+    free_scene((Scene*)scene);
+}
 
 
 
