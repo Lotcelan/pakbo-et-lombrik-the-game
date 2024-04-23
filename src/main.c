@@ -13,6 +13,7 @@
 #include "scenes/scene01/scene01.h"
 #include "scenes/spawn_level/spawn_level.h"
 #include "scenes/simple_arena/simple_arena.h"
+#include "scenes/game_over/game_over.h"
 #include "weapons/arbalete/arbalete.h"
 #include "weapons/basic_sword/basic_sword.h"
 #include "weapons/blue_duck_boss_laser/blue_duck_boss_laser.h"
@@ -74,7 +75,7 @@ int main(int argc, char* argv[]) {
 	Scene* spawn_level = init_spawn_level(game);
 	Scene* etagere_level = init_etagere_level(game);
     Scene* simple_arena = init_simple_arena(game);
-	Scene* game_over = init_scene_game_over(game);
+	Scene* game_over = init_game_over(game);
 
 	insert(game->scenes, "scene01", scene01);
 	insert(game->scenes, "main_menu", main_menu);
@@ -121,8 +122,6 @@ int main(int argc, char* argv[]) {
 		SDL_RenderClear(game->renderer);
 
 		if (game->current_dialog == NULL) {
-			if 
-			
 			// event_handler(game);
 			while (SDL_PollEvent(&(game->event)) != 0) {
 				if ((game->event).type == SDL_QUIT) {
