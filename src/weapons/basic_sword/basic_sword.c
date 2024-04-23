@@ -146,15 +146,15 @@ Weapon* init_basic_sword(GameData* game) {
 
     bool* is_attacking = (bool*)malloc(sizeof(bool));
     *is_attacking = false;
-    insert(weapon->objects, "is_attacking", is_attacking);
+    insert(weapon->objects, "is_attacking", is_attacking, free);
 
     int* attack_duration = (int*)malloc(sizeof(int));
     *attack_duration = -1;
-    insert(weapon->objects, "attack_duration", attack_duration);
+    insert(weapon->objects, "attack_duration", attack_duration, free);
 
     bool* has_hitbox_changed = (bool*)malloc(sizeof(bool));
     *has_hitbox_changed = false;
-    insert(weapon->objects, "has_hitbox_changed", has_hitbox_changed);
+    insert(weapon->objects, "has_hitbox_changed", has_hitbox_changed, free);
 
     return weapon;
 }

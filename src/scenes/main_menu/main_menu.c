@@ -113,14 +113,14 @@ void populate(GameData* game) {
     *selectedMenuItem = -1;
     Scene* scene = game->current_scene;
 
-    insert(scene->objects, "selectedMenuItem", selectedMenuItem);
+    insert(scene->objects, "selectedMenuItem", selectedMenuItem, free);
     
     SDL_Rect* menuItemsRect = (SDL_Rect*)malloc(sizeof(SDL_Rect) * NUM_MENU_ITEMS);
     menuItemsRect[0] = (SDL_Rect){ .x = 50, .y = 50, .w = 100, .h = 50 };
     menuItemsRect[1] = (SDL_Rect){ .x = 50, .y = 110, .w = 100, .h = 50 };
     menuItemsRect[2] = (SDL_Rect){ .x = 50, .y = 170, .w = 100, .h = 50 };
 
-    insert(scene->objects, "menuItemsRect", menuItemsRect);
+    insert(scene->objects, "menuItemsRect", menuItemsRect, free);
 
     // Text** menuItemsText = (Text**)malloc(sizeof(Text*) * NUM_MENU_ITEMS);
     // if (menuItemsText == NULL) {

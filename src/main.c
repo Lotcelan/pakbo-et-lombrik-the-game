@@ -41,48 +41,48 @@ int main(int argc, char* argv[]) {
 	// Init weapons MUST DO IT BEFORE ENTITIES
 	WeaponInitFunc* i_w = (WeaponInitFunc*)malloc(sizeof(WeaponInitFunc));
 	*i_w = init_basic_sword;
-	insert(game->weapons, "basic_sword", i_w);
+	insert(game->weapons, "basic_sword", i_w, free);
 
 	WeaponInitFunc* i_a = (WeaponInitFunc*)malloc(sizeof(WeaponInitFunc));
 	*i_a = init_arbalete;
-	insert(game->weapons, "arbalete", i_a);
+	insert(game->weapons, "arbalete", i_a, free);
 
     WeaponInitFunc* i_bdbl = (WeaponInitFunc*)malloc(sizeof(WeaponInitFunc));
     *i_bdbl = init_blue_duck_boss_laser;
-    insert(game->weapons, "blue_duck_boss_laser", i_bdbl);
+    insert(game->weapons, "blue_duck_boss_laser", i_bdbl, free);
 
 	// Init entities MUST DO IT BEFORE INIT SCENES
 	EntityInitFunc* i_p = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
 	*i_p = init_canard01;
-	insert(game->entities, "canard01", i_p);
+	insert(game->entities, "canard01", i_p, free);
 
 	EntityInitFunc* i_arrow = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
 	*i_arrow = init_projectile_arrow;
-	insert(game->entities, "projectile_arrow", i_arrow);
+	insert(game->entities, "projectile_arrow", i_arrow, free);
 
     EntityInitFunc* i_laser = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
 	*i_laser = init_projectile_laser;
-	insert(game->entities, "projectile_laser", i_laser);
+	insert(game->entities, "projectile_laser", i_laser, free);
 
     EntityInitFunc* i_bcb = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
     *i_bcb = init_blue_canard_boss;
-    insert(game->entities, "blue_canard_boss", i_bcb);
+    insert(game->entities, "blue_canard_boss", i_bcb, free);
 
 	EntityInitFunc* i_medic_hub = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
 	*i_medic_hub = init_medic_hub;
-	insert(game->entities, "medic_hub", i_medic_hub);
+	insert(game->entities, "medic_hub", i_medic_hub, free);
 	
 	EntityInitFunc* i_duck_orange = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
 	*i_duck_orange = init_duck_orange;
-	insert(game->entities, "duck_orange", i_duck_orange);
+	insert(game->entities, "duck_orange", i_duck_orange, free);
 
 	EntityInitFunc* i_duck_green = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
 	*i_duck_green = init_duck_green;
-	insert(game->entities, "duck_green", i_duck_green);
+	insert(game->entities, "duck_green", i_duck_green, free);
 
 	EntityInitFunc* i_duck_blue = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
 	*i_duck_blue = init_duck_blue;
-	insert(game->entities, "duck_blue", i_duck_blue);
+	insert(game->entities, "duck_blue", i_duck_blue, free);
 
 	// potentiellement systeme de sauvegarde plus tard (donc init avec valeurs différentes)
 	Entity* player = init_player(game, -1, -1);	 // -1 -1 convention pour dire que l'on ne l'affiche pas
@@ -96,12 +96,12 @@ int main(int argc, char* argv[]) {
     Scene* simple_arena = init_simple_arena(game);
 	Scene* hub_level = init_hub_level(game);
 
-	insert(game->scenes, "scene01", scene01);
-	insert(game->scenes, "main_menu", main_menu);
-	insert(game->scenes, "spawn_level", spawn_level);
-	insert(game->scenes, "etagere_level", etagere_level);
-    insert(game->scenes, "simple_arena", simple_arena);
-	insert(game->scenes, "hub_level", hub_level);
+	insert(game->scenes, "scene01", scene01, free_scene);
+	insert(game->scenes, "main_menu", main_menu, free_scene);
+	insert(game->scenes, "spawn_level", spawn_level, free_scene);
+	insert(game->scenes, "etagere_level", etagere_level, free_scene);
+    insert(game->scenes, "simple_arena", simple_arena, free_scene);
+	insert(game->scenes, "hub_level", hub_level, free_scene);
 
 	change_scene(game, "main_menu");
 
@@ -111,14 +111,14 @@ int main(int argc, char* argv[]) {
 		return 0;
 	}
 
-	insert(game->fonts, "suifak", font);
+	insert(game->fonts, "suifak", font, TTF_CloseFont);
 
 	font = TTF_OpenFont("../src/assets/Suifak.otf", 12);
 	if (font == NULL) {
 		printf("TTF_OpenFont: %s\n", TTF_GetError());
 		return 0;
 	}
-	insert(game->fonts, "suifak_small", font);
+	insert(game->fonts, "suifak_small", font, TTF_CloseFont);
 
 	/* Main loop :
 		- Getting events
@@ -135,6 +135,10 @@ int main(int argc, char* argv[]) {
 
 	while (game->state != CLOSING) {
 		// Calculate deltaT and set t0 to the current time
+		if (game->state == CHANGING) {
+			game->state = RUNNING;
+		}
+		
 		deltaT = SDL_GetTicks() - t0;
 		t0 = SDL_GetTicks();
 
@@ -150,11 +154,14 @@ int main(int argc, char* argv[]) {
                 SDL_PumpEvents();
 				if (game->current_scene != NULL) {
 					game->current_scene->event_handler(game);
+					if (game->state == CHANGING) continue;
 
 					if (game->player != NULL) {
 						game->player->event_handler(game->player, game);
+						if (game->state == CHANGING) continue;
 						if (game->player->weapon != NULL) {
 							game->player->weapon->event_handler(game, game->player->weapon, game->player);
+							if (game->state == CHANGING) continue;
 						}
 					}
 					// tout ceci devrait être inutile en théorie (a part pour les PNJ avec lesquels on peut intéragir)
@@ -165,6 +172,7 @@ int main(int argc, char* argv[]) {
 						current = current->next;
 						if (e->weapon != NULL) {
 							e->weapon->event_handler(game, e->weapon, e);
+							if (game->state == CHANGING) continue;
 						}
 					}
 				}
@@ -173,11 +181,12 @@ int main(int argc, char* argv[]) {
 			if (game->current_scene != NULL) {
 				// update_entities(game->current_scene->entities);
 				game->current_scene->update(game);
-
+				if (game->state == CHANGING) continue;
 				if (game->player != NULL) {
 					game->player->update(game, game->player, deltaT);
 					if (game->player->weapon != NULL) {
 						game->player->weapon->update(game, game->player, deltaT);
+						if (game->state == CHANGING) continue;
 					}
 				}
 
@@ -185,14 +194,16 @@ int main(int argc, char* argv[]) {
 				while (current != NULL) {
 					Entity* e = (Entity*)current->value;
 					e->update(game, e, deltaT);
+					if (game->state == CHANGING) continue;
                     if (e->weapon != NULL) {
                         e->weapon->update(game, e, deltaT);
+						if (game->state == CHANGING) continue;
                     }
 					current = current->next;
 				}
 			}
 
-			clear_entities(game);
+			clear_entities(game); // removes <= 0 hp entities
 
 			render_scene(game, deltaT);
 			render_hud(game);

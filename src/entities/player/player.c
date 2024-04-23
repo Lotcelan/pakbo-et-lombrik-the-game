@@ -32,6 +32,7 @@ void update_player(GameData* game, Entity* player, float delta_t) {
     if (player->current_hp <= 0) {
         // Sacha ce sera ici que tu feras un change_scene(game, "game_over");, là je fais direct le chgt vers le hub
         change_scene(game, "hub_level");
+        player->current_hp = player->max_hp;
         return;
     }
 

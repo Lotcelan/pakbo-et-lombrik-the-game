@@ -69,11 +69,11 @@ Entity* init_duck_green(GameData* game, int x, int y) {
 
 	int* duck_damage = malloc(sizeof(int));
 	*duck_damage = 1;
-	insert(duck_green->objects, "damage", duck_damage);
+	insert(duck_green->objects, "damage", duck_damage, free);
 
 	bool* is_attacking = malloc(sizeof(bool));
 	*is_attacking = false;
-	insert(duck_green->objects, "is_attacking", is_attacking);
+	insert(duck_green->objects, "is_attacking", is_attacking, free);
 
 	return duck_green;
 }

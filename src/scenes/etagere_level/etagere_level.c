@@ -91,7 +91,7 @@ Scene* init_etagere_level(GameData* game) {
 
 
 
-    insert(scene->objects, "toolbox_position", toolbox_position);
+    insert(scene->objects, "toolbox_position", toolbox_position, free);
 
     return scene;
 }

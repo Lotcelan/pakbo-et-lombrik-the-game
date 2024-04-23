@@ -78,6 +78,7 @@ void free_structure(void* s);
 void free_text(void* t);
 void free_rectangle(void* r);
 void free_texture(void* t);
+void free_mem_texture(MemTexture* t);
 
 void push_render_stack(GameData* game, void* key, void (*render)(GameData*, void*), void (*destroy)(void*), bool is_temporary);
 void push_render_stack_text(GameData* game, Text* text, bool is_temporary);

@@ -7,7 +7,7 @@ GameData* init_game(int width_amount, int height_amount, int final_width, int fi
 
     GameData* gameData = (GameData*)malloc(sizeof(GameData));
 
-    gameData->state = LOADING;
+    gameData->state = CHANGING;
     SDL_Window* window = SDL_CreateWindow(title,
                                           SDL_WINDOWPOS_CENTERED,
                                           SDL_WINDOWPOS_CENTERED,
@@ -69,8 +69,12 @@ void free_game(GameData* gameData) {
     destroyHashTable(gameData->fonts);
     destroyHashTable(gameData->scenes);
     destroyHashTable(gameData->entities);
+    destroyHashTable(gameData->weapons);
     SDL_DestroyRenderer(gameData->renderer);
     SDL_DestroyWindow(gameData->window);
+    destroy_dialog(gameData->current_dialog);
+    // free(gameData->keyboardState); jsuis con c'est un const
+    free_entity(gameData->player);
     free(gameData);
 }
 

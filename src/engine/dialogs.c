@@ -198,11 +198,11 @@ void render_dialog(GameData* game) {
 
 void destroy_dialog(void* d) {
 
-    Dialog* dialog = (Dialog*)d;
-
-    if (dialog == NULL) {
+    if (d == NULL) {
         return;
     }
+    Dialog* dialog = (Dialog*)d;
+
 
     // Go up to the root
     Dialog* current = dialog;

@@ -28,6 +28,8 @@ SDL_Texture* loadTextureFromMemory(GameData* game, const char* resource) {
 
 void render_texture(GameData* game, void* key) {
 
+    // printf("Rendering texture %s\n", ((Texture*)key)->name);
+
     Texture* texture = (Texture*)key;
     if (texture == NULL) {
         printf("Texture is NULL\n");
@@ -350,6 +352,8 @@ void destroy_render_stack(GameData* game) {
             current = current->next;
             ((RenderEntry*)temp->value)->destroy(((RenderEntry*)temp->value)->key);
         }
+        game->current_scene->render_stack = NULL;
+
     }
     return;
 }
@@ -364,4 +368,14 @@ void push_background_structures(GameData* game) {
         current = current->next;
     }
 
+}
+
+void free_mem_texture(MemTexture* t) {
+    if (t == NULL) {
+        return;
+    }
+    if (t->data != NULL) {
+        free(t->data);
+    }
+    free(t);
 }
