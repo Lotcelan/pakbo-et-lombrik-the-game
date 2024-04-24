@@ -95,7 +95,7 @@ Entity* init_projectile_laser(GameData* game, int x, int y) {
 
     bool* is_exploding = malloc(sizeof(bool));
     *is_exploding = false;
-    insert(projectile_laser->objects, "is_exploding", is_exploding);
+    insert(projectile_laser->objects, "is_exploding", is_exploding, free);
 
 
     return projectile_laser;

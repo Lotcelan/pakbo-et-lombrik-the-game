@@ -40,10 +40,7 @@ void update_blue_duck_boss_laser(GameData* game, Entity* e, float delta_t) {
             projectile->y_velocity = (player_y - e_y) / distance * 100;
             projectile->x_velocity = (player_x - e_x) / distance * 100;
 
-            
-            
-            
-            replace(e->weapon->objects, "projectiles", append_first(projectile, projectiles), strcmp);
+            replace(e->weapon->objects, "projectiles", append_first(projectile, projectiles), free, strcmp);
         } else {
             *attack_duration -= delta_t;
             if (*attack_duration <= 0) {
@@ -90,7 +87,7 @@ void update_blue_duck_boss_laser(GameData* game, Entity* e, float delta_t) {
     while (current != NULL){
         Entity* entity = (Entity*)current->value;
         if (entity->current_hp <= 0){
-            replace(e->weapon->objects, "projectiles", delete_compare(get(e->weapon->objects, "projectiles", strcmp), entity, compare_entities, free_entity), strcmp);
+            replace(e->weapon->objects, "projectiles", delete_compare(get(e->weapon->objects, "projectiles", strcmp), entity, compare_entities, free_entity), free, strcmp);
             current = get(e->weapon->objects, "projectiles", strcmp);
             continue;
         }
@@ -141,14 +138,14 @@ Weapon* init_blue_duck_boss_laser(GameData* game) {
 
     bool* is_shooting = (bool*)malloc(sizeof(bool));
     *is_shooting = false;
-    insert(weapon->objects, "is_shooting", is_shooting);
+    insert(weapon->objects, "is_shooting", is_shooting, free);
 
     int* attack_duration = (int*)malloc(sizeof(int));
     *attack_duration = -1;
-    insert(weapon->objects, "attack_duration", attack_duration);
+    insert(weapon->objects, "attack_duration", attack_duration, free);
 
     List* projectiles = NULL;
-    insert(weapon->objects, "projectiles", projectiles);
+    insert(weapon->objects, "projectiles", projectiles, free_entity_list);
 
     return weapon;
 }

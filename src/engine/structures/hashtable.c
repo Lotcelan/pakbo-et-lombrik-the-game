@@ -17,7 +17,7 @@ void destroyHashTable(HashTable* hashtable) {
         Entry* entry = hashtable->table[i];
         while (entry != NULL) {
             Entry* next = entry->next;
-            free(entry);
+            entry->destroy(entry);
             entry = next;
         }
     }
@@ -39,12 +39,13 @@ unsigned int hash(const char* key, int size) {
 }
 
 
-void insert(HashTable* hashtable, void* key, void* value) {
+void insert(HashTable* hashtable, void* key, void* value, void (*destroy)(void*)) {
     unsigned int index = hash(key, hashtable->size);
     Entry* entry = (Entry*)malloc(sizeof(Entry));
     entry->key = key;
     entry->value = value;
     entry->next = hashtable->table[index];
+    entry->destroy = destroy;
     hashtable->table[index] = entry;
 }
 
@@ -86,7 +87,7 @@ int contains(HashTable* hashtable, void* key, int (*cmp)(const char*, const char
     return get(hashtable, key, cmp) != NULL;
 }
 
-void replace(HashTable* hashtable, const char* key, void* value, int (*cmp)(const char*, const char*)) {
+void replace(HashTable* hashtable, const char* key, void* value, void (*destroy)(void* value), int (*cmp)(const char*, const char*)) {
     if (hashtable == NULL) {
         return;
     }
@@ -95,7 +96,9 @@ void replace(HashTable* hashtable, const char* key, void* value, int (*cmp)(cons
 
     while (entry != NULL) {
         if (cmp(entry->key, key) == 0) {
+            entry->destroy(entry);
             entry->value = value;
+            entry->destroy = destroy;
             return;
         }
         entry = entry->next;
@@ -103,11 +106,15 @@ void replace(HashTable* hashtable, const char* key, void* value, int (*cmp)(cons
 }
 
 void clear(HashTable* hashtable) {
+    if (hashtable == NULL) {
+        return;
+    }
+    
     for (int i = 0; i < hashtable->size; i++) {
         Entry* entry = hashtable->table[i];
         while (entry != NULL) {
             Entry* next = entry->next;
-            free(entry);
+            entry->destroy(entry);
             entry = next;
         }
         hashtable->table[i] = NULL;

@@ -1,3 +1,4 @@
+
 #include <SDL2/SDL.h>
 #include "projectile_arrow.h"
 
@@ -53,3 +54,4 @@ Entity* init_projectile_arrow(GameData* game, int x, int y) {
 
     return projectile_arrow;
 }
+

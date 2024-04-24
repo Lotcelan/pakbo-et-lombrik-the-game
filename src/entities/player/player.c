@@ -29,6 +29,13 @@ void update_player(GameData* game, Entity* player, float delta_t) {
     // }
     // return;
 
+    if (player->current_hp <= 0) {
+        // Sacha ce sera ici que tu feras un change_scene(game, "game_over");, là je fais direct le chgt vers le hub
+        change_scene(game, "hub_level");
+        player->current_hp = player->max_hp;
+        return;
+    }
+
     update_entity_movement(game, player, delta_t, true);
 }
 void event_handler_player(Entity* player, GameData* game) {
@@ -103,16 +110,18 @@ void update_animation_player(Entity* e, float delta) {
 }
 
 Entity* init_player(GameData* game, int x, int y) {
-    int* nbs = malloc(4*sizeof(int));
+    int* nbs = malloc(5*sizeof(int));
     nbs[0] = 7;
     nbs[1] = 8;
     nbs[2] = 5;
     nbs[3] = 1;
-    int* lock = malloc(4*sizeof(int));
+    nbs[4] = 9;
+    int* lock = malloc(5*sizeof(int));
     lock[0] = 0;
     lock[1] = 1;
     lock[2] = 1;
     lock[3] = 1;
+    lock[4] = 1;
     
     SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_lombric"); // to change
 

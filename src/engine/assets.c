@@ -28,6 +28,8 @@ SDL_Texture* loadTextureFromMemory(GameData* game, const char* resource) {
 
 void render_texture(GameData* game, void* key) {
 
+    // printf("Rendering texture %s\n", ((Texture*)key)->name);
+
     Texture* texture = (Texture*)key;
     if (texture == NULL) {
         printf("Texture is NULL\n");
@@ -68,6 +70,9 @@ void render_wrap_text(GameData* game, void* key, int wrap_length) {
 
 void render_entity(GameData* game, Entity* e, float delta) {
     // je sais ca peut paraitre bizarre de le faire ici, mais finalement ca fait sens
+    if (e == game->player) {
+        printf("Delay : %d\n", e->damage_delay);
+    }
     if (e->damage_delay > 0){
         e->damage_delay -= delta;
     }
@@ -347,6 +352,8 @@ void destroy_render_stack(GameData* game) {
             current = current->next;
             ((RenderEntry*)temp->value)->destroy(((RenderEntry*)temp->value)->key);
         }
+        game->current_scene->render_stack = NULL;
+
     }
     return;
 }
@@ -361,4 +368,19 @@ void push_background_structures(GameData* game) {
         current = current->next;
     }
 
+}
+
+void free_mem_texture(void* t) {
+    MemTexture* t2 = (MemTexture*)t;
+    if (t2 == NULL) {
+        return;
+    }
+    if (t2->data != NULL) {
+        free(t2->data);
+    }
+    free(t2);
+}
+
+void destroy_font(void* f) {
+    TTF_CloseFont((TTF_Font*)f);
 }

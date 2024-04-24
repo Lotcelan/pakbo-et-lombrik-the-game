@@ -179,3 +179,8 @@ int compare_entities(void* e1, void* e2) {
 	Entity* ent2 = (Entity*)e2;
 	return (int)(ent1 == ent2);
 }
+
+void free_entity_list(void* lst) {
+	List* l = (List*)lst;
+	list_delete(l, free_entity);
+}

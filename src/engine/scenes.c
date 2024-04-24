@@ -53,7 +53,7 @@ void init_scene_with_json(GameData* game, json_t *root, Scene* scene) {
         if (func != NULL) {
             
         
-            Entity* e = (*func)(game, x, y); // initialisation de l'entité
+            Entity* e = (*func)(game, x * CELL_WIDTH, y* CELL_HEIGHT); // initialisation de l'entité
 
             scene->entities = append_first(e, scene->entities);
             // printf("Entity %zu: x=%d, y=%d, respawn_delay=%d, entity=%s\n",
@@ -189,7 +189,9 @@ void free_scene(Scene* scene) {
     free(scene);
 }
 
-
+void free_scene_void(void* scene) {
+    free_scene((Scene*)scene);
+}
 
 
 
@@ -213,13 +215,24 @@ void destroy_screen_shake(GameData* game) {
     }
 }
 
+void destroy_entities_list(List* entities) {
+    list_delete(entities, free_entity);
+}
+
 void change_scene(GameData* game, char* next) {
+    game->state = CHANGING;
+    
     Scene* next_scene = get(game->scenes, next, strcmp);
     if (next_scene == NULL) {
         fprintf(stderr, "Scene %s not found\n", next);
         return;
     }
     destroy_render_stack(game);
+    if (game->current_scene != NULL) {
+        // destroy the content
+        clear(game->current_scene->objects);
+        destroy_entities_list(game->current_scene->entities);
+    }
     // game->current_scene->destroy_scene;
     game->current_scene = next_scene;
     game->current_scene->populate(game);

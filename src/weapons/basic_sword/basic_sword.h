@@ -1,6 +1,8 @@
 #ifndef BASIC_SWORD_H
 #define BASIC_SWORD_H
 
+#define BASIC_SWORD_ATTACK_DURATION 250
+
 #include "../../engine/include/weapon.h"
 
 void update_basic_dword(GameData* game, Entity* e, float delta_t);

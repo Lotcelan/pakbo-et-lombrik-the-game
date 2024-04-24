@@ -51,9 +51,10 @@ typedef struct Scene {
 Scene* init_scene(GameData* game, char* title); // Title = nom de la scène = nom du dossier dans scenes/
 void render_scene(GameData* game, float delta);
 void free_scene(Scene* scene);
+void free_scene_void(void* scene);
 void change_scene(GameData* game, char* next);
 SDL_Texture* load_texture(SDL_Renderer* renderer, char* path);
-
+void destroy_entities_list(List* entities);
 void init_scene_with_json(GameData* game, json_t *root, Scene* scene);
 
 void render_screen_shake(GameData* game);

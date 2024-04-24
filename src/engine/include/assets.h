@@ -78,6 +78,7 @@ void free_structure(void* s);
 void free_text(void* t);
 void free_rectangle(void* r);
 void free_texture(void* t);
+void free_mem_texture(void* t);
 
 void push_render_stack(GameData* game, void* key, void (*render)(GameData*, void*), void (*destroy)(void*), bool is_temporary);
 void push_render_stack_text(GameData* game, Text* text, bool is_temporary);
@@ -89,26 +90,6 @@ void render_stack(GameData* game);
 void render_no_destroy(GameData* game);
 void destroy_render_stack(GameData* game);
 
+void destroy_font(void* f);
 
-/*
-SDL_Surface* surface = IMG_Load("path_to_image.png");
-if (!surface) {
-    // handle error
-}
-
-SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
-if (!texture) {
-    // handle error
-}
-
-SDL_FreeSurface(surface); // we can free the surface after the texture is created
-
-SDL_Rect srcRect = {0, 0, width_of_texture, height_of_texture};
-SDL_Rect dstRect = {x_position_on_screen, y_position_on_screen, width_on_screen, height_on_screen};
-
-SDL_RenderCopy(renderer, texture, &srcRect, &dstRect);
-
-// when done with the texture
-SDL_DestroyTexture(texture);
-*/
 #endif

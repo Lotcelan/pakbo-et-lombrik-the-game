@@ -80,7 +80,7 @@ find "$src_dir" -type f \( -iname \*.jpg -o -iname \*.jpeg -o -iname \*.png -o -
     echo "    MemTexture* src_assets_${file_name}_texture = (MemTexture*)malloc(sizeof(MemTexture));" >> "$source_file"
     echo "    src_assets_${file_name}_texture->data = src_assets_${file_name}_${file_extension};" >> "$source_file"
     echo "    src_assets_${file_name}_texture->size = src_assets_${file_name}_${file_extension}_len;" >> "$source_file"
-    echo "    insert(resources, src_assets_${file_name}_key, src_assets_${file_name}_texture);" >> "$source_file"
+    echo "    insert(resources, src_assets_${file_name}_key, src_assets_${file_name}_texture, free_mem_texture);" >> "$source_file"
     echo "" >> "$source_file"
 done
 

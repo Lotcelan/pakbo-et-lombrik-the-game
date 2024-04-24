@@ -27,7 +27,7 @@ typedef struct Dialog Dialog;
 
 typedef enum GameStatus {
     RUNNING,
-    LOADING,
+    CHANGING,
     PAUSED,
     CLOSING,
 } GameStatus;
