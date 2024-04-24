@@ -278,6 +278,9 @@ bool is_entity_colliding_with_structures(Entity* e, List* structures) {
 }
 
 void free_box(Box* box) {
+	if (box == NULL) {
+		return;
+	}
 	free(box);
 }
 
@@ -355,4 +358,14 @@ void enlarge_entity_hitbox(Entity* e, Box* new_hitbox) {
 	printf("With old box : %d, %d, %d, %d\n", old_hitbox.x, old_hitbox.y, old_hitbox.w, old_hitbox.h);
 	printf("With new box : %d, %d, %d, %d\n", new_hitbox_rect.x, new_hitbox_rect.y, new_hitbox_rect.w, new_hitbox_rect.h);
 	printf("Result : %d, %d, %d, %d\n", e->hit_box->zone.x, e->hit_box->zone.y, e->hit_box->zone.w, e->hit_box->zone.h);
+}
+
+void change_structure_coordinates(Structure* s, int x, int y) {
+	if (s == NULL) {
+		return;
+	}
+	s->collision_box->zone.x = x;
+	s->collision_box->zone.y = y;
+	s->position.x = x;
+	s->position.y = y;
 }

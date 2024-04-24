@@ -233,6 +233,9 @@ Structure* init_structure(GameData* game, const char* identifier, const char* re
 }
 
 void free_structure(void* s) {
+    if (s == NULL) {
+        return;
+    }
     Structure* s2 = (Structure*)s;
     SDL_DestroyTexture(s2->texture);
     free_box(s2->collision_box);
