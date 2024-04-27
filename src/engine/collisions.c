@@ -19,6 +19,8 @@ Box* init_rect_box_from_entity(GameData* game, Entity* e) {
 
 	SDL_Rect spriteRect = {.x = frame[0] * e->sprite->width, .y = frame[1] * e->sprite->height, .w = e->sprite->width, .h = e->sprite->height};
 
+	return init_rect_box(spriteRect.x, spriteRect.y, spriteRect.w, spriteRect.h); // vu que le reste semble pas marcher
+
 	// Retrieve the SDL_Texture* sprite associated to the spriteRec in the spritesheet
 	SDL_Texture* sprite = SDL_CreateTexture(game->renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, spriteRect.w, spriteRect.h);
 	SDL_SetRenderTarget(game->renderer, sprite);
@@ -122,7 +124,7 @@ Box* init_rect_box_from_structure(GameData* game, Structure* s) {
 	
 	SDL_Rect rect = s->position;
 
-	// return init_rect_box(rect.x, rect.y, rect.w, rect.h);
+	return init_rect_box(rect.x, rect.y, rect.w, rect.h);
 
 	// Create a surface to hold the texture's pixel data
 	// SDL_Surface* surface = SDL_CreateRGBSurfaceWithFormat(0, rect.w, rect.h, 32, SDL_PIXELFORMAT_RGBA8888);
@@ -141,9 +143,9 @@ Box* init_rect_box_from_structure(GameData* game, Structure* s) {
 	// Now you can access the pixel data through the surface
 	// Uint32* pixels = (Uint32*)surface->pixels;
 	for (int y = 0; y < rect.h; y++) {
-		for (int x = 0; x < rect.w; x++) {
+		for (int x = 0; x < (rect.w * sizeof(Uint32)/4); x++) {
 			// printf("%i ", getPixelColor(surface, x, y).b);
-			printf("%i ", (pixels[y * rect.w + x] << 24) >> 24);
+			printf("%i ", (pixels[y * (rect.w * sizeof(Uint32)/4) + x]) & 0x000000FF);
 		}
 		printf("\n");
 	}
