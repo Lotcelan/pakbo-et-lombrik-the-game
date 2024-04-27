@@ -89,19 +89,25 @@ int main(int argc, char* argv[]) {
 	game->player = player;
 
 	// Init scenes
-	Scene* scene01 = init_scene01(game);
-	Scene* main_menu = init_main_menu(game);
-	Scene* spawn_level = init_spawn_level(game);
-	Scene* etagere_level = init_etagere_level(game);
-    Scene* simple_arena = init_simple_arena(game);
-	Scene* hub_level = init_hub_level(game);
+	SceneInit* scene01 = (SceneInit*)malloc(sizeof(SceneInit));
+	*scene01 = init_scene01;
+	SceneInit* main_menu = (SceneInit*)malloc(sizeof(SceneInit));
+	*main_menu = init_main_menu;
+	SceneInit* spawn_level = (SceneInit*)malloc(sizeof(SceneInit));
+	*spawn_level = init_spawn_level;
+	SceneInit* etagere_level = (SceneInit*)malloc(sizeof(SceneInit));
+	*etagere_level = init_etagere_level;
+	SceneInit* simple_arena = (SceneInit*)malloc(sizeof(SceneInit));
+	*simple_arena = init_simple_arena;
+	SceneInit* hub_level = (SceneInit*)malloc(sizeof(SceneInit));
+	*hub_level = init_hub_level;
 
-	insert(game->scenes, "scene01", scene01, free_scene_void);
-	insert(game->scenes, "main_menu", main_menu, free_scene_void);
-	insert(game->scenes, "spawn_level", spawn_level, free_scene_void);
-	insert(game->scenes, "etagere_level", etagere_level, free_scene_void);
-    insert(game->scenes, "simple_arena", simple_arena, free_scene_void);
-	insert(game->scenes, "hub_level", hub_level, free_scene_void);
+	insert(game->scenes, "scene01", scene01, free);
+	insert(game->scenes, "main_menu", main_menu, free);
+	insert(game->scenes, "spawn_level", spawn_level, free);
+	insert(game->scenes, "etagere_level", etagere_level, free);
+    insert(game->scenes, "simple_arena", simple_arena, free);
+	insert(game->scenes, "hub_level", hub_level, free);
 
 	change_scene(game, "main_menu");
 

@@ -16,7 +16,7 @@ void event_handler_spawn_level(GameData* game) {
                 //     break;
                 case SDLK_h:
                     screen_shake = init_screen_shake(10, 10);
-                    printf("Screen shake: %p\n", (void*)&screen_shake);
+                    // printf("Screen shake: %p\n", (void*)&screen_shake);
                     game->current_scene->screen_shake = screen_shake;
                     break;
                 default:

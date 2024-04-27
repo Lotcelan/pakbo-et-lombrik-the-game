@@ -48,6 +48,8 @@ typedef struct Scene {
 
 } Scene;
 
+typedef Scene* (*SceneInit)(GameData* game);
+
 Scene* init_scene(GameData* game, char* title); // Title = nom de la scène = nom du dossier dans scenes/
 void render_scene(GameData* game, float delta);
 void free_scene(Scene* scene);

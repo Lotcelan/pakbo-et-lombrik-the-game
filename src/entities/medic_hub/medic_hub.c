@@ -19,6 +19,8 @@ void update_medic_hub(GameData* game, Entity* medic_hub, float delta_t) {
 		push_render_stack_text(game, press_text, true);
 	}
 	// }
+
+	free(interact_box);
 }
 void event_handler_medic_hub(Entity* medic_hub, GameData* game) {
 	// SDL_Event event = game->event; // potentiellement avec switch
@@ -42,6 +44,7 @@ void event_handler_medic_hub(Entity* medic_hub, GameData* game) {
 		}
 		// }
 	}
+	free(interact_box);
 }
 
 void update_animation_medic_hub(Entity* e, float delta) {

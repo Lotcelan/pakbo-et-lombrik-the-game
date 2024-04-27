@@ -6,7 +6,7 @@ void update_simple_arena(GameData* game) {
     Structure* moving_platform = get(game->current_scene->objects, "moving_platform", strcmp);
     change_structure_coordinates(moving_platform, CELL_WIDTH * 6 + (50 * sin(2*3.14*SDL_GetTicks()/1000/4)), moving_platform->position.y);
 
-    printf("Current coords : %d, %d\n", moving_platform->position.x, moving_platform->position.y);
+    // printf("Current coords : %d, %d\n", moving_platform->position.x, moving_platform->position.y);
     return;
 }
 
@@ -33,7 +33,7 @@ void populate_simple_arena(GameData* game) {
 
     for (int i = 0; i < 500; i++) {
         EntityInitFunc* duck = get(game->entities, "duck_green", strcmp);
-        Entity* e = (*duck)(game, (rand() %  16) * CELL_WIDTH, (rand() % 9) * CELL_HEIGHT);
+        Entity* e = (*duck)(game, (rand() %  16) * CELL_WIDTH, (rand() % 4) * CELL_HEIGHT);
         game->current_scene->entities = append_first(e, game->current_scene->entities);
     }
 

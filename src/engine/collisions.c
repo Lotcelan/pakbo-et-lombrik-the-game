@@ -63,6 +63,54 @@ Box* init_rect_box_from_entity(GameData* game, Entity* e) {
 	return init_rect_box(e->x_position + min_x, e->y_position + min_y, w, h);
 }
 
+Uint32 getPixel(SDL_Surface *loadingSurface, int x, int y) {
+
+    Uint32 *pixels = (Uint32*)loadingSurface->pixels;
+    return pixels[(y * loadingSurface->pitch / 4) + x]; // I noticed that each y selection was off by 4 pixels in the y so I divided by 4. Why this is the case remains a mystery.
+
+}
+
+SDL_Color getPixelColor(SDL_Surface *loadingSurface, int x, int y) {
+
+    SDL_Color getColor = {0,0,0,0};
+    SDL_PixelFormat *format;
+    Uint32 pixel, index;
+    Uint8 red, green, blue, alpha;
+
+    format = loadingSurface->format;
+    SDL_LockSurface(loadingSurface);
+    pixel = getPixel(loadingSurface, x, y);
+    SDL_UnlockSurface(loadingSurface);
+
+    index = pixel & format->Rmask;  
+    index = index >> format->Rshift; 
+    index = index << format->Rloss;  
+    red = (Uint8)index;
+
+    index = pixel & format->Gmask;   
+    index = index >> format->Gshift; 
+    index = index << format->Gloss;  
+    green = (Uint8)index;
+
+    index = pixel & format->Bmask;   
+    index = index >> format->Bshift; 
+    index = index << format->Bloss;  
+    blue = (Uint8)index;
+
+    index = pixel & format->Amask;
+    index = index >> format->Ashift;
+    index = index << format->Aloss;
+    alpha = (Uint8)index;
+
+    getColor.r = red;
+    getColor.g = green;
+    getColor.b = blue;
+    getColor.a = alpha;
+
+    return getColor;
+
+}
+
 Box* init_rect_box_from_structure(GameData* game, Structure* s) {
 	if (s == NULL) {
 		return NULL;
@@ -70,24 +118,35 @@ Box* init_rect_box_from_structure(GameData* game, Structure* s) {
 
 	printf("Structure : %s\n", s->identifier);
 	SDL_Texture* texture = s->texture;
+	SDL_Texture* valid_texture = SDL_CreateTexture(game->renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, s->position.w, s->position.h);
+	
 	SDL_Rect rect = s->position;
 
-	return init_rect_box(rect.x, rect.y, rect.w, rect.h);
+	// return init_rect_box(rect.x, rect.y, rect.w, rect.h);
 
 	// Create a surface to hold the texture's pixel data
-	SDL_Surface* surface = SDL_CreateRGBSurfaceWithFormat(0, rect.w, rect.h, 32, SDL_PIXELFORMAT_RGBA8888);
+	// SDL_Surface* surface = SDL_CreateRGBSurfaceWithFormat(0, rect.w, rect.h, 32, SDL_PIXELFORMAT_RGBA8888);
 
 	// Set the texture as the render target
-	SDL_SetRenderTarget(game->renderer, texture);
+	SDL_SetRenderTarget(game->renderer, valid_texture);
 
+	SDL_RenderClear(game->renderer);
+	SDL_RenderCopy(game->renderer, texture, NULL, &rect);
 	// Read the pixel data from the texture into the surface
-	SDL_RenderReadPixels(game->renderer, &rect, SDL_PIXELFORMAT_RGBA8888, surface->pixels, surface->pitch);
+	Uint32* pixels = malloc(rect.w * rect.h * sizeof(Uint32));
+	SDL_RenderReadPixels(game->renderer, &rect, SDL_PIXELFORMAT_RGBA8888, pixels, rect.w * sizeof(Uint32));
 
 	// Reset the render target
 	SDL_SetRenderTarget(game->renderer, NULL);
-
 	// Now you can access the pixel data through the surface
-	Uint32* pixels = (Uint32*)surface->pixels;
+	// Uint32* pixels = (Uint32*)surface->pixels;
+	for (int y = 0; y < rect.h; y++) {
+		for (int x = 0; x < rect.w; x++) {
+			// printf("%i ", getPixelColor(surface, x, y).b);
+			printf("%i ", (pixels[y * rect.w + x] << 24) >> 24);
+		}
+		printf("\n");
+	}
 
 	// Uint32* pixels = (Uint32*)surface->pixels;
 
@@ -100,7 +159,7 @@ Box* init_rect_box_from_structure(GameData* game, Structure* s) {
 	// for (int y = 0; y < rect.h; y++) {
 	//     for (int x = 0; x < rect.w; x++) {
 	//         Uint32 pixel = pixels[(y + rect.y) * surface->w + (x + rect.x)];
-	//         Uint8 alpha = (pixel >> 24) & 0xFF;
+	//         Uint8 alpha = (pixel << 24) >> 24;
 
 	//         if (alpha != 0) {
 	//             if (x < min_x) {
@@ -129,8 +188,8 @@ Box* init_rect_box_from_structure(GameData* game, Structure* s) {
 	for (int x = 0; x < rect.w; x++) {
 		bool isAllColumnTransparent = true;
 		for (int y = 0; y < rect.h; y++) {
-			Uint32 pixel = pixels[y * surface->w + x];
-			Uint8 alpha = (pixel >> 24) & 0xFF;
+			Uint32 pixel = pixels[y * rect.w + x];
+			Uint8 alpha = (pixel << 24) >> 24;
 			if (alpha != 0) {
 				isAllColumnTransparent = false;
 				break;
@@ -147,8 +206,8 @@ Box* init_rect_box_from_structure(GameData* game, Structure* s) {
 	for (int x = rect.w - 1; x >= 0; x--) {
 		bool isAllColumnTransparent = true;
 		for (int y = 0; y < rect.h; y++) {
-			Uint32 pixel = pixels[y * surface->w + x];
-			Uint8 alpha = (pixel >> 24) & 0xFF;
+			Uint32 pixel = pixels[y * rect.w + x];
+			Uint8 alpha = (pixel << 24) >> 24;
 			if (alpha != 0) {
 				isAllColumnTransparent = false;
 				break;
@@ -165,8 +224,8 @@ Box* init_rect_box_from_structure(GameData* game, Structure* s) {
 	for (int y = 0; y < rect.h; y++) {
 		bool isAllRowTransparent = true;
 		for (int x = 0; x < rect.w; x++) {
-			Uint32 pixel = pixels[y * surface->w + x];
-			Uint8 alpha = (pixel >> 24) & 0xFF;
+			Uint32 pixel = pixels[y * rect.w + x];
+			Uint8 alpha = (pixel << 24) >> 24;
 			if (alpha != 0) {
 				isAllRowTransparent = false;
 				break;
@@ -183,10 +242,10 @@ Box* init_rect_box_from_structure(GameData* game, Structure* s) {
 	for (int y = rect.h - 1; y >= 0; y--) {
 		bool isAllRowTransparent = true;
 		for (int x = 0; x < rect.w; x++) {
-			Uint32 pixel = pixels[y * surface->w + x];
-			printf("Pixel : %d\n", pixel);
-			Uint8 alpha = (pixel >> 24) & 0xFF;
-			printf("Alpha : %d\n", alpha);
+			Uint32 pixel = pixels[y * rect.w + x];
+			// printf("Pixel : %d\n", pixel);
+			Uint8 alpha = (pixel << 24) >> 24;
+			// printf("Alpha : %d\n", alpha);
 			if (alpha != 0) {
 				isAllRowTransparent = false;
 				break;
@@ -201,7 +260,9 @@ Box* init_rect_box_from_structure(GameData* game, Structure* s) {
 	}
 	printf("FIN -------------------\n");
 
-	SDL_FreeSurface(surface);
+	// SDL_FreeSurface(surface);
+	free(pixels);
+	SDL_DestroyTexture(valid_texture);
 
 	int w = max_x - min_x;
 	int h = max_y - min_y;
@@ -355,9 +416,9 @@ void enlarge_entity_hitbox(Entity* e, Box* new_hitbox) {
 	e->hit_box->zone.y = min_y;
 	e->hit_box->zone.w = max_x - min_x;
 	e->hit_box->zone.h = max_y - min_y;
-	printf("With old box : %d, %d, %d, %d\n", old_hitbox.x, old_hitbox.y, old_hitbox.w, old_hitbox.h);
-	printf("With new box : %d, %d, %d, %d\n", new_hitbox_rect.x, new_hitbox_rect.y, new_hitbox_rect.w, new_hitbox_rect.h);
-	printf("Result : %d, %d, %d, %d\n", e->hit_box->zone.x, e->hit_box->zone.y, e->hit_box->zone.w, e->hit_box->zone.h);
+	// printf("With old box : %d, %d, %d, %d\n", old_hitbox.x, old_hitbox.y, old_hitbox.w, old_hitbox.h);
+	// printf("With new box : %d, %d, %d, %d\n", new_hitbox_rect.x, new_hitbox_rect.y, new_hitbox_rect.w, new_hitbox_rect.h);
+	// printf("Result : %d, %d, %d, %d\n", e->hit_box->zone.x, e->hit_box->zone.y, e->hit_box->zone.w, e->hit_box->zone.h);
 }
 
 void change_structure_coordinates(Structure* s, int x, int y) {

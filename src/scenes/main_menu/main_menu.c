@@ -11,7 +11,7 @@ void event_handler_main_menu(GameData* game) {
     switch (game->event.type) {
         case SDL_MOUSEMOTION:
             if (selectedMenuItem == NULL) {
-                printf("selectedMenuItem is NULL\n");
+                // printf("selectedMenuItem is NULL\n");
                 exit(-1);
             }
             menuItemsRect = get(game->current_scene->objects, "menuItemsRect", strcmp);
@@ -23,7 +23,7 @@ void event_handler_main_menu(GameData* game) {
             for (int i = 0; i < NUM_MENU_ITEMS; i++) {
                 point.x = game->event.motion.x;
                 point.y = game->event.motion.y;
-                printf("x: %d, y: %d\n", game->event.motion.x, game->event.motion.y);
+                // printf("x: %d, y: %d\n", game->event.motion.x, game->event.motion.y);
                 if (SDL_PointInRect(&point, &menuItemsRect[i])) {
                     *selectedMenuItem = i;
                     break;
@@ -59,7 +59,7 @@ void update_main_menu(GameData* game) {
         exit(-1);
     }
 
-    int* selectedMenuItem = (int*)get(((Scene*)get(game->scenes, "main_menu", strcmp))->objects, "selectedMenuItem", strcmp);
+    int* selectedMenuItem = (int*)get(game->current_scene->objects, "selectedMenuItem", strcmp);
     if (selectedMenuItem == NULL) {
         printf("selectedMenuItem is NULL\n");
         exit(-1);
@@ -72,7 +72,7 @@ void update_main_menu(GameData* game) {
             printf("menuItemsRect is NULL\n");
             exit(-1);
         }
-        printf("%d = selectedMenuItem\n", *selectedMenuItem);
+        // printf("%d = selectedMenuItem\n", *selectedMenuItem);
 
         if (i == *selectedMenuItem) {
             // SDL_SetRenderDrawColor(game->renderer, 255, 0, 0, 255);
