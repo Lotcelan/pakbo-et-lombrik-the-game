@@ -104,6 +104,7 @@ int main(int argc, char* argv[]) {
 	insert(game->scenes, "etagere_level", etagere_level, free_scene_void);
     insert(game->scenes, "simple_arena", simple_arena, free_scene_void);
 	insert(game->scenes, "hub_level", hub_level, free_scene_void);
+	insert(game->scenes, "game_over", game_over, free_scene_void);
 
 	change_scene(game, "main_menu");
 
