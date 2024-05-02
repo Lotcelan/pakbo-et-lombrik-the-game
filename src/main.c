@@ -102,6 +102,9 @@ int main(int argc, char* argv[]) {
 	*simple_arena = init_simple_arena;
 	SceneInit* hub_level = (SceneInit*)malloc(sizeof(SceneInit));
 	*hub_level = init_hub_level;
+	SceneInit* game_over = (SceneInit*)malloc(sizeof(SceneInit));
+	*game_over = init_game_over;
+
 
 	insert(game->scenes, "scene01", scene01, free);
 	insert(game->scenes, "main_menu", main_menu, free);
@@ -109,6 +112,7 @@ int main(int argc, char* argv[]) {
 	insert(game->scenes, "etagere_level", etagere_level, free);
     insert(game->scenes, "simple_arena", simple_arena, free);
 	insert(game->scenes, "hub_level", hub_level, free);
+	insert(game->scenes, "game_over", game_over, free);
 
 	change_scene(game, "main_menu");
 
