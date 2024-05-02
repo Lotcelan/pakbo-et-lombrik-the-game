@@ -35,11 +35,12 @@ typedef struct sprite {
     int height;     // nombre de pixels de haut pour une frame de l'animation
     // exemple : lom bric aura certainement height = width = 16 (son sprite étant un carré de taille 16)
     List** frames;  // tableau de listes chainées CYCLIQUES de coordonnées vis à vis du spriteSheet
-                    // les valeurs des maillons sont des quadruplets [x, y]
+                    // les valeurs des maillons sont des couples [x, y]
     List* currentFrame; // la valeur est un tableau de taille 2 de forme [x, y]
     // LockSprite : tableau d'entiers associant a chaque état un booléen
     // 0 si l'animation boucle
     // un entier si l'animation doit se jouer jusqu'au bout (exemple : coup d'épée)
+    // cet entier étant le nombre de frames que dure cette animation
     int* Lock_liste;
     int Lock;
     // orientation permet de ne pas avoir a faire un sprite qui regarde a droite et un sprite qui regarde a gauche

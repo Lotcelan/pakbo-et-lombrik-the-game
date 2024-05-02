@@ -1,5 +1,6 @@
 #include "../../engine/include/scenes.h"
 #include "../../resources.h"
+#include "../../entities/player/player.h"
 
 
 void update_game_over(GameData* game);
