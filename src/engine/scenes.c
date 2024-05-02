@@ -222,19 +222,21 @@ void destroy_entities_list(List* entities) {
 void change_scene(GameData* game, char* next) {
     game->state = CHANGING;
     
-    Scene* next_scene = get(game->scenes, next, strcmp);
+    SceneInit* next_scene = get(game->scenes, next, strcmp);
     if (next_scene == NULL) {
         fprintf(stderr, "Scene %s not found\n", next);
         return;
     }
     destroy_render_stack(game);
+    // game->current_scene->render_stack = NULL;
+
     if (game->current_scene != NULL) {
         // destroy the content
         clear(game->current_scene->objects);
         destroy_entities_list(game->current_scene->entities);
     }
     // game->current_scene->destroy_scene;
-    game->current_scene = next_scene;
+    game->current_scene = (*next_scene)(game);
     game->current_scene->populate(game);
 }
 

@@ -35,7 +35,7 @@ void update_player(GameData* game, Entity* player, float delta_t) {
         player->current_hp = player->max_hp;
         return;
     }
-
+    
     update_entity_movement(game, player, delta_t, true);
 }
 void event_handler_player(Entity* player, GameData* game) {
@@ -53,15 +53,13 @@ void event_handler_player(Entity* player, GameData* game) {
     
     
     if (game->keyboardState[SDL_SCANCODE_UP]) {
-        player->y_velocity = -250;
+        player->y_velocity = -100;
     } else if (game->keyboardState[SDL_SCANCODE_DOWN]) {
         player->y_velocity = 100;
-    } else {
-        player->y_velocity = 0;
     }
 
     if (game->keyboardState[SDL_SCANCODE_LEFT]) {
-        player->x_velocity = -100;
+        player->x_velocity = -175;
         player->sprite->orientation = SDL_FLIP_HORIZONTAL;
     } else if (game->keyboardState[SDL_SCANCODE_RIGHT]) {
         player->x_velocity = 100;

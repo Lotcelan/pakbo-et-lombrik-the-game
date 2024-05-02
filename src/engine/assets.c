@@ -43,7 +43,11 @@ void render_structure(GameData* game, void* key) {
     Structure* structure = (Structure*)key;
 
     SDL_RenderCopy(game->renderer, structure->texture, NULL, &structure->position);
+
+    // Rectangle* collision = init_rectangle(structure->collision_box->zone.x, structure->collision_box->zone.y, structure->collision_box->zone.w, structure->collision_box->zone.h, (SDL_Color){0, 255, 0, 255}, (SDL_Color){0, 0, 0, 0});
+    // render_rectangle(game, collision);
 }
+
 
 void render_text(GameData* game, void* key) {
     Text* text = (Text*)key;
@@ -71,7 +75,7 @@ void render_wrap_text(GameData* game, void* key, int wrap_length) {
 void render_entity(GameData* game, Entity* e, float delta) {
     // je sais ca peut paraitre bizarre de le faire ici, mais finalement ca fait sens
     if (e == game->player) {
-        printf("Delay : %d\n", e->damage_delay);
+        // printf("Delay : %d\n", e->damage_delay);
     }
     if (e->damage_delay > 0){
         e->damage_delay -= delta;
@@ -126,7 +130,7 @@ void render_entity(GameData* game, Entity* e, float delta) {
     // Render the collision box in green
     // if (e->hit_box != NULL) {
     //     Rectangle* hitbox_rectangle = init_rectangle(e->hit_box->zone.x, e->hit_box->zone.y, e->hit_box->zone.w, e->hit_box->zone.h, (SDL_Color){0, 0, 255, 255}, (SDL_Color){0, 0, 0, 0});
-    //     printf("Hitbox rectangle : %d %d %d %d\n", hitbox_rectangle->x, hitbox_rectangle->y, hitbox_rectangle->w, hitbox_rectangle->h);
+    //     // printf("Hitbox rectangle : %d %d %d %d\n", hitbox_rectangle->x, hitbox_rectangle->y, hitbox_rectangle->w, hitbox_rectangle->h);
     //     render_rectangle(game, hitbox_rectangle);
     //     free(hitbox_rectangle);
     // }
@@ -228,11 +232,14 @@ Structure* init_structure(GameData* game, const char* identifier, const char* re
     s->collision_box = NULL;
 
     s->collision_box = init_rect_box_from_structure(game, s);
-    printf("initialized coll box : %d %d %d %d\n", s->collision_box->zone.x, s->collision_box->zone.y, s->collision_box->zone.w, s->collision_box->zone.h);
+    // printf("initialized coll box : %d %d %d %d\n", s->collision_box->zone.x, s->collision_box->zone.y, s->collision_box->zone.w, s->collision_box->zone.h);
     return s;
 }
 
 void free_structure(void* s) {
+    if (s == NULL) {
+        return;
+    }
     Structure* s2 = (Structure*)s;
     SDL_DestroyTexture(s2->texture);
     free_box(s2->collision_box);
@@ -350,7 +357,9 @@ void destroy_render_stack(GameData* game) {
         while (current != NULL) {
             List* temp = current;
             current = current->next;
-            ((RenderEntry*)temp->value)->destroy(((RenderEntry*)temp->value)->key);
+            if (((RenderEntry*)temp->value)->destroy != NULL) {
+                ((RenderEntry*)temp->value)->destroy(((RenderEntry*)temp->value)->key);
+            }
         }
         game->current_scene->render_stack = NULL;
 
@@ -361,7 +370,6 @@ void destroy_render_stack(GameData* game) {
 void push_background_structures(GameData* game) {
     Texture* background = init_texture_from_memory(game, game->current_scene->background, 0, 0);
     push_render_stack_texture(game, background, false);
-
     List* current = game->current_scene->structures;
     while (current != NULL) {
         push_render_stack_structure(game, (Structure*)current->value, false);

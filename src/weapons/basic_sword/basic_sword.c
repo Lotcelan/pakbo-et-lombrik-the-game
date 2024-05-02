@@ -13,7 +13,7 @@ void update_basic_dword(GameData* game, Entity* e, float delta_t) {
             if (attack_duration != NULL) {
                 if (*attack_duration > 0) {
                     *attack_duration -= delta_t;
-                    printf("Attack duration: %d\n", *attack_duration);
+                    // printf("Attack duration: %d\n", *attack_duration);
                 } else {
                     *is_attacking = false;
                     *attack_duration = -1;

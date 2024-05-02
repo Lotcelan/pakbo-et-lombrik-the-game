@@ -114,7 +114,9 @@ void clear(HashTable* hashtable) {
         Entry* entry = hashtable->table[i];
         while (entry != NULL) {
             Entry* next = entry->next;
-            entry->destroy(entry);
+            if (entry->destroy != NULL) {
+                entry->destroy(entry);
+            }
             entry = next;
         }
         hashtable->table[i] = NULL;
