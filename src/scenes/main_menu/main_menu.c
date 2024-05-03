@@ -109,6 +109,7 @@ void update_main_menu(GameData* game) {
 void populate(GameData* game) {
 
     push_background_structures(game);
+    change_entity_coordinates(game->player, -1, -1);
     int* selectedMenuItem = malloc(sizeof(int));
     *selectedMenuItem = -1;
     Scene* scene = game->current_scene;

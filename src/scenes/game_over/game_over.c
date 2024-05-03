@@ -22,10 +22,12 @@ void update_game_over(GameData* game){
     // si on atteint la dernière frame de l'animation de mort
     int* position = (int*) game->player->sprite->currentFrame->value;
     if (position[0] == 8){
-        change_scene(game, "hub_level");
+        game->player->sprite->currentFrame = game->player->sprite->frames[0];
         game->player->update = update_player;
         game->player->event_handler = event_handler_player;
         game->player->update_animation = update_animation_player;
+        change_scene(game, "continue");
+        
     }
     return;
 }

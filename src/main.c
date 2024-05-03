@@ -11,6 +11,7 @@
 #include "entities/projectile_arrow/projectile_arrow.h"
 #include "entities/projectile_laser/projectile_laser.h"
 #include "entities/medic_hub/medic_hub.h"
+#include "entities/wormcan/wormcan.h"
 #include "resources.h"
 #include "scenes/etagere_level/etagere_level.h"
 #include "scenes/main_menu/main_menu.h"
@@ -19,6 +20,7 @@
 #include "scenes/simple_arena/simple_arena.h"
 #include "scenes/game_over/game_over.h"
 #include "scenes/hub_level/hub_level.h"
+#include "scenes/continue/continue.h"
 #include "weapons/arbalete/arbalete.h"
 #include "weapons/basic_sword/basic_sword.h"
 #include "weapons/blue_duck_boss_laser/blue_duck_boss_laser.h"
@@ -85,6 +87,10 @@ int main(int argc, char* argv[]) {
 	*i_duck_blue = init_duck_blue;
 	insert(game->entities, "duck_blue", i_duck_blue, free);
 
+	EntityInitFunc* wormcan = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
+	*wormcan = init_wormcan;
+	insert(game->entities, "wormcan", wormcan, free);
+
 	// potentiellement systeme de sauvegarde plus tard (donc init avec valeurs différentes)
 	Entity* player = init_player(game, -1, -1);	 // -1 -1 convention pour dire que l'on ne l'affiche pas
 	game->player = player;
@@ -104,6 +110,8 @@ int main(int argc, char* argv[]) {
 	*hub_level = init_hub_level;
 	SceneInit* game_over = (SceneInit*)malloc(sizeof(SceneInit));
 	*game_over = init_game_over;
+	SceneInit* continue_scene = (SceneInit*)malloc(sizeof(SceneInit));
+	*continue_scene = init_continue;
 
 
 	insert(game->scenes, "scene01", scene01, free);
@@ -113,6 +121,7 @@ int main(int argc, char* argv[]) {
     insert(game->scenes, "simple_arena", simple_arena, free);
 	insert(game->scenes, "hub_level", hub_level, free);
 	insert(game->scenes, "game_over", game_over, free);
+	insert(game->scenes, "continue", continue_scene, free);
 
 	change_scene(game, "main_menu");
 
