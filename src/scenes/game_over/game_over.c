@@ -19,6 +19,7 @@ void update_game_over(GameData* game){
     game->player->event_handler = &immobile;
     game->player->update_animation = &animation_mort;
     game->player->update = &update_mort;
+    // si on atteint la dernière frame de l'animation de mort
     int* position = (int*) game->player->sprite->currentFrame->value;
     if (position[0] == 8){
         change_scene(game, "hub_level");
@@ -32,6 +33,7 @@ void event_handler_game_over(GameData* game){
     return;
 }
 void populate_game_over(GameData* game){
+    push_background_structures(game);
     return;
 }
 Scene* init_game_over(GameData* game){
