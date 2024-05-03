@@ -7,7 +7,7 @@ void immobile_cont(Entity* e, GameData* game){
 
 void update_player_continue(GameData* game, Entity* e, float delta){
     e->y_velocity = 0;
-    e->damage_delay = 0;
+    e->damage_delay = -1;
     update_entity_movement(game, game->player, delta, false);
 }
 
@@ -56,7 +56,7 @@ void event_handler_continue(GameData* game){
 
 
 void populate_continue(GameData* game){
-    game->current_scene->entities = append_first(init_wormcan(game, 88, 10), game->current_scene->entities);
+    game->current_scene->entities = append_first(init_wormcan(game, 89, 13), game->current_scene->entities);
     push_background_structures(game);
     change_entity_coordinates(game->player, 120, 90);
     game->player->sprite->orientation = SDL_FLIP_NONE;
