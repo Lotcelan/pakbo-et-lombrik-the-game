@@ -14,6 +14,13 @@ void update_player_continue(GameData* game, Entity* e, float delta){
 void update_continue(GameData* game){
     game->player->event_handler = &immobile_cont;
     game->player->update = &update_player_continue;
+    // on regarde si la canette (wormcan) doit boucler la fin de son animation
+    Entity* wormcan = game->current_scene->entities->value;
+    int* position = (int*) wormcan->sprite->currentFrame->value;
+    if (position[0] == 11 && position[1] == 0){
+        wormcan->sprite->currentFrame = wormcan->sprite->frames[1];
+        wormcan->etat = 1;
+	}
     // si on atteint la dernière frame de l'animation de mort
     if (game->player->x_position >= 240){
         game->player->update = update_player;
@@ -33,7 +40,10 @@ void update_continue(GameData* game){
 
 void event_handler_continue(GameData* game){
     if (game->player->x_velocity == 0){
+        Entity* wormcan = game->current_scene->entities->value;
         if (game->keyboardState[SDL_SCANCODE_RIGHT]){
+            wormcan->sprite->currentFrame = wormcan->sprite->frames[0];
+            wormcan->etat = 0;
             game->player->x_velocity = 60;
             game->player->sprite->orientation = SDL_FLIP_NONE;
         }

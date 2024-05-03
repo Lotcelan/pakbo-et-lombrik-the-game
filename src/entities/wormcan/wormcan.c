@@ -28,10 +28,10 @@ Entity* init_wormcan(GameData* game, int x, int y) {
 	lock[0] = 0;
 	lock[1] = 0;
 	lock[2] = 0;
-
 	SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_wormcan");
 
 	Entity* e = init_entity(x, y, 12, spritesheet, 64, 64, nbs, lock, update_wormcan, event_handler_wormcan, update_animation_wormcan, 1, false);
-
+	e->etat = 2;
+	e->sprite->currentFrame = e->sprite->frames[2];
 	return e;
 }
