@@ -6,32 +6,48 @@ void immobile_cont(Entity* e, GameData* game){
 }
 
 void update_player_continue(GameData* game, Entity* e, float delta){
-    e->x_velocity = 0;
     e->y_velocity = 0;
     e->damage_delay = 0;
+    update_entity_movement(game, game->player, delta, false);
 }
 
 void update_continue(GameData* game){
     game->player->event_handler = &immobile_cont;
     game->player->update = &update_player_continue;
     // si on atteint la dernière frame de l'animation de mort
-    int* position = (int*) game->player->sprite->currentFrame->value;
-    if (position[0] == 8){
-        change_scene(game, "hub_level");
+    if (game->player->x_position >= 240){
         game->player->update = update_player;
         game->player->event_handler = event_handler_player;
         game->player->update_animation = update_animation_player;
+        change_scene(game, "hub_level");
+        game->player->x_velocity = 0;
     }
-    return;
+    else if (game->player->x_position <= -10){
+        game->player->update = update_player;
+        game->player->event_handler = event_handler_player;
+        game->player->update_animation = update_animation_player;
+        change_scene(game, "main_menu");
+        game->player->x_velocity = 0;
+    }
 }
 
 void event_handler_continue(GameData* game){
-    return;
+    if (game->player->x_velocity == 0){
+        if (game->keyboardState[SDL_SCANCODE_RIGHT]){
+            game->player->x_velocity = 60;
+            game->player->sprite->orientation = SDL_FLIP_NONE;
+        }
+        if (game->keyboardState[SDL_SCANCODE_LEFT]){
+            game->player->x_velocity = -60;
+            game->player->sprite->orientation = SDL_FLIP_HORIZONTAL;
+        }
+    }
 }
 
 void populate_continue(GameData* game){
     push_background_structures(game);
     change_entity_coordinates(game->player, 120, 90);
+    game->player->sprite->orientation = SDL_FLIP_NONE;
     return;
 }
 
