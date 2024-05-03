@@ -30,7 +30,6 @@ void update_player(GameData* game, Entity* player, float delta_t) {
     // return;
 
     if (player->current_hp <= 0) {
-        // Sacha ce sera ici que tu feras un change_scene(game, "game_over");, là je fais direct le chgt vers le hub
         change_scene(game, "game_over");
         player->current_hp = player->max_hp;
         return;
@@ -59,7 +58,7 @@ void event_handler_player(Entity* player, GameData* game) {
     }
 
     if (game->keyboardState[SDL_SCANCODE_LEFT]) {
-        player->x_velocity = -175;
+        player->x_velocity = -100;
         player->sprite->orientation = SDL_FLIP_HORIZONTAL;
     } else if (game->keyboardState[SDL_SCANCODE_RIGHT]) {
         player->x_velocity = 100;
@@ -126,7 +125,7 @@ Entity* init_player(GameData* game, int x, int y) {
     
     SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_lombric"); // to change
 
-    Entity* player = init_entity(x, y, 14, spritesheet, 16, 16, nbs, lock, update_player, event_handler_player, update_animation_player, 6, false);
+    Entity* player = init_entity(x, y, 14, spritesheet, 16, 16, nbs, lock, update_player, event_handler_player, update_animation_player, 6, true);
 
     // WeaponInitFunc* arbalete = get(game->weapons, "arbalete", strcmp);
     WeaponInitFunc* basic_sword = get(game->weapons, "basic_sword", strcmp);

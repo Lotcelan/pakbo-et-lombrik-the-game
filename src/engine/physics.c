@@ -132,7 +132,7 @@ void update_gravity(GameData* game, Entity* e, float delta_t) {
         return;
     }
 
-    float gravity = 250;
+    float gravity = 300;
     e->y_velocity += gravity * delta_t / 1000;
     // if (is_entity_colliding_with_structures(e, game->current_scene->structures)) {
     //     e->y_position = prev_y;

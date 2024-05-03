@@ -1,11 +1,5 @@
 {
     "structure" : [],
     "background" : "src_assets_continue",
-    "entities" : [
-        {
-          "identifier" : "wormcan",
-          "x" : 70,
-          "y" : 115
-        }
-      ]
+    "entities" : []
 }

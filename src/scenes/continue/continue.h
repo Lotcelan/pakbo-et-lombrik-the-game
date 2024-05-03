@@ -1,6 +1,7 @@
 #include "../../engine/include/scenes.h"
 #include "../../resources.h"
 #include "../../entities/player/player.h"
+#include "../../entities/wormcan/wormcan.h"
 
 
 void update_continue(GameData* game);

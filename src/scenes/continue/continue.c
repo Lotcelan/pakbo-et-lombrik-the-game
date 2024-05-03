@@ -44,7 +44,9 @@ void event_handler_continue(GameData* game){
     }
 }
 
+
 void populate_continue(GameData* game){
+    game->current_scene->entities = append_first(init_wormcan(game, 88, 10), game->current_scene->entities);
     push_background_structures(game);
     change_entity_coordinates(game->player, 120, 90);
     game->player->sprite->orientation = SDL_FLIP_NONE;
