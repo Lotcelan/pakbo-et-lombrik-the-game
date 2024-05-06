@@ -3,9 +3,9 @@
 #include <SDL2/SDL.h>
 
 void update_wormcan(GameData* game, Entity* e, float delta_t) {
-	if (e == NULL) {
-		return;
-	}
+	(void) game;
+	(void) e;
+	(void) delta_t;
 }
 void event_handler_wormcan(Entity* e, GameData* game) {
 	(void)e;

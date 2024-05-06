@@ -2,14 +2,19 @@
 
 // cette fonction est inutile, elle sert à annuler la gravité et la gestion des touches
 void immobile(Entity* e, GameData* game){
+    (void) e;
+    (void) game;
     return;
 }
 void animation_mort(Entity* e, float delta){
+    (void) delta;
     e->etat = 4;
     return;
 }
 
 void update_mort(GameData* game, Entity* e, float delta){
+    (void) game;
+    (void) delta;
     e->x_velocity = 0;
     e->y_velocity = 0;
     e->damage_delay = 0;
@@ -32,6 +37,7 @@ void update_game_over(GameData* game){
     return;
 }
 void event_handler_game_over(GameData* game){
+    (void)game;
     return;
 }
 void populate_game_over(GameData* game){

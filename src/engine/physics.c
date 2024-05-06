@@ -142,6 +142,7 @@ void update_gravity(GameData* game, Entity* e, float delta_t) {
 }
 
 void follow_player(GameData* game, Entity* e, int x_speed, int y_speed) {
+    (void) y_speed;
     if (game->current_scene == NULL) {
         return;
     }
@@ -150,9 +151,7 @@ void follow_player(GameData* game, Entity* e, int x_speed, int y_speed) {
         return;
     }
     int player_x = player->x_position;
-    int player_y = player->y_position;
     int e_x = e->x_position;
-    int e_y = e->y_position;
     if (player_x > e_x) {
         e->x_velocity = x_speed;
     } else if (player_x < e_x) {

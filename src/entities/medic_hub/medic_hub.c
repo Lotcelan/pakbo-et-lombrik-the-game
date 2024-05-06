@@ -2,6 +2,7 @@
 
 // SECTION ENTITE
 void update_medic_hub(GameData* game, Entity* medic_hub, float delta_t) {
+	(void) delta_t;
 	if (medic_hub == NULL) {
 		return;
 	}

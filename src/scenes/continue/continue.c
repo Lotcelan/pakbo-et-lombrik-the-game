@@ -2,6 +2,8 @@
 
 // cette fonction est inutile, elle sert à annuler la gestion des touches
 void immobile_cont(Entity* e, GameData* game){
+    (void) e;
+    (void) game;
     return;
 }
 
