@@ -66,7 +66,7 @@ Entity* init_medic_hub(GameData* game, int x, int y) {
 	lock[2] = 1;
 	lock[3] = 1;
 
-	SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_lombric");  // to change
+	SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_entities_lombric");  // to change
 
 	Entity* medic_hub = init_entity(x, y, 14, spritesheet, 16, 16, nbs, lock, update_medic_hub, event_handler_medic_hub, update_animation_medic_hub, 9999, false);
 

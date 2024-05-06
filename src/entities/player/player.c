@@ -123,7 +123,7 @@ Entity* init_player(GameData* game, int x, int y) {
     lock[3] = 0;
     lock[4] = 9;
     
-    SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_lombric"); // to change
+    SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_entities_lombric"); // to change
 
     Entity* player = init_entity(x, y, 14, spritesheet, 16, 16, nbs, lock, update_player, event_handler_player, update_animation_player, 6, true);
 

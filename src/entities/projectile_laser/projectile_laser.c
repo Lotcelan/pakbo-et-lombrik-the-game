@@ -89,7 +89,7 @@ Entity* init_projectile_laser(GameData* game, int x, int y) {
     lock[0] = 0;
     lock[1] = 1;
     
-    SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_projectile_laser"); // to change
+    SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_projectiles_laser"); // to change
 
     Entity* projectile_laser = init_entity(x, y, 14, spritesheet, 5, 5, nbs, lock, update_projectile_laser, event_handler_projectile_laser, update_animation_projectile_laser, 9999, true);
 

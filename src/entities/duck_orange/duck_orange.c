@@ -61,9 +61,9 @@ Entity* init_duck_orange(GameData* game, int x, int y) {
 	int* lock = malloc(3 * sizeof(int));
 	lock[0] = 0;
 	lock[1] = 0;
-	lock[2] = 1;
+	lock[2] = 3;
 
-	SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_full_duck_orange");	// to change
+	SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_entities_ducks_fullDuckOrange");	// to change
 
 	Entity* duck_orange = init_entity(x, y, 14, spritesheet, 16, 16, nbs, lock, update_duck_orange, event_handler_duck_orange, update_animation_duck_orange, 6, true);
 

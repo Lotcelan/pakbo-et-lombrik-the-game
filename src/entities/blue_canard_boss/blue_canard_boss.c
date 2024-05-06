@@ -35,7 +35,7 @@ Entity* init_blue_canard_boss(GameData* game, int x, int y) {
 	int* lock = malloc(sizeof(int));
 	lock[0] = 0;
 
-	SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_blue_canard_boss");	// to change
+	SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_entities_ducks_blueCanardBoss");	// to change
 
 	Entity* blue_canard_boss = init_entity(x, y, 14, spritesheet, 32, 32, nbs, lock, update_blue_canard_boss, event_handler_blue_canard_boss, update_animation_blue_canard_boss, 12, true);
 
