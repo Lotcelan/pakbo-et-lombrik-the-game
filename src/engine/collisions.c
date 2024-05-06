@@ -288,9 +288,10 @@ bool are_colliding(Box* a, Box* b) {
 	return false;
 }
 
-bool is_entity_colliding_with_structures(Entity* e, List* structures) {
+Structure* is_entity_colliding_with_structures(Entity* e, List* structures) {
+	// Returns NULL if no collision, or the structure with which the entity is colliding
 	if (e == NULL) {
-		return false;
+		return NULL;
 	}
 	// pour l'instant balek des pass_through, a prendre en compte après
 	Box* entity_box = e->collision_box;
@@ -333,11 +334,11 @@ bool is_entity_colliding_with_structures(Entity* e, List* structures) {
 
 		Box* struct_box = s->collision_box;
 		if (are_colliding(entity_box, struct_box)) {
-			return true;
+			return s;
 		}
 		current = current->next;
 	}
-	return false;
+	return NULL;
 }
 
 void free_box(Box* box) {

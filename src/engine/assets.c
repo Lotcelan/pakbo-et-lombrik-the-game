@@ -77,10 +77,10 @@ void render_entity(GameData* game, Entity* e, float delta) {
     if (e == game->player) {
         // printf("Delay : %d\n", e->damage_delay);
     }
-    if (e->damage_delay > 0){
+    if (e->damage_delay >= 0){
         e->damage_delay -= delta;
     }
-    if (e->stagger_duration > 0){
+    if (e->stagger_duration >= 0){
         e->stagger_duration -= delta;
     }
     
@@ -221,14 +221,14 @@ Structure* init_structure(GameData* game, const char* identifier, const char* re
     if (s == NULL) {
         exit(-1);
     }
-    s->identifier = identifier;
+    s->identifier = strdup(identifier);
     s->texture = loadTextureFromMemory(game, resource);
     s->position.x = x * CELL_WIDTH;
     s->position.y = y * CELL_HEIGHT;
     SDL_QueryTexture(s->texture, NULL, NULL, &s->position.w, &s->position.h);
 
     s->allow_pass_through = allow_pass_through;
-    s->teleport_to_scene = teleport_to_scene;
+    s->teleport_to_scene = strdup(teleport_to_scene);
     s->collision_box = NULL;
 
     s->collision_box = init_rect_box_from_structure(game, s);
@@ -372,7 +372,7 @@ void push_background_structures(GameData* game) {
     push_render_stack_texture(game, background, false);
     List* current = game->current_scene->structures;
     while (current != NULL) {
-        push_render_stack_structure(game, (Structure*)current->value, false);
+        push_render_stack_structure(game, (Structure*)(current->value), false);
         current = current->next;
     }
 

@@ -17,10 +17,13 @@ void update_mort(GameData* game, Entity* e, float delta){
     (void) delta;
     e->x_velocity = 0;
     e->y_velocity = 0;
-    e->damage_delay = 0;
+    e->damage_delay = -1;
 }
 
 void update_game_over(GameData* game){
+    // Pcq on a du appeler change_scene(game, "game_over_-1_-1"), alors on remet le joueur à sa position initiale
+    change_entity_coordinates(game->player, game->player->prev_collision_box->zone.x, game->player->prev_collision_box->zone.y);
+
     game->player->event_handler = &immobile;
     game->player->update_animation = &animation_mort;
     game->player->update = &update_mort;
@@ -31,7 +34,7 @@ void update_game_over(GameData* game){
         game->player->update = update_player;
         game->player->event_handler = event_handler_player;
         game->player->update_animation = update_animation_player;
-        change_scene(game, "continue");
+        change_scene(game, "continue_7_5");
         
     }
     return;

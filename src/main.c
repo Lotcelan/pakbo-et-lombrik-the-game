@@ -123,7 +123,7 @@ int main(int argc, char* argv[]) {
 	insert(game->scenes, "game_over", game_over, free);
 	insert(game->scenes, "continue", continue_scene, free);
 
-	change_scene(game, "main_menu");
+	change_scene(game, "main_menu_-1_-1");
 
 	TTF_Font* font = TTF_OpenFont("../src/assets/Suifak.otf", 24);
 	if (font == NULL) {

@@ -219,14 +219,48 @@ void destroy_entities_list(List* entities) {
     list_delete(entities, free_entity);
 }
 
-void change_scene(GameData* game, char* next) {
-    game->state = CHANGING;
+void change_scene(GameData* game, const char* next) {
+
+    // Parse the next as [name (potentially with '_')]_[x]_[y]
     
-    SceneInit* next_scene = get(game->scenes, next, strcmp);
+    char* name = (char*)malloc(sizeof(char) * strlen(next)); // chaînes pour les trois éléments à extraire
+    int x, y; // valeurs numériques à extraire
+
+    int underscore_1_pos = -1; // position du premier underscore (celui qu précède x)
+    int underscore_2_pos = -1; // position du deuxième underscore (celui qui précède y)
+
+    for (int i = strlen(next) - 1; i >= 0; i--) {
+        if (next[i] == '_') {
+            if (underscore_2_pos == -1) {
+                underscore_2_pos = i;
+            } else if (underscore_1_pos == -1) {
+                underscore_1_pos = i;
+                break;
+            }
+        }
+    }
+
+    if (underscore_1_pos == -1 || underscore_2_pos == -1) {
+        fprintf(stderr, "Invalid scene name %s\n", next);
+        return;
+    }
+
+    strncpy(name, next, underscore_1_pos);
+    name[underscore_1_pos] = '\0';
+    x = atoi(next + underscore_1_pos + 1);
+    y = atoi(next + underscore_2_pos + 1);
+    
+    printf("Changement de scène pour %s en %d, %d\n", name, x, y);
+
+    SceneInit* next_scene = get(game->scenes, name, strcmp);
+    free(name);
+    
     if (next_scene == NULL) {
         fprintf(stderr, "Scene %s not found\n", next);
         return;
     }
+    game->state = CHANGING;
+
     destroy_render_stack(game);
     // game->current_scene->render_stack = NULL;
 
@@ -238,5 +272,14 @@ void change_scene(GameData* game, char* next) {
     // game->current_scene->destroy_scene;
     game->current_scene = (*next_scene)(game);
     game->current_scene->populate(game);
+    
+    if ((x < 0 || y < 0 || x >= game->width_amount || y >= game->height_amount) && (x != -1 && y != -1)) {
+        fprintf(stderr, "Invalid coordinates\n");
+        return;
+    }
+
+    change_entity_coordinates(game->player, x * CELL_WIDTH, y * CELL_HEIGHT);
+
+
 }
 

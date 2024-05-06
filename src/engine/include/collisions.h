@@ -19,7 +19,7 @@ Box* init_rect_box(int x, int y, int w, int h);
 Box* init_rect_box_from_entity(GameData* game, Entity* e);
 Box* init_rect_box_from_structure(GameData* game, Structure* s);
 bool are_colliding(Box* a, Box* b);
-bool is_entity_colliding_with_structures(Entity* e, List* structures);
+Structure* is_entity_colliding_with_structures(Entity* e, List* structures);
 Box* copy_box(Box* a);
 void free_box(Box* box);
 void update_entity_boxes(Entity* e);

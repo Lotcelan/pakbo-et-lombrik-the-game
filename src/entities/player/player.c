@@ -30,8 +30,8 @@ void update_player(GameData* game, Entity* player, float delta_t) {
     // return;
 
     if (player->current_hp <= 0) {
-        change_scene(game, "game_over");
         player->current_hp = player->max_hp;
+        change_scene(game, "game_over_-1_-1");
         return;
     }
     

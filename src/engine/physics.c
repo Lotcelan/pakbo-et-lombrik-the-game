@@ -46,7 +46,7 @@ bool update_entity_movement(GameData* game, Entity* e, float delta_t, bool gravi
     // }
     bool is_colliding = false;
     int delta_x, delta_y;
-    bool result = false;
+    Structure* result = NULL;
     // double velocityMagnitude = sqrt(e->x_velocity * e->x_velocity + e->y_velocity * e->y_velocity);
     // if (velocityMagnitude > 0) {
     //     double normalizedXVelocity = e->x_velocity / velocityMagnitude;
@@ -71,10 +71,11 @@ bool update_entity_movement(GameData* game, Entity* e, float delta_t, bool gravi
         // update_entity_boxes(e, prev_x, prev_y);
         // temp_prev = e->x_position;
         change_entity_coordinates(e, e->x_position + sign_x * delta_x, e->y_position);
-
-        if (is_entity_colliding_with_structures(e, game->current_scene->structures)) {
+        Structure* s = is_entity_colliding_with_structures(e, game->current_scene->structures);
+        if (s != NULL) {
             is_colliding = true;
             has_collided = true;
+            result = s;
         } else {
             break;
         }
@@ -85,13 +86,15 @@ bool update_entity_movement(GameData* game, Entity* e, float delta_t, bool gravi
             // prev_x = e->x_position;
             delta_x--; // d'ici a ce qu'on fasse du raymarching :)
             is_colliding = false;
-            
+            if (strcmp(result->teleport_to_scene, "none") != 0 && e == game->player) {
+                change_scene(game, result->teleport_to_scene);
+                return result;
+            }
         }
     }
     if (has_collided) {
         e->x_velocity = 0;
     }
-    result = result || has_collided;
     has_collided = false;
     is_colliding = false;
 
@@ -101,10 +104,11 @@ bool update_entity_movement(GameData* game, Entity* e, float delta_t, bool gravi
         // update_entity_boxes(e, prev_x, prev_y);
         // temp_prev = e->y_position;
         change_entity_coordinates(e, e->x_position, e->y_position + sign_y * delta_y);
-
-        if (is_entity_colliding_with_structures(e, game->current_scene->structures)) {
+        Structure* s = is_entity_colliding_with_structures(e, game->current_scene->structures);
+        if (s != NULL) {
             is_colliding = true;
             has_collided = true;
+            result = s;
         } else {
             break;
         }
@@ -115,13 +119,16 @@ bool update_entity_movement(GameData* game, Entity* e, float delta_t, bool gravi
             // prev_y = e->y_position;
             delta_y--; // d'ici a ce qu'on fasse du raymarching :)
             is_colliding = false;
+            if (strcmp(result->teleport_to_scene, "none") != 0 && e == game->player) {
+                change_scene(game, result->teleport_to_scene);
+                return result;
+            }
             
         }
     }
     if (has_collided) {
         e->y_velocity = 0;
     }
-    result = result || has_collided;
 
     return result;
 

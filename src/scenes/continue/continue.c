@@ -28,14 +28,14 @@ void update_continue(GameData* game){
         game->player->update = update_player;
         game->player->event_handler = event_handler_player;
         game->player->update_animation = update_animation_player;
-        change_scene(game, "hub_level");
+        change_scene(game, "hub_level_2_2");
         game->player->x_velocity = 0;
     }
     else if (game->player->x_position <= -10){
         game->player->update = update_player;
         game->player->event_handler = event_handler_player;
         game->player->update_animation = update_animation_player;
-        change_scene(game, "main_menu");
+        change_scene(game, "main_menu_-1_-1");
         game->player->x_velocity = 0;
     }
 }
@@ -60,7 +60,7 @@ void event_handler_continue(GameData* game){
 void populate_continue(GameData* game){
     game->current_scene->entities = append_first(init_wormcan(game, 89, 13), game->current_scene->entities);
     push_background_structures(game);
-    change_entity_coordinates(game->player, 120, 90);
+    // change_entity_coordinates(game->player, 120, 90); // tkt, je le gère ailleurs
     game->player->sprite->orientation = SDL_FLIP_NONE;
     return;
 }

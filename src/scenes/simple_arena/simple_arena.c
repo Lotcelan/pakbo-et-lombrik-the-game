@@ -29,20 +29,19 @@ void event_handler_simple_arena(GameData* game) {
 
 void populate_simple_arena(GameData* game) {
     push_background_structures(game);
-    change_entity_coordinates(game->player, 50, 10);
+    // change_entity_coordinates(game->player, 50, 10);
 
-    for (int i = 0; i < 500; i++) {
-        EntityInitFunc* duck = get(game->entities, "duck_green", strcmp);
-        Entity* e = (*duck)(game, (rand() %  16) * CELL_WIDTH, (rand() % 4) * CELL_HEIGHT);
-        game->current_scene->entities = append_first(e, game->current_scene->entities);
-    }
+    // for (int i = 0; i < 1; i++) {
+    //     EntityInitFunc* duck = get(game->entities, "duck_green", strcmp);
+    //     Entity* e = (*duck)(game, (rand() %  16) * CELL_WIDTH, (rand() % 4) * CELL_HEIGHT);
+    //     game->current_scene->entities = append_first(e, game->current_scene->entities);
+    // }
 
     Structure* moving_platform = init_structure(game, "moving_platform", "src_assets_sol", 8, 4, 8, "none");
     insert(game->current_scene->objects, "moving_platform", moving_platform,NULL);
     
     game->current_scene->structures = append_first(moving_platform, game->current_scene->structures);
     push_render_stack_structure(game, moving_platform, false);
-
 }
 
 // void test(Entity* e, float delta){
