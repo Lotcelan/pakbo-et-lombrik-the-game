@@ -54,6 +54,25 @@ void render_text(GameData* game, void* key) {
     SDL_RenderCopy(game->renderer, text->texture, NULL, &text->position);
 }
 
+void render_circle(GameData* game, void* key) {
+    Circle* circle = (Circle*)key;
+    int radius = circle->radius;
+    int x = circle->x;
+    int y = circle->y;
+    SDL_Color color = circle->color;
+    for (int i = 0; i < radius; i++) {
+        for (int j = 0; j < radius; j++) {
+            if (i*i + j*j < radius*radius) {
+                SDL_SetRenderDrawColor(game->renderer, color.r, color.g, color.b, color.a);
+                SDL_RenderDrawPoint(game->renderer, x + i, y + j);
+                SDL_RenderDrawPoint(game->renderer, x - i, y + j);
+                SDL_RenderDrawPoint(game->renderer, x + i, y - j);
+                SDL_RenderDrawPoint(game->renderer, x - i, y - j);
+            }
+        }
+    }
+}
+
 void render_wrap_text(GameData* game, void* key, int wrap_length) {
     Text* text = (Text*)key;
     SDL_Surface* textSurface = TTF_RenderText_Blended_Wrapped(text->font, text->text, text->color, wrap_length);
@@ -216,6 +235,19 @@ void free_text(void* t) {
     }
 }
 
+Circle* init_circle(int x, int y, int radius, SDL_Color color) {
+    Circle* c = (Circle*)malloc(sizeof(Circle));
+    if (c == NULL) {
+        exit(-1);
+    }
+    c->x = x;
+    c->y = y;
+    c->radius = radius;
+    c->color = color;
+    return c;
+
+}
+
 Structure* init_structure(GameData* game, const char* identifier, const char* resource, int x, int y, int allow_pass_through, const char* teleport_to_scene) {
     Structure* s = (Structure*)malloc(sizeof(Structure));
     if (s == NULL) {
@@ -291,8 +323,16 @@ void free_texture(void* t) {
     free(t2);
 }
 
+void free_circle(void* c) {
+    free(c);
+}
+
 void push_render_stack_text(GameData* game, Text* text, bool is_temporary) {
     push_render_stack(game, text, render_text, free_text, is_temporary);
+}
+
+void push_render_stack_circle(GameData* game, Circle* circle, bool is_temporary) {
+    push_render_stack(game, circle, render_circle, free_circle, is_temporary);
 }
 
 void push_render_stack_structure(GameData* game, Structure* structure, bool is_temporary) {

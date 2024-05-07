@@ -37,7 +37,7 @@ void populate_simple_arena(GameData* game) {
     //     game->current_scene->entities = append_first(e, game->current_scene->entities);
     // }
 
-    Structure* moving_platform = init_structure(game, "moving_platform", "src_assets_sol", 8, 4, 8, "none");
+    Structure* moving_platform = init_structure(game, "moving_platform", "src_assets_structures_sol", 8, 4, 8, "none");
     insert(game->current_scene->objects, "moving_platform", moving_platform,NULL);
     
     game->current_scene->structures = append_first(moving_platform, game->current_scene->structures);

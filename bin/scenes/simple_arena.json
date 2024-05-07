@@ -169,6 +169,11 @@
             "identifier" : "duck_orange",
             "x" : 12,
             "y" : 1
+        },
+        {
+            "identifier" : "duck_blue",
+            "x" : 13,
+            "y" : 1
         }
     ]
 }

@@ -18,7 +18,7 @@ void update_duck_blue(GameData* game, Entity* duck_blue, float delta_t) {
 	}
 	
 
-	follow_player(game, duck_blue, 50, 50);
+	follow_player(game, duck_blue, 30, 30);
 	update_entity_movement(game, duck_blue, delta_t, true);
 	if (are_colliding(duck_blue->hit_box, game->player->hurt_box)) {
 		damage_entity(game, game->player, *damage, 1000, -1);
@@ -27,6 +27,11 @@ void update_duck_blue(GameData* game, Entity* duck_blue, float delta_t) {
 	else {
 		*is_attacking = false;
 	}
+
+	// c'est le tank donc on fait briller une aura autour de lui
+	int glow_freq = 50;
+	Circle* aura = init_circle(duck_blue->x_position + 8, duck_blue->y_position + 8, 15, (SDL_Color){50, 50, 158, 150 + 75 * sin(2 * 3.14 * SDL_GetTicks() / 1000)});
+	push_render_stack_circle(game, aura, true);
 	return;
 }
 void event_handler_duck_blue(Entity* duck_blue, GameData* game) {
@@ -50,6 +55,12 @@ void update_animation_duck_blue(Entity* e, float delta) {
 		e->etat = 1;
 	}
 
+	if (e->x_velocity > 0) {
+		e->sprite->orientation = SDL_FLIP_HORIZONTAL;
+	} else if (e->x_velocity < 0) {
+		e->sprite->orientation = SDL_FLIP_NONE;
+	}
+
 	return;
 }
 
@@ -63,9 +74,9 @@ Entity* init_duck_blue(GameData* game, int x, int y) {
 	lock[1] = 0;
 	lock[2] = 3;
 
-	SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_entities_ducks_fullDuckDlue");	// to change
+	SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_entities_ducks_fullDuckBlue");	// to change
 
-	Entity* duck_blue = init_entity(x, y, 14, spritesheet, 16, 16, nbs, lock, update_duck_blue, event_handler_duck_blue, update_animation_duck_blue, 6, true);
+	Entity* duck_blue = init_entity(x, y, 14, spritesheet, 16, 16, nbs, lock, update_duck_blue, event_handler_duck_blue, update_animation_duck_blue, 9, true);
 
 	int* duck_damage = malloc(sizeof(int));
 	*duck_damage = 1;

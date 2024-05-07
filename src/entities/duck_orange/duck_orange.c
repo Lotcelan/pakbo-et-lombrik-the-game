@@ -50,6 +50,12 @@ void update_animation_duck_orange(Entity* e, float delta) {
 		e->etat = 1;
 	}
 
+	if (e->x_velocity > 0) {
+		e->sprite->orientation = SDL_FLIP_HORIZONTAL;
+	} else if (e->x_velocity < 0) {
+		e->sprite->orientation = SDL_FLIP_NONE;
+	}
+
 	return;
 }
 
