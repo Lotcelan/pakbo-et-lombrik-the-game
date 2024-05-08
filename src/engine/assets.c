@@ -253,6 +253,7 @@ Structure* init_structure(GameData* game, const char* identifier, const char* re
     if (s == NULL) {
         exit(-1);
     }
+
     s->identifier = strdup(identifier);
     s->texture = loadTextureFromMemory(game, resource);
     s->position.x = x * CELL_WIDTH;

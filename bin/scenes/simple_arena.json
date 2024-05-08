@@ -161,6 +161,14 @@
             "resource" : "src_assets_structures_plateformeSurelevee",
             "allow_pass_through" : 11,
             "teleport_to_scene" : "none"
+        },
+        {
+            "identifier" : "door",
+            "x" : 15,
+            "y" : 5,
+            "resource" : "src_assets_structures_door",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "simple_arena_3_4"
         }
 
     ],

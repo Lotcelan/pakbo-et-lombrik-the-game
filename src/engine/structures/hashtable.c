@@ -27,6 +27,11 @@ void destroyHashTable(HashTable* hashtable) {
 }
 
 unsigned int hash(const char* key, int size) {
+    if (key == NULL) {
+        printf("HASH D'UNE CLE NULLE, C PAS NORMALE\n");
+        return 0;
+    }
+    
     unsigned char* str = (unsigned char*)key;
     unsigned int hash = 5381;
     int c;
@@ -70,6 +75,10 @@ void removeFrom(HashTable* hashtable, void* key) {
 }
 
 void* get(HashTable* hashtable, const char* key, int (*cmp)(const char*, const char*)) {
+    if (key == NULL) {
+        return NULL;
+    }
+    
     unsigned int index = hash(key, hashtable->size);
     Entry* entry = hashtable->table[index];
 
