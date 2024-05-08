@@ -5,13 +5,24 @@
 
 **Section destinée aux développeurs**
 
+### Linux
+
 Setup de SDL2 (sous Linux avec `apt`) & Jansson (librairie pour parse du JSON) :
 
 ```sh
 sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-ttf-dev libsdl2-mixer-dev libjansson-dev
 ```
 
-Voilà c'est tout. N'hésitez pas à changer le README pour Mac
+### Mac OSX
+
+Setup de SDL2 (sous Mac OSX avec `brew`) :
+
+```sh
+brew install sdl2 sdl2_image sdl2_ttf sdl2_mixer sdl2_ttf
+```
+
+Voilà c'est tout. 
+
 
 ## Structure du projet :
 
@@ -20,19 +31,21 @@ Voilà c'est tout. N'hésitez pas à changer le README pour Mac
 	| - main.c : Fichier principal qui lance le jeu et gère la main loop
 	| - scenes/ : Continedra ce qu'il faut pour chaque zone/biome
 		| - exemple_scene/
-			| - data.json : suit un format particulier pour décrire un niveau
+			| - exemple_scene.json : suit un format particulier pour décrire un niveau
 			| - exemple_scene.h/c : pour la logique du niveau
 	| - entities/ : Contiendra ce qu'il faut pour chaque entité
 		| - exemple_monster/
-			| - data.json : suit un format particulier pour décrire un monstre
 			| - exemple_monster.h/c : pour la logique du mob
+	| - weapons/ :
+		| - exemple_weapon/
+				| - exemple_weapon.h/c : pour la logique de l'arme
 	| - engine/ : Contient les fichiers du moteur de jeu
-		| - physics / audio / scene etc...
-		| - structures/ : Structures de données intéressantes
-
-- assets/ :
-	| - audio/
-	| - sprites/
-	| ...
-- Makefile : Pour construire le jeu (selon architecture) et effectuer les tests
+		| - include/ : tous les .h (+ facile pour la compilation)
+		| - structures/ : structure de données utiles (hashtable, linked lists...)
+		| - fichiers .c utiles pour le game engine
+	| - assets/ : Contient les fichiers images et autres utiles
+		| - audio/
+		| - sprites/
+		| ...
+- Makefile : Pour construire le jeu (selon architecture)
 ```

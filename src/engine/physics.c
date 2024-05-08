@@ -1,7 +1,7 @@
 #include "./include/physics.h"
 
-bool update_entity_movement(GameData* game, Entity* e, float delta_t, bool gravity_enabled) {
-    // returns true if it has collided with something
+Structure* update_entity_movement(GameData* game, Entity* e, float delta_t, bool gravity_enabled) {
+    // returns NULL if no collision or the structure there was collision with
     
     if (gravity_enabled) {
         update_gravity(game, e, delta_t);
@@ -135,6 +135,7 @@ bool update_entity_movement(GameData* game, Entity* e, float delta_t, bool gravi
 }
 
 void update_gravity(GameData* game, Entity* e, float delta_t) {
+    // just changes the y velocity to add gravity
     if (game->current_scene == NULL) {
         return;
     }
@@ -149,6 +150,7 @@ void update_gravity(GameData* game, Entity* e, float delta_t) {
 }
 
 void follow_player(GameData* game, Entity* e, int x_speed, int y_speed) {
+    // will change the velocity of the entity e to follow game->player
     (void) y_speed;
     if (game->current_scene == NULL) {
         return;

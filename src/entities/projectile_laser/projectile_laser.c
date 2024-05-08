@@ -24,10 +24,10 @@ void update_projectile_laser(GameData* game, Entity* projectile_laser, float del
     }
 
     // follow_player(game, projectile_laser, 200, 200);
-    bool has_collided = update_entity_movement(game, projectile_laser, delta_t, false);
+    Structure* has_collided = update_entity_movement(game, projectile_laser, delta_t, false);
 
 
-    if (has_collided) {
+    if (has_collided != NULL) {
         if (is_exploding != NULL) {
             *is_exploding = true;
             projectile_laser->x_velocity = 0;

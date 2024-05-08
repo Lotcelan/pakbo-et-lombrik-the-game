@@ -102,6 +102,9 @@ extern int src_assets_tentacula_png_len;
 extern unsigned char src_assets_hp_half_png[];
 extern int src_assets_hp_half_png_len;
 
+extern unsigned char src_assets_black_png[];
+extern int src_assets_black_png_len;
+
 extern unsigned char src_assets_entitiesForEditor_bouth_png[];
 extern int src_assets_entitiesForEditor_bouth_png_len;
 

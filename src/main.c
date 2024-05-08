@@ -125,27 +125,27 @@ int main(int argc, char* argv[]) {
 
 	change_scene(game, "main_menu_-1_-1");
 
+	// Init fonts
 	TTF_Font* font = TTF_OpenFont("../src/assets/Suifak.otf", 24);
 	if (font == NULL) {
 		printf("TTF_OpenFont: %s\n", TTF_GetError());
 		return 0;
 	}
 
-	insert(game->fonts, "suifak", font, destroy_font);
+	insert(game->fonts, "suifak", font, free); // avec destroy_font ca segfault ¯\_(ツ)_/¯
 
 	font = TTF_OpenFont("../src/assets/Suifak.otf", 12);
 	if (font == NULL) {
 		printf("TTF_OpenFont: %s\n", TTF_GetError());
 		return 0;
 	}
-	insert(game->fonts, "suifak_small", font, destroy_font);
+	insert(game->fonts, "suifak_small", font, free); // avec destroy_font ca segfault ¯\_(ツ)_/¯
 
 	/* Main loop :
 		- Getting events
 		- Updating the entities logic with the event
 		- Updating the scene logic with the event
-		- Render the scene
-		- Render the entities
+		- Render the scene (which also renders the entities)
 	*/
 
 	// Variables for deltaT between each loop
@@ -166,7 +166,8 @@ int main(int argc, char* argv[]) {
 		SDL_RenderClear(game->renderer);
 
 		if (game->current_dialog == NULL) {
-			// event_handler(game);
+			// SECTION EVENT HANDLER
+
 			while (SDL_PollEvent(&(game->event)) != 0) {
 				if ((game->event).type == SDL_QUIT) {
 					game->state = CLOSING;
@@ -198,6 +199,7 @@ int main(int argc, char* argv[]) {
 				}
 			}
 
+			// SECTION UPDATE
 			if (game->current_scene != NULL) {
 				// update_entities(game->current_scene->entities);
 				game->current_scene->update(game);
@@ -227,7 +229,6 @@ int main(int argc, char* argv[]) {
 
 			render_scene(game, deltaT);
 			render_hud(game);
-			// render_screen_shake(game);
 
 		} else {
 			// Peut être à revoir, peut sûrement être abuse (peut être pour skip frames)
@@ -241,6 +242,8 @@ int main(int argc, char* argv[]) {
 			update_dialog(game);
 			render_dialog(game);
 		}
+		
+		// Afficher
 		SDL_RenderPresent(game->renderer);
 		cap_fps(game->frm);
 	}

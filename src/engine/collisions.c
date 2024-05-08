@@ -114,6 +114,9 @@ SDL_Color getPixelColor(SDL_Surface *loadingSurface, int x, int y) {
 }
 
 Box* init_rect_box_from_structure(GameData* game, Structure* s) {
+	// Final goal : returns the smallest bouding box in which the structure fits (so without the transparent pixels)
+	// Right now : returns the bounding box that is the whole structure
+	
 	if (s == NULL) {
 		return NULL;
 	}
@@ -397,6 +400,7 @@ Box* copy_box(Box* a) {
 }
 
 void enlarge_entity_hitbox(Entity* e, Box* new_hitbox) {
+	// Prends une entité et une hitbox et AGRANDIT (ne remplace pas) la hitbox de l'entité avec la nouvelle hitbox
 	// non indépendant du type de zone
 	if (e == NULL || new_hitbox == NULL) {
 		return;

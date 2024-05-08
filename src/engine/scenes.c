@@ -2,6 +2,8 @@
 #include "include/game.h"
 
 void init_scene_with_json(GameData* game, json_t *root, Scene* scene) {
+    // changes the fiels of `scene`according to the json object `root
+
     // const char *name = json_string_value(json_object_get(root, "name"));
     const char *background = json_string_value(json_object_get(root, "background"));
 
@@ -120,14 +122,11 @@ Scene* init_scene(GameData* game, char* title) {
 void render_scene(GameData* game, float delta) {
     // Using game->renderer, render the scene : the background then all the textures
 
-    // Load the background texture contained in game->current_scene->background and resize it to width and height of the window
-    // Then render it at (0, 0)
-    // delta is the tick time between previous frame and current frame
-
     if (game->current_scene == NULL) {
         return;
     }
 
+    // If there is a screen shake, apply the modification to the renderer
     if (game->current_scene->screen_shake != NULL) {
         ScreenShake* shake = game->current_scene->screen_shake;
         if (shake->time < shake->duration) {
@@ -144,7 +143,10 @@ void render_scene(GameData* game, float delta) {
     } else {
         SDL_RenderSetLogicalSize(game->renderer, CELL_WIDTH * game->width_amount, CELL_HEIGHT * game->height_amount);
     }
+
+    // Render everythint to render except entities
     render_stack(game);
+    
     // Render all the entities
     List* liste_entites = game->current_scene->entities;
     Entity* e;

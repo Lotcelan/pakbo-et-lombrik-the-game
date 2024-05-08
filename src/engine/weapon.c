@@ -10,6 +10,7 @@ void render_weapon(GameData* game, Entity* e, float delta_t) {
 int delete_weapon(Weapon *weapon){
     if(weapon){
         // free(weapon->name);
+        destroyHashTable(weapon->objects);
         free(weapon);
         return 1;
     }
