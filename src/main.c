@@ -18,6 +18,7 @@
 #include "scenes/scene01/scene01.h"
 #include "scenes/spawn_level/spawn_level.h"
 #include "scenes/simple_arena/simple_arena.h"
+#include "scenes/ping_pong/ping_pong.h"
 #include "scenes/game_over/game_over.h"
 #include "scenes/hub_level/hub_level.h"
 #include "scenes/continue/continue.h"
@@ -112,6 +113,8 @@ int main(int argc, char* argv[]) {
 	*game_over = init_game_over;
 	SceneInit* continue_scene = (SceneInit*)malloc(sizeof(SceneInit));
 	*continue_scene = init_continue;
+	SceneInit* ping_pong = (SceneInit*)malloc(sizeof(SceneInit));
+	*ping_pong = init_ping_pong;
 
 
 	insert(game->scenes, "scene01", scene01, free);
@@ -122,6 +125,7 @@ int main(int argc, char* argv[]) {
 	insert(game->scenes, "hub_level", hub_level, free);
 	insert(game->scenes, "game_over", game_over, free);
 	insert(game->scenes, "continue", continue_scene, free);
+	insert(game->scenes, "ping_pong", ping_pong, free);
 
 	change_scene(game, "main_menu_-1_-1");
 
@@ -160,6 +164,7 @@ int main(int argc, char* argv[]) {
 		}
 		
 		deltaT = SDL_GetTicks() - t0;
+		game->deltaT = deltaT;
 		t0 = SDL_GetTicks();
 
 		SDL_SetRenderDrawColor(game->renderer, 0, 0, 0, 255);

@@ -168,7 +168,7 @@
             "y" : 5,
             "resource" : "src_assets_structures_door",
             "allow_pass_through" : 0,
-            "teleport_to_scene" : "simple_arena_3_4"
+            "teleport_to_scene" : "ping_pong_2_5"
         }
 
     ],

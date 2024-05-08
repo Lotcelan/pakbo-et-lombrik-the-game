@@ -55,6 +55,7 @@ typedef struct GameData {
     Entity* player; // on sépare le joueur du reste des entités
 
     FrameRateManager* frm;
+    float deltaT; // ajouté très tard dans la structure, donc bcp de fonctions le prenne encore en paramètre
 } GameData;
 
 GameData* init_game(int width_amount, int height_amount, int final_width, int final_height, const char* title, int capped_fps);

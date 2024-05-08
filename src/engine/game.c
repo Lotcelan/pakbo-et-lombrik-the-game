@@ -53,6 +53,7 @@ GameData* init_game(int width_amount, int height_amount, int final_width, int fi
     // Init framerate manager
     FrameRateManager* frm = init_frm(capped_fps);
     gameData->frm = frm;
+    gameData->deltaT = 0;
 
     gameData->player = NULL;
 
