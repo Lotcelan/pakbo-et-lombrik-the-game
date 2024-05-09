@@ -6,6 +6,7 @@
 #include "entities/duck_orange/duck_orange.h"
 #include "entities/duck_green/duck_green.h"
 #include "entities/duck_blue/duck_blue.h"
+#include "entities/la_mouche/la_mouche.h"
 #include "entities/blue_canard_boss/blue_canard_boss.h"
 #include "entities/player/player.h"
 #include "entities/projectile_arrow/projectile_arrow.h"
@@ -87,6 +88,10 @@ int main(int argc, char* argv[]) {
 	EntityInitFunc* i_duck_blue = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
 	*i_duck_blue = init_duck_blue;
 	insert(game->entities, "duck_blue", i_duck_blue, free);
+
+	EntityInitFunc* i_la_mouche = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
+	*i_la_mouche = init_la_mouche;
+	insert(game->entities, "la_mouche", i_la_mouche, free);
 
 	EntityInitFunc* wormcan = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
 	*wormcan = init_wormcan;

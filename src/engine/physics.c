@@ -177,3 +177,225 @@ void follow_player(GameData* game, Entity* e, int x_speed, int y_speed) {
     // }
 
 }
+
+float heuristic_a_star(int x1, int y1, int x2, int y2) {
+    // distnace à vol d'oiseau
+    
+    return sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+}
+
+GridGraph* create_grid_graph_from_game(GameData* game, Entity* entity_from) {
+    // on a besoin de l'entité source pour ajouter une "marge" autour des structure pour pas qu'elle se "cogne" dedans
+    // on a besoin d'ajouter la marge que sur le côté nord et ouest (car (x,y) = point supérieur gauche de l'entité)
+    
+    GridGraph* result = create_grid_graph(game->width_amount, game->height_amount);
+
+    if (game->current_scene == NULL || entity_from == NULL) return NULL;
+
+    int x_margin = entity_from->sprite->width / CELL_WIDTH;
+    int y_margin = entity_from->sprite->height / CELL_HEIGHT;
+
+    if (x_margin == 0) x_margin++; // pour le cas des entités qui ont une collision plus petite qu'une case, vu qu'on n'a pas assez de précision on prend de la marge
+    if (y_margin == 0) y_margin++;
+
+    List* current = game->current_scene->structures;
+    while (current != NULL) {
+        Box* coll = ((Structure*)current->value)->collision_box;
+        if (coll == NULL) {
+            current = current->next;
+            continue;
+        }
+        int x_from = coll->zone.x / CELL_WIDTH - x_margin;
+        int y_from = coll->zone.y / CELL_HEIGHT - y_margin;
+
+        int x_end = (coll->zone.x + coll->zone.w) / CELL_WIDTH;
+        int y_end = (coll->zone.y + coll->zone.h) / CELL_HEIGHT;
+
+        // "remplir" la zone de 0, on ne peut pas passer
+
+        // printf("From : (%d, %d), To : (%d, %d)\n", x_from, y_from, x_end, y_end);
+
+        for (int x = x_from; x <= x_end; x++) {
+            for (int y = y_from; y <= y_end; y++) {
+                bool* val = (bool*)malloc(sizeof(bool));
+                *val = false;
+                update_value_of_grid_node(x,y, val, free, result);
+            }
+        }
+        current = current->next;
+    }
+
+    // on remplie le reste avec des 1 pour dire qu'on peut passer
+    for (int x = 0; x < game->width_amount; x++) {
+        for (int y = 0; y < game->height_amount; y++) {
+            GridNode* current = get_grid_node(x, y, result);
+            if (current != NULL) {
+                if (current->value != NULL) {
+                    if (*((bool*)(current->value)) == false) {
+                        continue;
+                    }
+                }
+            }
+            bool* val = (bool*)malloc(sizeof(bool));
+            *val = 1;
+            update_value_of_grid_node(x,y, val, free, result);
+        }
+    }
+
+    return result;
+}
+
+
+void print_binary_heap_grid_node(binary_heap* bh) {
+    if (bh == NULL) return;
+    printf("[ ");
+    for (int i = 0; i < bh->size; i++) {
+        GridNode* n = (GridNode*)((binary_heap_basic_entry*)bh->array[i])->value;
+        printf("(%i %i) ", n->x, n->y);
+    }
+    printf("]\n");
+
+}
+
+bool compare_grid_node_game(void* n1, void* n2) {
+    if (n1 == n2) {
+        return true; // litterally same object (can be NULL)
+    }
+    if (n1 == NULL || n2 == NULL) {
+        return false;
+    }
+    binary_heap_basic_entry* e1 = (binary_heap_basic_entry*)n1;
+    GridNode* node1 = (GridNode*)(e1->value); // dans le contexte dans lequel on l'appelera, on compare une entrée binary heap et un voisin
+    GridNode* node2 = (GridNode*)n2;
+
+    if (node1->x == node2->x && node1->y == node2->y && node1->destroy_value == node2->destroy_value) {
+        bool* val1 = node1->value;
+        bool* val2 = node2->value;
+        if (val1 == val2) {
+            return true;
+        } else if (val1 == NULL || val2 == NULL) {
+            return false;
+        } else {
+            return *val1 == *val2;
+        }
+    } else {
+        return false;
+    }
+}
+
+
+GridGraph* a_star(Entity* entity_from, Entity* entity_to, GameData* game) {
+    // Renvoie un graphe donc chaque élément (g->nodes[index]->value) est UN POINTEUR GridNode* vers SON PARENT dans le parcours de A*
+
+    if (entity_from == NULL || entity_to == NULL) {
+        return NULL;
+    }
+
+    binary_heap* pqueue = binary_heap_create(game->width_amount * game->height_amount, binary_heap_basic_entry_compare); // contiendra les GridNode*
+
+    int x_from = entity_from->collision_box->zone.x / CELL_WIDTH;
+    int y_from = entity_from->collision_box->zone.y / CELL_HEIGHT;
+
+    int x_to = entity_to->collision_box->zone.x / CELL_WIDTH;
+    int y_to = entity_to->collision_box->zone.y / CELL_HEIGHT;
+
+    GridGraph* distances = create_grid_graph(game->width_amount, game->height_amount);
+    for (int x = 0; x < game->width_amount; x++) {
+        for (int y = 0; y < game->height_amount; y++) {
+            float* val = malloc(sizeof(float));
+            if (x == x_from && y == y_from) {
+                *val = 0.0;
+            } else {
+                *val = INFINITY;
+            }
+            update_value_of_grid_node(x, y, val, free, distances);
+        }
+    }
+    GridGraph* origins = create_grid_graph(game->width_amount, game->height_amount); // Chaque value est un GridNode avec le x,y de son parent et une value de NULL
+    for (int x = 0; x < game->width_amount; x++) {
+        for (int y = 0; y < game->height_amount; y++) {
+            update_value_of_grid_node(x, y, copy_grid_node(get_grid_node(x, y, origins)), destroy_grid_node, origins); // au début, tout le monde est sa propre origine
+        }
+    }
+
+
+
+    GridGraph* game_graph = create_grid_graph_from_game(game, entity_from);
+    // display_grid_graph_bool(game_graph);
+
+    // A PARTIR DE MAINTEANT ON FAIT CONFIRANCE A L'UNVIERS ET JE CHECK PAS QUE TOUT CE QUI EST RENVOYE EST NON NULL
+    // [Modifier ceci petit à petit] Temps de débug supplémentaire à cause de cette flemme : 5min
+
+    binary_heap_basic_entry* initial = create_binary_heap_basic_entry(get_grid_node(x_from, y_from, game_graph), *(float*)(get_grid_node(x_from, y_from, distances)->value));
+    binary_heap_insert(pqueue, initial);
+
+    while (!is_binary_heap_empty(pqueue)) {
+        print_binary_heap_grid_node(pqueue);
+        binary_heap_basic_entry* current = binary_heap_extract(pqueue);
+        GridNode* current_node = (GridNode*)current->value;
+        int x_current = current_node->x;
+        int y_current = current_node->y;
+
+        if (x_current == x_to && y_current == y_to) {
+            return origins;
+        }
+
+        GridNode** neighbours = get_neighbours(x_current, y_current, game_graph);
+        // display_grid_graph_float(distances);
+        for (int i = 0; i < 8; i++) {
+            // printf("%p\n", get_grid_node(x_current, y_current, distances));
+            // printf("%d %d\n", x_current, y_current);
+            if (neighbours[i] == NULL) {
+                continue;
+            }
+            
+            float distance_to_current = *(float*)(get_grid_node(x_current, y_current, distances)->value);
+            float distance_to_neighbour = *(float*)(get_grid_node(neighbours[i]->x, neighbours[i]->y, distances)->value);
+
+            float weight = (i == 0 || i == 2 || i == 5 || i == 7) ? 1.0 : 1.4; // en diagonale c'est sqrt(2) la distance :)
+            printf("%f %f %f\n", distance_to_current, weight, distance_to_neighbour);
+            if (distance_to_current + weight < distance_to_neighbour) {
+                printf("salut\n");
+                float* new_distance = malloc(sizeof(float));
+                *new_distance = distance_to_current + weight;
+                update_value_of_grid_node(neighbours[i]->x, neighbours[i]->y, new_distance, free, distances); // on a trouvé une meilleure distance
+
+                update_value_of_grid_node(neighbours[i]->x, neighbours[i]->y, copy_grid_node(get_grid_node(x_current, y_current, origins)), destroy_grid_node, origins); // et donc on change le parent
+
+                float* heuristic_distance = malloc(sizeof(float));
+                *heuristic_distance = *new_distance; // + heuristic_a_star(neighbours[i]->x, neighbours[i]->y, x_to, y_to);
+                if (is_present_in_binary_heap(pqueue, neighbours[i], compare_grid_node_game)) {
+                    binary_heap_modify(pqueue, neighbours[i], create_binary_heap_basic_entry(neighbours[i], *heuristic_distance), compare_grid_node_game);
+                } else {
+                    binary_heap_insert(pqueue, create_binary_heap_basic_entry(neighbours[i], *heuristic_distance));
+                }
+            }
+        }
+    }
+
+    // si on n'a rien trouvé
+    return NULL;
+}
+void follow_player_using_a_star(GameData* game, Entity* e, int x_speed, int y_speed) {
+    GridGraph* path = a_star(e, game->player, game);
+    display_grid_graph_grid_node_coords(path);
+
+    if (path == NULL) {
+        return;
+    }
+
+    int x_to = game->player->collision_box->zone.x / CELL_WIDTH;
+    int y_to = game->player->collision_box->zone.y / CELL_HEIGHT;
+
+    GridNode* current = get_grid_node(x_to, y_to, path);
+    while (current != NULL) {
+        Circle* c = init_circle(current->x * CELL_WIDTH + CELL_WIDTH / 2, current->y * CELL_HEIGHT + CELL_HEIGHT / 2, 5, (SDL_Color){255, 0, 0, 255});
+        push_render_stack_circle(game, c, true); // pour le debug
+        
+        if ( ((GridNode*)current->value)->x == e->collision_box->zone.x / CELL_WIDTH && ((GridNode*)current->value)->y == e->collision_box->zone.y / CELL_HEIGHT) {
+            break;
+        }
+        current = get_grid_node(((GridNode*)current->value)->x, ((GridNode*)current->value)->y, path);
+    }
+
+}

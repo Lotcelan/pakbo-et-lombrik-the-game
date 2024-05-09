@@ -174,13 +174,8 @@
     ],
     "entities" : [
         {
-            "identifier" : "duck_orange",
+            "identifier" : "la_mouche",
             "x" : 12,
-            "y" : 1
-        },
-        {
-            "identifier" : "duck_blue",
-            "x" : 13,
             "y" : 1
         }
     ]
