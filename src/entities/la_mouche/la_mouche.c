@@ -18,8 +18,8 @@ void update_la_mouche(GameData* game, Entity* la_mouche, float delta_t) {
 	}
 	
 
-	follow_player_using_a_star(game, la_mouche, 30, 30);
-	update_entity_movement(game, la_mouche, delta_t, true);
+	follow_player_using_a_star(game, la_mouche, 50, 50);
+	update_entity_movement(game, la_mouche, delta_t, false);
 	if (are_colliding(la_mouche->hit_box, game->player->hurt_box)) {
 		damage_entity(game, game->player, *damage, 1000, -1);
 		*is_attacking = true;
@@ -29,9 +29,6 @@ void update_la_mouche(GameData* game, Entity* la_mouche, float delta_t) {
 	}
 
 	// c'est le tank donc on fait briller une aura autour de lui
-	int glow_freq = 50;
-	Circle* aura = init_circle(la_mouche->x_position + 8, la_mouche->y_position + 8, 15, (SDL_Color){50, 50, 158, 150 + 75 * sin(2 * 3.14 * SDL_GetTicks() / 1000)});
-	push_render_stack_circle(game, aura, true);
 	return;
 }
 void event_handler_la_mouche(Entity* la_mouche, GameData* game) {

@@ -136,8 +136,9 @@ void destroy_grid_node(void* n) {
     if (node->destroy_value != NULL) {
         node->destroy_value(node->value);
     }
-    printf("deleting : %i %i\n", node->x, node->y);
-    // free(node);
+    // printf("deleting : %i %i\n", node->x, node->y);
+    // if (node != NULL) free(node); // Il faudrait vérifier di destroy_value destroy le noeud ou pas. Faut prier que oui
+    
 }
 
 GridNode* copy_grid_node(GridNode* n) {
