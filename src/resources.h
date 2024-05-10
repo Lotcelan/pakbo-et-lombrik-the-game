@@ -27,6 +27,9 @@ extern int src_assets_entities_projectiles_arrow_png_len;
 extern unsigned char src_assets_entities_projectiles_projectile_laser_png[];
 extern int src_assets_entities_projectiles_projectile_laser_png_len;
 
+extern unsigned char src_assets_entities_fly_png[];
+extern int src_assets_entities_fly_png_len;
+
 extern unsigned char src_assets_entities_lombric_png[];
 extern int src_assets_entities_lombric_png_len;
 

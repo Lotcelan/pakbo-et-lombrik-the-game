@@ -39,45 +39,42 @@ void event_handler_la_mouche(Entity* la_mouche, GameData* game) {
 
 void update_animation_la_mouche(Entity* e, float delta) {
 	(void)delta;
-	bool* is_attacking = get(e->objects, "is_attacking", strcmp);
-	if (is_attacking == NULL) {
-		return;
-	}
-	if (*is_attacking) {
-		e->etat = 2;
-	} else if (e->x_velocity == 0 && e->y_velocity == 0) {
-		e->etat = 0;
-	}
-	else {
-		e->etat = 1;
-	}
+	(void)e;
+	// bool* is_attacking = get(e->objects, "is_attacking", strcmp);
+	// if (is_attacking == NULL) {
+	// 	return;
+	// }
+	// if (*is_attacking) {
+	// 	e->etat = 2;
+	// } else if (e->x_velocity == 0 && e->y_velocity == 0) {
+	// 	e->etat = 0;
+	// }
+	// else {
+	// 	e->etat = 1;
+	// }
 
-	if (e->x_velocity > 0) {
-		e->sprite->orientation = SDL_FLIP_HORIZONTAL;
-	} else if (e->x_velocity < 0) {
-		e->sprite->orientation = SDL_FLIP_NONE;
-	}
+	// if (e->x_velocity > 0) {
+	// 	e->sprite->orientation = SDL_FLIP_HORIZONTAL;
+	// } else if (e->x_velocity < 0) {
+	// 	e->sprite->orientation = SDL_FLIP_NONE;
+	// }
 
 	return;
 }
 
 Entity* init_la_mouche(GameData* game, int x, int y) {
-	int* nbs = malloc(3 * sizeof(int));
-	nbs[0] = 2;	 // idle
-	nbs[1] = 5;	 // walk
-	nbs[2] = 3;	 // atack
-	int* lock = malloc(3 * sizeof(int));
-	lock[0] = 0;
-	lock[1] = 0;
-	lock[2] = 3;
+	int* nbs = malloc(1 * sizeof(int));
+	nbs[0] = 10;	 // idle
+	int* lock = malloc(1 * sizeof(int));
+	lock[0] = 10;
 
-	SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_entities_ducks_fullDuckBlue");	// to change
+	SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_entities_fly");
 
 	Entity* la_mouche = init_entity(x, y, 14, spritesheet, 16, 16, nbs, lock, update_la_mouche, event_handler_la_mouche, update_animation_la_mouche, 9, true);
 
-	int* duck_damage = malloc(sizeof(int));
-	*duck_damage = 1;
-	insert(la_mouche->objects, "damage", duck_damage, free);
+	int* fly_damage = malloc(sizeof(int));
+	*fly_damage = 1;
+	insert(la_mouche->objects, "damage", fly_damage, free);
 
 	bool* is_attacking = malloc(sizeof(bool));
 	*is_attacking = false;
