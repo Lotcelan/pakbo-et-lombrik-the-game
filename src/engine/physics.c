@@ -430,11 +430,16 @@ void follow_player_using_a_star(GameData* game, Entity* e, int x_speed, int y_sp
         e->x_velocity = x_speed;
     } else if (e->collision_box->zone.x > x_to) {
         e->x_velocity = -x_speed;
+    } else {
+        e->x_velocity = 0;
     }
+    
 
     if (e->collision_box->zone.y < y_to) {
         e->y_velocity = y_speed;
     } else if (e->collision_box->zone.y > y_to) {
         e->y_velocity = -y_speed;
+    } else {
+        e->y_velocity = 0;
     }
 }

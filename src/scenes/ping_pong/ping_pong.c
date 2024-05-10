@@ -57,9 +57,7 @@ void update_ping_pong(GameData* game) {
     free_box(right_coll);
     free_box(ball_coll);
 
-    push_render_stack_circle(game, ball, false); // on ne refait pas de malloc a chaque update donc non temporaire
-    push_render_stack_rect(game, left_platform, false);
-    push_render_stack_rect(game, right_platform, false);
+    
 
     return;
 }
@@ -107,6 +105,11 @@ void populate_ping_pong(GameData* game) {
 
     insert(game->current_scene->objects, "ball_x_velocity", ball_x_velocity, free);
     insert(game->current_scene->objects, "ball_y_velocity", ball_y_velocity, free);
+
+    push_render_stack_circle(game, ball, false); // on ne refait pas de malloc a chaque update donc non temporaire
+    push_render_stack_rect(game, left_platform, false);
+    push_render_stack_rect(game, right_platform, false);
+    
 }
 
 // void test(Entity* e, float delta){
