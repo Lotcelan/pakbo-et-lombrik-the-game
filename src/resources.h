@@ -96,6 +96,42 @@ extern int src_assets_backgrounds_blurredBrickBackgroundWithFloor_png_len;
 extern unsigned char src_assets_continue_png[];
 extern int src_assets_continue_png_len;
 
+extern unsigned char src_assets_cafet_betonTextureOmbre_png[];
+extern int src_assets_cafet_betonTextureOmbre_png_len;
+
+extern unsigned char src_assets_cafet_bgLeft_png[];
+extern int src_assets_cafet_bgLeft_png_len;
+
+extern unsigned char src_assets_cafet_bgRight_png[];
+extern int src_assets_cafet_bgRight_png_len;
+
+extern unsigned char src_assets_cafet_betonTexture_png[];
+extern int src_assets_cafet_betonTexture_png_len;
+
+extern unsigned char src_assets_cafet_comptoireMiddle_png[];
+extern int src_assets_cafet_comptoireMiddle_png_len;
+
+extern unsigned char src_assets_cafet_bouilloire_png[];
+extern int src_assets_cafet_bouilloire_png_len;
+
+extern unsigned char src_assets_cafet_tableMiddle_png[];
+extern int src_assets_cafet_tableMiddle_png_len;
+
+extern unsigned char src_assets_cafet_tableRight_png[];
+extern int src_assets_cafet_tableRight_png_len;
+
+extern unsigned char src_assets_cafet_ordinateurOpenBar_png[];
+extern int src_assets_cafet_ordinateurOpenBar_png_len;
+
+extern unsigned char src_assets_cafet_pastaMamaMia_png[];
+extern int src_assets_cafet_pastaMamaMia_png_len;
+
+extern unsigned char src_assets_cafet_tableLeft_png[];
+extern int src_assets_cafet_tableLeft_png_len;
+
+extern unsigned char src_assets_cafet_piedTable_png[];
+extern int src_assets_cafet_piedTable_png_len;
+
 extern unsigned char src_assets_hp_full_png[];
 extern int src_assets_hp_full_png_len;
 

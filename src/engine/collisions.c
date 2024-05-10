@@ -437,3 +437,24 @@ void change_structure_coordinates(Structure* s, int x, int y) {
 	s->position.x = x;
 	s->position.y = y;
 }
+
+bool is_entity_touching_the_top_of_a_structure(Entity* e, List* s_list) {
+	// name is explicit :)
+	
+	if (s_list == NULL || e == NULL) {
+		return false;
+	}
+
+	List* current = s_list;
+	while (current != NULL) {
+		Structure* s = (Structure*)(current->value);
+		if (e->collision_box->zone.y + e->sprite->height == s->position.y) {
+			return true;
+		}
+
+		current = current->next;
+	}
+
+
+	return false;
+}

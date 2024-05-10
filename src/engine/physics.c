@@ -398,21 +398,25 @@ void follow_player_using_a_star(GameData* game, Entity* e, int x_speed, int y_sp
     int y_to = game->player->collision_box->zone.y / CELL_HEIGHT;
 
     GridNode* current = get_grid_node(x_to, y_to, path);
+    if (current == NULL) return;
     GridNode* previous = current;
     // display_grid_graph_grid_node_coords(path);
     
     while (current != NULL) {
-        // Circle* c = init_circle(current->x * CELL_WIDTH + CELL_WIDTH / 2, current->y * CELL_HEIGHT + CELL_HEIGHT / 2, 5, (SDL_Color){255, 0, 0, 255});
-        // push_render_stack_circle(game, c, true); // pour le debug
+        Circle* c = init_circle(current->x * CELL_WIDTH + CELL_WIDTH / 2, current->y * CELL_HEIGHT + CELL_HEIGHT / 2, 5, (SDL_Color){255, 0, 0, 255});
+        push_render_stack_circle(game, c, true); // pour le debug
         
-        GridNode* next = current = get_grid_node(((GridNode*)current->value)->x, ((GridNode*)current->value)->y, path);
+        GridNode* next = get_grid_node(((GridNode*)current->value)->x, ((GridNode*)current->value)->y, path);
         // if ( ((GridNode*)next->value)->x == e->collision_box->zone.x / CELL_WIDTH && ((GridNode*)next->value)->y == e->collision_box->zone.y / CELL_HEIGHT) {
         //     break;
         // }
 
-        if ( ((GridNode*)(current->value))->x == next->x && ((GridNode*)(current->value))->y == next->y ) {
-            current = NULL;
-            continue;
+        if (next == NULL) {
+            break;
+        }
+
+        if ( current->x == next->x && current->y == next->y ) {
+            break;
         }
 
 
@@ -420,8 +424,9 @@ void follow_player_using_a_star(GameData* game, Entity* e, int x_speed, int y_sp
         current = next;
     }
 
-    // Circle* c = init_circle(previous->x * CELL_WIDTH + CELL_WIDTH / 2, previous->y * CELL_HEIGHT + CELL_HEIGHT / 2, 5, (SDL_Color){0, 255, 0, 255});
-    // push_render_stack_circle(game, c, true); // pour le debug
+    Circle* c = init_circle(previous->x * CELL_WIDTH + CELL_WIDTH / 2, previous->y * CELL_HEIGHT + CELL_HEIGHT / 2, 5, (SDL_Color){0, 255, 0, 255});
+    push_render_stack_circle(game, c, true); // pour le debug
+
 
     x_to = previous->x * CELL_WIDTH;
     y_to = previous->y * CELL_HEIGHT;

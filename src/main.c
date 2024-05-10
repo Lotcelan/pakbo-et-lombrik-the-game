@@ -19,6 +19,7 @@
 #include "scenes/scene01/scene01.h"
 #include "scenes/spawn_level/spawn_level.h"
 #include "scenes/simple_arena/simple_arena.h"
+#include "scenes/cafet_beginning/cafet_beginning.h"
 #include "scenes/ping_pong/ping_pong.h"
 #include "scenes/game_over/game_over.h"
 #include "scenes/hub_level/hub_level.h"
@@ -120,6 +121,8 @@ int main(int argc, char* argv[]) {
 	*continue_scene = init_continue;
 	SceneInit* ping_pong = (SceneInit*)malloc(sizeof(SceneInit));
 	*ping_pong = init_ping_pong;
+	SceneInit* cafet_beginning = (SceneInit*)malloc(sizeof(SceneInit));
+	*cafet_beginning = init_cafet_beginning;
 
 
 	insert(game->scenes, "scene01", scene01, free);
@@ -131,6 +134,7 @@ int main(int argc, char* argv[]) {
 	insert(game->scenes, "game_over", game_over, free);
 	insert(game->scenes, "continue", continue_scene, free);
 	insert(game->scenes, "ping_pong", ping_pong, free);
+	insert(game->scenes, "cafet_beginning", cafet_beginning, free);
 
 	change_scene(game, "main_menu_-1_-1");
 

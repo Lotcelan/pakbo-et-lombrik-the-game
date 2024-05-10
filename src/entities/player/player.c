@@ -36,6 +36,15 @@ void update_player(GameData* game, Entity* player, float delta_t) {
     }
     
     update_entity_movement(game, player, delta_t, true);
+
+    bool* can_jump = get(player->objects, "can_jump", strcmp);
+    if (can_jump != NULL) {
+        if (!(*can_jump)) {   
+            if (is_entity_touching_the_top_of_a_structure(player, game->current_scene->structures)) {
+                *can_jump = true;
+            }
+        }
+    }
 }
 void event_handler_player(Entity* player, GameData* game) {
     // SDL_Event event = game->event; // potentiellement avec switch
@@ -51,11 +60,18 @@ void event_handler_player(Entity* player, GameData* game) {
     }   
     
     
-    if (game->keyboardState[SDL_SCANCODE_UP]) {
-        player->y_velocity = -100;
-    } else if (game->keyboardState[SDL_SCANCODE_DOWN]) {
-        player->y_velocity = 100;
+    bool* can_jump = get(player->objects, "can_jump", strcmp);
+    if (can_jump != NULL) {
+        if (*can_jump) {
+            if (game->keyboardState[SDL_SCANCODE_UP]) {
+                player->y_velocity = -165; // 165 ca fait pile 32 pixels de saut (qu'on peut franchir)
+                *can_jump = false;
+            }
+        }
     }
+    // else if (game->keyboardState[SDL_SCANCODE_DOWN]) {
+    //     player->y_velocity = 100;
+    // }
 
     if (game->keyboardState[SDL_SCANCODE_LEFT]) {
         player->x_velocity = -100;
@@ -113,10 +129,12 @@ void update_animation_player(Entity* e, float delta) {
     }
     if (e->current_hp <= 0){
         e->etat = 4;
+        return;
     }
     
     if (e->x_velocity != 0){
         e->etat = 1;
+        return;
     }
         
     e->etat = 0;
@@ -153,6 +171,10 @@ Entity* init_player(GameData* game, int x, int y) {
     bool* is_tentacula = malloc(sizeof(bool));
     *is_tentacula = false;
     insert(player->objects, "is_tentacula", is_tentacula, free);
+
+    bool* can_jump = malloc(sizeof(bool));
+    *can_jump = true;
+    insert(player->objects, "can_jump", can_jump, free);
 
     return player;
 }
