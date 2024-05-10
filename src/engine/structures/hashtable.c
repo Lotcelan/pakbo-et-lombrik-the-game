@@ -83,6 +83,7 @@ void* get(HashTable* hashtable, const char* key, int (*cmp)(const char*, const c
     Entry* entry = hashtable->table[index];
 
     while (entry != NULL) {
+        // printf("%s\n", entry->key);
         if (cmp(entry->key, key) == 0) {
             return entry->value;
         }
@@ -105,7 +106,10 @@ void replace(HashTable* hashtable, const char* key, void* value, void (*destroy)
 
     while (entry != NULL) {
         if (cmp(entry->key, key) == 0) {
-            entry->destroy(entry);
+            if (entry->destroy != NULL) {
+                // printf("Destroying %p\n", entry->value);
+                entry->destroy(entry->value);
+            }
             entry->value = value;
             entry->destroy = destroy;
             return;

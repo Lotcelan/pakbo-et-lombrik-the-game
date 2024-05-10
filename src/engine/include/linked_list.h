@@ -64,5 +64,6 @@ List *merge_sort_cyclic(List *list, void delete(void*), int comparaison(void*, v
 
 List *map_list_cyclic(List *list, void *f(void *a), void delete(void*)) ;
 
-
+List* copy_list(List* to_copy, void* (*copy_value)(void*));
+List* copy_cyclic_list(List* to_copy, void* (*copy_value)(void*));
 #endif

@@ -21,6 +21,7 @@
 #include "scenes/simple_arena/simple_arena.h"
 #include "scenes/cafet_beginning/cafet_beginning.h"
 #include "scenes/cafet_crossing_counters/cafet_crossing_counters.h"
+#include "scenes/cafet_second_counter_beginning/cafet_second_counter_beginning.h"
 #include "scenes/ping_pong/ping_pong.h"
 #include "scenes/game_over/game_over.h"
 #include "scenes/hub_level/hub_level.h"
@@ -126,6 +127,8 @@ int main(int argc, char* argv[]) {
 	*cafet_beginning = init_cafet_beginning;
 	SceneInit* cafet_crossing_counters = (SceneInit*)malloc(sizeof(SceneInit));
 	*cafet_crossing_counters = init_cafet_crossing_counters;
+	SceneInit* cafet_second_counter_beginning = (SceneInit*)malloc(sizeof(SceneInit));
+	*cafet_second_counter_beginning = init_cafet_second_counter_beginning;
 
 
 	insert(game->scenes, "scene01", scene01, free);
@@ -139,6 +142,7 @@ int main(int argc, char* argv[]) {
 	insert(game->scenes, "ping_pong", ping_pong, free);
 	insert(game->scenes, "cafet_beginning", cafet_beginning, free);
 	insert(game->scenes, "cafet_crossing_counters", cafet_crossing_counters, free);
+	insert(game->scenes, "cafet_second_counter_beginning", cafet_second_counter_beginning, free);
 
 	change_scene(game, "main_menu_-1_-1");
 

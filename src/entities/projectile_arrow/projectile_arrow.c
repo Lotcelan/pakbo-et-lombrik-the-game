@@ -48,10 +48,10 @@ Entity* init_projectile_arrow(GameData* game, int x, int y) {
     int* lock = malloc(sizeof(int));
     lock[0] = 0;
     
-    SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_projectiles_arrow"); // to change
+    SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_entities_projectiles_arrow"); // to change
 
-    Entity* projectile_arrow = init_entity(x, y, 1, spritesheet, 16, 16, nbs, lock, update_projectile_arrow, event_handler_projectile_arrow, update_animation_projectile_arrow, 1, true);
-
+    Entity* projectile_arrow = init_entity(x, y, 1, spritesheet, 16, 16, nbs, lock, update_projectile_arrow, event_handler_projectile_arrow, update_animation_projectile_arrow, 999999, true);
+    projectile_arrow->hurt_box = NULL;
     return projectile_arrow;
 }
 

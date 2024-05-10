@@ -7,7 +7,7 @@ void update_arbalete(GameData* game, Entity* e, float delta_t) {
 
     bool* is_shooting = get(e->weapon->objects, "is_shooting", strcmp);
     int* attack_duration = get(e->weapon->objects, "attack_duration", strcmp);
-    List* projectiles = get(e->weapon->objects, "projectiles", strcmp);
+    // List* projectiles = get(e->weapon->objects, "projectiles", strcmp);
 
     if (is_shooting == NULL || attack_duration == NULL) {
         return;
@@ -25,6 +25,8 @@ void update_arbalete(GameData* game, Entity* e, float delta_t) {
             }
             Entity* projectile = (*projectile_func)(game, e->x_position, e->y_position);
             projectile->parent = e;
+            game->current_scene->entities = append_first(projectile, game->current_scene->entities);
+            
             int sign = 1;
             if (e->sprite->orientation == SDL_FLIP_HORIZONTAL) {
                 sign = -1;
@@ -32,7 +34,8 @@ void update_arbalete(GameData* game, Entity* e, float delta_t) {
             }
             projectile->x_velocity = e->x_velocity + sign * 100;
             
-            replace(e->weapon->objects, "projectiles", append_first(projectile, projectiles), free_entity, strcmp);
+            // List* copy_projectiles = copy_list(projectiles, copy_entity);
+            // replace(e->weapon->objects, "projectiles", append_first(projectile, copy_projectiles), free_entity_list, strcmp);
         } else {
             *attack_duration -= delta_t;
             if (*attack_duration <= 0) {
@@ -64,25 +67,26 @@ void update_arbalete(GameData* game, Entity* e, float delta_t) {
     // }
 
 
-    List* current = get(e->weapon->objects, "projectiles", strcmp);
-    while (current != NULL) {
-        Entity* projectile = (Entity*)(current->value);
-        if (projectile != NULL) {
-            projectile->update(game, projectile, delta_t);
-        }
-        current = current->next;
-    }
+    // List* current = (List*)get(e->weapon->objects, "projectiles", strcmp);
+    // while (current != NULL) {
+    //     Entity* projectile = (Entity*)(current->value);
+    //     if (projectile != NULL) {
+    //         projectile->update(game, projectile, delta_t);
+    //     }
+    //     current = current->next;
+    // }
 
-    current = get(e->weapon->objects, "projectiles", strcmp);
-    while (current != NULL){
-        Entity* entity = (Entity*)current->value;
-        if (entity->current_hp <= 0){
-            replace(e->weapon->objects, "projectiles", delete_compare(get(e->weapon->objects, "projectiles", strcmp), entity, compare_entities, free_entity), free, strcmp);
-            current = get(e->weapon->objects, "projectiles", strcmp);
-            continue;
-        }
-        current = current->next;
-    }
+    // current = get(e->weapon->objects, "projectiles", strcmp);
+    // while (current != NULL){
+    //     Entity* entity = (Entity*)current->value;
+    //     if (entity->current_hp <= 0){
+    //         List* projectiles_without_dead_one = delete_compare(get(e->weapon->objects, "projectiles", strcmp), entity, compare_entities, free_entity);
+    //         replace(e->weapon->objects, "projectiles", projectiles_without_dead_one, free_entity_list, strcmp);
+    //         current = get(e->weapon->objects, "projectiles", strcmp);
+    //         continue;
+    //     }
+    //     current = current->next;
+    // }
 
     return;
 }
@@ -107,21 +111,20 @@ void event_handler_arbalete(GameData* game, Weapon* weapon, Entity* e) {
 }
 
 void render_arbalete(GameData* game, Entity* e, float delta_t) {
-    // Do nothing
-    // for now just draw a rectangle
+
     if (e == NULL) {
         return;
     }
 
-    List* projectiles = get(e->weapon->objects, "projectiles", strcmp);
-    if (projectiles != NULL) {
-        List* current = projectiles;
-        while (current != NULL) {
-            render_entity(game, (Entity*)(current->value), delta_t);
-            current = current->next;
-        }
+    // List* projectiles = get(e->weapon->objects, "projectiles", strcmp);
+    // if (projectiles != NULL) {
+    //     List* current = projectiles;
+    //     while (current != NULL) {
+    //         render_entity(game, (Entity*)(current->value), delta_t);
+    //         current = current->next;
+    //     }
 
-    }
+    // }
 
 
     return;
@@ -147,8 +150,8 @@ Weapon* init_arbalete(GameData* game) {
     *attack_duration = -1;
     insert(weapon->objects, "attack_duration", attack_duration, free);
 
-    List* projectiles = NULL;
-    insert(weapon->objects, "projectiles", projectiles, free);
+    // List* projectiles = NULL;
+    // insert(weapon->objects, "projectiles", projectiles, free);
 
     return weapon;
 }

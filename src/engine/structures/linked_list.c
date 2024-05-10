@@ -534,3 +534,30 @@ List *map_list_cyclic(List *list, void *f(void *a), void delete(void*))
     }
 
 
+List* copy_list(List* to_copy, void* (*copy_value)(void*)) {
+    // Quand on veut copier LE CONTENU de la liste (genre une Entity)
+    List* new = NULL;
+    List* current = to_copy;
+    while (current != NULL) {
+        new = append_first(copy_value(current->value), new);
+        current = current->next;
+    }
+    return new;
+
+}
+
+List* copy_cyclic_list(List* to_copy, void* (*copy_value)(void*)) {
+    // Quand on veut copier LE CONTENU de la liste (genre une Entity)
+    List* new = NULL;
+    List* current = to_copy;
+    List* first = to_copy;
+    while (current != NULL) {
+        if ( current->next == first) break;
+        new = append_cyclic_first(copy_value(current->value), new);
+        current = current->next;
+    }
+    if (current != NULL) {
+        new = append_cyclic_first(copy_value(current->value), new);
+    }
+    return new;
+}

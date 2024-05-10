@@ -1,12 +1,17 @@
 #include "include/entity.h"
 
 void free_entity(void* entite) {
+	if  (entite == NULL) return;
 	Entity* e = (Entity*)entite;
 	int width, height;
+	if (e->sprite == NULL) {
+		free(e);
+		return;
+	}
 	SDL_QueryTexture(e->sprite->spriteSheet, NULL, NULL, &width, &height);
 	// on libère les listes de coordonnées
 	for (int i = 0; i < (height / e->sprite->height); i++) {
-		list_cyclic_delete(e->sprite->frames[i], &free);
+		list_cyclic_delete(e->sprite->frames[i], free);
 	}
 	free(e->sprite->frames);
 	free(e->sprite->Lock_liste);
@@ -117,7 +122,7 @@ Sprite* init_sprite(int framerate, SDL_Texture* spriteSheet, int width, int heig
 	res->Lock_liste = lock_liste;
 	res->Lock = lock_liste[0];
 	res->orientation = SDL_FLIP_NONE;
-
+	res->nbFrames = nbFrames;
 	// on cherche le nb d'animations différentes de l'entité
 	int sswidth, ssheight;	// ss pour spriteSheet
 	SDL_QueryTexture(spriteSheet, NULL, NULL, &sswidth, &ssheight);
@@ -139,6 +144,48 @@ Sprite* init_sprite(int framerate, SDL_Texture* spriteSheet, int width, int heig
 	res->currentFrame = frames[0];
 	return res;
 }
+
+void* copy_tuple(void* t) {
+	if (t == NULL) return NULL;
+	int* co = malloc(2*sizeof(int));
+	int* tuple = (int*)t;
+	co[0] = tuple[0];
+	co[1] = tuple[1];
+
+	return co;
+}
+
+void* copy_sprite(void* s) {
+	if (s == NULL) return NULL;
+	Sprite* sprite = (Sprite*) s;
+	Sprite* copy = malloc(sizeof(Sprite));
+	copy->framerate = sprite->framerate;
+	copy->timer = sprite->timer;
+	copy->spriteSheet = sprite->spriteSheet;
+	copy->width = sprite->width;
+	copy->height = sprite->height;
+	copy->Lock_liste = malloc(sizeof(int) * sprite->height);
+	for (int i = 0; i < sprite->height; i++) {
+		copy->Lock_liste[i] = sprite->Lock_liste[i];
+	}
+	copy->Lock = sprite->Lock;
+	copy->orientation = sprite->orientation;
+	copy->nbFrames = malloc(sizeof(int) * sprite->height);
+	for (int i = 0; i < sprite->height; i++) {
+		copy->nbFrames[i] = sprite->nbFrames[i];
+	}
+	copy->frames = malloc(sizeof(List*) * sprite->height);
+	int sswidth, ssheight;	// ss pour spriteSheet
+	SDL_QueryTexture(sprite->spriteSheet, NULL, NULL, &sswidth, &ssheight);
+	int nb_etats = ssheight / sprite->height;
+	for (int i = 0; i < nb_etats; i++) {
+		printf("%i\n", nb_etats);
+		copy->frames[i] = copy_cyclic_list(sprite->frames[i], copy_tuple);
+	}
+	copy->currentFrame = copy->frames[0];
+	return copy;
+}
+
 
 void damage_entity(GameData* game, Entity* e, int damage, int delay, int stagger_duration) {
 	// Si on veut que sur le dégât un délai soit appliquer, on met should_add_delay à true
@@ -183,4 +230,38 @@ int compare_entities(void* e1, void* e2) {
 void free_entity_list(void* lst) {
 	List* l = (List*)lst;
 	list_delete(l, free_entity);
+}
+
+void* copy_entity(void* entity) {
+	if (entity == NULL) return NULL;
+	Entity* e = (Entity*) entity;
+	Entity* copy = malloc(sizeof(Entity));
+	copy->x_position = e->x_position;
+	copy->y_position = e->y_position;
+	copy->x_velocity = e->x_velocity;
+	copy->y_velocity = e->y_velocity;
+	copy->etat = e->etat;
+	copy->sprite = (Sprite*)copy_sprite(e->sprite);
+	copy->update = e->update;
+	copy->event_handler = e->event_handler;
+	copy->update_animation = e->update_animation;
+	copy->objects = createHashTable(10);
+	copy->max_hp = e->max_hp;
+	copy->current_hp = e->current_hp;
+	copy->stagger_duration = e->stagger_duration;
+	copy->collision_box = copy_box(e->collision_box);
+	copy->prev_collision_box = copy_box(e->prev_collision_box);
+	copy->hurt_box = copy_box(e->hurt_box);
+	copy->prev_hurt_box = copy_box(e->prev_hurt_box);
+	if (e->hit_box != NULL) {
+		copy->hit_box = copy_box(e->hit_box);
+		copy->prev_hit_box = copy_box(e->prev_hit_box);
+	} else {
+		copy->hit_box = NULL;
+		copy->prev_hit_box = NULL;
+	}
+	copy->damage_delay = e->damage_delay;
+	copy->weapon = e->weapon;
+	copy->parent = e->parent;
+	return copy;
 }

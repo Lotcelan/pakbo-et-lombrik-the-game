@@ -43,6 +43,8 @@ typedef struct sprite {
     // cet entier étant le nombre de frames que dure cette animation
     int* Lock_liste;
     int Lock;
+
+    int* nbFrames;
     // orientation permet de ne pas avoir a faire un sprite qui regarde a droite et un sprite qui regarde a gauche
     SDL_RendererFlip orientation;
 } Sprite;
@@ -98,5 +100,7 @@ int compare_entities(void* e1, void* e2);
 void clear_entities(GameData* game);
 void change_entity_coordinates(Entity* e, int x, int y);
 void free_entity_list(void* lst);
-
+void* copy_entity(void* e);
+void* copy_sprite(void* sprite);
+void* copy_tuple(void* t);
 #endif
