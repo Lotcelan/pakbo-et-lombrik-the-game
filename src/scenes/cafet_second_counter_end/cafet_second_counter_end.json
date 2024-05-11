@@ -155,25 +155,25 @@
             "teleport_to_scene" : "none"
         },
         {
-            "identifier" : "comptoire135",
+            "identifier" : "comptoire134",
             "x" : 13,
-            "y" : 5,
+            "y" : 4,
             "resource" : "src_assets_cafet_tableLeft",
             "allow_pass_through" : 0,
             "teleport_to_scene" : "none"
         },
         {
-            "identifier" : "comptoire145",
+            "identifier" : "comptoire144",
             "x" : 14,
-            "y" : 5,
+            "y" : 4,
             "resource" : "src_assets_cafet_tableMiddle",
             "allow_pass_through" : 0,
             "teleport_to_scene" : "none"
         },
         {
-            "identifier" : "comptoire155",
+            "identifier" : "comptoire154",
             "x" : 15,
-            "y" : 5,
+            "y" : 4,
             "resource" : "src_assets_cafet_tableMiddle",
             "allow_pass_through" : 0,
             "teleport_to_scene" : "none"
