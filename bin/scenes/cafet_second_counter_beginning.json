@@ -404,20 +404,5 @@
         }
     ],
     "entities" : [
-        {
-            "identifier" : "la_mouche",
-            "x" : 10,
-            "y" : 1
-        },
-        {
-            "identifier" : "la_mouche",
-            "x" : 5,
-            "y" : 4
-        },
-        {
-            "identifier" : "la_mouche",
-            "x" : 12,
-            "y" : 3
-        }
     ]
 }

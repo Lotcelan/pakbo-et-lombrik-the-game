@@ -160,13 +160,13 @@ Entity* init_player(GameData* game, int x, int y) {
 
     Entity* player = init_entity(x, y, 14, spritesheet, 16, 16, nbs, lock, update_player, event_handler_player, update_animation_player, 6, true);
 
-    WeaponInitFunc* arbalete = get(game->weapons, "arbalete", strcmp);
-    // WeaponInitFunc* basic_sword = get(game->weapons, "basic_sword", strcmp);
-    if (arbalete == NULL) {
+    // WeaponInitFunc* arbalete = get(game->weapons, "arbalete", strcmp);
+    WeaponInitFunc* basic_sword = get(game->weapons, "basic_sword", strcmp);
+    if (basic_sword == NULL) {
         printf("Error: weapon not found\n");
         return NULL;
     }
-    player->weapon = (*arbalete)(game);
+    player->weapon = (*basic_sword)(game);
 
     bool* is_tentacula = malloc(sizeof(bool));
     *is_tentacula = false;

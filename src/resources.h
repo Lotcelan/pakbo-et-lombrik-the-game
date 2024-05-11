@@ -114,6 +114,9 @@ extern int src_assets_cafet_comptoireMiddle_png_len;
 extern unsigned char src_assets_cafet_bouilloire_png[];
 extern int src_assets_cafet_bouilloire_png_len;
 
+extern unsigned char src_assets_cafet_giganticFork_png[];
+extern int src_assets_cafet_giganticFork_png_len;
+
 extern unsigned char src_assets_cafet_tableMiddle_png[];
 extern int src_assets_cafet_tableMiddle_png_len;
 

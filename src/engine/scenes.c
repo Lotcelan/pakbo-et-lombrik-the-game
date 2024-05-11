@@ -152,7 +152,6 @@ void render_scene(GameData* game, float delta) {
     Entity* e;
     while (liste_entites != NULL){
         e = liste_entites->value;
-        
         render_entity(game, e, delta);
         liste_entites = liste_entites->next;
     }
@@ -274,6 +273,7 @@ void change_scene(GameData* game, const char* next) {
     // game->current_scene->destroy_scene;
     game->current_scene = (*next_scene)(game);
     game->current_scene->populate(game);
+
     
     if ((x < 0 || y < 0 || x >= game->width_amount || y >= game->height_amount) && (x != -1 && y != -1)) {
         fprintf(stderr, "Invalid coordinates\n");

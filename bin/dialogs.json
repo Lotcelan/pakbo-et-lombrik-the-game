@@ -43,5 +43,11 @@
                 "branches" : []
             }
         ]
+    },
+    "second_counter_fork_blocking" : {
+        "message" : "Oh non ! Il te faut te debarasser des mouches pour continuer...",
+        "font_name" : "suifak_small",
+        "optionts" : [],
+        "branches" : []
     }
 }
