@@ -42,13 +42,15 @@ Le fichier `data.json` doit suivre ce format :
     "background" : "src_assets_{name_of_the_file_including_the_path_with_underscores}", // Key of the resource hashmap
     "structures" : [
         {
+			"identifier" : "wall00", // Un nom, si possible unique, auquel on pourra se référer dans le code
             "x" : 0, // Grid position
             "y" : 0, // Grid position
-            "texture" : "src_assets_structures_wall",
+            "texture" : "src_assets_structures_wall", // Ici on suit le chemin dans assets du fichier png (un "_" pour rentrer dans un sous dossier). Ne pas oublier de laner assests_to_code pour ajouter les images !
             "allow_pass_through" : 8, // On 4 bits : first bit : left, then cyclig clockwise
             "teleport_to_scene" : "none"
         },
         {
+			"identifier" : "door105",
             "x" : 10,
             "y" : 5,
             "texture" : "src_assets_structures_door",
