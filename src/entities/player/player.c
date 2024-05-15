@@ -40,7 +40,9 @@ void update_player(GameData* game, Entity* player, float delta_t) {
     bool* can_jump = get(player->objects, "can_jump", strcmp);
     if (can_jump != NULL) {
         if (!(*can_jump)) {   
-            if (is_entity_touching_the_top_of_a_structure(player, game->current_scene->structures)) {
+            Structure* s = is_entity_touching_the_top_of_a_structure(player, game->current_scene->structures);
+            if (s != NULL) {
+                printf("tu peux jump mon reuf %s\n", s->identifier);
                 *can_jump = true;
             }
         }

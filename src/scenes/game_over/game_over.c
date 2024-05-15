@@ -24,15 +24,16 @@ void update_game_over(GameData* game){
     // Pcq on a du appeler change_scene(game, "game_over_-1_-1"), alors on remet le joueur à sa position initiale
     change_entity_coordinates(game->player, game->player->prev_collision_box->zone.x, game->player->prev_collision_box->zone.y);
 
-    game->player->event_handler = &immobile;
-    game->player->update_animation = &animation_mort;
-    game->player->update = &update_mort;
+    game->player->event_handler = immobile;
+    game->player->update_animation = animation_mort;
+    game->player->update = update_mort;
     // si on atteint la dernière frame de l'animation de mort
     int* position = (int*) game->player->sprite->currentFrame->value;
     if (position[0] == 8){
         game->player->sprite->currentFrame = game->player->sprite->frames[0];
         game->player->update = update_player;
         game->player->event_handler = event_handler_player;
+        printf("chgt animation player\n");
         game->player->update_animation = update_animation_player;
         change_scene(game, "continue_7_5");
         
