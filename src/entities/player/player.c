@@ -104,6 +104,7 @@ void event_handler_player(Entity* player, GameData* game) {
 
 void update_animation_player(Entity* e, float delta) {
     (void)delta;
+    printf("salut\n");
     bool* is_tentacula = get(e->objects, "is_tentacula", strcmp);
     if (is_tentacula != NULL) {
         if (*is_tentacula) {

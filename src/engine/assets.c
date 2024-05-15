@@ -109,7 +109,7 @@ void render_entity(GameData* game, Entity* e, float delta) {
     // si on peut (l'animation n'est pas lock -- voir sprite.Lock) on met a jour l'animation de l'entité, en général :
     // soit on change l'état de e en fonction de conditions relatives à l'entité e en question
     // soit (si on n'a pas changé d'etat) on met a jour le sprite de e (le timer notamment)
-    if (sprite->Lock){
+    if (sprite->Lock > 0){
         sprite->Lock -= 1;
         update_frame(e, delta);
     }
