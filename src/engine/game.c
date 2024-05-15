@@ -7,7 +7,7 @@ GameData* init_game(int width_amount, int height_amount, int final_width, int fi
 
     GameData* gameData = (GameData*)malloc(sizeof(GameData));
 
-    gameData->state = LOADING;
+    gameData->state = CHANGING;
     SDL_Window* window = SDL_CreateWindow(title,
                                           SDL_WINDOWPOS_CENTERED,
                                           SDL_WINDOWPOS_CENTERED,
@@ -39,6 +39,9 @@ GameData* init_game(int width_amount, int height_amount, int final_width, int fi
     HashTable* entities = createHashTable(10);
     gameData->entities = entities;
 
+    HashTable* weapons = createHashTable(10);
+    gameData->weapons = weapons;
+
     gameData->event = (SDL_Event){0};
     gameData->window = window;
     gameData->renderer = renderer;
@@ -50,8 +53,12 @@ GameData* init_game(int width_amount, int height_amount, int final_width, int fi
     // Init framerate manager
     FrameRateManager* frm = init_frm(capped_fps);
     gameData->frm = frm;
+    gameData->deltaT = 0;
+
+    gameData->player = NULL;
 
     SDL_RenderSetLogicalSize(renderer, CELL_WIDTH * width_amount, CELL_HEIGHT * height_amount);
+    gameData->keyboardState = SDL_GetKeyboardState(NULL);
 
     return gameData;
 
@@ -63,8 +70,12 @@ void free_game(GameData* gameData) {
     destroyHashTable(gameData->fonts);
     destroyHashTable(gameData->scenes);
     destroyHashTable(gameData->entities);
+    destroyHashTable(gameData->weapons);
     SDL_DestroyRenderer(gameData->renderer);
     SDL_DestroyWindow(gameData->window);
+    destroy_dialog(gameData->current_dialog);
+    // free(gameData->keyboardState); jsuis con c'est un const
+    free_entity(gameData->player);
     free(gameData);
 }
 

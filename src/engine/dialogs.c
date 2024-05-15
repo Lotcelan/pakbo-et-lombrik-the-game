@@ -83,6 +83,8 @@ Dialog* create_dialog_from_json(json_t* root, Dialog* previous) {
 }
 
 Dialog* get_dialog_from_json(const char* dialog_name) {
+    // Fonction à utiliser pour charger un dialogue : juste indiquer l'entrée dans le json dialogs.json et ca renvoie l'objet Dialog* à mettre dand game->current_dialog
+
 
     FILE *file = fopen("./dialogs.json", "r");
 
@@ -144,6 +146,7 @@ void dialog_event_handler(GameData* game) {
 }
 
 void update_dialog(GameData* game) {
+    (void)game;
     return;
 }
 
@@ -197,11 +200,11 @@ void render_dialog(GameData* game) {
 
 void destroy_dialog(void* d) {
 
-    Dialog* dialog = (Dialog*)d;
-
-    if (dialog == NULL) {
+    if (d == NULL) {
         return;
     }
+    Dialog* dialog = (Dialog*)d;
+
 
     // Go up to the root
     Dialog* current = dialog;

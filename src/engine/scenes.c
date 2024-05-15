@@ -2,7 +2,9 @@
 #include "include/game.h"
 
 void init_scene_with_json(GameData* game, json_t *root, Scene* scene) {
-    const char *name = json_string_value(json_object_get(root, "name"));
+    // changes the fiels of `scene`according to the json object `root
+
+    // const char *name = json_string_value(json_object_get(root, "name"));
     const char *background = json_string_value(json_object_get(root, "background"));
 
     strcpy(scene->background, background);
@@ -49,11 +51,11 @@ void init_scene_with_json(GameData* game, json_t *root, Scene* scene) {
 
         printf("%p\n", get(game->entities, entity, strcmp));
         EntityInitFunc* func = (EntityInitFunc*)get(game->entities, entity, strcmp);
-        printKeys(game->entities);
+        // printKeys(game->entities);
         if (func != NULL) {
             
         
-            Entity* e = (*func)(game, x, y); // initialisation de l'entité
+            Entity* e = (*func)(game, x * CELL_WIDTH, y* CELL_HEIGHT); // initialisation de l'entité
 
             scene->entities = append_first(e, scene->entities);
             // printf("Entity %zu: x=%d, y=%d, respawn_delay=%d, entity=%s\n",
@@ -120,14 +122,11 @@ Scene* init_scene(GameData* game, char* title) {
 void render_scene(GameData* game, float delta) {
     // Using game->renderer, render the scene : the background then all the textures
 
-    // Load the background texture contained in game->current_scene->background and resize it to width and height of the window
-    // Then render it at (0, 0)
-    // delta is the tick time between previous frame and current frame
-
     if (game->current_scene == NULL) {
         return;
     }
 
+    // If there is a screen shake, apply the modification to the renderer
     if (game->current_scene->screen_shake != NULL) {
         ScreenShake* shake = game->current_scene->screen_shake;
         if (shake->time < shake->duration) {
@@ -144,42 +143,41 @@ void render_scene(GameData* game, float delta) {
     } else {
         SDL_RenderSetLogicalSize(game->renderer, CELL_WIDTH * game->width_amount, CELL_HEIGHT * game->height_amount);
     }
+
+    // Render everythint to render except entities
     render_stack(game);
+    
     // Render all the entities
     List* liste_entites = game->current_scene->entities;
     Entity* e;
-    Sprite* sprite;
     while (liste_entites != NULL){
         e = liste_entites->value;
-        sprite = get_sprite(e);
-        // si on peut (l'animation n'est pas lock -- voir sprite.Lock) on met a jour l'animation de l'entité, en général :
-        // soit on change l'état de e en fonction de conditions relatives à l'entité e en question
-        // soit (si on n'a pas changé d'etat) on met a jour le sprite de e (le timer notamment)
-        
-        //e->update_animation(e, delta);
-        if (sprite->Lock){
-            sprite->Lock -= 1;
-            update_frame(e, delta);
-        }
-        else{
-            int etat_old = e->etat;
-            e->update_animation(e, delta);
-            sprite->Lock = sprite->Lock_liste[e->etat];
-            if (e->etat == etat_old){
-                update_frame(e, delta);
-            }
-        }
-        // zone de la sprite sheet à afficher
-        // rappel : sprite->frames est une liste de coordonnées
-        int* frame = e->sprite->currentFrame->value;    // tableau de taille 2 : [x, y]
-        // printf("\n\n%d, %d\n\n", frame[0], frame[1]);
-        SDL_Rect spriteRect = {.x = frame[0]*sprite->width, .y = frame[1]*sprite->height, .w = sprite->width, .h = sprite->height};
-        // position du sprite à l'écran
-        SDL_Rect destRect = {.x = e->x_position, .y = e->y_position, .w = sprite->width, .h = sprite->height};
-        // On affiche la bonne frame au bon endroit
-        SDL_RenderCopyEx(game->renderer, sprite->spriteSheet, &spriteRect, &destRect, 0, NULL, sprite->orientation);
+        render_entity(game, e, delta);
         liste_entites = liste_entites->next;
     }
+    if (game->player != NULL) {
+        if (game->player->x_position != -1 && game->player->y_position != -1) {
+            render_entity(game, game->player, delta);
+        }
+    }
+
+}
+
+void free_scene_(Scene* scene){
+    // Destroy the hashtable "object"
+    // Entry** entry = (Entry**)(scene->objects->table);
+    // il faudra faire un for sur la longueur du Entry**, puis pour chacun des entry[i] faire Entry* current = entry[i] et itérer dessus
+    
+    // while (entry != NULL) {
+    //     Entry* next = (Entry*)(entry->next);
+    //     free(entry->key);
+    //     ((ObjectEntry*) (entry->value))->destroy_value (entry->value);
+    //     free(entry);
+    //     entry = next;
+    // }
+    // free(scene->objects);
+    (void)scene;
+    return;
 }
 
 void free_scene(Scene* scene) {
@@ -192,7 +190,9 @@ void free_scene(Scene* scene) {
     free(scene);
 }
 
-
+void free_scene_void(void* scene) {
+    free_scene((Scene*)scene);
+}
 
 
 
@@ -216,14 +216,72 @@ void destroy_screen_shake(GameData* game) {
     }
 }
 
-void change_scene(GameData* game, char* next) {
-    Scene* next_scene = get(game->scenes, next, strcmp);
+void destroy_entities_list(List* entities) {
+    list_delete(entities, free_entity);
+}
+
+void change_scene(GameData* game, const char* next) {
+
+    // Parse the next as [name (potentially with '_')]_[x]_[y]
+    
+    char* name = (char*)malloc(sizeof(char) * strlen(next)); // chaînes pour les trois éléments à extraire
+    int x, y; // valeurs numériques à extraire
+
+    int underscore_1_pos = -1; // position du premier underscore (celui qu précède x)
+    int underscore_2_pos = -1; // position du deuxième underscore (celui qui précède y)
+
+    for (int i = strlen(next) - 1; i >= 0; i--) {
+        if (next[i] == '_') {
+            if (underscore_2_pos == -1) {
+                underscore_2_pos = i;
+            } else if (underscore_1_pos == -1) {
+                underscore_1_pos = i;
+                break;
+            }
+        }
+    }
+
+    if (underscore_1_pos == -1 || underscore_2_pos == -1) {
+        fprintf(stderr, "Invalid scene name %s\n", next);
+        return;
+    }
+
+    strncpy(name, next, underscore_1_pos);
+    name[underscore_1_pos] = '\0';
+    x = atoi(next + underscore_1_pos + 1);
+    y = atoi(next + underscore_2_pos + 1);
+    
+    printf("Changement de scène pour %s en %d, %d\n", name, x, y);
+
+    SceneInit* next_scene = get(game->scenes, name, strcmp);
+    free(name);
+    
     if (next_scene == NULL) {
         fprintf(stderr, "Scene %s not found\n", next);
         return;
     }
+    game->state = CHANGING;
+
     destroy_render_stack(game);
-    game->current_scene = next_scene;
+    // game->current_scene->render_stack = NULL;
+
+    if (game->current_scene != NULL) {
+        // destroy the content
+        clear(game->current_scene->objects);
+        destroy_entities_list(game->current_scene->entities);
+    }
+    // game->current_scene->destroy_scene;
+    game->current_scene = (*next_scene)(game);
     game->current_scene->populate(game);
+
+    
+    if ((x < 0 || y < 0 || x >= game->width_amount || y >= game->height_amount) && (x != -1 && y != -1)) {
+        fprintf(stderr, "Invalid coordinates\n");
+        return;
+    }
+
+    change_entity_coordinates(game->player, x * CELL_WIDTH, y * CELL_HEIGHT);
+
+
 }
 

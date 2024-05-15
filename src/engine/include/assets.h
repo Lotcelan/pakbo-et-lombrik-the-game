@@ -5,8 +5,13 @@
 #include <string.h>
 #include "game.h"
 #include "../../resources.h"
+#include "collisions.h"
+#include "entity.h"
+#include "weapon.h"
 
 typedef struct GameData GameData;
+typedef struct Box Box;
+typedef struct Entity Entity;
 
 typedef struct Structure {
     const char* identifier;
@@ -14,6 +19,7 @@ typedef struct Structure {
     SDL_Rect position;
     int allow_pass_through;
     const char* teleport_to_scene;
+    Box* collision_box;
 } Structure;
 
 typedef struct RenderEntry {
@@ -48,6 +54,14 @@ typedef struct Rectangle {
     SDL_Color fill_color;
 } Rectangle;
 
+typedef struct Circle {
+    int x;
+    int y;
+    int radius;
+    SDL_Color color;
+} Circle;
+
+
 typedef struct MemTexture {
     int size;
     unsigned char* data;
@@ -59,49 +73,37 @@ void render_texture(GameData* game, void* key);
 void render_structure(GameData* game, void* key);
 void render_text(GameData* game, void* key);
 void render_rectangle(GameData* game, void* key);
+void render_circle(GameData* game, void* key);
 
+void render_entity(GameData* game, Entity* e, float delta);
 void render_wrap_text(GameData* game, void* key, int wrap_length);
 
 Text* init_text(GameData* game, const char* text, SDL_Color color, int x, int y, TTF_Font* font);
 Structure* init_structure(GameData* game, const char* identifier, const char* resource, int x, int y, int allow_pass_through, const char* teleport_to_scene);
 Rectangle* init_rectangle(int x, int y, int w, int h, SDL_Color outline_color, SDL_Color fill_color);
 Texture* init_texture_from_memory(GameData* game, char* name, int x, int y);
+Circle* init_circle(int x, int y, int radius, SDL_Color color);
 
 void free_structure(void* s);
 void free_text(void* t);
 void free_rectangle(void* r);
 void free_texture(void* t);
+void free_mem_texture(void* t);
+void free_circle(void* c);
 
 void push_render_stack(GameData* game, void* key, void (*render)(GameData*, void*), void (*destroy)(void*), bool is_temporary);
 void push_render_stack_text(GameData* game, Text* text, bool is_temporary);
 void push_render_stack_structure(GameData* game, Structure* structure, bool is_temporary);
 void push_render_stack_texture(GameData* game, Texture* texture, bool is_temporary);
 void push_render_stack_rect(GameData* game, Rectangle* rect, bool is_temporary);
+void push_render_stack_circle(GameData* game, Circle* circle, bool is_temporary);
+
 void push_background_structures(GameData* game);
+
 void render_stack(GameData* game);
 void render_no_destroy(GameData* game);
 void destroy_render_stack(GameData* game);
 
+void destroy_font(void* f);
 
-/*
-SDL_Surface* surface = IMG_Load("path_to_image.png");
-if (!surface) {
-    // handle error
-}
-
-SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
-if (!texture) {
-    // handle error
-}
-
-SDL_FreeSurface(surface); // we can free the surface after the texture is created
-
-SDL_Rect srcRect = {0, 0, width_of_texture, height_of_texture};
-SDL_Rect dstRect = {x_position_on_screen, y_position_on_screen, width_on_screen, height_on_screen};
-
-SDL_RenderCopy(renderer, texture, &srcRect, &dstRect);
-
-// when done with the texture
-SDL_DestroyTexture(texture);
-*/
 #endif

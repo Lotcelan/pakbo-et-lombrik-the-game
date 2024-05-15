@@ -17,7 +17,7 @@ void destroyHashTable(HashTable* hashtable) {
         Entry* entry = hashtable->table[i];
         while (entry != NULL) {
             Entry* next = entry->next;
-            free(entry);
+            entry->destroy(entry);
             entry = next;
         }
     }
@@ -27,6 +27,11 @@ void destroyHashTable(HashTable* hashtable) {
 }
 
 unsigned int hash(const char* key, int size) {
+    if (key == NULL) {
+        printf("HASH D'UNE CLE NULLE, C PAS NORMALE\n");
+        return 0;
+    }
+    
     unsigned char* str = (unsigned char*)key;
     unsigned int hash = 5381;
     int c;
@@ -39,12 +44,13 @@ unsigned int hash(const char* key, int size) {
 }
 
 
-void insert(HashTable* hashtable, void* key, void* value) {
+void insert(HashTable* hashtable, void* key, void* value, void (*destroy)(void*)) {
     unsigned int index = hash(key, hashtable->size);
     Entry* entry = (Entry*)malloc(sizeof(Entry));
     entry->key = key;
     entry->value = value;
     entry->next = hashtable->table[index];
+    entry->destroy = destroy;
     hashtable->table[index] = entry;
 }
 
@@ -69,10 +75,15 @@ void removeFrom(HashTable* hashtable, void* key) {
 }
 
 void* get(HashTable* hashtable, const char* key, int (*cmp)(const char*, const char*)) {
+    if (key == NULL) {
+        return NULL;
+    }
+    
     unsigned int index = hash(key, hashtable->size);
     Entry* entry = hashtable->table[index];
 
     while (entry != NULL) {
+        // printf("%s\n", entry->key);
         if (cmp(entry->key, key) == 0) {
             return entry->value;
         }
@@ -86,13 +97,21 @@ int contains(HashTable* hashtable, void* key, int (*cmp)(const char*, const char
     return get(hashtable, key, cmp) != NULL;
 }
 
-void replace(HashTable* hashtable, const char* key, void* value, int (*cmp)(const char*, const char*)) {
+void replace(HashTable* hashtable, const char* key, void* value, void (*destroy)(void* value), int (*cmp)(const char*, const char*)) {
+    if (hashtable == NULL) {
+        return;
+    }
     unsigned int index = hash(key, hashtable->size);
     Entry* entry = hashtable->table[index];
 
     while (entry != NULL) {
         if (cmp(entry->key, key) == 0) {
+            if (entry->destroy != NULL) {
+                // printf("Destroying %p\n", entry->value);
+                entry->destroy(entry->value);
+            }
             entry->value = value;
+            entry->destroy = destroy;
             return;
         }
         entry = entry->next;
@@ -100,11 +119,17 @@ void replace(HashTable* hashtable, const char* key, void* value, int (*cmp)(cons
 }
 
 void clear(HashTable* hashtable) {
+    if (hashtable == NULL) {
+        return;
+    }
+    
     for (int i = 0; i < hashtable->size; i++) {
         Entry* entry = hashtable->table[i];
         while (entry != NULL) {
             Entry* next = entry->next;
-            free(entry);
+            if (entry->destroy != NULL) {
+                entry->destroy(entry);
+            }
             entry = next;
         }
         hashtable->table[i] = NULL;

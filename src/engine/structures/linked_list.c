@@ -36,6 +36,35 @@ List *create_list(void *value, List *next)
         return list ;
     }
 
+List* delete_compare(List* l, void* value, int compare(void*, void*), void delete(void*)) {
+    if (l == NULL) {
+        return NULL;
+    }
+    if (l->next == NULL) {
+        if (compare(l->value, value) == 1) {
+            if (delete != NULL) {
+                delete(l->value);
+            }
+            free(l);
+            return NULL;
+        }
+        return l;
+    }
+    if (compare(l->value, value) == 1) {
+        List* next = l->next;
+        if (delete != NULL) {
+            delete(l->value);
+        }
+        free(l);
+        return delete_compare(next, value, compare, delete);
+    }
+    l->next = delete_compare(l->next, value, compare, delete);
+    return l;
+
+
+}
+
+
 List *list_del_first( List *l, void delete(void*) ) 
     {
         if (l == NULL)
@@ -505,3 +534,30 @@ List *map_list_cyclic(List *list, void *f(void *a), void delete(void*))
     }
 
 
+List* copy_list(List* to_copy, void* (*copy_value)(void*)) {
+    // Quand on veut copier LE CONTENU de la liste (genre une Entity)
+    List* new = NULL;
+    List* current = to_copy;
+    while (current != NULL) {
+        new = append_first(copy_value(current->value), new);
+        current = current->next;
+    }
+    return new;
+
+}
+
+List* copy_cyclic_list(List* to_copy, void* (*copy_value)(void*)) {
+    // Quand on veut copier LE CONTENU de la liste (genre une Entity)
+    List* new = NULL;
+    List* current = to_copy;
+    List* first = to_copy;
+    while (current != NULL) {
+        if ( current->next == first) break;
+        new = append_cyclic_first(copy_value(current->value), new);
+        current = current->next;
+    }
+    if (current != NULL) {
+        new = append_cyclic_first(copy_value(current->value), new);
+    }
+    return new;
+}

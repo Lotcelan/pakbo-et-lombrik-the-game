@@ -16,6 +16,7 @@
 #include "framerate.h"
 #include "entity.h"
 
+
 #include <math.h>
 
 #define CELL_WIDTH 16
@@ -24,10 +25,9 @@
 typedef struct Scene Scene;
 typedef struct Dialog Dialog;
 
-
 typedef enum GameStatus {
     RUNNING,
-    LOADING,
+    CHANGING,
     PAUSED,
     CLOSING,
 } GameStatus;
@@ -43,13 +43,19 @@ typedef struct GameData {
     int height_amount;
     SDL_Renderer* renderer;
     SDL_Event event;
+    const Uint8* keyboardState;
+
 
     HashTable* resources;
     HashTable* fonts;
     HashTable* scenes;
     HashTable* entities; // FONCTIONS d'initialisation
+    HashTable* weapons; // FONCTIONS d'initialisation
+
+    Entity* player; // on sépare le joueur du reste des entités
 
     FrameRateManager* frm;
+    float deltaT; // ajouté très tard dans la structure, donc bcp de fonctions le prenne encore en paramètre
 } GameData;
 
 GameData* init_game(int width_amount, int height_amount, int final_width, int final_height, const char* title, int capped_fps);

@@ -27,6 +27,12 @@ typedef struct ScreenShake {
 typedef struct GameData GameData;
 typedef struct Structure Structure;
 
+typedef struct ObjectEntry {
+    void* value;
+    void (*destroy_value) (void* value);
+} ObjectEntry;
+
+
 typedef struct Scene {
     char title[200];
     List* render_stack;
@@ -42,12 +48,15 @@ typedef struct Scene {
 
 } Scene;
 
+typedef Scene* (*SceneInit)(GameData* game);
+
 Scene* init_scene(GameData* game, char* title); // Title = nom de la scène = nom du dossier dans scenes/
 void render_scene(GameData* game, float delta);
 void free_scene(Scene* scene);
-void change_scene(GameData* game, char* next);
+void free_scene_void(void* scene);
+void change_scene(GameData* game, const char* next);
 SDL_Texture* load_texture(SDL_Renderer* renderer, char* path);
-
+void destroy_entities_list(List* entities);
 void init_scene_with_json(GameData* game, json_t *root, Scene* scene);
 
 void render_screen_shake(GameData* game);

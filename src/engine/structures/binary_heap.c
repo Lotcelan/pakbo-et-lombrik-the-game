@@ -2,7 +2,7 @@
 
 binary_heap* binary_heap_create(int capacity, int (*compare)(void*, void*)) {
     binary_heap* bh = malloc(sizeof(binary_heap));
-    bh->array = malloc(capacity * sizeof(void*));
+    bh->array = (void**)malloc(capacity * sizeof(void*));
     
     bh->compare = compare;
     bh->size = 0;
@@ -29,6 +29,37 @@ void binary_heap_insert(binary_heap *bh, void* value) {
         i = (i - 1) / 2;
     }
 }   
+
+void binary_heap_modify(binary_heap* bh, void* to_modify, void* new_value, bool (*cmp)(void* v1, void* v2)) {
+    int i = 0;
+    while (i < bh->size && !cmp(bh->array[i], to_modify)) {
+        i++;
+    }
+    
+    if (i == bh->size) {
+        return;
+    }
+    
+    bh->array[i] = new_value;
+    
+    while (i != 0 && bh->compare(bh->array[(i - 1) / 2], bh->array[i]) > 0) {
+        void* temp = bh->array[i];
+        bh->array[i] = bh->array[(i - 1) / 2];
+        bh->array[(i - 1) / 2] = temp;
+        i = (i - 1) / 2;
+    }
+}
+
+bool is_present_in_binary_heap(binary_heap* bh, void* value, bool (*cmp)(void* v1, void* v2)) {    
+    for (int i = 0; i < bh->size; i++) {
+        if (cmp(bh->array[i], value)) {
+            return true;
+        }
+    }
+    
+    return false;
+    
+}
 
 void display_binary_heap(binary_heap* bh, void (*display)(void*)) {
     for (int i = 0; i < bh->size; i++) {
@@ -77,6 +108,39 @@ void min_heapify(binary_heap* bh, int i) {
 }
 
 void binary_heap_free(binary_heap* bh) {
+    // a modifier
     free(bh->array);
     free(bh);
+}
+
+int binary_heap_basic_entry_compare(void* e1, void* e2) {
+    binary_heap_basic_entry* entry1 = (binary_heap_basic_entry*) e1;
+    binary_heap_basic_entry* entry2 = (binary_heap_basic_entry*) e2;
+    if (entry1 == NULL && entry2 == NULL) {
+        return 0;
+    } else if (entry1 == NULL) {
+        return 1;
+    } else if (entry2 == NULL) {
+        return -1;
+    } else {
+        if (entry1->value > entry2->value) {
+            return 1;
+        } else if (entry1->value == entry2->value) {
+            return 0;
+        } else {
+            return -1;
+        }
+    }
+}
+
+bool is_binary_heap_empty(binary_heap* bh) {
+    return bh->size == 0;
+}
+
+binary_heap_basic_entry* create_binary_heap_basic_entry(void* value, float priority) {
+    binary_heap_basic_entry* res = (binary_heap_basic_entry*)malloc(sizeof(binary_heap_basic_entry*));
+    res->priority = priority;
+    res->value = value;
+
+    return res;
 }
