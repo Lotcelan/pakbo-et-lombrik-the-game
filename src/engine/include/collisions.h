@@ -25,6 +25,6 @@ void free_box(Box* box);
 void update_entity_boxes(Entity* e);
 void enlarge_entity_hitbox(Entity* e, Box* new_hitbox);
 void change_structure_coordinates(Structure* s, int x, int y);
-bool is_entity_touching_the_top_of_a_structure(Entity* e, List* s_list);
+Structure* is_entity_touching_the_top_of_a_structure(Entity* e, List* s_list);
 
 #endif
