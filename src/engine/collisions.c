@@ -445,10 +445,15 @@ Structure* is_entity_touching_the_top_of_a_structure(Entity* e, List* s_list) {
 		return NULL;
 	}
 
+
+	Box* offset_one_box = copy_box(e->collision_box);
+	offset_one_box->zone.y++;
+
 	List* current = s_list;
 	while (current != NULL) {
 		Structure* s = (Structure*)(current->value);
-		if (e->collision_box->zone.y + e->sprite->height >= s->position.y) {
+		if (are_colliding(offset_one_box, s->collision_box)) {
+			free_box(offset_one_box);
 			return s;
 		}
 
@@ -456,5 +461,6 @@ Structure* is_entity_touching_the_top_of_a_structure(Entity* e, List* s_list) {
 	}
 
 
+	free_box(offset_one_box);
 	return NULL;
 }

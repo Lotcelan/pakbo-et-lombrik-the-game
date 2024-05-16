@@ -146,7 +146,7 @@ void render_entity(GameData* game, Entity* e, float delta) {
     // On affiche la bonne frame au bon endroit
     SDL_RenderCopyEx(game->renderer, sprite->spriteSheet, &spriteRect, &destRect, 0, NULL, sprite->orientation);
 
-    // Render the collision box in green
+    // // Render the collision box in green
     // if (e->hit_box != NULL) {
     //     Rectangle* hitbox_rectangle = init_rectangle(e->hit_box->zone.x, e->hit_box->zone.y, e->hit_box->zone.w, e->hit_box->zone.h, (SDL_Color){0, 0, 255, 255}, (SDL_Color){0, 0, 0, 0});
     //     // printf("Hitbox rectangle : %d %d %d %d\n", hitbox_rectangle->x, hitbox_rectangle->y, hitbox_rectangle->w, hitbox_rectangle->h);
@@ -156,10 +156,11 @@ void render_entity(GameData* game, Entity* e, float delta) {
     // Rectangle* collision_rectangle = init_rectangle(e->collision_box->zone.x, e->collision_box->zone.y, e->collision_box->zone.w, e->collision_box->zone.h, (SDL_Color){0, 255, 0, 255}, (SDL_Color){0, 0, 0, 0});
     // render_rectangle(game, collision_rectangle);
     // free(collision_rectangle);
-    // Rectangle* hurtbox = init_rectangle(e->hurt_box->zone.x, e->hurt_box->zone.y, e->hurt_box->zone.w, e->hurt_box->zone.h, (SDL_Color){255, 0, 0, 255}, (SDL_Color){0, 0, 0, 0});
-    // render_rectangle(game, hurtbox);
-    // free(hurtbox);
-
+    // if (e->hurt_box != NULL) {
+    //     Rectangle* hurtbox = init_rectangle(e->hurt_box->zone.x, e->hurt_box->zone.y, e->hurt_box->zone.w, e->hurt_box->zone.h, (SDL_Color){255, 0, 0, 255}, (SDL_Color){0, 0, 0, 0});
+    //     render_rectangle(game, hurtbox);
+    //     free(hurtbox);
+    // }
 
     render_weapon(game, e, delta);
 }
