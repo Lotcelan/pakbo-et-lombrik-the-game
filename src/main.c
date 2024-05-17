@@ -13,6 +13,13 @@
 #include "entities/projectile_laser/projectile_laser.h"
 #include "entities/medic_hub/medic_hub.h"
 #include "entities/wormcan/wormcan.h"
+
+#include "entities/kiwi_iced/kiwi_iced.h"
+#include "entities/kiwi_red_iced/kiwi_red_iced.h"
+#include "entities/kiwi_yellow_iced/kiwi_yellow_iced.h"
+
+
+
 #include "resources.h"
 #include "scenes/etagere_level/etagere_level.h"
 #include "scenes/main_menu/main_menu.h"
@@ -28,6 +35,10 @@
 #include "scenes/hub_level/hub_level.h"
 #include "scenes/continue/continue.h"
 #include "scenes/ewan_first_scene/ewan_first_scene.h"
+#include "scenes/ewan_second_scene/ewan_second_scene.h"
+
+#include "scenes/ewan_third_scene/ewan_third_scene.h"
+
 #include "weapons/arbalete/arbalete.h"
 #include "weapons/basic_sword/basic_sword.h"
 #include "weapons/blue_duck_boss_laser/blue_duck_boss_laser.h"
@@ -102,6 +113,18 @@ int main(int argc, char* argv[]) {
 	*wormcan = init_wormcan;
 	insert(game->entities, "wormcan", wormcan, free);
 
+	EntityInitFunc* kiwi_iced = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
+	*kiwi_iced = init_kiwi_iced;
+	insert(game->entities, "kiwiIced", kiwi_iced, free);
+
+	EntityInitFunc* kiwi_red_iced = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
+	*kiwi_red_iced = init_kiwi_red_iced;
+	insert(game->entities, "kiwiRedIced", kiwi_red_iced, free);
+
+	EntityInitFunc* kiwi_yellow_iced = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
+	*kiwi_yellow_iced = init_kiwi_yellow_iced;
+	insert(game->entities, "kiwiYellowIced", kiwi_yellow_iced, free);
+
 	// potentiellement systeme de sauvegarde plus tard (donc init avec valeurs différentes)
 	Entity* player = init_player(game, -1, -1);	 // -1 -1 convention pour dire que l'on ne l'affiche pas
 	game->player = player;
@@ -137,6 +160,12 @@ int main(int argc, char* argv[]) {
 	SceneInit* ewan_first_scene = (SceneInit*)malloc(sizeof(SceneInit));
 	*ewan_first_scene = init_ewan_first_scene;
 
+	SceneInit* ewan_second_scene = (SceneInit*)malloc(sizeof(SceneInit));
+	*ewan_second_scene = init_ewan_second_scene;
+	
+	SceneInit* ewan_third_scene = (SceneInit*)malloc(sizeof(SceneInit));
+	*ewan_third_scene = init_ewan_third_scene;
+
 
 	insert(game->scenes, "scene01", scene01, free);
 	insert(game->scenes, "main_menu", main_menu, free);
@@ -152,6 +181,8 @@ int main(int argc, char* argv[]) {
 	insert(game->scenes, "cafet_second_counter_beginning", cafet_second_counter_beginning, free);
 	insert(game->scenes, "cafet_second_counter_end", cafet_second_counter_end, free);
 	insert(game->scenes, "ewan_first_scene", ewan_first_scene, free);
+	insert(game->scenes, "ewan_second_scene", ewan_second_scene, free);
+	insert(game->scenes, "ewan_third_scene", ewan_third_scene, free);
 
 	change_scene(game, "main_menu_-1_-1");
 
