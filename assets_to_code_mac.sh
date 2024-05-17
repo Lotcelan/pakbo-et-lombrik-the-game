@@ -71,16 +71,21 @@ echo "    // Add entries for each image" >> "$source_file"
 
 # Loop through all image files again to add to init_resources function
 find "$src_dir" -type f \( -iname \*.jpg -o -iname \*.jpeg -o -iname \*.png -o -iname \*.bmp \) | while read -r file; do
+    
+    xxd_output=$(xxd -i "$file")
+    variable_name=$(echo "$xxd_output" | ggrep -oP '(?<=unsigned char )\w+(?=\[\])')
+    
     file_extension="${file##*.}"
-    file_name=$(basename "$file" ".$file_extension")
+    variable_name="${variable_name%_$file_extension}"
+
     echo "" >> "$source_file"
-    echo "    char* src_assets_${file_name}_key = (char*)malloc(strlen(\"src_assets_${file_name}\")+1);" >> "$source_file"
-    echo "    strcpy(src_assets_${file_name}_key, \"src_assets_${file_name}\");" >> "$source_file"
+    echo "    char* ${variable_name}_key = (char*)malloc(strlen(\"${variable_name}\")+1);" >> "$source_file"
+    echo "    strcpy(${variable_name}_key, \"${variable_name}\");" >> "$source_file"
     echo "" >> "$source_file"
-    echo "    MemTexture* src_assets_${file_name}_texture = (MemTexture*)malloc(sizeof(MemTexture));" >> "$source_file"
-    echo "    src_assets_${file_name}_texture->data = src_assets_${file_name}_${file_extension};" >> "$source_file"
-    echo "    src_assets_${file_name}_texture->size = src_assets_${file_name}_${file_extension}_len;" >> "$source_file"
-    echo "    insert(resources, src_assets_${file_name}_key, src_assets_${file_name}_texture, free_mem_texture);" >> "$source_file"
+    echo "    MemTexture* ${variable_name}_texture = (MemTexture*)malloc(sizeof(MemTexture));" >> "$source_file"
+    echo "    ${variable_name}_texture->data = ${variable_name}_${file_extension};" >> "$source_file"
+    echo "    ${variable_name}_texture->size = ${variable_name}_${file_extension}_len;" >> "$source_file"
+    echo "    insert(resources, ${variable_name}_key, ${variable_name}_texture, free_mem_texture);" >> "$source_file"
     echo "" >> "$source_file"
 done
 
