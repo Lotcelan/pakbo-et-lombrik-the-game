@@ -428,14 +428,47 @@ void enlarge_entity_hitbox(Entity* e, Box* new_hitbox) {
 	// printf("Result : %d, %d, %d, %d\n", e->hit_box->zone.x, e->hit_box->zone.y, e->hit_box->zone.w, e->hit_box->zone.h);
 }
 
-void change_structure_coordinates(Structure* s, int x, int y) {
+void change_structure_coordinates(GameData* game, Structure* s, int x, int y) {
 	if (s == NULL) {
 		return;
 	}
+
+	int dx = x - s->collision_box->zone.x;
+	int dy = y - s->collision_box->zone.y;
+
 	s->collision_box->zone.x = x;
 	s->collision_box->zone.y = y;
 	s->position.x = x;
 	s->position.y = y;
+
+	// on va faire que par défaut tout est sticky
+	if (game->current_scene == NULL) return;
+	List* current = game->current_scene->entities;
+	current = append_first(game->player, current);
+	while (current != NULL) {
+		Entity* e = (Entity*)(current->value);
+		if (are_colliding(e->collision_box, s->collision_box)) { // ici ne gère que les déplacements en hauteur
+			change_entity_coordinates(e, e->collision_box->zone.x + dx, e->collision_box->zone.y + dy);
+		}
+
+		current = current->next;
+	}
+	
+	current = game->current_scene->entities;
+	current = append_first(game->player, current);
+	while (current != NULL) {
+		Entity* e = (Entity*)(current->value);
+		Box* offset_by_one = copy_box(e->collision_box);
+		offset_by_one->zone.y++;
+		if (are_colliding(offset_by_one, s->collision_box)) { // ici ne gère que les déplacements en largeur
+			printf("%s\n", s->identifier);
+			change_entity_coordinates(e, e->collision_box->zone.x + dx, e->collision_box->zone.y + dy);
+		}
+
+		current = current->next;
+	}
+
+
 }
 
 Structure* is_entity_touching_the_top_of_a_structure(Entity* e, List* s_list) {

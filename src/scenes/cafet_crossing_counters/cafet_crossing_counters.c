@@ -4,7 +4,7 @@ void update_cafet_crossing_counters(GameData* game) {
     // printf("Current coords : %d, %d\n", moving_platform->position.x, moving_platform->position.y);
 
     Structure* moving_platform = get(game->current_scene->objects, "moving_platform", strcmp);
-    change_structure_coordinates(moving_platform, CELL_WIDTH * 8 + (CELL_WIDTH * 5 * sin(2*3.14*SDL_GetTicks()/1000/8)), moving_platform->position.y);
+    change_structure_coordinates(game, moving_platform, CELL_WIDTH * 8 + (CELL_WIDTH * 5 * sin(2*3.14*SDL_GetTicks()/1000/8)), moving_platform->position.y);
 
     if (game->player->collision_box->zone.x > game->width_amount * CELL_WIDTH) {
         change_scene(game, "cafet_second_counter_beginning_3_4");
