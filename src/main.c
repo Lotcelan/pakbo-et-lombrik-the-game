@@ -166,6 +166,13 @@ int main(int argc, char* argv[]) {
 	}
 	insert(game->fonts, "suifak_small", font, free); // avec destroy_font ca segfault ¯\_(ツ)_/¯
 
+	font = TTF_OpenFont("../src/assets/MontserratThin.otf", 10);
+	if (font == NULL) {
+		printf("TTF_OpenFont: %s\n", TTF_GetError());
+		return 0;
+	}
+	insert(game->fonts, "monsterrat_thin_small", font, free); // avec destroy_font ca segfault ¯\_(ツ)_/¯
+
 	/* Main loop :
 		- Getting events
 		- Updating the entities logic with the event

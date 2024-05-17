@@ -38,13 +38,20 @@ void update_player(GameData* game, Entity* player, float delta_t) {
     
     update_entity_movement(game, player, delta_t, true);
 
-    bool* can_jump = get(player->objects, "can_jump", strcmp);
-    if (can_jump != NULL) {
-        if (!(*can_jump)) {   
+    int* jump_amount = get(player->objects, "jump_amount", strcmp);
+    if (jump_amount != NULL) {
+        printf("Jump amount : %d\n", *jump_amount);
+        if (*jump_amount <= 0) {   
             Structure* s = is_entity_touching_the_top_of_a_structure(player, game->current_scene->structures);
+            printf("aled\n");
             if (s != NULL) {
-                printf("tu peux jump mon reuf %s\n", s->identifier);
-                *can_jump = true;
+                printf("tu peux sauter %s\n", s->identifier);
+                Modifier* m = get_entity_modifier(player, N_JUMP);
+                if (m != NULL) {
+                    *jump_amount = 1+m->quantity;
+                } else {
+                    *jump_amount = 1;
+                }
             }
         }
     }
@@ -63,12 +70,12 @@ void event_handler_player(Entity* player, GameData* game) {
     }   
     
     
-    bool* can_jump = get(player->objects, "can_jump", strcmp);
-    if (can_jump != NULL) {
-        if (*can_jump) {
+    int* jump_amount = get(player->objects, "jump_amount", strcmp);
+    if (jump_amount != NULL) {
+        if (*jump_amount > 0) {
             if (game->keyboardState[SDL_SCANCODE_UP]) {
                 player->y_velocity = -165; // 165 ca fait pile 32 pixels de saut (qu'on peut franchir)
-                *can_jump = false;
+                *jump_amount--;
             }
         }
     }
@@ -176,9 +183,9 @@ Entity* init_player(GameData* game, int x, int y) {
     *is_tentacula = false;
     insert(player->objects, "is_tentacula", is_tentacula, free);
 
-    bool* can_jump = malloc(sizeof(bool));
-    *can_jump = true;
-    insert(player->objects, "can_jump", can_jump, free);
+    int* jump_amount = malloc(sizeof(int));
+    *jump_amount = 1;
+    insert(player->objects, "jump_amount", jump_amount, free);
 
     return player;
 }
