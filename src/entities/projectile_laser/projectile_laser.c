@@ -45,7 +45,7 @@ void update_projectile_laser(GameData* game, Entity* projectile_laser, float del
         Entity* entity = (Entity*)(current_entity->value);
         if (!compare_entities(entity, projectile_laser->parent)) {
             if (are_colliding(projectile_laser->hit_box, entity->hurt_box)) {
-                damage_entity(game, entity, projectile_laser->parent->weapon->damage_value, 100, 100);
+                damage_entity(game, entity, projectile_laser->parent->weapon->damage_value, 100, 100, false, projectile_laser);
                 if (is_exploding != NULL) {
                     printf("exploding\n");
                     *is_exploding = true;

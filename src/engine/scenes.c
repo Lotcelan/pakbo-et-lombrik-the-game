@@ -272,8 +272,6 @@ void change_scene(GameData* game, const char* next) {
     }
     // game->current_scene->destroy_scene;
     game->current_scene = (*next_scene)(game);
-    game->current_scene->populate(game);
-
     
     if ((x < 0 || y < 0 || x >= game->width_amount || y >= game->height_amount) && (x != -1 && y != -1)) {
         fprintf(stderr, "Invalid coordinates\n");
@@ -281,6 +279,11 @@ void change_scene(GameData* game, const char* next) {
     }
 
     change_entity_coordinates(game->player, x * CELL_WIDTH, y * CELL_HEIGHT);
+
+    
+    game->current_scene->populate(game); // peut potentiellement changer les coords
+
+    
 
 
 }

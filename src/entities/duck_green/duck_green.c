@@ -21,7 +21,7 @@ void update_duck_green(GameData* game, Entity* duck_green, float delta_t) {
 	follow_player(game, duck_green, 50, 50);
 	update_entity_movement(game, duck_green, delta_t, true);
 	if (are_colliding(duck_green->hit_box, game->player->hurt_box)) {
-		damage_entity(game, game->player, *damage, 1000, -1);
+		damage_entity(game, game->player, *damage, 1000, -1, false, duck_green);
 		*is_attacking = true;
 	}
 	else {

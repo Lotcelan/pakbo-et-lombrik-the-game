@@ -17,6 +17,7 @@ void free_entity(void* entite) {
 	free(e->sprite->Lock_liste);
 	SDL_DestroyTexture(e->sprite->spriteSheet);
 	free(e->sprite);
+	list_delete(e->modifiers, destroy_modifier);
 	free(e);
 }
 
@@ -66,6 +67,7 @@ Entity* init_entity(int x, int y, int framerate, SDL_Texture* spriteSheet, int w
 	res->update_animation = update_animation;
 	HashTable* objects = createHashTable(10);
 	res->objects = objects;
+	res->modifiers = NULL;
 
 	res->max_hp = max_hp;
 	res->current_hp = max_hp;
@@ -187,7 +189,7 @@ void* copy_sprite(void* s) {
 }
 
 
-void damage_entity(GameData* game, Entity* e, int damage, int delay, int stagger_duration) {
+void damage_entity(GameData* game, Entity* e, int damage, int delay, int stagger_duration, bool should_repulse_attacker, Entity* attacker) {
 	// Si on veut que sur le dégât un délai soit appliquer, on met should_add_delay à true
 	if (e->damage_delay < 0) {
 		e->current_hp -= damage;
@@ -196,13 +198,25 @@ void damage_entity(GameData* game, Entity* e, int damage, int delay, int stagger
         if (compare_entities(e, game->player)) {
             ScreenShake* shake = init_screen_shake(10, 5);
             game->current_scene->screen_shake = shake;
+
         }
         
 		if (delay >= 0) {
 			e->damage_delay = delay;
 		}
+
+		(void)should_repulse_attacker;
+		(void)attacker;
+		// if (should_repulse_attacker && attacker != NULL) {
+		// 	int s_x = (attacker->x_velocity > 0) ? 1 : -1;
+		// 	printf("a l'atak\n");
+		// 	int s_y = (attacker->y_velocity > 0) ? 1 : -1;
+		// 	attacker->x_velocity = -s_x * 50 -attacker->x_velocity;
+		// 	// attacker->y_velocity = -s_y * 20 -attacker->y_velocity;
+		// }
 	}
 
+	
 	// if (e->current_hp <= 0){
 	//     game->current_scene->entities = delete_compare(game->current_scene->entities, e, compare_entities, free_entity);
 	// }

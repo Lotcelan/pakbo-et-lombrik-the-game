@@ -30,7 +30,7 @@ void update_basic_dword(GameData* game, Entity* e, float delta_t) {
                 if (current->value != e) { // inutile si c'est le joueur qui a l'épée
                     if (are_colliding(e->hit_box, ((Entity*)(current->value))->hurt_box)) {
                         // bool should_delay = e != game->player;
-                        damage_entity(game, (Entity*)current->value, e->weapon->damage_value, 250, 250);
+                        damage_entity(game, (Entity*)current->value, e->weapon->damage_value, 250, 250, true, e);
                     }
                 }
                 current = current->next;
