@@ -12,7 +12,7 @@ void update_blue_canard_boss(GameData* game, Entity* blue_canard_boss, float del
 	update_entity_movement(game, blue_canard_boss, delta_t, true);
 
 	if (are_colliding(blue_canard_boss->hit_box, game->player->hurt_box)) {
-		damage_entity(game, game->player, 2, 1000, -1);
+		damage_entity(game, game->player, 2, 1000, -1, false, blue_canard_boss);
 	}
 
 	return;

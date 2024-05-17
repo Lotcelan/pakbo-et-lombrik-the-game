@@ -21,7 +21,7 @@ void update_la_mouche(GameData* game, Entity* la_mouche, float delta_t) {
 	follow_player_using_a_star(game, la_mouche, 50, 50);
 	update_entity_movement(game, la_mouche, delta_t, false);
 	if (are_colliding(la_mouche->hit_box, game->player->hurt_box)) {
-		damage_entity(game, game->player, *damage, 1000, -1);
+		damage_entity(game, game->player, *damage, 1000, -1, true, la_mouche);
 		*is_attacking = true;
 	}
 	else {

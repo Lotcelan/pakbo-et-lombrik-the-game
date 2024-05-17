@@ -67,6 +67,7 @@ typedef struct Entity {
     void (*update)(GameData* game, struct Entity* e, float delta_t);
     void (*event_handler)(struct Entity* e, GameData* game);
     HashTable* objects;
+    List* modifiers; // Les modifiers sont les effets bonus ou malus
 
     Box* collision_box;
     Box* hurt_box;
@@ -95,7 +96,7 @@ void update_frame(Entity* e, float delta);
 void print_entity(Entity* e);
 Entity* init_entity(int x, int y, int framerate, SDL_Texture* spriteSheet, int width, int height, int* nbFrames, int* lock_liste, void (*update)(GameData* game, Entity* e, float d), void (*event_handler)(Entity* e, GameData* game), void (*update_animation)(Entity* e, float delta), int max_hp, bool should_have_hitbox);
 Sprite* init_sprite(int framerate, SDL_Texture* spriteSheet, int width, int height, int* nbFrames, int* lock_liste);
-void damage_entity(GameData* game, Entity* e, int damage, int delay, int stagger_duration);
+void damage_entity(GameData* game, Entity* e, int damage, int delay, int stagger_duration, bool should_repulse_attacker, Entity* attacker);
 int compare_entities(void* e1, void* e2);
 void clear_entities(GameData* game);
 void change_entity_coordinates(Entity* e, int x, int y);

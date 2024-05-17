@@ -15,6 +15,7 @@
 #include "hashtable.h"
 #include "framerate.h"
 #include "entity.h"
+#include "modifiers.h"
 
 
 #include <math.h>

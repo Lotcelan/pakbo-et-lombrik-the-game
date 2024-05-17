@@ -16,7 +16,7 @@ void update_ping_pong(GameData* game) {
     Box* right_coll = init_rect_box(right_platform->x, right_platform->y, right_platform->w, right_platform->h);
     Box* ball_coll = init_rect_box(ball->x, ball->y, ball->radius*2, ball->radius*2);
     if (are_colliding(game->player->hurt_box, left_coll) || are_colliding(game->player->hurt_box, right_coll) || are_colliding(game->player->hurt_box, ball_coll)) {
-        damage_entity(game, game->player, 1, 500, -1);
+        damage_entity(game, game->player, 1, 500, -1, false, NULL);
     }
 
     float* ball_x_velocity = get(game->current_scene->objects, "ball_x_velocity", strcmp);

@@ -121,7 +121,7 @@ Box* init_rect_box_from_structure(GameData* game, Structure* s) {
 		return NULL;
 	}
 
-	printf("Structure : %s\n", s->identifier);
+	// printf("Structure : %s\n", s->identifier);
 	SDL_Texture* texture = s->texture;
 	SDL_Texture* valid_texture = SDL_CreateTexture(game->renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, s->position.w, s->position.h);
 	

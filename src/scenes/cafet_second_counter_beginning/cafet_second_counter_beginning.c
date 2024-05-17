@@ -24,10 +24,10 @@ void update_cafet_second_counter_beginning(GameData* game) {
         push_render_stack_structure(game, left_fork, true);
         push_render_stack_structure(game, right_fork, true);
         
-        if (game->player->x_position < 32) {
+        if (game->player->x_position <= 32) {
             game->player->x_velocity = (- game->player->x_velocity > 0) ? - game->player->x_velocity : 0;
         }
-        if (game->player->x_position > game->width_amount * CELL_WIDTH - 48) {
+        if (game->player->x_position >= game->width_amount * CELL_WIDTH - 48) {
             game->player->x_velocity = (- game->player->x_velocity < 0) ? - game->player->x_velocity : 0;
         }
 
