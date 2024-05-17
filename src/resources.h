@@ -9,8 +9,17 @@ HashTable* init_resources();
 extern unsigned char src_assets_psych_duck_png[];
 extern int src_assets_psych_duck_png_len;
 
-extern unsigned char src_assets_modifiers_NJUMP_png[];
-extern int src_assets_modifiers_NJUMP_png_len;
+extern unsigned char src_assets_modifiers_POISON_EFFECT_png[];
+extern int src_assets_modifiers_POISON_EFFECT_png_len;
+
+extern unsigned char src_assets_modifiers_N_JUMP_png[];
+extern int src_assets_modifiers_N_JUMP_png_len;
+
+extern unsigned char src_assets_modifiers_POISON_AFFECT_png[];
+extern int src_assets_modifiers_POISON_AFFECT_png_len;
+
+extern unsigned char src_assets_entities_icePicCollision_png[];
+extern int src_assets_entities_icePicCollision_png_len;
 
 extern unsigned char src_assets_entities_ducks_blueCanardBoss_png[];
 extern int src_assets_entities_ducks_blueCanardBoss_png_len;
@@ -45,6 +54,12 @@ extern int src_assets_entities_kiwis_kiwiRedWalkingAnimation_png_len;
 extern unsigned char src_assets_entities_kiwis_kiwiWalkingAnimation_png[];
 extern int src_assets_entities_kiwis_kiwiWalkingAnimation_png_len;
 
+extern unsigned char src_assets_entities_flyBlue_png[];
+extern int src_assets_entities_flyBlue_png_len;
+
+extern unsigned char src_assets_entities_icePicStructure_png[];
+extern int src_assets_entities_icePicStructure_png_len;
+
 extern unsigned char src_assets_entities_projectiles_arrow_png[];
 extern int src_assets_entities_projectiles_arrow_png_len;
 
@@ -56,6 +71,9 @@ extern int src_assets_entities_fly_png_len;
 
 extern unsigned char src_assets_entities_lombric_png[];
 extern int src_assets_entities_lombric_png_len;
+
+extern unsigned char src_assets_entities_icePicGoutte_png[];
+extern int src_assets_entities_icePicGoutte_png_len;
 
 extern unsigned char src_assets_entities_bouth_png[];
 extern int src_assets_entities_bouth_png_len;
@@ -219,8 +237,17 @@ extern int src_assets_black_png_len;
 extern unsigned char src_assets_entitiesForEditor_kiwiPurple_png[];
 extern int src_assets_entitiesForEditor_kiwiPurple_png_len;
 
+extern unsigned char src_assets_entitiesForEditor_icePicCollision_png[];
+extern int src_assets_entitiesForEditor_icePicCollision_png_len;
+
 extern unsigned char src_assets_entitiesForEditor_kiwiRed_png[];
 extern int src_assets_entitiesForEditor_kiwiRed_png_len;
+
+extern unsigned char src_assets_entitiesForEditor_flyBlue_png[];
+extern int src_assets_entitiesForEditor_flyBlue_png_len;
+
+extern unsigned char src_assets_entitiesForEditor_icePicStructure_png[];
+extern int src_assets_entitiesForEditor_icePicStructure_png_len;
 
 extern unsigned char src_assets_entitiesForEditor_fly_png[];
 extern int src_assets_entitiesForEditor_fly_png_len;
@@ -230,6 +257,9 @@ extern int src_assets_entitiesForEditor_kiwi_png_len;
 
 extern unsigned char src_assets_entitiesForEditor_kiwiBlue_png[];
 extern int src_assets_entitiesForEditor_kiwiBlue_png_len;
+
+extern unsigned char src_assets_entitiesForEditor_icePicGoutte_png[];
+extern int src_assets_entitiesForEditor_icePicGoutte_png_len;
 
 extern unsigned char src_assets_entitiesForEditor_kiwiOrange_png[];
 extern int src_assets_entitiesForEditor_kiwiOrange_png_len;

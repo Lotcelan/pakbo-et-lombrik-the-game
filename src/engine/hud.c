@@ -28,6 +28,8 @@ void render_hud(GameData* game) {
         SDL_RenderCopy(game->renderer, empty, &src, &dest);
     }
 
+
+    // Affichage des effets
     List* modif = game->player->modifiers;
     int x = game->width_amount * CELL_WIDTH - 12;
     int y = 4;
@@ -35,12 +37,24 @@ void render_hud(GameData* game) {
     while (modif != NULL) {
         amount++;
         Modifier* m = (Modifier*)(modif->value);
+        if (!is_modifier_name_effect(m->name)) {
+            modif = modif->next;
+            continue;
+        }
         Texture* t = modifier_name_to_texture(game, m->name, x, y);
         t->dstRect->w = 8; // on supp que la c'est que du 16x16, sinon c relou
         t->dstRect->h = 8;
         
         render_texture(game, t);
         free_texture(t);
+
+
+        char text[10];
+        sprintf(text, "%d", m->quantity);
+
+        Text* te = init_text(game, text, (SDL_Color){255, 255, 255, 255}, x+2, y+2, (TTF_Font*)get(game->fonts, "monsterrat_thin_small", strcmp));
+        render_text(game, te);
+        free_text(te);
 
         x -= 12;
         if (amount >= 10) {
@@ -50,7 +64,43 @@ void render_hud(GameData* game) {
         }
 
         modif = modif->next;
+    }
+
+    // Affichage des affects
+    modif = game->player->modifiers;
+    x = 4;
+    y = CELL_HEIGHT + 4; // y'a deja les pts de vie
+    amount = 0;
+    while (modif != NULL) {
+        amount++;
+        Modifier* m = (Modifier*)(modif->value);
+        if (is_modifier_name_effect(m->name)) {
+            modif = modif->next;
+            continue;
+        }
+        Texture* t = modifier_name_to_texture(game, m->name, x, y);
+        t->dstRect->w = 8; // on supp que la c'est que du 16x16, sinon c relou
+        t->dstRect->h = 8;
         
+        render_texture(game, t);
+        free_texture(t);
+
+
+        char text[10];
+        sprintf(text, "%d", m->quantity);
+
+        Text* te = init_text(game, text, (SDL_Color){255, 255, 255, 255}, x+2, y+2, (TTF_Font*)get(game->fonts, "monsterrat_thin_small", strcmp));
+        render_text(game, te);
+        free_text(te);
+
+        x += 12;
+        if (amount >= 10) {
+            amount = 0;
+            x = 4;
+            y += 12;
+        }
+
+        modif = modif->next;
     }
     return;
 }
