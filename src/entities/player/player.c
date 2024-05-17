@@ -32,6 +32,7 @@ void update_player(GameData* game, Entity* player, float delta_t) {
     if (player->current_hp <= 0) {
         player->current_hp = player->max_hp;
         change_scene(game, "game_over_-1_-1");
+        player->damage_delay = -1;
         return;
     }
     
@@ -131,6 +132,7 @@ void update_animation_player(Entity* e, float delta) {
     }
     if (e->current_hp <= 0){
         e->etat = 4;
+        e->damage_delay = -1;
         return;
     }
     
