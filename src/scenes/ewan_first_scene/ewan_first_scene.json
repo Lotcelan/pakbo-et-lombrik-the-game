@@ -1,0 +1,233 @@
+{
+  "background" : "src_assets_backgrounds_BackgroundCave2",
+  "entities" : [
+
+  ],
+  "structures" : [
+    {
+      "y" : 0,
+      "resource" : "src_assets_structures_icePic2",
+      "x" : 5,
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none",
+      "identifier" : "icePic2.png_797682D2-82D9-4A45-BDEF-1FA686A0A408"
+    },
+    {
+      "allow_pass_through" : 0,
+      "y" : 0,
+      "teleport_to_scene" : "none",
+      "resource" : "src_assets_structures_icePic",
+      "x" : 6,
+      "identifier" : "icePic.png_E375F819-95C0-442F-B9E4-DCD653BD16D3"
+    },
+    {
+      "y" : 0,
+      "allow_pass_through" : 0,
+      "identifier" : "icePic2.png_3B3CFA94-2824-427E-B11D-27F3223D22AD",
+      "resource" : "src_assets_structures_icePic2",
+      "x" : 9,
+      "teleport_to_scene" : "none"
+    },
+    {
+      "identifier" : "iceBlocDownLeft.png_3B22412A-EA21-46DC-B268-6793BFFB2E50",
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none",
+      "x" : 10,
+      "resource" : "src_assets_structures_iceBlocDownLeft",
+      "y" : 0
+    },
+    {
+      "identifier" : "iceBlocWithoutSnow.png_9C171241-A5ED-453D-8916-8147FA45E198",
+      "y" : 0,
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none",
+      "x" : 11,
+      "resource" : "src_assets_structures_iceBlocWithoutSnow"
+    },
+    {
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none",
+      "identifier" : "iceBlocWithoutSnow.png_F2137CFE-747B-4B78-B49F-D1FCF226BD25",
+      "x" : 12,
+      "resource" : "src_assets_structures_iceBlocWithoutSnow",
+      "y" : 0
+    },
+    {
+      "y" : 0,
+      "allow_pass_through" : 0,
+      "x" : 13,
+      "resource" : "src_assets_structures_iceBlocWithoutSnow",
+      "identifier" : "iceBlocWithoutSnow.png_E29FFCAC-8017-4794-B5F8-E8ABB8B1A051",
+      "teleport_to_scene" : "none"
+    },
+    {
+      "x" : 14,
+      "resource" : "src_assets_structures_iceBlocWithoutSnow",
+      "y" : 0,
+      "allow_pass_through" : 0,
+      "identifier" : "iceBlocWithoutSnow.png_0A65867A-1728-48CE-94C2-2EA1EB2C9884",
+      "teleport_to_scene" : "none"
+    },
+    {
+      "identifier" : "iceBlocWithoutSnow.png_B6DD2352-E141-4F3A-A505-2897938E56F8",
+      "resource" : "src_assets_structures_iceBlocWithoutSnow",
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none",
+      "y" : 0,
+      "x" : 15
+    },
+    {
+      "resource" : "src_assets_structures_icePic2",
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none",
+      "x" : 12,
+      "identifier" : "icePic2.png_CA850F0F-254A-4D08-987B-DDD7401EFF68",
+      "y" : 1
+    },
+    {
+      "y" : 1,
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none",
+      "x" : 15,
+      "identifier" : "icePic.png_6F212A89-E3D3-4B45-A56D-DC59751D47C3",
+      "resource" : "src_assets_structures_icePic"
+    },
+    {
+      "resource" : "src_assets_structures_IceDoor",
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "ewan_second_scene_2_2",
+      "identifier" : "IceDoor.png_9D58EE92-F287-4C93-8B50-C58883251AAE",
+      "x" : 15,
+      "y" : 6
+    },
+    {
+      "resource" : "src_assets_structures_iceBlocWithSnow",
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none",
+      "identifier" : "iceBlocWithSnow.png_36CE4B17-379C-4CFA-8909-E3A1009F85EE",
+      "x" : 0,
+      "y" : 7
+    },
+    {
+      "y" : 7,
+      "resource" : "src_assets_structures_iceBlocWithSnow",
+      "identifier" : "iceBlocWithSnow.png_DFF19A86-EC3D-4F7F-98A6-E98B8F711DDC",
+      "x" : 1,
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none"
+    },
+    {
+      "resource" : "src_assets_structures_iceBlocWithSnow",
+      "identifier" : "iceBlocWithSnow.png_D3DEB9EF-4C13-4968-8DCB-27060C76E4B6",
+      "y" : 7,
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none",
+      "x" : 2
+    },
+    {
+      "y" : 7,
+      "identifier" : "iceBlocWithSnow.png_02D8EC2C-14E8-428C-94AE-735C7033C2CE",
+      "x" : 3,
+      "resource" : "src_assets_structures_iceBlocWithSnow",
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none"
+    },
+    {
+      "identifier" : "iceBlocWithSnow.png_5D081277-1851-4A5C-872C-A6DFE74359A7",
+      "y" : 7,
+      "resource" : "src_assets_structures_iceBlocWithSnow",
+      "allow_pass_through" : 0,
+      "x" : 4,
+      "teleport_to_scene" : "none"
+    },
+    {
+      "x" : 5,
+      "resource" : "src_assets_structures_iceBlocWithSnow",
+      "teleport_to_scene" : "none",
+      "identifier" : "iceBlocWithSnow.png_C2BCD467-F685-449B-929A-81E9291BBF59",
+      "y" : 7,
+      "allow_pass_through" : 0
+    },
+    {
+      "resource" : "src_assets_structures_iceBlocWithSnow",
+      "identifier" : "iceBlocWithSnow.png_1ABA15A7-4912-4E0F-8063-99FB04667871",
+      "x" : 6,
+      "allow_pass_through" : 0,
+      "y" : 7,
+      "teleport_to_scene" : "none"
+    },
+    {
+      "x" : 7,
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none",
+      "y" : 7,
+      "resource" : "src_assets_structures_iceBlocWithSnow",
+      "identifier" : "iceBlocWithSnow.png_F923E559-158E-42CB-9EBC-854576690E5D"
+    },
+    {
+      "identifier" : "iceBlocWithSnow.png_E5C2E898-C50D-475F-8B4B-E2CA6C9FBF09",
+      "y" : 7,
+      "resource" : "src_assets_structures_iceBlocWithSnow",
+      "allow_pass_through" : 0,
+      "x" : 8,
+      "teleport_to_scene" : "none"
+    },
+    {
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none",
+      "y" : 7,
+      "resource" : "src_assets_structures_iceBlocWithSnow",
+      "identifier" : "iceBlocWithSnow.png_A81ED180-9B2A-44F5-8F0D-01D5C25A8B6E",
+      "x" : 9
+    },
+    {
+      "resource" : "src_assets_structures_iceBlocWithSnow",
+      "allow_pass_through" : 0,
+      "identifier" : "iceBlocWithSnow.png_FC501A9C-2306-4BB6-9BBA-4CB61FAF14B7",
+      "y" : 7,
+      "x" : 10,
+      "teleport_to_scene" : "none"
+    },
+    {
+      "identifier" : "iceBlocWithSnow.png_5A6BBE52-B044-46A2-89A6-573D575DF336",
+      "y" : 7,
+      "x" : 11,
+      "teleport_to_scene" : "none",
+      "resource" : "src_assets_structures_iceBlocWithSnow",
+      "allow_pass_through" : 0
+    },
+    {
+      "x" : 12,
+      "teleport_to_scene" : "none",
+      "identifier" : "iceBlocWithSnow.png_609FE397-1607-491C-81B5-DE24CAB9A297",
+      "allow_pass_through" : 0,
+      "resource" : "src_assets_structures_iceBlocWithSnow",
+      "y" : 7
+    },
+    {
+      "identifier" : "iceBlocWithSnow.png_02785B9B-F1C0-4D50-829E-5007026F7C26",
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none",
+      "y" : 7,
+      "resource" : "src_assets_structures_iceBlocWithSnow",
+      "x" : 13
+    },
+    {
+      "identifier" : "iceBlocWithSnow.png_E6FF5BC9-FAF5-44EC-9E01-DB39E3B150BE",
+      "x" : 14,
+      "y" : 7,
+      "resource" : "src_assets_structures_iceBlocWithSnow",
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none"
+    },
+    {
+      "allow_pass_through" : 0,
+      "resource" : "src_assets_structures_iceBlocWithSnow",
+      "x" : 15,
+      "identifier" : "iceBlocWithSnow.png_1EDDECC2-CA38-45BA-A2B1-88FC87CED7C5",
+      "y" : 7,
+      "teleport_to_scene" : "none"
+    }
+  ],
+  "name" : "ewan_first_scene"
+}

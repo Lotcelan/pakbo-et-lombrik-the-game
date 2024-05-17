@@ -27,6 +27,7 @@
 #include "scenes/game_over/game_over.h"
 #include "scenes/hub_level/hub_level.h"
 #include "scenes/continue/continue.h"
+#include "scenes/ewan_first_scene/ewan_first_scene.h"
 #include "weapons/arbalete/arbalete.h"
 #include "weapons/basic_sword/basic_sword.h"
 #include "weapons/blue_duck_boss_laser/blue_duck_boss_laser.h"
@@ -133,6 +134,9 @@ int main(int argc, char* argv[]) {
 	SceneInit* cafet_second_counter_end = (SceneInit*)malloc(sizeof(SceneInit));
 	*cafet_second_counter_end = init_cafet_second_counter_end;
 
+	SceneInit* ewan_first_scene = (SceneInit*)malloc(sizeof(SceneInit));
+	*ewan_first_scene = init_ewan_first_scene;
+
 
 	insert(game->scenes, "scene01", scene01, free);
 	insert(game->scenes, "main_menu", main_menu, free);
@@ -147,6 +151,7 @@ int main(int argc, char* argv[]) {
 	insert(game->scenes, "cafet_crossing_counters", cafet_crossing_counters, free);
 	insert(game->scenes, "cafet_second_counter_beginning", cafet_second_counter_beginning, free);
 	insert(game->scenes, "cafet_second_counter_end", cafet_second_counter_end, free);
+	insert(game->scenes, "ewan_first_scene", ewan_first_scene, free);
 
 	change_scene(game, "main_menu_-1_-1");
 
