@@ -4,7 +4,7 @@ void update_simple_arena(GameData* game) {
     (void)game;
 
     Structure* moving_platform = get(game->current_scene->objects, "moving_platform", strcmp);
-    change_structure_coordinates(moving_platform, CELL_WIDTH * 6 + (50 * sin(2*3.14*SDL_GetTicks()/1000/4)), moving_platform->position.y);
+    change_structure_coordinates(game, moving_platform, CELL_WIDTH * 6 + (50 * sin(2*3.14*SDL_GetTicks()/1000/4)), moving_platform->position.y);
 
     // printf("Current coords : %d, %d\n", moving_platform->position.x, moving_platform->position.y);
     return;

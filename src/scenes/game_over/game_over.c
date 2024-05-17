@@ -18,6 +18,7 @@ void update_mort(GameData* game, Entity* e, float delta){
     e->x_velocity = 0;
     e->y_velocity = 0;
     e->damage_delay = -1;
+    e->stagger_duration = -1;
 }
 
 void update_game_over(GameData* game){
