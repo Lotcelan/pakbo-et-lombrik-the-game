@@ -17,7 +17,8 @@
 #include "entities/kiwi_iced/kiwi_iced.h"
 #include "entities/kiwi_red_iced/kiwi_red_iced.h"
 #include "entities/kiwi_yellow_iced/kiwi_yellow_iced.h"
-
+#include "entities/fly_blue/fly_blue.h"
+#include "entities/canard_laque_iced/canard_laque_iced.h"
 
 
 #include "resources.h"
@@ -36,6 +37,7 @@
 #include "scenes/continue/continue.h"
 #include "scenes/ewan_first_scene/ewan_first_scene.h"
 #include "scenes/ewan_second_scene/ewan_second_scene.h"
+#include "scenes/ewan_fourth_scene/ewan_fourth_scene.h"
 
 #include "scenes/ewan_third_scene/ewan_third_scene.h"
 
@@ -125,6 +127,14 @@ int main(int argc, char* argv[]) {
 	*kiwi_yellow_iced = init_kiwi_yellow_iced;
 	insert(game->entities, "kiwiYellowIced", kiwi_yellow_iced, free);
 
+	EntityInitFunc* fly_blue = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
+	*fly_blue = init_fly_blue;
+	insert(game->entities, "flyBlue", fly_blue, free);
+
+	EntityInitFunc* canard_laque_iced = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
+	*canard_laque_iced = init_canard_laque_iced;
+	insert(game->entities, "canardLaqueIced", canard_laque_iced, free);
+
 	// potentiellement systeme de sauvegarde plus tard (donc init avec valeurs différentes)
 	Entity* player = init_player(game, -1, -1);	 // -1 -1 convention pour dire que l'on ne l'affiche pas
 	game->player = player;
@@ -166,6 +176,9 @@ int main(int argc, char* argv[]) {
 	SceneInit* ewan_third_scene = (SceneInit*)malloc(sizeof(SceneInit));
 	*ewan_third_scene = init_ewan_third_scene;
 
+	SceneInit* ewan_fourth_scene = (SceneInit*)malloc(sizeof(SceneInit));
+	*ewan_fourth_scene = init_ewan_fourth_scene;
+
 
 	insert(game->scenes, "scene01", scene01, free);
 	insert(game->scenes, "main_menu", main_menu, free);
@@ -183,6 +196,7 @@ int main(int argc, char* argv[]) {
 	insert(game->scenes, "ewan_first_scene", ewan_first_scene, free);
 	insert(game->scenes, "ewan_second_scene", ewan_second_scene, free);
 	insert(game->scenes, "ewan_third_scene", ewan_third_scene, free);
+	insert(game->scenes, "ewan_fourth_scene", ewan_fourth_scene, free);
 
 	change_scene(game, "main_menu_-1_-1");
 

@@ -30,6 +30,9 @@ extern int src_assets_entitiesForEditor_kiwiIced_png_len;
 extern unsigned char src_assets_entitiesForEditor_kiwiYellow_png[];
 extern int src_assets_entitiesForEditor_kiwiYellow_png_len;
 
+extern unsigned char src_assets_entitiesForEditor_canardLaqueIced_png[];
+extern int src_assets_entitiesForEditor_canardLaqueIced_png_len;
+
 extern unsigned char src_assets_entitiesForEditor_kiwiRedIced_png[];
 extern int src_assets_entitiesForEditor_kiwiRedIced_png_len;
 
@@ -189,6 +192,9 @@ extern int src_assets_structures_stone8_png_len;
 extern unsigned char src_assets_structures_stone9_png[];
 extern int src_assets_structures_stone9_png_len;
 
+extern unsigned char src_assets_structures_icePic3_png[];
+extern int src_assets_structures_icePic3_png_len;
+
 extern unsigned char src_assets_structures_plateformeSurelevee_png[];
 extern int src_assets_structures_plateformeSurelevee_png_len;
 
@@ -312,11 +318,17 @@ extern int src_assets_entities_ducks_fullDuckGreen_png_len;
 extern unsigned char src_assets_entities_ducks_blueCanardBoss_png[];
 extern int src_assets_entities_ducks_blueCanardBoss_png_len;
 
+extern unsigned char src_assets_entities_ducks_fullCanardLaque_png[];
+extern int src_assets_entities_ducks_fullCanardLaque_png_len;
+
 extern unsigned char src_assets_entities_ducks_fullDuckBlue_png[];
 extern int src_assets_entities_ducks_fullDuckBlue_png_len;
 
 extern unsigned char src_assets_entities_ducks_fullDuckOrange_png[];
 extern int src_assets_entities_ducks_fullDuckOrange_png_len;
+
+extern unsigned char src_assets_entities_ducks_fullCanardLaqueIced_png[];
+extern int src_assets_entities_ducks_fullCanardLaqueIced_png_len;
 
 extern unsigned char src_assets_entities_fly_png[];
 extern int src_assets_entities_fly_png_len;
