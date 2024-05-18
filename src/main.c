@@ -13,6 +13,9 @@
 #include "entities/projectile_laser/projectile_laser.h"
 #include "entities/medic_hub/medic_hub.h"
 #include "entities/wormcan/wormcan.h"
+#include "entities/ice_pic_structure/ice_pic_structure.h"
+#include "entities/ice_pic_collision/ice_pic_collision.h"
+#include "entities/la_mouche_bleue/la_mouche_bleue.h"
 #include "resources.h"
 #include "scenes/etagere_level/etagere_level.h"
 #include "scenes/main_menu/main_menu.h"
@@ -27,6 +30,7 @@
 #include "scenes/game_over/game_over.h"
 #include "scenes/hub_level/hub_level.h"
 #include "scenes/continue/continue.h"
+#include "scenes/cave_beginning/cave_beginning.h"
 #include "weapons/arbalete/arbalete.h"
 #include "weapons/basic_sword/basic_sword.h"
 #include "weapons/blue_duck_boss_laser/blue_duck_boss_laser.h"
@@ -101,6 +105,18 @@ int main(int argc, char* argv[]) {
 	*wormcan = init_wormcan;
 	insert(game->entities, "wormcan", wormcan, free);
 
+	EntityInitFunc* i_la_mouche_bleue = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
+	*i_la_mouche_bleue = init_la_mouche_bleue;
+	insert(game->entities, "flyBlue", i_la_mouche_bleue, free);
+
+	EntityInitFunc* i_ice_pic_structure = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
+	*i_ice_pic_structure = init_ice_pic_structure;
+	insert(game->entities, "icePicStructure", i_ice_pic_structure, free);
+
+	EntityInitFunc* i_ice_pic_collision = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
+	*i_ice_pic_collision = init_ice_pic_collision;
+	insert(game->entities, "icePicCollision", i_ice_pic_collision, free);
+
 	// potentiellement systeme de sauvegarde plus tard (donc init avec valeurs différentes)
 	Entity* player = init_player(game, -1, -1);	 // -1 -1 convention pour dire que l'on ne l'affiche pas
 	game->player = player;
@@ -132,6 +148,9 @@ int main(int argc, char* argv[]) {
 	*cafet_second_counter_beginning = init_cafet_second_counter_beginning;
 	SceneInit* cafet_second_counter_end = (SceneInit*)malloc(sizeof(SceneInit));
 	*cafet_second_counter_end = init_cafet_second_counter_end;
+	SceneInit* cave_beginning = (SceneInit*)malloc(sizeof(SceneInit));
+	*cave_beginning = init_cave_beginning;
+	
 
 
 	insert(game->scenes, "scene01", scene01, free);
@@ -147,6 +166,7 @@ int main(int argc, char* argv[]) {
 	insert(game->scenes, "cafet_crossing_counters", cafet_crossing_counters, free);
 	insert(game->scenes, "cafet_second_counter_beginning", cafet_second_counter_beginning, free);
 	insert(game->scenes, "cafet_second_counter_end", cafet_second_counter_end, free);
+	insert(game->scenes, "cave_beginning", cave_beginning, free);
 
 	change_scene(game, "main_menu_-1_-1");
 
