@@ -11,8 +11,12 @@ bool is_modifier_name_effect(ModifierName name) {
             return true;
         case POISON_EFFECT:
             return false;
-        case FIRE_EFFECT:
+        case N_LIFE:
+            return true; // de tte facon il se fait tej instant
+        case BALL_AND_CHAIN:
             return false;
+        case SWORD:
+            return true;
     }
 }
 
@@ -25,11 +29,20 @@ Texture* modifier_name_to_texture(GameData* game, ModifierName name, int x, int 
         case POISON_EFFECT:
             strcpy(mem_name, "src_assets_modifiers_POISON_EFFECT");
             break;
-        case FIRE_EFFECT:
-            strcpy(mem_name, "src_assets_modifiers_FIRE_EFFECT");
+        case POISON_AFFECT:
+            strcpy(mem_name, "src_assets_modifiers_POISON_AFFECT");
             break;
         case SPEED_HOOF:
-            strcpy(mem_name, "src_assets_modifiers_N_JUMP");
+            strcpy(mem_name, "src_assets_modifiers_SPEED_HOOF");
+            break;
+        case BALL_AND_CHAIN:
+            strcpy(mem_name, "src_assets_modifiers_BALL_AND_CHAIN");
+            break;
+        case N_LIFE:
+            strcpy(mem_name, "src_assets_modifiers_N_LIFE");
+            break;
+        case SWORD:
+            strcpy(mem_name, "src_assets_modifiers_SWORD");
             break;
     }
 
