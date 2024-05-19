@@ -236,7 +236,6 @@ int main(int argc, char* argv[]) {
 			if (game->current_scene != NULL) {
 				// update_entities(game->current_scene->entities);
 				game->current_scene->update(game);
-				update_entity_modifiers(game, append_first(game->player, game->current_scene->entities));
 				update_modifiers(game);
 				if (game->state == CHANGING) continue;
 				if (game->player != NULL) {

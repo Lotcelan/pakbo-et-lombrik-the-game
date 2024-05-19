@@ -144,3 +144,4 @@ binary_heap_basic_entry* create_binary_heap_basic_entry(void* value, float prior
 
     return res;
 }
+
