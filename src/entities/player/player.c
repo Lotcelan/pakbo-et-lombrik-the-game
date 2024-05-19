@@ -40,12 +40,11 @@ void update_player(GameData* game, Entity* player, float delta_t) {
 
     int* jump_amount = get(player->objects, "jump_amount", strcmp);
     if (jump_amount != NULL) {
-        printf("Jump amount : %d\n", *jump_amount);
+        // printf("Jump amount : %d\n", *jump_amount);
         if (*jump_amount <= 0) {   
             Structure* s = is_entity_touching_the_top_of_a_structure(player, game->current_scene->structures);
-            printf("aled\n");
             if (s != NULL) {
-                printf("tu peux sauter %s\n", s->identifier);
+                // printf("tu peux sauter %s\n", s->identifier);
                 Modifier* m = get_entity_modifier(player, N_JUMP);
                 if (m != NULL) {
                     *jump_amount = 1+m->quantity;
@@ -75,9 +74,10 @@ void event_handler_player(Entity* player, GameData* game) {
         if (*jump_amount > 0) {
             if (game->keyboardState[SDL_SCANCODE_UP]) {
                 player->y_velocity = -165; // 165 ca fait pile 32 pixels de saut (qu'on peut franchir)
-                *jump_amount--;
+                *jump_amount = *jump_amount - 1;
             }
         }
+        // printf("j'ai envent handlé : %i\n", *jump_amount);
     }
     // else if (game->keyboardState[SDL_SCANCODE_DOWN]) {
     //     player->y_velocity = 100;

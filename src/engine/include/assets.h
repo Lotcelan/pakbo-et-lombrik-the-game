@@ -8,10 +8,12 @@
 #include "collisions.h"
 #include "entity.h"
 #include "weapon.h"
+#include "modifiers.h"
 
 typedef struct GameData GameData;
 typedef struct Box Box;
 typedef struct Entity Entity;
+typedef struct SceneModifier SceneModifier;
 
 typedef struct Structure {
     const char* identifier;
@@ -74,6 +76,7 @@ void render_structure(GameData* game, void* key);
 void render_text(GameData* game, void* key);
 void render_rectangle(GameData* game, void* key);
 void render_circle(GameData* game, void* key);
+void render_scene_modifier(GameData* game, void* key);
 
 void render_entity(GameData* game, Entity* e, float delta);
 void render_wrap_text(GameData* game, void* key, int wrap_length);
@@ -97,6 +100,7 @@ void push_render_stack_structure(GameData* game, Structure* structure, bool is_t
 void push_render_stack_texture(GameData* game, Texture* texture, bool is_temporary);
 void push_render_stack_rect(GameData* game, Rectangle* rect, bool is_temporary);
 void push_render_stack_circle(GameData* game, Circle* circle, bool is_temporary);
+void push_render_stack_scene_modifier(GameData* game, SceneModifier* sm, bool is_temporary);
 
 void push_background_structures(GameData* game);
 
