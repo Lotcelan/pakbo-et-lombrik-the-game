@@ -26,6 +26,16 @@ SDL_Texture* loadTextureFromMemory(GameData* game, const char* resource) {
     return texture;
 }
 
+void render_scene_modifier(GameData* game, void* key) {
+    if (key == NULL) return;
+    SceneModifier* m = (SceneModifier*)key;
+    if (m->modifier == NULL) return;
+    Texture* t = modifier_name_to_texture(game, m->modifier->name, m->x * CELL_WIDTH + 2, m->y * CELL_HEIGHT + 2 + floor(50 * (sin(2 * 3.14 * SDL_GetTicks() / 1000))) / 20);
+    t->dstRect->w = 12;
+    t->dstRect->h = 12;
+    render_texture(game, t);
+}
+
 void render_texture(GameData* game, void* key) {
 
     // printf("Rendering texture %s\n", ((Texture*)key)->name);
@@ -327,6 +337,10 @@ void free_texture(void* t) {
 
 void free_circle(void* c) {
     free(c);
+}
+
+void push_render_stack_scene_modifier(GameData* game, SceneModifier* sm, bool is_temporary) {
+    push_render_stack(game, sm, render_scene_modifier, destroy_scene_modifier, is_temporary);
 }
 
 void push_render_stack_text(GameData* game, Text* text, bool is_temporary) {

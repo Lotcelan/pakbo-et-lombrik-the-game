@@ -105,6 +105,7 @@ Scene* init_scene(GameData* game, char* title) {
     // json_dumpf(root, stdout, JSON_INDENT(4));
     new->entities = NULL;
     new->structures = NULL;
+    new->modifiers = NULL;
 
     if (root) {
         init_scene_with_json(game, root, new);
@@ -142,6 +143,13 @@ void render_scene(GameData* game, float delta) {
         }
     } else {
         SDL_RenderSetLogicalSize(game->renderer, CELL_WIDTH * game->width_amount, CELL_HEIGHT * game->height_amount);
+    }
+
+    List* scene_modifiers = game->current_scene->modifiers;
+    while (scene_modifiers != NULL) {
+        SceneModifier* to_render = copy_scene_modifier((SceneModifier*)(scene_modifiers->value)); // obligé de faire une copie car ici on travaille à la fois sur la liste de modifier de la scene (qu'on veut garder) et de ceux qu'on affiche (qu'on fait disparaitre apres)
+        push_render_stack_scene_modifier(game, to_render, true);
+        scene_modifiers = scene_modifiers->next;
     }
 
     // Render everythint to render except entities
@@ -187,6 +195,7 @@ void free_scene(Scene* scene) {
     }
     list_delete(scene->entities, free_entity);
     list_delete(scene->structures, free_structure);
+    list_delete(scene->modifiers, destroy_modifier);
     free(scene);
 }
 

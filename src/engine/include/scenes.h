@@ -38,6 +38,7 @@ typedef struct Scene {
     List* render_stack;
     List* structures;
     List* entities;
+    List* modifiers; // ceux qu'on peut récupérer en marchant dessus. Liste de SceneModifier*
     char background[200];
     void (*update)(GameData* game);
     void (*populate)(GameData* game);
