@@ -25,6 +25,32 @@
             }
         ]
     },
+    "bobbi" : {
+        "message" : "Lom Bric ! Enfin tu es arrivé !",
+        "font_name" : "suifak_small",
+        "options" : [ "Qui es-tu ?", "Où sont les autres ?" ],
+        "branches" : [
+            {
+                "message" : "Je m'appelle bobbi ! Je suis une nouvelle recrue.",
+                "font_name" : "suifak_small",
+                "options" : [],
+                "branches" : []
+            }, 
+            {
+                "message" : "Le reste de l'escouade est déjà à l'avant poste.",
+                "font_name" : "suifak_small",
+                "options" : ["Il est où cet avant poste ?"],
+                "branches" : [
+                    {
+                    "message" : "Tu peux les rejoindre par ce tunnel, je l'ai creusé moi-même !",
+                    "font_name" : "suifak_small",
+                    "options" : [],
+                    "branches" : []
+                }
+            ]
+            }
+        ]
+    },
     "medic_hub_test" : {
         "message" : "Bienvenue Lom Bric",
         "font_name" : "suifak_small",

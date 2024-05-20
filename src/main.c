@@ -14,6 +14,7 @@
 #include "entities/projectile_laser/projectile_laser.h"
 #include "entities/medic_hub/medic_hub.h"
 #include "entities/wormcan/wormcan.h"
+#include "entities/bobbi/bobbi.h"
 #include "resources.h"
 #include "scenes/etagere_level/etagere_level.h"
 #include "scenes/main_menu/main_menu.h"
@@ -28,6 +29,7 @@
 #include "scenes/game_over/game_over.h"
 #include "scenes/hub_level/hub_level.h"
 #include "scenes/continue/continue.h"
+#include "scenes/telecom/telecom.h"
 #include "weapons/arbalete/arbalete.h"
 #include "weapons/basic_sword/basic_sword.h"
 #include "weapons/blue_duck_boss_laser/blue_duck_boss_laser.h"
@@ -128,6 +130,10 @@ int main(int argc, char* argv[]) {
 	*wormcan = init_wormcan;
 	insert(game->entities, "wormcan", wormcan, free);
 
+	EntityInitFunc* bobbi = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
+	*wormcan = init_bobbi;
+	insert(game->entities, "bobbi", bobbi, free);
+
 	// potentiellement systeme de sauvegarde plus tard (donc init avec valeurs différentes)
 	Entity* player = init_player(game, -1, -1);	 // -1 -1 convention pour dire que l'on ne l'affiche pas
 	game->player = player;
@@ -159,6 +165,8 @@ int main(int argc, char* argv[]) {
 	*cafet_second_counter_beginning = init_cafet_second_counter_beginning;
 	SceneInit* cafet_second_counter_end = (SceneInit*)malloc(sizeof(SceneInit));
 	*cafet_second_counter_end = init_cafet_second_counter_end;
+	SceneInit* telecom = (SceneInit*)malloc(sizeof(SceneInit));
+	*telecom = init_telecom;
 
 
 	insert(game->scenes, "scene01", scene01, free);
@@ -174,6 +182,7 @@ int main(int argc, char* argv[]) {
 	insert(game->scenes, "cafet_crossing_counters", cafet_crossing_counters, free);
 	insert(game->scenes, "cafet_second_counter_beginning", cafet_second_counter_beginning, free);
 	insert(game->scenes, "cafet_second_counter_end", cafet_second_counter_end, free);
+	insert(game->scenes, "telecom", telecom, free);
 
 	change_scene(game, "main_menu_-1_-1");
 

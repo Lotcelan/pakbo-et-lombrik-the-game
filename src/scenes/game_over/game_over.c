@@ -36,7 +36,7 @@ void update_game_over(GameData* game){
         game->player->event_handler = event_handler_player;
         printf("chgt animation player\n");
         game->player->update_animation = update_animation_player;
-        change_scene(game, "continue_7_5");
+        change_scene(game, "continue_7_6");
         
     }
     return;
