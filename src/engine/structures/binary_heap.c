@@ -26,13 +26,13 @@ void binary_heap_insert(binary_heap* bh, void* value) {
 	int i = bh->size - 1;
 	bh->array[i] = value;
 
-        printf("%i\n",i);
+        // printf("%i\n",i);
 	while (i != 0 && bh->compare(bh->array[(i - 1) / 2], bh->array[i]) > 0) {
 		void* temp = bh->array[i];
 		bh->array[i] = bh->array[(i - 1) / 2];
 		bh->array[(i - 1) / 2] = temp;
 		i = (i - 1) / 2;
-        printf(">%i\n",i);
+        // printf(">%i\n",i);
 	}
 }
 
