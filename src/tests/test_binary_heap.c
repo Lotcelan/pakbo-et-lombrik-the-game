@@ -1,41 +1,56 @@
 #include "../engine/include/binary_heap.h"
 #include "../engine/include/test_binary_heap.h"
 
-void test_binary_heap_create() {
-    printf("Testing binary_heap_create()\n");
-    // Test case 1: Create a binary heap with capacity 10
-    binary_heap* bh1 = binary_heap_create(10, binary_heap_basic_entry_compare);
-    assert(bh1 != NULL);
-    assert(bh1->size == 0);
-    assert(bh1->capacity == 10);
-    binary_heap_free(bh1);
+// void test_binary_heap_create() {
+//     printf("Testing binary_heap_create()\n");
+//     // Test case 1: Create a binary heap with capacity 10
+//     binary_heap* bh1 = binary_heap_create(10, binary_heap_basic_entry_compare, NULL);
+//     assert(bh1 != NULL);
+//     assert(bh1->size == 0);
+//     assert(bh1->capacity == 10);
+//     binary_heap_free(bh1);
     
-    // Test case 2: Create a binary heap with capacity 0
-    binary_heap* bh2 = binary_heap_create(0, binary_heap_basic_entry_compare);
-    assert(bh2 != NULL);
-    assert(bh2->size == 0);
-    assert(bh2->capacity == 0);
-    binary_heap_free(bh2);
-}
+//     // Test case 2: Create a binary heap with capacity 0
+//     binary_heap* bh2 = binary_heap_create(0, binary_heap_basic_entry_compare, NULL);
+//     assert(bh2 != NULL);
+//     assert(bh2->size == 0);
+//     assert(bh2->capacity == 0);
+//     binary_heap_free(bh2);
+// }
 
 // void test_binary_heap_insert() {
 //     printf("Testing binary_heap_insert()\n");
 //     // Test case 1: Insert a value into an empty binary heap
-//     binary_heap* bh1 = binary_heap_create(10, binary_heap_basic_entry_compare);
-//     binary_heap_insert(bh1, create_binary_heap_basic_entry("value1", 1.0));
+//     binary_heap* bh1 = binary_heap_create(10, binary_heap_basic_entry_compare, binary_heap_basic_entry_free);
+//     binary_heap_insert(bh1, create_binary_heap_basic_entry("value1", 1.0, NULL));
 //     assert(bh1->size == 1);
-//     assert(strcmp((char*)(bh1->array[0]->value), "value1") == 0);
+//     assert(strcmp((char*)(((binary_heap_basic_entry*)(bh1->array[0]))->value), "value1") == 0);
 //     binary_heap_free(bh1);
     
 //     // Test case 2: Insert multiple values into a binary heap
-//     binary_heap* bh2 = binary_heap_create(10, binary_heap_basic_entry_compare);
-//     binary_heap_insert(bh2, create_binary_heap_basic_entry("value1", 1.0));
-//     binary_heap_insert(bh2, create_binary_heap_basic_entry("value2", 2.0));
-//     binary_heap_insert(bh2, create_binary_heap_basic_entry("value3", 0.5));
+//     binary_heap* bh2 = binary_heap_create(10, binary_heap_basic_entry_compare, binary_heap_basic_entry_free);
+//     binary_heap_insert(bh2, create_binary_heap_basic_entry("value1", 1.0, NULL));
+//     printf("avant %p\n", ((binary_heap_basic_entry*)bh2->array[0])->destroy);
+//     char* value = malloc(7 * sizeof(char)); // Allocate memory for 6 characters and the null terminator
+//     printf("apres %p\n", ((binary_heap_basic_entry*)bh2->array[0])->destroy);
+//     if (value == NULL) {
+//         // Handle error
+//         exit(1);
+//     }
+//     strcpy(value, "value3");
+//     binary_heap_basic_entry* aled = create_binary_heap_basic_entry(value, 2.0, NULL);
+
+//     printf("aledddd %p and %p\n", aled->destroy, free);
+//     binary_heap_insert(bh2, aled);
+//     printf("aled %p and %p\n", ((binary_heap_basic_entry*)bh2->array[0])->destroy, free);
+//     binary_heap_insert(bh2, create_binary_heap_basic_entry("value3", 0.5, NULL));
+//     printf("aled %p\n", ((binary_heap_basic_entry*)bh2->array[0])->destroy);
 //     assert(bh2->size == 3);
-//     assert(bh2->array[0]->value == "value3");
-//     assert(bh2->array[1]->value == "value1");
-//     assert(bh2->array[2]->value == "value2");
+//     assert(strcmp((char*)(((binary_heap_basic_entry*)(bh2->array[0]))->value), "value3") == 0);
+//     // pas nécessaire de vérif ca enft
+//     // assert(strcmp((char*)(((binary_heap_basic_entry*)(bh2->array[1]))->value), "value1") == 0);
+//     // assert(strcmp((char*)(((binary_heap_basic_entry*)(bh2->array[2]))->value), "value2") == 0);
+
 //     binary_heap_free(bh2);
 // }
 

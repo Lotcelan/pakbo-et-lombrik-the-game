@@ -8,7 +8,7 @@
 #include <stdio.h>
 
 void test_binary_heap_create();
-// void test_binary_heap_insert();
+void test_binary_heap_insert();
 // void test_binary_heap_modify();
 // void test_is_present_in_binary_heap();
 // void test_display_binary_heap();
