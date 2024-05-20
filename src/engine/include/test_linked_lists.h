@@ -1,5 +1,5 @@
-#ifndef TEST_BINARY_HEAP_H
-#define TEST_BINARY_HEAP_H
+#ifndef TEST_LINKED_LISTS_H
+#define TEST_LINKED_LISTS_H
 
 #include "linked_list.h"
 
@@ -19,11 +19,6 @@ void test_get_i_element();
 void test_list_del_i_element();
 void test_print_list();
 void test_delete_all_non_struct();
-void test_compare_int();
-void test_prefix();
-void test_suffix();
-void test_suffix_non_delete();
-void test_prefix_non_delete();
 void test_list_delete();
 void test_merge_sort();
 void test_create_list_cyclic();
