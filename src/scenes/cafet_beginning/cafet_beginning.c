@@ -37,6 +37,10 @@ void populate_cafet_beginning(GameData* game) {
     spawn_modifier_in_scene(game, game->current_scene, create_modifier(SPEED_HOOF, 1, -1), 8, 4);
     spawn_modifier_in_scene(game, game->current_scene, create_modifier(SPEED_HOOF, 1, -1), 8, 4);
     spawn_modifier_in_scene(game, game->current_scene, create_modifier(SPEED_HOOF, 1, -1), 8, 4);
+    spawn_modifier_in_scene(game, game->current_scene, create_modifier(BALL_AND_CHAIN, 1, -1), 10, 4);
+    spawn_modifier_in_scene(game, game->current_scene, create_modifier(BALL_AND_CHAIN, 1, -1), 10, 4);
+    spawn_modifier_in_scene(game, game->current_scene, create_modifier(BALL_AND_CHAIN, 1, -1), 10, 4);
+    spawn_modifier_in_scene(game, game->current_scene, create_modifier(BALL_AND_CHAIN, 1, -1), 10, 4);
 }
 
 Scene* init_cafet_beginning(GameData* game) {
