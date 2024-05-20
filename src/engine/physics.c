@@ -292,7 +292,6 @@ GridGraph* a_star(Entity* entity_from, Entity* entity_to, GameData* game) {
     }
 
     binary_heap* pqueue = binary_heap_create(game->width_amount * game->height_amount, binary_heap_basic_entry_compare); // contiendra les GridNode*
-    // binary_heap* pqueue = binary_heap_create(game->width_amount * game->height_amount, binary_heap_basic_entry_compare, binary_heap_basic_entry_free); // contiendra les GridNode*
 
     int x_from = (entity_from->collision_box->zone.x + entity_from->sprite->width / 2)  / CELL_WIDTH;
     int y_from = (entity_from->collision_box->zone.y + entity_from->sprite->height / 2) / CELL_HEIGHT;
@@ -334,7 +333,6 @@ GridGraph* a_star(Entity* entity_from, Entity* entity_to, GameData* game) {
     // [Modifier ceci petit à petit] Temps de débug supplémentaire à cause de cette flemme : 50min
 
     binary_heap_basic_entry* initial = create_binary_heap_basic_entry(get_grid_node(x_from, y_from, game_graph), *(float*)(get_grid_node(x_from, y_from, distances)->value));
-    // binary_heap_basic_entry* initial = create_binary_heap_basic_entry(get_grid_node(x_from, y_from, game_graph), *(float*)(get_grid_node(x_from, y_from, distances)->value), destroy_grid_node);
     binary_heap_insert(pqueue, initial);
 
     while (!is_binary_heap_empty(pqueue)) {
@@ -378,10 +376,8 @@ GridGraph* a_star(Entity* entity_from, Entity* entity_to, GameData* game) {
                 *heuristic_distance = *new_distance + heuristic_a_star(neighbours[i]->x, neighbours[i]->y, x_to, y_to);
                 if (is_present_in_binary_heap(pqueue, neighbours[i], compare_grid_node_game)) {
                     binary_heap_modify(pqueue, neighbours[i], create_binary_heap_basic_entry(neighbours[i], *heuristic_distance), compare_grid_node_game);
-                    // binary_heap_modify(pqueue, neighbours[i], create_binary_heap_basic_entry(neighbours[i], *heuristic_distance, destroy_grid_node), compare_grid_node_game);
                 } else {
                     binary_heap_insert(pqueue, create_binary_heap_basic_entry(neighbours[i], *heuristic_distance));
-                    // binary_heap_insert(pqueue, create_binary_heap_basic_entry(neighbours[i], *heuristic_distance, destroy_grid_node));
                 }
             }
         }

@@ -20,13 +20,9 @@ BUILDDIR := build
 TARGET := bin/game
 
 # Source files
-SRCS := $(wildcard $(SRCDIR)/*.c) $(wildcard $(SRCDIR)/engine/*.c) $(wildcard $(SRCDIR)/engine/structures/*.c) $(wildcard $(SRCDIR)/scenes/**/*.c) $(wildcard $(SRCDIR)/entities/**/*.c) $(wildcard $(SRCDIR)/weapons/**/*.c) 
+SRCS := $(wildcard $(SRCDIR)/*.c) $(wildcard $(SRCDIR)/engine/*.c) $(wildcard $(SRCDIR)/engine/structures/*.c) $(wildcard $(SRCDIR)/scenes/**/*.c) $(wildcard $(SRCDIR)/entities/**/*.c) $(wildcard $(SRCDIR)/weapons/**/*.c)
 OBJS := $(patsubst $(SRCDIR)/%.c,$(BUILDDIR)/%.o,$(SRCS))
 DEPS := $(OBJS:.o=.d)
-
-TEST_SRCS =  $(filter-out src/main.c, $(SRCS)) $(wildcard $(SRCDIR)/tests/*.c)
-TEST_OBJS = $(patsubst $(SRCDIR)/%.c,$(BUILDDIR)/%.o,$(TEST_SRCS))
-TEST_DEPS = $(TEST_OBJS:.o=.d)
 
 # Default target
 .PHONY: all
@@ -39,29 +35,21 @@ all: $(TARGET)
 run: all
 	./$(TARGET)
 
+# Linking
 $(TARGET): $(OBJS)
 	@mkdir -p $(@D)
 	$(CC) $(OBJS) -o $@ $(LDFLAGS)
 
+# Compilation
 $(BUILDDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@
 
--include $(TEST_DEPS)
+# Include dependency files
+-include $(DEPS)
 
-.PHONY: test
-test: $(TEST_OBJS)
-	@echo $(TEST_OBJS)
-	@mkdir -p bin/scenes
-	@find src/scenes/ -name '*.json' -exec cp {} bin/scenes/ \;
-	@cp src/assets/dialogs.json bin/
-	@mkdir -p $(@D)
-# $(CC) $(CFLAGS) $^ -o $(BUILDDIR)/run_tests $(LDFLAGS)
-	$(CC) $(TEST_OBJS) -o bin/run_tests $(LDFLAGS)
-	./bin/run_tests
-
+# Clean build files
 .PHONY: clean
 clean:
 	rm -rf $(BUILDDIR)
 	rm -rf bin/*
-
