@@ -50,12 +50,12 @@ void update_animation_bobbi(Entity* e, float delta) {
 }
 
 Entity* init_bobbi(GameData* game, int x, int y) {
-	int* nbs = malloc(4 * sizeof(int));
+	int* nbs = malloc(sizeof(int));
 	nbs[0] = 7;
-	int* lock = malloc(4 * sizeof(int));
+	int* lock = malloc(sizeof(int));
 	lock[0] = 0;
 
-	SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_entities_lombric");  // to change
+	SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_entities_bobbi");  // to change
 
 	Entity* bobbi = init_entity(x, y, 14, spritesheet, 16, 16, nbs, lock, update_bobbi, event_handler_bobbi, update_animation_bobbi, 9999, false);
 

@@ -131,7 +131,7 @@ int main(int argc, char* argv[]) {
 	insert(game->entities, "wormcan", wormcan, free);
 
 	EntityInitFunc* bobbi = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
-	*wormcan = init_bobbi;
+	*bobbi = init_bobbi;
 	insert(game->entities, "bobbi", bobbi, free);
 
 	// potentiellement systeme de sauvegarde plus tard (donc init avec valeurs différentes)

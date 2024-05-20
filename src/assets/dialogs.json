@@ -26,9 +26,9 @@
         ]
     },
     "bobbi" : {
-        "message" : "Lom Bric ! Enfin tu es arrivé !",
+        "message" : "Lom Bric ! Enfin tu es arrive !",
         "font_name" : "suifak_small",
-        "options" : [ "Qui es-tu ?", "Où sont les autres ?" ],
+        "options" : [ "Qui es-tu ?", "Ou sont les autres ?" ],
         "branches" : [
             {
                 "message" : "Je m'appelle bobbi ! Je suis une nouvelle recrue.",
@@ -37,12 +37,12 @@
                 "branches" : []
             }, 
             {
-                "message" : "Le reste de l'escouade est déjà à l'avant poste.",
+                "message" : "Le reste de l'escouade est deja à l'avant poste.",
                 "font_name" : "suifak_small",
-                "options" : ["Il est où cet avant poste ?"],
+                "options" : [],
                 "branches" : [
                     {
-                    "message" : "Tu peux les rejoindre par ce tunnel, je l'ai creusé moi-même !",
+                    "message" : "Tu peux les rejoindre par ce tunnel, je l'ai creuse moi-meme !",
                     "font_name" : "suifak_small",
                     "options" : [],
                     "branches" : []

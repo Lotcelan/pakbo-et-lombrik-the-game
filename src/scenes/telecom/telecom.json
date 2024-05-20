@@ -1,6 +1,10 @@
 {
   "entities" : [
-    
+    {
+        "identifier" : "bobbi",
+        "x" : 10,
+        "y" : 4
+    }
 
   ],
   "name" : "telecom",

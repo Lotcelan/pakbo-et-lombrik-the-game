@@ -279,6 +279,9 @@ extern int src_assets_entities_wormcan_png_len;
 extern unsigned char src_assets_entities_bouth_png[];
 extern int src_assets_entities_bouth_png_len;
 
+extern unsigned char src_assets_entities_bobbi_png[];
+extern int src_assets_entities_bobbi_png_len;
+
 extern unsigned char src_assets_entities_kiwis_kiwiYellowWalkingAnimation_png[];
 extern int src_assets_entities_kiwis_kiwiYellowWalkingAnimation_png_len;
 
