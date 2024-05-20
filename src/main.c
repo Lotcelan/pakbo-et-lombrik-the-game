@@ -2,6 +2,7 @@
 #include "engine/include/game.h"
 #include "engine/include/hud.h"
 #include "engine/include/scenes.h"
+#include "engine/include/soundsManager.h"
 #include "entities/canard01/canard01.h"
 #include "entities/duck_orange/duck_orange.h"
 #include "entities/duck_green/duck_green.h"
@@ -31,12 +32,26 @@
 #include "weapons/basic_sword/basic_sword.h"
 #include "weapons/blue_duck_boss_laser/blue_duck_boss_laser.h"
 
+
+
 int main(int argc, char* argv[]) {
 	(void)argc; // Pour les warnings
     (void)argv;
 
 	set_dir();
 	// Initialize SDL
+	int init_sounds = Mix_Init(0);
+
+	if(SDL_Init(SDL_INIT_AUDIO) < 0) {
+        printf("SDL Error: %s", SDL_GetError());
+        return 1;
+    }
+
+
+    if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+        printf("SDL_mixer Error: %s", Mix_GetError());
+        return 1;
+    }
 
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
 		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
@@ -45,7 +60,19 @@ int main(int argc, char* argv[]) {
 
 	TTF_Init();
 
+	
+
+	
+
 	GameData* game = init_game(16, 8, 1024, 512, "Pakbo é Lonbrik", 30);
+	MusicManager* manager = initMusicManager();
+	playMusic(manager, "../src/assets/sounds/test.wav");
+		
+
+	int currentVolume = Mix_VolumeMusic(-1); 
+	setMusicVolume(manager, currentVolume - 100); 
+
+
 
 	// Init weapons MUST DO IT BEFORE ENTITIES
 	WeaponInitFunc* i_w = (WeaponInitFunc*)malloc(sizeof(WeaponInitFunc));
@@ -186,6 +213,7 @@ int main(int argc, char* argv[]) {
 	int deltaT;
 
 	while (game->state != CLOSING) {
+		
 		// Calculate deltaT and set t0 to the current time
 		if (game->state == CHANGING) {
 			game->state = RUNNING;
@@ -282,6 +310,11 @@ int main(int argc, char* argv[]) {
 		SDL_RenderPresent(game->renderer);
 		cap_fps(game->frm);
 	}
+
+	if(manager->currentMusic != NULL) {
+		Mix_FreeMusic(manager->currentMusic);
+	}
+	free(manager);
 
 	free_game(game);
 	SDL_Quit();
