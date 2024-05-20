@@ -87,6 +87,10 @@ Entity* init_entity(int x, int y, int framerate, SDL_Texture* spriteSheet, int w
 	res->weapon = NULL;
 
 	res->parent = NULL;
+
+	//AUDIO
+	res->soundEffectManager = initSoundEffectManager();
+
 	return res;
 }
 

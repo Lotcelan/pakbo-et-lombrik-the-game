@@ -22,6 +22,9 @@ typedef struct Weapon {
     
     HashTable* objects;
 
+   
+    
+
 } Weapon;
 
 typedef Weapon* (*WeaponInitFunc)(GameData* game);

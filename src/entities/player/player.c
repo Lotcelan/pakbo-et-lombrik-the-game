@@ -1,5 +1,7 @@
 #include <SDL2/SDL.h>
 #include "player.h"
+#include <unistd.h>
+
 
 // SECTION ENTITE
 void update_player(GameData* game, Entity* player, float delta_t) {
@@ -103,6 +105,10 @@ void event_handler_player(Entity* player, GameData* game) {
 
     if (game->keyboardState[SDL_SCANCODE_T] && game->event.type == SDL_KEYDOWN) {
         printf("tentacula T\n");
+        
+        
+        
+
         bool* is_tentacula = get(player->objects, "is_tentacula", strcmp);
         if (is_tentacula != NULL) {
             *is_tentacula = !(*is_tentacula);
@@ -127,10 +133,12 @@ void update_animation_player(Entity* e, float delta) {
         int* attack_duration = get(e->weapon->objects, "attack_duration", strcmp);
         if (is_attacking != NULL) {
             // printf("%d, %d\n", *is_attacking, *attack_duration);
+            
             if (*is_attacking) {
                 if (attack_duration != NULL) {
                     if (*attack_duration > 0) {
                         e->etat = 2;
+                        playSoundEffect(e->soundEffectManager, "../src/assets/sounds/sword_attack.wav");
                         return;
                     } 
                 }

@@ -12,6 +12,7 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_mixer.h>
 #include <SDL2/SDL_ttf.h>
+#include "soundEffectsManager.h"
 
 
 typedef struct GameData GameData;
@@ -85,6 +86,10 @@ typedef struct Entity {
     
     Weapon* weapon;
     struct Entity* parent; // CAN BE USEFUL (for projectiles for instance)
+
+    //AUDIO
+    SoundEffectManager* soundEffectManager;
+
 } Entity;
 
 typedef Entity* (*EntityInitFunc)(GameData*, int, int);
