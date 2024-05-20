@@ -7,18 +7,22 @@ void update_basic_dword(GameData* game, Entity* e, float delta_t) {
 
     bool* is_attacking = get(e->weapon->objects, "is_attacking", strcmp);
     int* attack_duration = get(e->weapon->objects, "attack_duration", strcmp);
-
+    
     if (is_attacking != NULL) {
         if (*is_attacking) {
+            
             if (attack_duration != NULL) {
                 if (*attack_duration > 0) {
                     *attack_duration -= delta_t;
+                    
                     // printf("Attack duration: %d\n", *attack_duration);
                 } else {
+                    playSoundEffect(e->soundEffectManager, "../src/assets/sounds/sword_attack.wav");
                     *is_attacking = false;
                     *attack_duration = -1;
                 }
-            }
+            } 
+    
         }
     }
 
@@ -31,10 +35,12 @@ void update_basic_dword(GameData* game, Entity* e, float delta_t) {
                     if (are_colliding(e->hit_box, ((Entity*)(current->value))->hurt_box)) {
                         // bool should_delay = e != game->player;
                         damage_entity(game, (Entity*)current->value, e->weapon->damage_value, 250, 250, true, e);
+                        
                     }
                 }
                 current = current->next;
             }
+           
         }
     }
 

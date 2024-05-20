@@ -122,6 +122,7 @@ void update_animation_player(Entity* e, float delta) {
     if (is_tentacula != NULL) {
         if (*is_tentacula) {
             printf("tentacula\n");
+            
             e->etat = 5;
             return;
         }
@@ -138,7 +139,6 @@ void update_animation_player(Entity* e, float delta) {
                 if (attack_duration != NULL) {
                     if (*attack_duration > 0) {
                         e->etat = 2;
-                        playSoundEffect(e->soundEffectManager, "../src/assets/sounds/sword_attack.wav");
                         return;
                     } 
                 }
