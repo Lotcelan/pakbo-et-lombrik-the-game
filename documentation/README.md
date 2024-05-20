@@ -106,17 +106,17 @@ Chaque fonction d'initialisation de scène se base sur la fonction init_scene_wi
 Une entité est définie par les structures
 ```c
 typedef struct sprite {
-    int framerate;    // dans l'idéal c'est le meme opur chaque sprite, sert a reset le timer
-    float timer;    // état du timer (mis a jour à chaque tour de boucle)
-    SDL_Texture* spriteSheet;   // une grande texture contenant toutes les frames cote à cote
+    int framerate;    // dans l'idéal c'est le même pour chaque sprite, sert à reset le timer
+    float timer;    // état du timer (mis à jour à chaque tour de boucle)
+    SDL_Texture* spriteSheet;   // une grande texture contenant toutes les frames côte à côte
     // les champs width et height permettent de simplifier les coordonnonées dans la liste frames 
     int width;  // nombre de pixels de large pour une frame de l'animation
     int height;     // nombre de pixels de haut pour une frame de l'animation
-    // exemple : lom bric aura certainement height = width = 16 (son sprite étant un carré de taille 16)
+    // exemple : lom bric aura certainement height = width = 16 (son sprite étant un carré de taille 16x16)
     List** frames;  // tableau de listes chainées CYCLIQUES de coordonnées vis à vis du spriteSheet
                     // les valeurs des maillons sont des couples [x, y]
     List* currentFrame; // la valeur est un tableau de taille 2 de forme [x, y]
-    // LockSprite : tableau d'entiers associant a chaque état un booléen
+    // LockSprite : tableau d'entiers associant à chaque état un booléen
     // 0 si l'animation boucle
     // un entier si l'animation doit se jouer jusqu'au bout (exemple : coup d'épée)
     // cet entier étant le nombre de frames que dure cette animation
@@ -124,7 +124,7 @@ typedef struct sprite {
     int Lock;
 
     int* nbFrames;
-    // orientation permet de ne pas avoir a faire un sprite qui regarde a droite et un sprite qui regarde a gauche
+    // orientation permet de ne pas avoir à faire un sprite qui regarde à droite et un sprite qui regarde à gauche
     SDL_RendererFlip orientation;
 } Sprite;
 
@@ -137,7 +137,7 @@ typedef struct Entity {
     double y_velocity;
     // entier qui correspond à l'indice de l'animation qu'on veut afficher
     int etat;
-    // modifie l'entité self.etat pour mettre a jour l'animation de l'entité
+    // modifie l'entité self.etat pour mettre à jour l'animation de l'entité
     // le flottant correspond au deltaT (temps depuis la frame précédente, en secondes)
     void (*update_animation)(struct Entity* e, float d);
     // sprite (framerate, timer, spriteSheet, width, height)
@@ -185,7 +185,7 @@ typedef struct Weapon {
     int current_durability;
     
     void (*update)(GameData* game, Entity* e, float delta_t);
-    void (*event_handler)(GameData* game, struct Weapon* weapon, Entity* e); //Entity pour savoir a qui appartient l'arme, weapon pour l'arme en elle meme, et game car on en a tjrs besoin
+    void (*event_handler)(GameData* game, struct Weapon* weapon, Entity* e); //Entity pour savoir à qui appartient l'arme, weapon pour l'arme en elle même, et game car on en à tjrs besoin
     void (*render)(GameData* game, Entity* e, float delta_t);
     
     HashTable* objects;
