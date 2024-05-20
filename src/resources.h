@@ -9,6 +9,15 @@ HashTable* init_resources();
 extern unsigned char src_assets_psych_duck_png[];
 extern int src_assets_psych_duck_png_len;
 
+extern unsigned char src_assets_modifiers_BALL_AND_CHAIN_png[];
+extern int src_assets_modifiers_BALL_AND_CHAIN_png_len;
+
+extern unsigned char src_assets_modifiers_SPEED_HOOF_png[];
+extern int src_assets_modifiers_SPEED_HOOF_png_len;
+
+extern unsigned char src_assets_modifiers_SWORD_png[];
+extern int src_assets_modifiers_SWORD_png_len;
+
 extern unsigned char src_assets_modifiers_POISON_EFFECT_png[];
 extern int src_assets_modifiers_POISON_EFFECT_png_len;
 

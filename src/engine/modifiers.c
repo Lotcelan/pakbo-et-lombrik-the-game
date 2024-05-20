@@ -135,6 +135,7 @@ SceneModifier* create_scene_modifier(Modifier* modifier, int x, int y) {
 void spawn_modifier_in_scene(GameData* game, Scene* scene, Modifier* modifier, int x, int y) {
     // va spawn un collectible sur lequel on peut passer pour obtenir le modifier
     // x et y numéros de cases
+    // ici le time duration de `modifier` n'a pas d'importance, autant mettre -1
 
     (void)game;
 
@@ -197,6 +198,9 @@ void update_modifiers(GameData* game) {
                 previous->next = current->next;
             }
             destroy_scene_modifier(sm);
+            current = game->current_scene->modifiers;
+            previous = NULL;
+            continue;
         }
         previous = current;
         current = current->next;

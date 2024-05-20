@@ -57,8 +57,14 @@ Structure* update_entity_movement(GameData* game, Entity* e, float delta_t, bool
     // }
     // printf("Delta X : %d, Delta Y : %d\n", delta_x, delta_y);
 
-    delta_x = delta_t * e->x_velocity / 1000; // delta_t en ms
-    delta_y = delta_t * e->y_velocity / 1000; // delta_t en ms
+    double modifier_multiplier = 1;
+    Modifier* m = get_entity_modifier(e, SPEED_HOOF);
+    if (m != NULL) {
+        modifier_multiplier += 0.15 * m->quantity;
+    }
+
+    delta_x = delta_t * e->x_velocity * modifier_multiplier / 1000; // delta_t en ms
+    delta_y = delta_t * e->y_velocity * modifier_multiplier / 1000; // delta_t en ms
     int sign_x = delta_x > 0 ? 1 : -1;
     int sign_y = delta_y > 0 ? 1 : -1;
     delta_x = abs(delta_x);
