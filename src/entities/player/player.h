@@ -6,6 +6,7 @@
 #include"../../engine/include/game.h"
 #include"../../engine/include/entity.h"
 #include"../../engine/include/physics.h"
+#include"../../engine/include/collisions.h"
 
 void update_player(GameData* game, Entity* player, float delta_t);
 void event_handler_player(Entity*, GameData* game);

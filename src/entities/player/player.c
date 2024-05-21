@@ -130,8 +130,7 @@ void update_animation_player(Entity* e, float delta) {
             return;
         }
     }
-    
-    
+
     if (strcmp(e->weapon->name, "basic_sword") == 0) {
         bool* is_attacking = get(e->weapon->objects, "is_attacking", strcmp);
         int* attack_duration = get(e->weapon->objects, "attack_duration", strcmp);
@@ -176,6 +175,7 @@ Entity* init_player(GameData* game, int x, int y) {
     lock[1] = 0;
     lock[2] = 4;
     lock[3] = 0;
+    lock[4] = 0;
     lock[5] = 6;
     
     SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_entities_lombric"); // to change
