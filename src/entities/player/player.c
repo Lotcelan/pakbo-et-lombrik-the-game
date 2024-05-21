@@ -25,9 +25,10 @@ void update_player(GameData* game, Entity* player, float delta_t) {
     Modifier* m = get_entity_modifier(player, POISON_AFFECT);
     int* nb_poison_proc = get(player->objects, "nb_poison_proc", strcmp);
     if (m && nb_poison_proc){
-        int k = m->current_time_alive / m->value;
+        m->max_time_alive += 100;
+        int k = (m->current_time_alive) / m->value;
         if (k > *nb_poison_proc){
-            *nb_poison_proc = k;
+            *nb_poison_proc += 1;
             damage_entity(game, player, m->quantity, 0, 0, false, NULL);
         }
     }else{
