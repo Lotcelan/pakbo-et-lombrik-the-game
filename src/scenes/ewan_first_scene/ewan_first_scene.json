@@ -1,0 +1,266 @@
+{
+  "background" : "src_assets_backgrounds_BackgroundCave2",
+  "structures" : [
+    {
+      "teleport_to_scene" : "none",
+      "y" : 0,
+      "resource" : "src_assets_structures_icePic2",
+      "x" : 0,
+      "allow_pass_through" : 0,
+      "identifier" : "icePic2.png_DD92FA33-6408-418B-9F8A-654FAD024AE0"
+    },
+    {
+      "x" : 1,
+      "y" : 0,
+      "resource" : "src_assets_structures_iceBlocDownLeft",
+      "allow_pass_through" : 0,
+      "identifier" : "iceBlocDownLeft.png_13CCB9C5-745B-4C00-919A-EDE98367B2D9",
+      "teleport_to_scene" : "none"
+    },
+    {
+      "resource" : "src_assets_structures_iceBlocWithoutSnow",
+      "identifier" : "iceBlocWithoutSnow.png_A2A88537-B171-4AE0-BC05-BEA418918F6E",
+      "y" : 0,
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none",
+      "x" : 2
+    },
+    {
+      "teleport_to_scene" : "none",
+      "identifier" : "iceBlocWithoutSnow.png_7814E730-B6BF-4382-B6F7-9A545447259B",
+      "resource" : "src_assets_structures_iceBlocWithoutSnow",
+      "x" : 3,
+      "allow_pass_through" : 0,
+      "y" : 0
+    },
+    {
+      "resource" : "src_assets_structures_iceBlocWithoutSnow",
+      "identifier" : "iceBlocWithoutSnow.png_CECBFD0D-EC01-4866-906A-62ADB92D8F1A",
+      "teleport_to_scene" : "none",
+      "y" : 0,
+      "x" : 4,
+      "allow_pass_through" : 0
+    },
+    {
+      "x" : 5,
+      "teleport_to_scene" : "none",
+      "identifier" : "iceBlocWithoutSnow.png_1EC47D56-A299-45BD-B90E-0BBCF3089D28",
+      "resource" : "src_assets_structures_iceBlocWithoutSnow",
+      "y" : 0,
+      "allow_pass_through" : 0
+    },
+    {
+      "x" : 6,
+      "y" : 0,
+      "identifier" : "iceBlocWithoutSnow.png_3F65E2CA-FCB8-474B-8569-BC95F67EB34A",
+      "teleport_to_scene" : "none",
+      "allow_pass_through" : 0,
+      "resource" : "src_assets_structures_iceBlocWithoutSnow"
+    },
+    {
+      "teleport_to_scene" : "none",
+      "identifier" : "iceBlocDownRight.png_7E623168-3E34-46B3-BA51-ABE78D0C19E8",
+      "y" : 0,
+      "resource" : "src_assets_structures_iceBlocDownRight",
+      "allow_pass_through" : 0,
+      "x" : 7
+    },
+    {
+      "resource" : "src_assets_structures_icePic",
+      "allow_pass_through" : 0,
+      "y" : 1,
+      "x" : 5,
+      "teleport_to_scene" : "none",
+      "identifier" : "icePic.png_36D8C25F-6001-4DA5-B592-DE61146F2021"
+    },
+    {
+      "y" : 1,
+      "allow_pass_through" : 0,
+      "resource" : "src_assets_structures_icePic2",
+      "identifier" : "icePic2.png_EAF5A01E-73DC-499B-BF83-DEAB1D00686A",
+      "x" : 6,
+      "teleport_to_scene" : "none"
+    },
+    {
+      "resource" : "src_assets_structures_iceBlocAllLeft",
+      "identifier" : "iceBlocAllLeft.png_B834AF9D-B638-47E2-B9B9-13BE2A876B74",
+      "y" : 5,
+      "x" : 9,
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none"
+    },
+    {
+      "identifier" : "iceBlocWithSnow.png_43C8F2F4-0EF4-434E-BB8C-4BE1666309BE",
+      "resource" : "src_assets_structures_iceBlocWithSnow",
+      "y" : 5,
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none",
+      "x" : 10
+    },
+    {
+      "identifier" : "iceBlocAllRight.png_95442DF6-F327-4853-B91E-3383CDAE0C37",
+      "y" : 5,
+      "x" : 11,
+      "resource" : "src_assets_structures_iceBlocAllRight",
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none"
+    },
+    {
+      "resource" : "src_assets_structures_icePic2",
+      "identifier" : "icePic2.png_2966DF83-4E26-48E6-A9C2-520EA0E80473",
+      "x" : 10,
+      "y" : 6,
+      "allow_pass_through" : 10,
+      "teleport_to_scene" : "none"
+    },
+    {
+      "x" : 15,
+      "resource" : "src_assets_structures_IceDoor",
+      "y" : 6,
+      "identifier" : "IceDoor.png_527C9308-C922-4D13-AD6E-8AAE8F23BCD1",
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "ewan_second_scene_0_6"
+    },
+    {
+      "y" : 7,
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none",
+      "identifier" : "iceBlocWithSnow.png_EFA3A2CB-505A-4C11-84E4-31261EC48FF7",
+      "x" : 0,
+      "resource" : "src_assets_structures_iceBlocWithSnow"
+    },
+    {
+      "resource" : "src_assets_structures_iceBlocWithSnow",
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none",
+      "identifier" : "iceBlocWithSnow.png_6F3F83A5-5353-4D51-B213-62F829C8AB8C",
+      "x" : 1,
+      "y" : 7
+    },
+    {
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none",
+      "identifier" : "iceBlocWithSnow.png_C1E65C99-05D5-4829-91B1-1852B966E3D7",
+      "x" : 2,
+      "y" : 7,
+      "resource" : "src_assets_structures_iceBlocWithSnow"
+    },
+    {
+      "allow_pass_through" : 0,
+      "identifier" : "iceBlocWithSnow.png_0F7AC7DA-C45A-4838-B28B-C8578BCDD725",
+      "teleport_to_scene" : "none",
+      "x" : 3,
+      "y" : 7,
+      "resource" : "src_assets_structures_iceBlocWithSnow"
+    },
+    {
+      "identifier" : "iceBlocWithSnow.png_56F31BDC-8370-4A47-B037-C6180532CAEB",
+      "y" : 7,
+      "allow_pass_through" : 0,
+      "x" : 4,
+      "resource" : "src_assets_structures_iceBlocWithSnow",
+      "teleport_to_scene" : "none"
+    },
+    {
+      "teleport_to_scene" : "none",
+      "resource" : "src_assets_structures_iceBlocWithSnow",
+      "x" : 5,
+      "identifier" : "iceBlocWithSnow.png_699F1F3A-14D5-4DFC-8EC1-1B1FB4F4D898",
+      "allow_pass_through" : 0,
+      "y" : 7
+    },
+    {
+      "x" : 6,
+      "identifier" : "iceBlocWithSnow.png_4627DDD4-8BA6-4E19-B68F-17EDB422BBCE",
+      "resource" : "src_assets_structures_iceBlocWithSnow",
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none",
+      "y" : 7
+    },
+    {
+      "identifier" : "iceBlocWithSnow.png_EC57C19D-DEB7-4A97-ABE1-8548FD21B4C9",
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none",
+      "x" : 7,
+      "y" : 7,
+      "resource" : "src_assets_structures_iceBlocWithSnow"
+    },
+    {
+      "teleport_to_scene" : "none",
+      "x" : 8,
+      "y" : 7,
+      "allow_pass_through" : 0,
+      "identifier" : "iceBlocWithSnow.png_DC99FD60-FA79-4FFA-9DED-56148B534674",
+      "resource" : "src_assets_structures_iceBlocWithSnow"
+    },
+    {
+      "resource" : "src_assets_structures_iceBlocWithSnow",
+      "allow_pass_through" : 0,
+      "y" : 7,
+      "teleport_to_scene" : "none",
+      "identifier" : "iceBlocWithSnow.png_607EA1BF-EFCD-43EB-8AE4-596CE3BF0C82",
+      "x" : 9
+    },
+    {
+      "allow_pass_through" : 0,
+      "y" : 7,
+      "resource" : "src_assets_structures_iceBlocWithSnow",
+      "teleport_to_scene" : "none",
+      "identifier" : "iceBlocWithSnow.png_E156FBB4-2385-42A6-B141-439D325E2640",
+      "x" : 10
+    },
+    {
+      "allow_pass_through" : 0,
+      "resource" : "src_assets_structures_iceBlocWithSnow",
+      "teleport_to_scene" : "none",
+      "identifier" : "iceBlocWithSnow.png_18C1668E-F8EC-4717-9CD2-B2CE430C9D40",
+      "x" : 11,
+      "y" : 7
+    },
+    {
+      "allow_pass_through" : 0,
+      "y" : 7,
+      "resource" : "src_assets_structures_iceBlocWithSnow",
+      "x" : 12,
+      "teleport_to_scene" : "none",
+      "identifier" : "iceBlocWithSnow.png_E26BF064-522D-4097-910E-ADCDE44ED4C8"
+    },
+    {
+      "allow_pass_through" : 0,
+      "identifier" : "iceBlocWithSnow.png_44A0B535-80FA-41D3-BD4D-F5A51BC494EE",
+      "x" : 13,
+      "teleport_to_scene" : "none",
+      "resource" : "src_assets_structures_iceBlocWithSnow",
+      "y" : 7
+    },
+    {
+      "allow_pass_through" : 0,
+      "resource" : "src_assets_structures_iceBlocWithSnow",
+      "teleport_to_scene" : "none",
+      "identifier" : "iceBlocWithSnow.png_A5B9392C-7A2B-417F-989A-F98F107D4C0E",
+      "x" : 14,
+      "y" : 7
+    },
+    {
+      "x" : 15,
+      "identifier" : "iceBlocWithSnow.png_5748D8AC-3C66-45FC-9B50-A9ED0B553C85",
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none",
+      "y" : 7,
+      "resource" : "src_assets_structures_iceBlocWithSnow"
+    }
+  ],
+  "name" : "ewan_first_scene",
+  "entities" : [
+    {
+      "identifier" : "kiwiRedIced",
+      "x" : 11,
+      "y" : 4
+    },
+    {
+      "y" : 6,
+      "x" : 6,
+      "identifier" : "kiwiIced"
+    }
+  ]
+}

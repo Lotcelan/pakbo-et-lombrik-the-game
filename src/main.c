@@ -14,6 +14,14 @@
 #include "entities/projectile_laser/projectile_laser.h"
 #include "entities/medic_hub/medic_hub.h"
 #include "entities/wormcan/wormcan.h"
+
+#include "entities/kiwi_iced/kiwi_iced.h"
+#include "entities/kiwi_red_iced/kiwi_red_iced.h"
+#include "entities/kiwi_yellow_iced/kiwi_yellow_iced.h"
+#include "entities/fly_blue/fly_blue.h"
+#include "entities/canard_laque_iced/canard_laque_iced.h"
+
+
 #include "resources.h"
 #include "scenes/etagere_level/etagere_level.h"
 #include "scenes/main_menu/main_menu.h"
@@ -28,6 +36,12 @@
 #include "scenes/game_over/game_over.h"
 #include "scenes/hub_level/hub_level.h"
 #include "scenes/continue/continue.h"
+#include "scenes/ewan_first_scene/ewan_first_scene.h"
+#include "scenes/ewan_second_scene/ewan_second_scene.h"
+#include "scenes/ewan_fourth_scene/ewan_fourth_scene.h"
+
+#include "scenes/ewan_third_scene/ewan_third_scene.h"
+
 #include "weapons/arbalete/arbalete.h"
 #include "weapons/basic_sword/basic_sword.h"
 #include "weapons/blue_duck_boss_laser/blue_duck_boss_laser.h"
@@ -128,6 +142,26 @@ int main(int argc, char* argv[]) {
 	*wormcan = init_wormcan;
 	insert(game->entities, "wormcan", wormcan, free);
 
+	EntityInitFunc* kiwi_iced = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
+	*kiwi_iced = init_kiwi_iced;
+	insert(game->entities, "kiwiIced", kiwi_iced, free);
+
+	EntityInitFunc* kiwi_red_iced = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
+	*kiwi_red_iced = init_kiwi_red_iced;
+	insert(game->entities, "kiwiRedIced", kiwi_red_iced, free);
+
+	EntityInitFunc* kiwi_yellow_iced = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
+	*kiwi_yellow_iced = init_kiwi_yellow_iced;
+	insert(game->entities, "kiwiYellowIced", kiwi_yellow_iced, free);
+
+	EntityInitFunc* fly_blue = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
+	*fly_blue = init_fly_blue;
+	insert(game->entities, "flyBlue", fly_blue, free);
+
+	EntityInitFunc* canard_laque_iced = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
+	*canard_laque_iced = init_canard_laque_iced;
+	insert(game->entities, "canardLaqueIced", canard_laque_iced, free);
+
 	// potentiellement systeme de sauvegarde plus tard (donc init avec valeurs différentes)
 	Entity* player = init_player(game, -1, -1);	 // -1 -1 convention pour dire que l'on ne l'affiche pas
 	game->player = player;
@@ -160,6 +194,18 @@ int main(int argc, char* argv[]) {
 	SceneInit* cafet_second_counter_end = (SceneInit*)malloc(sizeof(SceneInit));
 	*cafet_second_counter_end = init_cafet_second_counter_end;
 
+	SceneInit* ewan_first_scene = (SceneInit*)malloc(sizeof(SceneInit));
+	*ewan_first_scene = init_ewan_first_scene;
+
+	SceneInit* ewan_second_scene = (SceneInit*)malloc(sizeof(SceneInit));
+	*ewan_second_scene = init_ewan_second_scene;
+	
+	SceneInit* ewan_third_scene = (SceneInit*)malloc(sizeof(SceneInit));
+	*ewan_third_scene = init_ewan_third_scene;
+
+	SceneInit* ewan_fourth_scene = (SceneInit*)malloc(sizeof(SceneInit));
+	*ewan_fourth_scene = init_ewan_fourth_scene;
+
 
 	insert(game->scenes, "scene01", scene01, free);
 	insert(game->scenes, "main_menu", main_menu, free);
@@ -174,6 +220,10 @@ int main(int argc, char* argv[]) {
 	insert(game->scenes, "cafet_crossing_counters", cafet_crossing_counters, free);
 	insert(game->scenes, "cafet_second_counter_beginning", cafet_second_counter_beginning, free);
 	insert(game->scenes, "cafet_second_counter_end", cafet_second_counter_end, free);
+	insert(game->scenes, "ewan_first_scene", ewan_first_scene, free);
+	insert(game->scenes, "ewan_second_scene", ewan_second_scene, free);
+	insert(game->scenes, "ewan_third_scene", ewan_third_scene, free);
+	insert(game->scenes, "ewan_fourth_scene", ewan_fourth_scene, free);
 
 	change_scene(game, "main_menu_-1_-1");
 
