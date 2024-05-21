@@ -171,7 +171,11 @@ void update_entity_modifiers(GameData* game, List* entity_list) {
                 }
             }
             previous = current_modifiers;
-            current_modifiers = current_modifiers->next;
+            if (current_modifiers != NULL){
+                current_modifiers = current_modifiers->next;
+            }else{
+                continue;
+            }
         }
 
         current = current->next;
