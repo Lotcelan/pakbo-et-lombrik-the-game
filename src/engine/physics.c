@@ -463,3 +463,23 @@ void follow_player_using_a_star(GameData* game, Entity* e, int x_speed, int y_sp
         e->y_velocity = 0;
     }
 }
+bool detect_player(GameData* game, Entity* e, int radius) {
+    // will change the velocity of the entity e to follow game->player
+    if (game->current_scene == NULL) {
+        return false;
+    }
+    Entity* player = game->player;
+    if (player == NULL) {
+        return false;
+    }
+    int player_x = player->x_position;
+    int e_x = e->x_position;
+    if (e_x - player_x < radius && player_x < e_x) {
+        return true; 
+    }
+
+    if (player_x - e_x < radius + CELL_WIDTH && player_x > e_x + CELL_WIDTH) {
+        return true; 
+    }
+    return false;
+}

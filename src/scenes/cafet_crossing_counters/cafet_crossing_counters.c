@@ -10,6 +10,11 @@ void update_cafet_crossing_counters(GameData* game) {
         change_scene(game, "cafet_second_counter_beginning_3_4");
         return;
     }
+
+    if (game->player->collision_box->zone.y > game->height_amount * CELL_WIDTH) {
+        change_scene(game, "cave_beginning_1_0");
+        return;
+    }
     
     return;
 }

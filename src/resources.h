@@ -165,6 +165,9 @@ extern int src_assets_structures_icePic_png_len;
 extern unsigned char src_assets_structures_iceBlocDownLeft_png[];
 extern int src_assets_structures_iceBlocDownLeft_png_len;
 
+extern unsigned char src_assets_structures_iceBlocPlatform_png[];
+extern int src_assets_structures_iceBlocPlatform_png_len;
+
 extern unsigned char src_assets_structures_icePic2_png[];
 extern int src_assets_structures_icePic2_png_len;
 

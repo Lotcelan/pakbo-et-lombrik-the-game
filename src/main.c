@@ -20,6 +20,8 @@
 #include "entities/kiwi_yellow_iced/kiwi_yellow_iced.h"
 #include "entities/fly_blue/fly_blue.h"
 #include "entities/canard_laque_iced/canard_laque_iced.h"
+#include "entities/ice_pic_collision/ice_pic_collision.h"
+#include "entities/ice_pic_structure/ice_pic_structure.h"
 
 
 #include "resources.h"
@@ -36,6 +38,8 @@
 #include "scenes/game_over/game_over.h"
 #include "scenes/hub_level/hub_level.h"
 #include "scenes/continue/continue.h"
+#include "scenes/cave_beginning/cave_beginning.h"
+
 #include "scenes/ewan_first_scene/ewan_first_scene.h"
 #include "scenes/ewan_second_scene/ewan_second_scene.h"
 #include "scenes/ewan_fourth_scene/ewan_fourth_scene.h"
@@ -161,6 +165,15 @@ int main(int argc, char* argv[]) {
 	EntityInitFunc* canard_laque_iced = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
 	*canard_laque_iced = init_canard_laque_iced;
 	insert(game->entities, "canardLaqueIced", canard_laque_iced, free);
+	
+	EntityInitFunc* i_ice_pic_structure = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
+	*i_ice_pic_structure = init_ice_pic_structure;
+	insert(game->entities, "icePicStructure", i_ice_pic_structure, free);
+
+	EntityInitFunc* i_ice_pic_collision = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
+	*i_ice_pic_collision = init_ice_pic_collision;
+	insert(game->entities, "icePicCollision", i_ice_pic_collision, free);
+
 
 	// potentiellement systeme de sauvegarde plus tard (donc init avec valeurs différentes)
 	Entity* player = init_player(game, -1, -1);	 // -1 -1 convention pour dire que l'on ne l'affiche pas
@@ -194,6 +207,9 @@ int main(int argc, char* argv[]) {
 	SceneInit* cafet_second_counter_end = (SceneInit*)malloc(sizeof(SceneInit));
 	*cafet_second_counter_end = init_cafet_second_counter_end;
 
+	SceneInit* cave_beginning = (SceneInit*)malloc(sizeof(SceneInit));
+	*cave_beginning = init_cave_beginning;
+
 	SceneInit* ewan_first_scene = (SceneInit*)malloc(sizeof(SceneInit));
 	*ewan_first_scene = init_ewan_first_scene;
 
@@ -220,6 +236,7 @@ int main(int argc, char* argv[]) {
 	insert(game->scenes, "cafet_crossing_counters", cafet_crossing_counters, free);
 	insert(game->scenes, "cafet_second_counter_beginning", cafet_second_counter_beginning, free);
 	insert(game->scenes, "cafet_second_counter_end", cafet_second_counter_end, free);
+	insert(game->scenes, "cave_beginning", cave_beginning, free);
 	insert(game->scenes, "ewan_first_scene", ewan_first_scene, free);
 	insert(game->scenes, "ewan_second_scene", ewan_second_scene, free);
 	insert(game->scenes, "ewan_third_scene", ewan_third_scene, free);
