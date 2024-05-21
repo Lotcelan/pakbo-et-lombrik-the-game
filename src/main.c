@@ -4,6 +4,7 @@
 #include "engine/include/scenes.h"
 #include "engine/include/soundsManager.h"
 #include "entities/canard01/canard01.h"
+#include "entities/duck_purple/duck_purple.h"
 #include "entities/duck_orange/duck_orange.h"
 #include "entities/duck_green/duck_green.h"
 #include "entities/duck_blue/duck_blue.h"
@@ -129,6 +130,10 @@ int main(int argc, char* argv[]) {
 	EntityInitFunc* i_duck_orange = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
 	*i_duck_orange = init_duck_orange;
 	insert(game->entities, "duck_orange", i_duck_orange, free);
+
+	EntityInitFunc* i_duck_purple = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
+	*i_duck_purple = init_duck_purple;
+	insert(game->entities, "duck_purple", i_duck_purple, free);
 
 	EntityInitFunc* i_duck_green = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
 	*i_duck_green = init_duck_green;

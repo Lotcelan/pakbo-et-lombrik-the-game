@@ -21,6 +21,11 @@
       "identifier" : "flyBlue"
     },
     {
+      "x" : 10,
+      "y" : 2,
+      "identifier" : "duck_purple"
+    },
+    {
       "x" : 1,
       "identifier" : "icePicCollision",
       "y" : 6
