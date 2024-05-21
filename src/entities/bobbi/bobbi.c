@@ -7,6 +7,13 @@ void update_bobbi(GameData* game, Entity* bobbi, float delta_t) {
 		return;
 	}
 
+	if (bobbi->x_position > game->player->x_position){
+		bobbi->sprite->orientation = SDL_FLIP_NONE;
+	}
+	else{
+		bobbi->sprite->orientation = SDL_FLIP_HORIZONTAL;
+	}
+
 	Box* interact_box = init_rect_box_from_entity(game, bobbi);
 	// pour l'instant on suppose
 	interact_box->zone.x = bobbi->x_position - 10;
