@@ -22,6 +22,17 @@ void update_player(GameData* game, Entity* player, float delta_t) {
             }
         }
     }
+    Modifier* m = get_entity_modifier(player, POISON_AFFECT);
+    int* nb_poison_proc = get(player->objects, "nb_poison_proc", strcmp);
+    if (m && nb_poison_proc){
+        int k = m->current_time_alive / m->value;
+        if (k > *nb_poison_proc){
+            *nb_poison_proc = k;
+            damage_entity(game, player, m->quantity, 0, 0, false, NULL);
+        }
+    }else{
+        *nb_poison_proc = 0;
+    }
 
     if (player->current_hp <= 0) {
         player->current_hp = player->max_hp;
@@ -190,6 +201,11 @@ Entity* init_player(GameData* game, int x, int y) {
     int* previous_time_alive_jump_modifier = malloc(sizeof(int));
     *previous_time_alive_jump_modifier = -1;
     insert(player->objects, "previous_time_alive_jump_modifier", previous_time_alive_jump_modifier, free);
+
+    int* nb_poison_proc = malloc(sizeof(int));
+    *nb_poison_proc = 0;
+    insert(player->objects, "nb_poison_proc", nb_poison_proc, free);
+
 
     return player;
 }

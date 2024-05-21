@@ -218,6 +218,13 @@ void damage_entity(GameData* game, Entity* e, int damage, int delay, int stagger
 		// 	attacker->x_velocity = -s_x * 50 -attacker->x_velocity;
 		// 	// attacker->y_velocity = -s_y * 20 -attacker->y_velocity;
 		// }
+
+		if (attacker && e){
+			Modifier *m = get_entity_modifier(attacker, POISON_EFFECT);
+			if (m){
+				add_modifier_to_entity(game, e, POISON_AFFECT, m->value, 4000);
+			}
+		}
 	}
 
 	

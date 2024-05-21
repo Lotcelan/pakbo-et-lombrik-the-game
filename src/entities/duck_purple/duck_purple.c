@@ -81,5 +81,7 @@ Entity* init_duck_purple(GameData* game, int x, int y) {
 	*is_attacking = false;
 	insert(duck_purple->objects, "is_attacking", is_attacking, free);
 
+	add_modifier_to_entity(game, duck_purple, POISON_EFFECT, 2000, -1);
+
 	return duck_purple;
 }
