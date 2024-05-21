@@ -81,6 +81,9 @@ void event_handler_player(Entity* player, GameData* game) {
         }
         // printf("j'ai envent handlé : %i\n", *jump_amount);
     }
+    if (!(game->keyboardState[SDL_SCANCODE_UP]) && player->y_velocity < 0){
+        player->y_velocity = 0;
+    }
     // else if (game->keyboardState[SDL_SCANCODE_DOWN]) {
     //     player->y_velocity = 100;
     // }
