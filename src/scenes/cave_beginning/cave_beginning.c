@@ -33,6 +33,9 @@ void event_handler_cave_beginning(GameData* game) {
 
 void populate_cave_beginning(GameData* game) {
     push_background_structures(game);
+
+    Dialog* warning_dialog = get_dialog_from_json("cave_beginning_fall");
+    game->current_dialog = warning_dialog;
 }
 
 Scene* init_cave_beginning(GameData* game) {

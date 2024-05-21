@@ -11,7 +11,7 @@ typedef struct Scene Scene;
 
 typedef enum {
     N_JUMP, // value n'a pas d'effet, c'est la quantité d'items qui compte ici
-    POISON_EFFECT, // (qui va être infligé à l'attaqué) value indique le nombre en ms de délai entre chaque proc de poison, La quantité d'items est le nombre de points de vie perdu a chaque fois
+    POISON_EFFECT, // (qui va être infligé à l'attaqué) value indique le nombre en ms de délai  entre chaque proc de poison sur les 16 premiers bits, puis la durée que l'affect aura sur les 16 suivants, La quantité d'items est le nombre de points de vie perdu a chaque fois
     POISON_AFFECT, // (qui va être infligé à l'attaquant) value indique le nombre en ms de délai entre chaque proc de poison, La quantité d'items est le nombre de points de vie perdu a chaque fois
     SPEED_HOOF, // value n'a pas d'effet, c'est la quantité qui applique un multiplicateur
     N_LIFE, // value représente le nombre de point de vie à récupérer, l'objectif est qu'il soit consommé instantanément

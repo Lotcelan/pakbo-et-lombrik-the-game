@@ -24,8 +24,9 @@ void update_player(GameData* game, Entity* player, float delta_t) {
     }
     Modifier* m = get_entity_modifier(player, POISON_AFFECT);
     int* nb_poison_proc = get(player->objects, "nb_poison_proc", strcmp);
+    printf("Poison proc : %i\n", *nb_poison_proc);
     if (m && nb_poison_proc){
-        m->max_time_alive += 100;
+        
         int k = (m->current_time_alive) / m->value;
         if (k > *nb_poison_proc){
             *nb_poison_proc += 1;
@@ -37,6 +38,8 @@ void update_player(GameData* game, Entity* player, float delta_t) {
 
     if (player->current_hp <= 0) {
         player->current_hp = player->max_hp;
+        list_delete(player->modifiers, destroy_modifier);
+        player->modifiers = NULL;
         change_scene(game, "game_over_-1_-1");
         player->damage_delay = -1;
         return;

@@ -81,7 +81,13 @@ Entity* init_duck_purple(GameData* game, int x, int y) {
 	*is_attacking = false;
 	insert(duck_purple->objects, "is_attacking", is_attacking, free);
 
-	add_modifier_to_entity(game, duck_purple, POISON_EFFECT, 2000, -1);
+	// on veut une durée de poison de 4s et que cela proc toutes les 2s :
+
+	int proc_delay = 2000;
+	int poison_duration = 4000;
+	int value = (proc_delay & 0xFFFF) | ((poison_duration & 0xFFFF) << 16);
+
+	add_modifier_to_entity(game, duck_purple, POISON_EFFECT, value, -1);
 
 	return duck_purple;
 }

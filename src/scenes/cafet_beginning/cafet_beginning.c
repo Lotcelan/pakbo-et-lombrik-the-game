@@ -7,6 +7,11 @@ void update_cafet_beginning(GameData* game) {
         return;
     }
     
+    if (game->player->y_position > game->height_amount * CELL_HEIGHT) {
+        change_scene(game, "cave_beginning_1_0");
+        return;
+    }
+
     return;
 }
 

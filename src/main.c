@@ -40,6 +40,7 @@
 #include "scenes/hub_level/hub_level.h"
 #include "scenes/continue/continue.h"
 #include "scenes/cave_beginning/cave_beginning.h"
+#include "scenes/cafet_ping_pong_beginning/cafet_ping_pong_beginning.h"
 
 #include "scenes/ewan_first_scene/ewan_first_scene.h"
 #include "scenes/ewan_second_scene/ewan_second_scene.h"
@@ -211,6 +212,8 @@ int main(int argc, char* argv[]) {
 	*cafet_second_counter_beginning = init_cafet_second_counter_beginning;
 	SceneInit* cafet_second_counter_end = (SceneInit*)malloc(sizeof(SceneInit));
 	*cafet_second_counter_end = init_cafet_second_counter_end;
+	SceneInit* cafet_ping_pong_beginning = (SceneInit*)malloc(sizeof(SceneInit));
+	*cafet_ping_pong_beginning = init_cafet_ping_pong_beginning;
 
 	SceneInit* cave_beginning = (SceneInit*)malloc(sizeof(SceneInit));
 	*cave_beginning = init_cave_beginning;
@@ -246,6 +249,7 @@ int main(int argc, char* argv[]) {
 	insert(game->scenes, "ewan_second_scene", ewan_second_scene, free);
 	insert(game->scenes, "ewan_third_scene", ewan_third_scene, free);
 	insert(game->scenes, "ewan_fourth_scene", ewan_fourth_scene, free);
+	insert(game->scenes, "cafet_ping_pong_beginning", cafet_ping_pong_beginning, free);
 
 	change_scene(game, "main_menu_-1_-1");
 

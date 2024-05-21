@@ -49,5 +49,12 @@
         "font_name" : "suifak_small",
         "optionts" : [],
         "branches" : []
+    },
+    "cave_beginning_fall" : {
+        "message" : "Je crois que tu as glissé... Fais attention il y a des pics juste en dessous de toi ! Evite les !",
+        "font_name" : "suifak_small",
+        "optionts" : [],
+        "branches" : []
+
     }
 }

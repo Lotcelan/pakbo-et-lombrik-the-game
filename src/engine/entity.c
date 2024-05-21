@@ -222,7 +222,10 @@ void damage_entity(GameData* game, Entity* e, int damage, int delay, int stagger
 		if (attacker && e){
 			Modifier *m = get_entity_modifier(attacker, POISON_EFFECT);
 			if (m){
-				add_modifier_to_entity(game, e, POISON_AFFECT, m->value, 4000);
+				int value = m->value;
+				int proc_delay = (value & 0xFFFF);
+				int poison_duration = (value >> 16) & 0xFFFF;
+				add_modifier_to_entity(game, e, POISON_AFFECT, proc_delay, poison_duration);
 			}
 		}
 	}

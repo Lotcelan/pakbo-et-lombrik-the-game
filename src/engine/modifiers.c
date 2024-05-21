@@ -10,6 +10,8 @@ bool is_modifier_name_effect(ModifierName name) {
         case SPEED_HOOF:
             return true;
         case POISON_EFFECT:
+            return true;
+        case POISON_AFFECT:
             return false;
         case N_LIFE:
             return true; // de tte facon il se fait tej instant
@@ -18,6 +20,8 @@ bool is_modifier_name_effect(ModifierName name) {
         case SWORD:
             return true;
     }
+
+    return false;
 }
 
 Texture* modifier_name_to_texture(GameData* game, ModifierName name, int x, int y) {
@@ -193,6 +197,11 @@ void update_modifiers(GameData* game) {
     while (current != NULL) {
         SceneModifier* sm = (SceneModifier*)current->value;
         Modifier* m = sm->modifier;
+        if (m == NULL) {
+            previous == current;
+            current = current->next;
+            continue;
+        }
         Box* sm_box = init_rect_box(sm->x * CELL_WIDTH, sm->y * CELL_HEIGHT, 16, 16);
         if (are_colliding(game->player->collision_box, sm_box)) {
             add_modifier_to_entity(game, game->player, m->name, m->value, m->max_time_alive);
