@@ -17,6 +17,7 @@ void update_ping_pong(GameData* game) {
     Box* ball_coll = init_rect_box(ball->x, ball->y, ball->radius*2, ball->radius*2);
     if (are_colliding(game->player->hurt_box, left_coll) || are_colliding(game->player->hurt_box, right_coll) || are_colliding(game->player->hurt_box, ball_coll)) {
         damage_entity(game, game->player, 1, 500, -1, false, NULL);
+         playSoundEffect(game->player->soundEffectManager, "../src/assets/sounds/ball_hit_table.mp3");
     }
 
     float* ball_x_velocity = get(game->current_scene->objects, "ball_x_velocity", strcmp);
@@ -33,6 +34,9 @@ void update_ping_pong(GameData* game) {
     if (are_colliding(next_x_ball_coll, left_coll) || are_colliding(next_x_ball_coll, right_coll) || next_x < 0 || next_x > game->width_amount * CELL_WIDTH) {
         *ball_x_velocity = -*ball_x_velocity;
         next_x = ball->x + (*ball_x_velocity * game->deltaT /1000);
+
+        playSoundEffect(game->player->soundEffectManager, "../src/assets/sounds/ball_hit.mp3");
+       
     }
     
     int next_y = ball->y + ceil(*ball_y_velocity * game->deltaT /1000);
@@ -57,17 +61,24 @@ void update_ping_pong(GameData* game) {
     free_box(right_coll);
     free_box(ball_coll);
 
-    Structure* moving_platform_left = get(game->current_scene->objects, "moving_platform_left", strcmp);
-    Structure* moving_platform_right = get(game->current_scene->objects, "moving_platform_right", strcmp);
+    int* moving_delay = get(game->current_scene->objects, "moving_delay", strcmp);
+    if (moving_delay == NULL) return;
 
-    if (moving_platform_left == NULL || moving_platform_right == NULL) {
-        return;
+    if (*moving_delay >= 750) {
+        *moving_delay = 0;
+
+        Structure* moving_platform_left = get(game->current_scene->objects, "moving_platform_left", strcmp);
+        Structure* moving_platform_right = get(game->current_scene->objects, "moving_platform_right", strcmp);
+
+        if (moving_platform_left == NULL || moving_platform_right == NULL) {
+            return;
+        }
+
+        change_structure_coordinates(game, moving_platform_left, moving_platform_left->position.x - 1, moving_platform_left->position.y);
+        change_structure_coordinates(game, moving_platform_right, moving_platform_right->position.x + 1, moving_platform_right->position.y);    
+    } else {
+        *moving_delay = *moving_delay + game->deltaT;
     }
-
-    change_structure_coordinates(game, moving_platform_left, moving_platform_left->position.x - 1, moving_platform_left->position.y);
-    change_structure_coordinates(game, moving_platform_right, moving_platform_right->position.x + 1, moving_platform_right->position.y);
-
-    
 
     return;
 }
@@ -132,6 +143,10 @@ void populate_ping_pong(GameData* game) {
     push_render_stack_rect(game, left_platform, false);
     push_render_stack_rect(game, right_platform, false);
     
+    int* moving_delay = malloc(sizeof(int));
+    *moving_delay = 0;
+    insert(game->current_scene->objects, "moving_delay", moving_delay, free);
+
 }
 
 // void test(Entity* e, float delta){
