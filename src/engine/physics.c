@@ -1,79 +1,15 @@
 #include "./include/physics.h"
 
-Structure* update_entity_movement(GameData* game, Entity* e, float delta_t, bool gravity_enabled) {
-    // returns NULL if no collision or the structure there was collision with
-    
-    if (gravity_enabled) {
-        update_gravity(game, e, delta_t);
-    }
-    if (game->current_scene == NULL) {
-        return false;
-    }
+Structure* do_the_moves(GameData* game, Entity* e, int delta_x, int delta_y) {
+    // On peut avoir besoin de modifier la position en fonction dx ou dy hors de update_entity_movement
 
-    if ((e->x_velocity == 0 && e->y_velocity == 0) || (e->x_position == -1 && e->y_position == -1)) {
-        return false;
-    }
-
-    // int prev_x = e->x_position;
-    // int prev_y = e->y_position;
-    
-    // todo : normalisation de la vitesse en diagonale avec un /sqrt(2)
-    // int delta_x = floor(delta_t * e->x_velocity / 1000); // delta_t en ms
-    // int sign_x = delta_x > 0 ? 1 : -1;
-    // for (int current = 0; current < delta_x; current++) {
-    //     e->x_position = e->x_position + delta_x + sign_x * current;
-    //     update_entity_boxes(e);
-        
-    //     if (is_entity_colliding_with_structures(e, game->current_scene->structures)) {
-    //         e->x_position = prev_x;
-    //         update_entity_boxes(e);
-    //         continue;
-    //     }
-    //     break;
-    // }
-    // int delta_y = floor(delta_t * e->y_velocity / 1000); // delta_t en ms
-    // int sign_y = delta_y > 0 ? 1 : -1;
-    // for (int current = 0; current < delta_y; current++) {
-    //     e->y_position = e->y_position + delta_y + sign_y * current;
-    //     printf("Prev : %d, Current : %d, Delta : %d\n", prev_y, e->y_position, delta_y);
-    //     update_entity_boxes(e);
-    //     if (is_entity_colliding_with_structures(e, game->current_scene->structures)) {
-    //         e->y_position = prev_y;
-    //         update_entity_boxes(e);
-    //         continue;
-    //     }
-    //     break;
-    // }
-    bool is_colliding = false;
-    int delta_x, delta_y;
     Structure* result = NULL;
-    // double velocityMagnitude = sqrt(e->x_velocity * e->x_velocity + e->y_velocity * e->y_velocity);
-    // if (velocityMagnitude > 0) {
-    //     double normalizedXVelocity = e->x_velocity / velocityMagnitude;
-    //     double normalizedYVelocity = e->y_velocity / velocityMagnitude;
-
-    //     delta_x = delta_t * normalizedXVelocity / 1000; // delta_t en ms
-    //     delta_y = delta_t * normalizedYVelocity / 1000; // delta_t en ms
-    // }
-    // printf("Delta X : %d, Delta Y : %d\n", delta_x, delta_y);
-
-    double modifier_multiplier = 1;
-    Modifier* m = get_entity_modifier(e, SPEED_HOOF);
-    if (m != NULL) {
-        modifier_multiplier += 0.15 * m->quantity;
-    }
-
-    m = get_entity_modifier(e, BALL_AND_CHAIN);
-    if (m != NULL) {
-        modifier_multiplier -= 0.15 * m->quantity;
-    }
-
-    delta_x = delta_t * e->x_velocity * modifier_multiplier / 1000; // delta_t en ms
-    delta_y = delta_t * e->y_velocity * modifier_multiplier / 1000; // delta_t en ms
     int sign_x = delta_x > 0 ? 1 : -1;
     int sign_y = delta_y > 0 ? 1 : -1;
     delta_x = abs(delta_x);
     delta_y = abs(delta_y);
+
+    bool is_colliding = false;
     bool has_collided = false;
 
     while (delta_x >= 0) {
@@ -141,6 +77,80 @@ Structure* update_entity_movement(GameData* game, Entity* e, float delta_t, bool
         e->y_velocity = 0;
     }
 
+}
+
+Structure* update_entity_movement(GameData* game, Entity* e, float delta_t, bool gravity_enabled) {
+    // returns NULL if no collision or the structure there was collision with
+    
+    if (gravity_enabled) {
+        update_gravity(game, e, delta_t);
+    }
+    if (game->current_scene == NULL) {
+        return false;
+    }
+
+    if ((e->x_velocity == 0 && e->y_velocity == 0) || (e->x_position == -1 && e->y_position == -1)) {
+        return false;
+    }
+
+    // int prev_x = e->x_position;
+    // int prev_y = e->y_position;
+    
+    // todo : normalisation de la vitesse en diagonale avec un /sqrt(2)
+    // int delta_x = floor(delta_t * e->x_velocity / 1000); // delta_t en ms
+    // int sign_x = delta_x > 0 ? 1 : -1;
+    // for (int current = 0; current < delta_x; current++) {
+    //     e->x_position = e->x_position + delta_x + sign_x * current;
+    //     update_entity_boxes(e);
+        
+    //     if (is_entity_colliding_with_structures(e, game->current_scene->structures)) {
+    //         e->x_position = prev_x;
+    //         update_entity_boxes(e);
+    //         continue;
+    //     }
+    //     break;
+    // }
+    // int delta_y = floor(delta_t * e->y_velocity / 1000); // delta_t en ms
+    // int sign_y = delta_y > 0 ? 1 : -1;
+    // for (int current = 0; current < delta_y; current++) {
+    //     e->y_position = e->y_position + delta_y + sign_y * current;
+    //     printf("Prev : %d, Current : %d, Delta : %d\n", prev_y, e->y_position, delta_y);
+    //     update_entity_boxes(e);
+    //     if (is_entity_colliding_with_structures(e, game->current_scene->structures)) {
+    //         e->y_position = prev_y;
+    //         update_entity_boxes(e);
+    //         continue;
+    //     }
+    //     break;
+    // }
+    int delta_x, delta_y;
+    Structure* result = NULL;
+    // double velocityMagnitude = sqrt(e->x_velocity * e->x_velocity + e->y_velocity * e->y_velocity);
+    // if (velocityMagnitude > 0) {
+    //     double normalizedXVelocity = e->x_velocity / velocityMagnitude;
+    //     double normalizedYVelocity = e->y_velocity / velocityMagnitude;
+
+    //     delta_x = delta_t * normalizedXVelocity / 1000; // delta_t en ms
+    //     delta_y = delta_t * normalizedYVelocity / 1000; // delta_t en ms
+    // }
+    // printf("Delta X : %d, Delta Y : %d\n", delta_x, delta_y);
+
+    double modifier_multiplier = 1;
+    Modifier* m = get_entity_modifier(e, SPEED_HOOF);
+    if (m != NULL) {
+        modifier_multiplier += 0.15 * m->quantity;
+    }
+
+    m = get_entity_modifier(e, BALL_AND_CHAIN);
+    if (m != NULL) {
+        modifier_multiplier -= 0.15 * m->quantity;
+    }
+
+    delta_x = delta_t * e->x_velocity * modifier_multiplier / 1000; // delta_t en ms
+    delta_y = delta_t * e->y_velocity * modifier_multiplier / 1000; // delta_t en ms
+
+    result = do_the_moves(game, e, delta_x, delta_y);
+    
     return result;
 
 }

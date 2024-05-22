@@ -9,6 +9,7 @@
 #include "grid_graph.h"
 
 Structure* update_entity_movement(GameData* game, Entity* e, float delta_t, bool gravity_enabled);
+Structure* do_the_moves(GameData* game, Entity* e, int delta_x, int delta_y);
 void follow_player(GameData* game, Entity* e, int x_speed, int y_speed);
 void update_gravity(GameData* game, Entity* e, float delta_t);
 GridGraph* a_star(Entity* entity_from, Entity* entity_to, GameData* game);
