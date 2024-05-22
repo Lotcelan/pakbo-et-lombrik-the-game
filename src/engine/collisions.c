@@ -1,4 +1,5 @@
 #include "./include/collisions.h"
+#include "./include/physics.h"
 
 Box* init_rect_box(int x, int y, int w, int h) {
 	Box* box = malloc(sizeof(Box));

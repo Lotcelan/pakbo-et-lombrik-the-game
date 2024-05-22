@@ -42,10 +42,10 @@ void event_handler_main_menu(GameData* game) {
                     // game->current_scene = get(game->scenes, "spawn_level", strcmp);
                     game->player->y_velocity = 0;
 
-                    // change_scene(game, "cafet_beginning_2_4");
+                     change_scene(game, "cafet_beginning_2_4");
                     // change_scene(game, "ewan_first_scene_0_6");
 
-                    change_scene(game, "ping_pong_1_4");
+                    //change_scene(game, "ping_pong_1_4");
                     // change_scene(game, "cafet_ping_pong_beginning_0_3");
                     // change_scene(game, "cafet_second_counter_end_0_3");
 
