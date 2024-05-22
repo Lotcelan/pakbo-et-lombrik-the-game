@@ -26,7 +26,7 @@ void update_basic_dword(GameData* game, Entity* e, float delta_t) {
                         playSoundEffect(e->soundEffectManager, "../src/assets/sounds/sword_attack_1.wav");
                     } else {
                         printf("Second sound attack");
-                        playSoundEffect(e->soundEffectManager, "../src/assets/sounds/sword_attack_2.wav");
+                        playSoundEffect(e->soundEffectManager, "../src/assets/sounds/sword_attack_3.wav");
                     }
                     
                     *is_attacking = false;
