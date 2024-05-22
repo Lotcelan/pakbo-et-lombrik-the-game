@@ -17,6 +17,7 @@ void update_ping_pong(GameData* game) {
     Box* ball_coll = init_rect_box(ball->x, ball->y, ball->radius*2, ball->radius*2);
     if (are_colliding(game->player->hurt_box, left_coll) || are_colliding(game->player->hurt_box, right_coll) || are_colliding(game->player->hurt_box, ball_coll)) {
         damage_entity(game, game->player, 1, 500, -1, false, NULL);
+         playSoundEffect(game->player->soundEffectManager, "../src/assets/sounds/ball_hit_table.mp3");
     }
 
     float* ball_x_velocity = get(game->current_scene->objects, "ball_x_velocity", strcmp);
@@ -33,6 +34,9 @@ void update_ping_pong(GameData* game) {
     if (are_colliding(next_x_ball_coll, left_coll) || are_colliding(next_x_ball_coll, right_coll) || next_x < 0 || next_x > game->width_amount * CELL_WIDTH) {
         *ball_x_velocity = -*ball_x_velocity;
         next_x = ball->x + (*ball_x_velocity * game->deltaT /1000);
+
+        playSoundEffect(game->player->soundEffectManager, "../src/assets/sounds/ball_hit.mp3");
+       
     }
     
     int next_y = ball->y + ceil(*ball_y_velocity * game->deltaT /1000);

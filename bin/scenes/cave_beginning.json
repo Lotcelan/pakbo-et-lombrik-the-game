@@ -144,12 +144,12 @@
       "x" : 15
     },
     {
-      "teleport_to_scene" : "none",
+      "teleport_to_scene" : "ewan_first_scene_0_5",
       "x" : 15,
       "identifier" : "IceDoor.png_8BE61F4C-0286-4165-95D0-B4336EBB1CFC",
       "resource" : "src_assets_structures_IceDoor",
       "y" : 2,
-      "allow_pass_through" : 14
+      "allow_pass_through" : 0
     },
     {
       "identifier" : "iceBlocAllLeft.png_30E67B52-8D4A-4FE2-8287-95FB0ABBE106",
