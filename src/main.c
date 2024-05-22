@@ -54,7 +54,6 @@
 #include "weapons/blue_duck_boss_laser/blue_duck_boss_laser.h"
 
 
-
 int main(int argc, char* argv[]) {
 	(void)argc; // Pour les warnings
     (void)argv;

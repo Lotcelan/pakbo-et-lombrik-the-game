@@ -6,19 +6,6 @@ void update_cafet_crossing_counters(GameData* game) {
     Structure* moving_platform = get(game->current_scene->objects, "moving_platform", strcmp);
     change_structure_coordinates(game, moving_platform, CELL_WIDTH * 8 + (CELL_WIDTH * 5 * sin(2*3.14*SDL_GetTicks()/1000/8)), moving_platform->position.y);
 
-    if (game->player->collision_box->zone.x > game->width_amount * CELL_WIDTH) {
-        change_scene(game, "cafet_second_counter_beginning_3_4");
-        return;
-    }
-    if (game->player->collision_box->zone.x < 0) {
-        change_scene(game, "cafet_beginning_15_4");
-        return;
-    }
-
-    if (game->player->y_position > game->height_amount * CELL_HEIGHT) {
-        change_scene(game, "cave_beginning_1_0");
-        return;
-    }
     
     return;
 }

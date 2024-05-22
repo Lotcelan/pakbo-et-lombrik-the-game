@@ -2,6 +2,30 @@
   "background" : "src_assets_backgrounds_BackgroundCave2",
   "structures" : [
     {
+      "identifier" : "blockLeft",
+      "x" : -1,
+      "y" : 0,
+      "resource" : "src_assets_structures_fullBlockVertical",
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none"
+  },
+  {
+      "identifier" : "blockRight",
+      "x" : 16,
+      "y" : 0,
+      "resource" : "src_assets_structures_fullBlockVertical",
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "cafet_crossing_counters_1_4"
+  },
+  {
+      "identifier" : "blockUp",
+      "x" : 0,
+      "y" : -1,
+      "resource" : "src_assets_structures_fullBlockHorizontal",
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none"
+  },
+    {
       "identifier" : "iceBlocWithoutSnow.png_54AC2987-B007-4BA7-90C8-BD7A51959885",
       "resource" : "src_assets_structures_iceBlocWithoutSnow",
       "y" : 0,

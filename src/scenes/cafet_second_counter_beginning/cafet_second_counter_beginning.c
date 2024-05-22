@@ -38,19 +38,6 @@ void update_cafet_second_counter_beginning(GameData* game) {
         push_render_stack_text(game, t, true);
     }
 
-    if (game->player->x_position > game->width_amount * CELL_WIDTH) {
-        change_scene(game, "cafet_second_counter_end_2_4");
-    }
-
-    if (game->player->y_position > game->height_amount * CELL_HEIGHT) {
-        change_scene(game, "cave_beginning_1_0");
-        return;
-    }
-
-    if (game->player->collision_box->zone.x < 0) {
-        change_scene(game, "cafet_crossing_counters_15_4");
-        return;
-    }
 
     return;
 }

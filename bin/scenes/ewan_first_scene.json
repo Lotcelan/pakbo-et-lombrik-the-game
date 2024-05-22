@@ -2,6 +2,30 @@
   "background" : "src_assets_backgrounds_BackgroundCave2",
   "structures" : [
     {
+      "identifier" : "blockLeft",
+      "x" : -1,
+      "y" : 0,
+      "resource" : "src_assets_structures_fullBlockVertical",
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none"
+  },
+  {
+      "identifier" : "blockRight",
+      "x" : 16,
+      "y" : 0,
+      "resource" : "src_assets_structures_fullBlockVertical",
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none"
+  },
+  {
+      "identifier" : "blockUp",
+      "x" : 0,
+      "y" : -1,
+      "resource" : "src_assets_structures_fullBlockHorizontal",
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none"
+  },
+    {
       "teleport_to_scene" : "none",
       "y" : 0,
       "resource" : "src_assets_structures_icePic2",

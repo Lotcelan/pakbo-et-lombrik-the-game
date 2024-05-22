@@ -2,10 +2,6 @@
 
 void update_ewan_first_scene(GameData* game) {
     // printf("Current coords : %d, %d\n", moving_platform->position.x, moving_platform->position.y);
-    if (game->player->collision_box->zone.x > game->width_amount * CELL_WIDTH) {
-        change_scene(game, "cafet_crossing_counters_1_4");
-        return;
-    }
     
     return;
 }

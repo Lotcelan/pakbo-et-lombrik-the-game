@@ -40,6 +40,30 @@
   "name" : "first_flo_level_cave",
   "structures" : [
     {
+      "identifier" : "blockLeft",
+      "x" : -1,
+      "y" : 0,
+      "resource" : "src_assets_structures_fullBlockVertical",
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none"
+  },
+  {
+      "identifier" : "blockRight",
+      "x" : 16,
+      "y" : 0,
+      "resource" : "src_assets_structures_fullBlockVertical",
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none"
+  },
+  {
+      "identifier" : "blockUp",
+      "x" : 0,
+      "y" : -1,
+      "resource" : "src_assets_structures_fullBlockHorizontal",
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none"
+  },
+    {
       "resource" : "src_assets_structures_icePic2",
       "x" : 0,
       "identifier" : "icePic2.png_1DACFF8A-D537-4FB0-A562-2215A295BBC2",
