@@ -187,7 +187,7 @@
       "y" : 5,
       "resource" : "src_assets_structures_iceBlocAllRight",
       "x" : 11,
-      "allow_pass_through" : 0,
+      "allow_pass_through" : 1,
       "teleport_to_scene" : "none",
       "identifier" : "iceBlocAllRight.png_55CB929F-91F6-4186-9808-72DA0161342A"
     },

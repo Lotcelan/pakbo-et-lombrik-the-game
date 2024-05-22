@@ -28,7 +28,7 @@ void update_continue(GameData* game){
         game->player->update = update_player;
         game->player->event_handler = event_handler_player;
         game->player->update_animation = update_animation_player;
-        change_scene(game, "hub_level_2_2");
+        change_scene(game, "cafet_beginning_1_0");
         game->player->x_velocity = 0;
     }
     else if (game->player->x_position <= -10){

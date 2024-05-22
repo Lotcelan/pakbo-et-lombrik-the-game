@@ -45,11 +45,11 @@ void event_handler_main_menu(GameData* game) {
                     // change_scene(game, "cafet_beginning_2_4");
                     // change_scene(game, "ewan_first_scene_0_6");
 
-                    // change_scene(game, "cafet_beginning_2_4");
+                    change_scene(game, "cafet_beginning_1_0");
                     // change_scene(game, "cafet_ping_pong_beginning_0_3");
                     // change_scene(game, "cafet_second_counter_end_0_3");
 
-                    change_scene(game, "cave_2_4");
+                    //change_scene(game, "cave_2_4");
 
                     return;
                 } else if (strcmp(main_menu_options[*selectedMenuItem], "Quit")==0) {

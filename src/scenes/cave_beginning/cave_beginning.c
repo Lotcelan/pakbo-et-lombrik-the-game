@@ -7,6 +7,8 @@ void update_cave_beginning(GameData* game) {
     //}
     
     if (game->player->collision_box->zone.y > game->height_amount * CELL_WIDTH) {
+        playSoundEffect(game->player->soundEffectManager, "../src/assets/sounds/duck_quack.mp3" );
+        //damage_entity(game, game->player, 2, 1, 1000, false, game->player);
         change_scene(game, "cave_beginning_1_0");
         return;
     }

@@ -23,7 +23,7 @@
             "x" : 3,
             "y" : 3,
             "resource" : "src_assets_cafet_ordinateurOpenBar",
-            "allow_pass_through" : 0,
+            "allow_pass_through" : 10,
             "teleport_to_scene" : "none"
         },
         {
