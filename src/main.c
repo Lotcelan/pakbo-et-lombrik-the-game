@@ -45,6 +45,7 @@
 #include "scenes/ewan_first_scene/ewan_first_scene.h"
 #include "scenes/ewan_second_scene/ewan_second_scene.h"
 #include "scenes/ewan_fourth_scene/ewan_fourth_scene.h"
+#include "scenes/cave/cave.h"
 
 #include "scenes/ewan_third_scene/ewan_third_scene.h"
 
@@ -230,6 +231,9 @@ int main(int argc, char* argv[]) {
 	SceneInit* ewan_fourth_scene = (SceneInit*)malloc(sizeof(SceneInit));
 	*ewan_fourth_scene = init_ewan_fourth_scene;
 
+	SceneInit* cave = (SceneInit*)malloc(sizeof(SceneInit));
+	*cave = init_cave;
+
 
 	insert(game->scenes, "scene01", scene01, free);
 	insert(game->scenes, "main_menu", main_menu, free);
@@ -250,6 +254,7 @@ int main(int argc, char* argv[]) {
 	insert(game->scenes, "ewan_third_scene", ewan_third_scene, free);
 	insert(game->scenes, "ewan_fourth_scene", ewan_fourth_scene, free);
 	insert(game->scenes, "cafet_ping_pong_beginning", cafet_ping_pong_beginning, free);
+	insert(game->scenes, "cave", cave, free);
 
 	change_scene(game, "main_menu_-1_-1");
 
