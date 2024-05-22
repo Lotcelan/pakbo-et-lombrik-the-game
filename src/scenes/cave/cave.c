@@ -12,6 +12,12 @@ void update_cave(GameData* game) {
     //    return;
     //}
 
+
+    if (game->player->y_position > game->height_amount * CELL_HEIGHT) {
+        change_scene(game, "cave_1_6");
+        return;
+    }
+
     return;
 }
 
@@ -33,19 +39,9 @@ void event_handler_cave(GameData* game) {
 }
 
 void populate_cave(GameData* game) {
-    push_background_structures(game);
-
+    push_background_structures(game);   
     for (int i = 0; i < 3; i++) add_modifier_to_entity(game, game->player, N_JUMP, 1, -1);
-    for (int i = 0; i < 15; i++) add_modifier_to_entity(game, game->player, POISON_EFFECT, 1, 5000);
 
-    spawn_modifier_in_scene(game, game->current_scene, create_modifier(SPEED_HOOF, 1, -1), 8, 4);
-    spawn_modifier_in_scene(game, game->current_scene, create_modifier(SPEED_HOOF, 1, -1), 8, 4);
-    spawn_modifier_in_scene(game, game->current_scene, create_modifier(SPEED_HOOF, 1, -1), 8, 4);
-    spawn_modifier_in_scene(game, game->current_scene, create_modifier(SPEED_HOOF, 1, -1), 8, 4);
-    spawn_modifier_in_scene(game, game->current_scene, create_modifier(BALL_AND_CHAIN, 1, -1), 10, 4);
-    spawn_modifier_in_scene(game, game->current_scene, create_modifier(BALL_AND_CHAIN, 1, -1), 10, 4);
-    spawn_modifier_in_scene(game, game->current_scene, create_modifier(BALL_AND_CHAIN, 1, -1), 10, 4);
-    spawn_modifier_in_scene(game, game->current_scene, create_modifier(BALL_AND_CHAIN, 1, -1), 10, 4);
 }
 
 Scene* init_cave(GameData* game) {
