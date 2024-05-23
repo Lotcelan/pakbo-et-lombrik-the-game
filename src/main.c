@@ -40,6 +40,7 @@
 #include "scenes/hub_level/hub_level.h"
 #include "scenes/continue/continue.h"
 #include "scenes/cave_beginning/cave_beginning.h"
+#include "scenes/first_boss_room/first_boss_room.h"
 #include "scenes/cafet_ping_pong_beginning/cafet_ping_pong_beginning.h"
 
 #include "scenes/ewan_first_scene/ewan_first_scene.h"
@@ -232,6 +233,8 @@ int main(int argc, char* argv[]) {
 
 	SceneInit* cave = (SceneInit*)malloc(sizeof(SceneInit));
 	*cave = init_cave;
+	SceneInit* first_boss_room = (SceneInit*)malloc(sizeof(SceneInit));
+	*first_boss_room = init_first_boss_room;
 
 
 	insert(game->scenes, "scene01", scene01, free);
@@ -254,6 +257,7 @@ int main(int argc, char* argv[]) {
 	insert(game->scenes, "ewan_fourth_scene", ewan_fourth_scene, free);
 	insert(game->scenes, "cafet_ping_pong_beginning", cafet_ping_pong_beginning, free);
 	insert(game->scenes, "cave", cave, free);
+	insert(game->scenes, "first_boss_room", first_boss_room, free);
 
 	change_scene(game, "main_menu_-1_-1");
 
