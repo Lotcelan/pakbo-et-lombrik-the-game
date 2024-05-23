@@ -23,6 +23,7 @@
 #include "entities/canard_laque_iced/canard_laque_iced.h"
 #include "entities/ice_pic_collision/ice_pic_collision.h"
 #include "entities/ice_pic_structure/ice_pic_structure.h"
+#include "entities/first_final_boss/first_final_boss.h"
 
 
 #include "resources.h"
@@ -172,6 +173,9 @@ int main(int argc, char* argv[]) {
 	EntityInitFunc* canard_laque_iced = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
 	*canard_laque_iced = init_canard_laque_iced;
 	insert(game->entities, "canardLaqueIced", canard_laque_iced, free);
+	EntityInitFunc* first_final_boss = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
+	*first_final_boss = init_first_final_boss;
+	insert(game->entities, "first_final_boss", first_final_boss, free);
 	
 	EntityInitFunc* i_ice_pic_structure = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
 	*i_ice_pic_structure = init_ice_pic_structure;

@@ -241,6 +241,16 @@ void clear_entities(GameData* game) {
 	while (current != NULL) {
 		Entity* e = (Entity*)current->value;
 		if (e->current_hp <= 0) {
+			if (e->objects) {
+				bool* do_not_clear = get(e->objects, "DO_NOT_CLEAR", strcmp); // hardcodé
+				if (do_not_clear) {
+					if (*do_not_clear) {
+						current = current->next;
+						continue;
+					}
+				}
+			}
+			
 			game->current_scene->entities = delete_compare(game->current_scene->entities, e, compare_entities, free_entity);
 			current = game->current_scene->entities;
 			continue;
