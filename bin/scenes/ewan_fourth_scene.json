@@ -15,7 +15,7 @@
       "y" : 0,
       "resource" : "src_assets_structures_fullBlockVertical",
       "allow_pass_through" : 0,
-      "teleport_to_scene" : "cafet_crossing_counters_1_4"
+      "teleport_to_scene" : "none"
   },
   {
       "identifier" : "blockUp",
