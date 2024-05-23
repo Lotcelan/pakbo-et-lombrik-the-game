@@ -30,6 +30,7 @@
 #include "scenes/hub_level/hub_level.h"
 #include "scenes/continue/continue.h"
 #include "scenes/telecom/telecom.h"
+#include "scenes/intro1/intro1.h"
 #include "weapons/arbalete/arbalete.h"
 #include "weapons/basic_sword/basic_sword.h"
 #include "weapons/blue_duck_boss_laser/blue_duck_boss_laser.h"
@@ -167,6 +168,8 @@ int main(int argc, char* argv[]) {
 	*cafet_second_counter_end = init_cafet_second_counter_end;
 	SceneInit* telecom = (SceneInit*)malloc(sizeof(SceneInit));
 	*telecom = init_telecom;
+	SceneInit* intro1 = (SceneInit*)malloc(sizeof(SceneInit));
+	*intro1 = init_intro1;
 
 
 	insert(game->scenes, "scene01", scene01, free);
@@ -183,6 +186,7 @@ int main(int argc, char* argv[]) {
 	insert(game->scenes, "cafet_second_counter_beginning", cafet_second_counter_beginning, free);
 	insert(game->scenes, "cafet_second_counter_end", cafet_second_counter_end, free);
 	insert(game->scenes, "telecom", telecom, free);
+	insert(game->scenes, "intro1", intro1, free);
 
 	change_scene(game, "main_menu_-1_-1");
 

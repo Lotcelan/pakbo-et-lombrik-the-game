@@ -3,7 +3,7 @@
 void update_telecom(GameData* game) {
     // printf("Current coords : %d, %d\n", moving_platform->position.x, moving_platform->position.y);
     if (game->player->collision_box->zone.y > 130) {
-        change_scene(game, "main_menu_-1_-1");
+        change_scene(game, "intro1_1_0");
         return;
     }
     

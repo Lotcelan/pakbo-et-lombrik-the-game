@@ -52,6 +52,8 @@ typedef struct sprite {
 
 typedef struct Entity {
     // position
+    int prev_x;
+    int prev_y;
     int x_position;
     int y_position;
     // vitesse

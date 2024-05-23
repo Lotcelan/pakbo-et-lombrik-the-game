@@ -56,6 +56,8 @@ void print_entity(Entity* e) {
 
 Entity* init_entity(int x, int y, int framerate, SDL_Texture* spriteSheet, int width, int height, int* nbFrames, int* lock_liste, void (*update)(GameData* game, Entity* e, float d), void (*event_handler)(Entity* e, GameData* game), void (*update_animation)(Entity* e, float delta), int max_hp, bool should_have_hitbox) {
 	Entity* res = malloc(sizeof(Entity));
+	res->prev_x = x;
+	res->prev_y = y;
 	res->x_position = x;
 	res->y_position = y;
 	res->x_velocity = 0;
@@ -106,6 +108,8 @@ void change_entity_coordinates(Entity* e, int x, int y) {
 	e->prev_collision_box = copy_box(e->collision_box);
 	e->prev_hurt_box = copy_box(e->hurt_box);
 	e->prev_hit_box = copy_box(e->hit_box);
+	e->prev_x = e->x_position;
+	e->prev_y = e->y_position;
 
 	e->x_position = x;
 	e->y_position = y;

@@ -80,7 +80,7 @@ Structure* update_entity_movement(GameData* game, Entity* e, float delta_t, bool
             break;
         }
         if (is_colliding) {
-            change_entity_coordinates(e, e->prev_collision_box->zone.x, e->prev_collision_box->zone.y);
+            change_entity_coordinates(e, e->prev_x, e->prev_y);
 
             // update_entity_boxes(e, temp_prev, prev_y);
             // prev_x = e->x_position;

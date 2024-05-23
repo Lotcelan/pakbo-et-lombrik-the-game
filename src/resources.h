@@ -114,11 +114,20 @@ extern int src_assets_server_png_len;
 extern unsigned char src_assets_continue_png[];
 extern int src_assets_continue_png_len;
 
-extern unsigned char src_assets_dirt_png[];
-extern int src_assets_dirt_png_len;
+extern unsigned char src_assets_structures_dirtWall0_png[];
+extern int src_assets_structures_dirtWall0_png_len;
+
+extern unsigned char src_assets_structures_dirtWall1_png[];
+extern int src_assets_structures_dirtWall1_png_len;
 
 extern unsigned char src_assets_structures_grasswallLeft_png[];
 extern int src_assets_structures_grasswallLeft_png_len;
+
+extern unsigned char src_assets_structures_dirtWall3_png[];
+extern int src_assets_structures_dirtWall3_png_len;
+
+extern unsigned char src_assets_structures_dirtWall2_png[];
+extern int src_assets_structures_dirtWall2_png_len;
 
 extern unsigned char src_assets_structures_grassCornerLeft_png[];
 extern int src_assets_structures_grassCornerLeft_png_len;
@@ -129,8 +138,17 @@ extern int src_assets_structures_sol_png_len;
 extern unsigned char src_assets_structures_iceBlocWithSnow_png[];
 extern int src_assets_structures_iceBlocWithSnow_png_len;
 
+extern unsigned char src_assets_structures_tree2Reverse_png[];
+extern int src_assets_structures_tree2Reverse_png_len;
+
+extern unsigned char src_assets_structures_dirt_png[];
+extern int src_assets_structures_dirt_png_len;
+
 extern unsigned char src_assets_structures_grasswallRight_png[];
 extern int src_assets_structures_grasswallRight_png_len;
+
+extern unsigned char src_assets_structures_tree3Apple_png[];
+extern int src_assets_structures_tree3Apple_png_len;
 
 extern unsigned char src_assets_structures_iceBlocLeft_png[];
 extern int src_assets_structures_iceBlocLeft_png_len;
@@ -147,17 +165,47 @@ extern int src_assets_structures_ecocupInfusion_png_len;
 extern unsigned char src_assets_structures_black_png[];
 extern int src_assets_structures_black_png_len;
 
+extern unsigned char src_assets_structures_tree_reverse_png[];
+extern int src_assets_structures_tree_reverse_png_len;
+
 extern unsigned char src_assets_structures_iceBlocAllLeft_png[];
 extern int src_assets_structures_iceBlocAllLeft_png_len;
 
 extern unsigned char src_assets_structures_icePic2_png[];
 extern int src_assets_structures_icePic2_png_len;
 
+extern unsigned char src_assets_structures_dirtCornerEx3_png[];
+extern int src_assets_structures_dirtCornerEx3_png_len;
+
+extern unsigned char src_assets_structures_dirtCornerIn3_png[];
+extern int src_assets_structures_dirtCornerIn3_png_len;
+
+extern unsigned char src_assets_structures_dirtCornerIn2_png[];
+extern int src_assets_structures_dirtCornerIn2_png_len;
+
+extern unsigned char src_assets_structures_dirtCornerEx2_png[];
+extern int src_assets_structures_dirtCornerEx2_png_len;
+
 extern unsigned char src_assets_structures_grass_png[];
 extern int src_assets_structures_grass_png_len;
 
 extern unsigned char src_assets_structures_plateformeSurelevee_png[];
 extern int src_assets_structures_plateformeSurelevee_png_len;
+
+extern unsigned char src_assets_structures_dirtCornerEx0_png[];
+extern int src_assets_structures_dirtCornerEx0_png_len;
+
+extern unsigned char src_assets_structures_dirtCornerIn0_png[];
+extern int src_assets_structures_dirtCornerIn0_png_len;
+
+extern unsigned char src_assets_structures_dirtCornerIn1_png[];
+extern int src_assets_structures_dirtCornerIn1_png_len;
+
+extern unsigned char src_assets_structures_dirtCornerEx1_png[];
+extern int src_assets_structures_dirtCornerEx1_png_len;
+
+extern unsigned char src_assets_structures_tree_png[];
+extern int src_assets_structures_tree_png_len;
 
 extern unsigned char src_assets_structures_door_png[];
 extern int src_assets_structures_door_png_len;
@@ -191,6 +239,12 @@ extern int src_assets_structures_iceBlocAllRight_png_len;
 
 extern unsigned char src_assets_structures_iceBlocDownRight_png[];
 extern int src_assets_structures_iceBlocDownRight_png_len;
+
+extern unsigned char src_assets_structures_tree2_png[];
+extern int src_assets_structures_tree2_png_len;
+
+extern unsigned char src_assets_structures_bush_png[];
+extern int src_assets_structures_bush_png_len;
 
 extern unsigned char src_assets_structures_solEclaire_png[];
 extern int src_assets_structures_solEclaire_png_len;
