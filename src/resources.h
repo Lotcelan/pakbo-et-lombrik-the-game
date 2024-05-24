@@ -12,6 +12,9 @@ extern int src_assets_psych_duck_png_len;
 extern unsigned char src_assets_modifiers_BALL_AND_CHAIN_png[];
 extern int src_assets_modifiers_BALL_AND_CHAIN_png_len;
 
+extern unsigned char src_assets_modifiers_N_LIFE_png[];
+extern int src_assets_modifiers_N_LIFE_png_len;
+
 extern unsigned char src_assets_modifiers_SPEED_HOOF_png[];
 extern int src_assets_modifiers_SPEED_HOOF_png_len;
 

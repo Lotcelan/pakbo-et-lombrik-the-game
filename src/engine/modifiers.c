@@ -112,6 +112,33 @@ void destroy_modifier(void* mo) {
     free(m);
 }
 
+void remove_entity_modifier(Entity* e, Modifier* m) {
+    if (!m || !e) return;
+
+    List* current = e->modifiers;
+    List* previous = NULL;
+    bool found = false;
+    while (current) {
+        Modifier* m_current = current->value;
+        if (m_current == m) {
+            found = true;
+            break;
+        }
+        previous = current;
+        current = current->next;
+    }
+
+    if (found && current) {
+        if (previous) {
+            previous->next = current->next;
+        } else {
+            e->modifiers = current->next;
+        }
+        destroy_modifier(current->value);
+        free(current);
+    }
+}
+
 Modifier* get_entity_modifier(Entity* e, ModifierName name) {
     if (e == NULL) return NULL;;
     List* current = e->modifiers;

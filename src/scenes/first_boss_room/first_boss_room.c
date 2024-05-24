@@ -57,6 +57,9 @@ void update_first_boss_room(GameData* game) {
         game->current_scene->structures = append_first(upper_right_platform, game->current_scene->structures);
         push_render_stack_structure(game, upper_left_platform, false);
         push_render_stack_structure(game, upper_right_platform, false);
+        spawn_modifier_in_scene(game, game->current_scene, create_modifier(N_LIFE, 1, -1), 2 , 6);
+        spawn_modifier_in_scene(game, game->current_scene, create_modifier(N_LIFE, 1, -1), 2 , 6);
+        spawn_modifier_in_scene(game, game->current_scene, create_modifier(N_JUMP, 1, -1), (15-2) , 6);
     }
 
     if (*state == 3) {

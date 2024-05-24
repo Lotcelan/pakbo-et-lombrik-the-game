@@ -30,6 +30,7 @@ void update_first_final_boss(GameData* game, Entity* first_final_boss, float del
 
 	int* phase = get(first_final_boss->objects, "phase", strcmp);
 	if (!phase) return;
+	int previous_phase = *phase;
 	printf("*phase : %i\n", *phase);
 	if (first_final_boss->current_hp <= 0) {
 		bool* DO_NOT_CLEAR = get(first_final_boss->objects, "DO_NOT_CLEAR", strcmp);
@@ -37,6 +38,12 @@ void update_first_final_boss(GameData* game, Entity* first_final_boss, float del
 		if (*DO_NOT_CLEAR) {
 			*phase = *phase + 1;
 			first_final_boss->current_hp = first_final_boss->max_hp;
+		}
+	}
+	if (*phase == 2 && previous_phase == 1) {
+		WeaponInitFunc* laser = get(game->weapons, "blue_duck_boss_laser", strcmp);
+		if (laser) {
+			first_final_boss->weapon = (*laser)(game);
 		}
 	}
 
