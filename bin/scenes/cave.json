@@ -16,7 +16,7 @@
       "y" : 0,
       "resource" : "src_assets_structures_fullBlockVertical",
       "allow_pass_through" : 0,
-      "teleport_to_scene" : "cave2_2_2"
+      "teleport_to_scene" : "cave2_0_6"
   },
   {
       "identifier" : "blockUp",

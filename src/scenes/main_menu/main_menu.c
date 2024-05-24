@@ -43,13 +43,13 @@ void event_handler_main_menu(GameData* game) {
                     game->player->y_velocity = 0;
 
                     //change_scene(game, "cafet_beginning_2_4");
-                    //change_scene(game, "first_boss_room_7_6");
+                    change_scene(game, "first_boss_room_7_6");
 
                     //change_scene(game, "ping_pong_1_4");
                     // change_scene(game, "cafet_ping_pong_beginning_0_3");
                     // change_scene(game, "cafet_second_counter_end_0_3");
 
-                    change_scene(game, "cave_2_4");
+                    //change_scene(game, "cave2_0_6");
 
                     return;
                 } else if (strcmp(main_menu_options[*selectedMenuItem], "Quit")==0) {
