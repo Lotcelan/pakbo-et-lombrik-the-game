@@ -28,7 +28,7 @@
     "greg" : {
         "message" : "Bonjour je m'appelle Gregory, je suis le medecin de cette escouade.",
         "font_name" : "Minecraft",
-        "options" : [ "Tu es medecin ?", "Qui est ce qui me ramene ici ?"],
+        "options" : [ "Tu es medecin ?", "Qui me transportera jusqu'ici ?"],
         "branches" : [
             {
                 "message" : "De toute evidence.",
@@ -37,7 +37,7 @@
                 "branches" : []
             }, 
             {
-                "message" : "Mes subordonnes, Allison, Eric et Robert, sont des agents de terrain. Ils s'occuppent de tout.",
+                "message" : "Mes subordonnes, Allison, Eric et Robert, sont des agents de terrain. Ils s'occupperont de tout.",
                 "font_name" : "Minecraft",
                 "options" : [],
                 "branches" : []
@@ -47,7 +47,7 @@
     "james" : {
         "message" : "Bonjour je m'appelle James, je suis l'armurier de l'escouade",
         "font_name" : "Minecraft",
-        "options" : [ "Peux-tu m'enseigner le maniement de l'epee ?", "Est-ce qu'on a des explosifs en reserve ?"],
+        "options" : [ "Peux-tu m'enseigner le maniement de l'epee ?", "Est-ce qu'on a des munitions en reserve ?"],
         "branches" : [
             {
                 "message" : "Tu as lu le panneau sur le chemin jusqu'ici non ? Brandis ton epee avec X. Pour ce qui est du reste, trouve ton propre style.",
@@ -75,7 +75,7 @@
                 "branches" : []
             }, 
             {
-                "message" : "Voici James, il fait office d'armurier.",
+                "message" : "Voici James, il fait office d'armurier. Tu as deja rencontre son frere je crois.",
                 "font_name" : "Minecraft",
                 "options" : [],
                 "branches" : []
@@ -133,7 +133,7 @@
         "options" : [],
         "branches" : [
             {
-                "message" : "Je me suis rendu compte que je pouvais me gratter le dos facilement avec mon epee ! (appuyer sur X pour brandir son epee)",
+                "message" : "Je me suis rendu compte que je pouvais me gratter le dos facilement avec mon epee ! \n(appuyer sur X)",
                 "font_name" : "Minecraft",
                 "options" : [],
                 "branches" : [
