@@ -58,7 +58,7 @@
 
     },
     "ending_demo" : {
-        "message" : "Canard laque a ete vaincu ! Félicitation !",
+        "message" : "Canard laque a ete vaincu ! Felicitation !",
         "font_name" : "suifak_small",
         "optionts" : [ "Merci !" ],
         "branches" : [
