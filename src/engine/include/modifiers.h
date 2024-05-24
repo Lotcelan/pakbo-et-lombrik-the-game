@@ -47,4 +47,5 @@ void destroy_scene_modifier(void* sm);
 SceneModifier* copy_scene_modifier(SceneModifier* sm);
 Modifier* copy_modifier(Modifier* to_copy);
 void update_modifiers(GameData* game);
+void remove_entity_modifier(Entity* e, Modifier* m);
 #endif

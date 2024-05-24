@@ -23,6 +23,7 @@
 #include "entities/canard_laque_iced/canard_laque_iced.h"
 #include "entities/ice_pic_collision/ice_pic_collision.h"
 #include "entities/ice_pic_structure/ice_pic_structure.h"
+#include "entities/first_final_boss/first_final_boss.h"
 
 
 #include "resources.h"
@@ -40,6 +41,7 @@
 #include "scenes/hub_level/hub_level.h"
 #include "scenes/continue/continue.h"
 #include "scenes/cave_beginning/cave_beginning.h"
+#include "scenes/first_boss_room/first_boss_room.h"
 #include "scenes/cafet_ping_pong_beginning/cafet_ping_pong_beginning.h"
 
 #include "scenes/ewan_first_scene/ewan_first_scene.h"
@@ -171,6 +173,9 @@ int main(int argc, char* argv[]) {
 	EntityInitFunc* canard_laque_iced = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
 	*canard_laque_iced = init_canard_laque_iced;
 	insert(game->entities, "canardLaqueIced", canard_laque_iced, free);
+	EntityInitFunc* first_final_boss = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
+	*first_final_boss = init_first_final_boss;
+	insert(game->entities, "first_final_boss", first_final_boss, free);
 	
 	EntityInitFunc* i_ice_pic_structure = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
 	*i_ice_pic_structure = init_ice_pic_structure;
@@ -232,6 +237,8 @@ int main(int argc, char* argv[]) {
 
 	SceneInit* cave = (SceneInit*)malloc(sizeof(SceneInit));
 	*cave = init_cave;
+	SceneInit* first_boss_room = (SceneInit*)malloc(sizeof(SceneInit));
+	*first_boss_room = init_first_boss_room;
 
 
 	insert(game->scenes, "scene01", scene01, free);
@@ -254,6 +261,7 @@ int main(int argc, char* argv[]) {
 	insert(game->scenes, "ewan_fourth_scene", ewan_fourth_scene, free);
 	insert(game->scenes, "cafet_ping_pong_beginning", cafet_ping_pong_beginning, free);
 	insert(game->scenes, "cave", cave, free);
+	insert(game->scenes, "first_boss_room", first_boss_room, free);
 
 	change_scene(game, "main_menu_-1_-1");
 
