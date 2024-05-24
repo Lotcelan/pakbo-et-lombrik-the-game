@@ -1,15 +1,68 @@
 #include "./include/physics.h"
 
-Structure* do_the_moves(GameData* game, Entity* e, int delta_x, int delta_y) {
-    // On peut avoir besoin de modifier la position en fonction dx ou dy hors de update_entity_movement
+Structure* update_entity_movement(GameData* game, Entity* e, float delta_t, bool gravity_enabled) {
+    // returns NULL if no collision or the structure there was collision with
+    
+    if (gravity_enabled) {
+        update_gravity(game, e, delta_t);
+    }
+    if (game->current_scene == NULL) {
+        return false;
+    }
 
+    if ((e->x_velocity == 0 && e->y_velocity == 0) || (e->x_position == -1 && e->y_position == -1)) {
+        return false;
+    }
+
+    // int prev_x = e->x_position;
+    // int prev_y = e->y_position;
+    
+    // todo : normalisation de la vitesse en diagonale avec un /sqrt(2)
+    // int delta_x = floor(delta_t * e->x_velocity / 1000); // delta_t en ms
+    // int sign_x = delta_x > 0 ? 1 : -1;
+    // for (int current = 0; current < delta_x; current++) {
+    //     e->x_position = e->x_position + delta_x + sign_x * current;
+    //     update_entity_boxes(e);
+        
+    //     if (is_entity_colliding_with_structures(e, game->current_scene->structures)) {
+    //         e->x_position = prev_x;
+    //         update_entity_boxes(e);
+    //         continue;
+    //     }
+    //     break;
+    // }
+    // int delta_y = floor(delta_t * e->y_velocity / 1000); // delta_t en ms
+    // int sign_y = delta_y > 0 ? 1 : -1;
+    // for (int current = 0; current < delta_y; current++) {
+    //     e->y_position = e->y_position + delta_y + sign_y * current;
+    //     printf("Prev : %d, Current : %d, Delta : %d\n", prev_y, e->y_position, delta_y);
+    //     update_entity_boxes(e);
+    //     if (is_entity_colliding_with_structures(e, game->current_scene->structures)) {
+    //         e->y_position = prev_y;
+    //         update_entity_boxes(e);
+    //         continue;
+    //     }
+    //     break;
+    // }
+    bool is_colliding = false;
+    int delta_x, delta_y;
     Structure* result = NULL;
+    // double velocityMagnitude = sqrt(e->x_velocity * e->x_velocity + e->y_velocity * e->y_velocity);
+    // if (velocityMagnitude > 0) {
+    //     double normalizedXVelocity = e->x_velocity / velocityMagnitude;
+    //     double normalizedYVelocity = e->y_velocity / velocityMagnitude;
+
+    //     delta_x = delta_t * normalizedXVelocity / 1000; // delta_t en ms
+    //     delta_y = delta_t * normalizedYVelocity / 1000; // delta_t en ms
+    // }
+    // printf("Delta X : %d, Delta Y : %d\n", delta_x, delta_y);
+
+    delta_x = delta_t * e->x_velocity / 1000; // delta_t en ms
+    delta_y = delta_t * e->y_velocity / 1000; // delta_t en ms
     int sign_x = delta_x > 0 ? 1 : -1;
     int sign_y = delta_y > 0 ? 1 : -1;
     delta_x = abs(delta_x);
     delta_y = abs(delta_y);
-
-    bool is_colliding = false;
     bool has_collided = false;
 
     while (delta_x >= 0) {
@@ -77,80 +130,6 @@ Structure* do_the_moves(GameData* game, Entity* e, int delta_x, int delta_y) {
         e->y_velocity = 0;
     }
 
-}
-
-Structure* update_entity_movement(GameData* game, Entity* e, float delta_t, bool gravity_enabled) {
-    // returns NULL if no collision or the structure there was collision with
-    
-    if (gravity_enabled) {
-        update_gravity(game, e, delta_t);
-    }
-    if (game->current_scene == NULL) {
-        return false;
-    }
-
-    if ((e->x_velocity == 0 && e->y_velocity == 0) || (e->x_position == -1 && e->y_position == -1)) {
-        return false;
-    }
-
-    // int prev_x = e->x_position;
-    // int prev_y = e->y_position;
-    
-    // todo : normalisation de la vitesse en diagonale avec un /sqrt(2)
-    // int delta_x = floor(delta_t * e->x_velocity / 1000); // delta_t en ms
-    // int sign_x = delta_x > 0 ? 1 : -1;
-    // for (int current = 0; current < delta_x; current++) {
-    //     e->x_position = e->x_position + delta_x + sign_x * current;
-    //     update_entity_boxes(e);
-        
-    //     if (is_entity_colliding_with_structures(e, game->current_scene->structures)) {
-    //         e->x_position = prev_x;
-    //         update_entity_boxes(e);
-    //         continue;
-    //     }
-    //     break;
-    // }
-    // int delta_y = floor(delta_t * e->y_velocity / 1000); // delta_t en ms
-    // int sign_y = delta_y > 0 ? 1 : -1;
-    // for (int current = 0; current < delta_y; current++) {
-    //     e->y_position = e->y_position + delta_y + sign_y * current;
-    //     printf("Prev : %d, Current : %d, Delta : %d\n", prev_y, e->y_position, delta_y);
-    //     update_entity_boxes(e);
-    //     if (is_entity_colliding_with_structures(e, game->current_scene->structures)) {
-    //         e->y_position = prev_y;
-    //         update_entity_boxes(e);
-    //         continue;
-    //     }
-    //     break;
-    // }
-    int delta_x, delta_y;
-    Structure* result = NULL;
-    // double velocityMagnitude = sqrt(e->x_velocity * e->x_velocity + e->y_velocity * e->y_velocity);
-    // if (velocityMagnitude > 0) {
-    //     double normalizedXVelocity = e->x_velocity / velocityMagnitude;
-    //     double normalizedYVelocity = e->y_velocity / velocityMagnitude;
-
-    //     delta_x = delta_t * normalizedXVelocity / 1000; // delta_t en ms
-    //     delta_y = delta_t * normalizedYVelocity / 1000; // delta_t en ms
-    // }
-    // printf("Delta X : %d, Delta Y : %d\n", delta_x, delta_y);
-
-    double modifier_multiplier = 1;
-    Modifier* m = get_entity_modifier(e, SPEED_HOOF);
-    if (m != NULL) {
-        modifier_multiplier += 0.15 * m->quantity;
-    }
-
-    m = get_entity_modifier(e, BALL_AND_CHAIN);
-    if (m != NULL) {
-        modifier_multiplier -= 0.15 * m->quantity;
-    }
-
-    delta_x = delta_t * e->x_velocity * modifier_multiplier / 1000; // delta_t en ms
-    delta_y = delta_t * e->y_velocity * modifier_multiplier / 1000; // delta_t en ms
-
-    result = do_the_moves(game, e, delta_x, delta_y);
-    
     return result;
 
 }
@@ -313,7 +292,6 @@ GridGraph* a_star(Entity* entity_from, Entity* entity_to, GameData* game) {
     }
 
     binary_heap* pqueue = binary_heap_create(game->width_amount * game->height_amount, binary_heap_basic_entry_compare); // contiendra les GridNode*
-    // binary_heap* pqueue = binary_heap_create(game->width_amount * game->height_amount, binary_heap_basic_entry_compare, binary_heap_basic_entry_free); // contiendra les GridNode*
 
     int x_from = (entity_from->collision_box->zone.x + entity_from->sprite->width / 2)  / CELL_WIDTH;
     int y_from = (entity_from->collision_box->zone.y + entity_from->sprite->height / 2) / CELL_HEIGHT;
@@ -355,7 +333,6 @@ GridGraph* a_star(Entity* entity_from, Entity* entity_to, GameData* game) {
     // [Modifier ceci petit à petit] Temps de débug supplémentaire à cause de cette flemme : 50min
 
     binary_heap_basic_entry* initial = create_binary_heap_basic_entry(get_grid_node(x_from, y_from, game_graph), *(float*)(get_grid_node(x_from, y_from, distances)->value));
-    // binary_heap_basic_entry* initial = create_binary_heap_basic_entry(get_grid_node(x_from, y_from, game_graph), *(float*)(get_grid_node(x_from, y_from, distances)->value), destroy_grid_node);
     binary_heap_insert(pqueue, initial);
 
     while (!is_binary_heap_empty(pqueue)) {
@@ -399,10 +376,8 @@ GridGraph* a_star(Entity* entity_from, Entity* entity_to, GameData* game) {
                 *heuristic_distance = *new_distance + heuristic_a_star(neighbours[i]->x, neighbours[i]->y, x_to, y_to);
                 if (is_present_in_binary_heap(pqueue, neighbours[i], compare_grid_node_game)) {
                     binary_heap_modify(pqueue, neighbours[i], create_binary_heap_basic_entry(neighbours[i], *heuristic_distance), compare_grid_node_game);
-                    // binary_heap_modify(pqueue, neighbours[i], create_binary_heap_basic_entry(neighbours[i], *heuristic_distance, destroy_grid_node), compare_grid_node_game);
                 } else {
                     binary_heap_insert(pqueue, create_binary_heap_basic_entry(neighbours[i], *heuristic_distance));
-                    // binary_heap_insert(pqueue, create_binary_heap_basic_entry(neighbours[i], *heuristic_distance, destroy_grid_node));
                 }
             }
         }
@@ -472,24 +447,4 @@ void follow_player_using_a_star(GameData* game, Entity* e, int x_speed, int y_sp
     } else {
         e->y_velocity = 0;
     }
-}
-bool detect_player(GameData* game, Entity* e, int radius) {
-    // will change the velocity of the entity e to follow game->player
-    if (game->current_scene == NULL) {
-        return false;
-    }
-    Entity* player = game->player;
-    if (player == NULL) {
-        return false;
-    }
-    int player_x = player->x_position;
-    int e_x = e->x_position;
-    if (e_x - player_x < radius && player_x < e_x) {
-        return true; 
-    }
-
-    if (player_x - e_x < radius + CELL_WIDTH && player_x > e_x + CELL_WIDTH) {
-        return true; 
-    }
-    return false;
 }

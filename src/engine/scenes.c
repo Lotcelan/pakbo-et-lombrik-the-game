@@ -196,7 +196,6 @@ void free_scene(Scene* scene) {
     list_delete(scene->entities, free_entity);
     list_delete(scene->structures, free_structure);
     list_delete(scene->modifiers, destroy_modifier);
-    destroyHashTable(scene->objects);
     free(scene);
 }
 

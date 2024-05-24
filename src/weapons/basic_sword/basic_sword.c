@@ -1,6 +1,4 @@
 #include "basic_sword.h"
-#include <time.h>
-
 
 void update_basic_dword(GameData* game, Entity* e, float delta_t) {
     if (e == NULL) {
@@ -19,16 +17,7 @@ void update_basic_dword(GameData* game, Entity* e, float delta_t) {
                     
                     // printf("Attack duration: %d\n", *attack_duration);
                 } else {
-                    int x = 2;
-                    srand(time(0));
-                    if (rand() % x == 0){
-                        printf("First sound attack");
-                        playSoundEffect(e->soundEffectManager, "../src/assets/sounds/sword_attack_1.wav");
-                    } else {
-                        printf("Second sound attack");
-                        playSoundEffect(e->soundEffectManager, "../src/assets/sounds/sword_attack_3.mp3");
-                    }
-                    
+                    playSoundEffect(e->soundEffectManager, "../src/assets/sounds/sword_attack.wav");
                     *is_attacking = false;
                     *attack_duration = -1;
                 }

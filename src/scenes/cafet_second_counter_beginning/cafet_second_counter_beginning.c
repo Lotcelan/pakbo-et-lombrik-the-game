@@ -38,6 +38,9 @@ void update_cafet_second_counter_beginning(GameData* game) {
         push_render_stack_text(game, t, true);
     }
 
+    if (game->player->x_position > game->width_amount * CELL_WIDTH) {
+        change_scene(game, "cafet_second_counter_end_2_4");
+    }
 
     return;
 }

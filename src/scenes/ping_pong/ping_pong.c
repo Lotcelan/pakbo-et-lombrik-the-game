@@ -17,7 +17,6 @@ void update_ping_pong(GameData* game) {
     Box* ball_coll = init_rect_box(ball->x, ball->y, ball->radius*2, ball->radius*2);
     if (are_colliding(game->player->hurt_box, left_coll) || are_colliding(game->player->hurt_box, right_coll) || are_colliding(game->player->hurt_box, ball_coll)) {
         damage_entity(game, game->player, 1, 500, -1, false, NULL);
-         playSoundEffect(game->player->soundEffectManager, "../src/assets/sounds/ball_hit_table.mp3");
     }
 
     float* ball_x_velocity = get(game->current_scene->objects, "ball_x_velocity", strcmp);
@@ -34,9 +33,6 @@ void update_ping_pong(GameData* game) {
     if (are_colliding(next_x_ball_coll, left_coll) || are_colliding(next_x_ball_coll, right_coll) || next_x < 0 || next_x > game->width_amount * CELL_WIDTH) {
         *ball_x_velocity = -*ball_x_velocity;
         next_x = ball->x + (*ball_x_velocity * game->deltaT /1000);
-
-        playSoundEffect(game->player->soundEffectManager, "../src/assets/sounds/ball_hit.mp3");
-       
     }
     
     int next_y = ball->y + ceil(*ball_y_velocity * game->deltaT /1000);
@@ -45,10 +41,10 @@ void update_ping_pong(GameData* game) {
         next_y = ball->y + ceil(*ball_y_velocity * game->deltaT /1000);
     }
 
-    // printf("next_x: %d, next_y: %d\n", next_x, next_y);
-    // printf("left_platform x: %d, y: %d\n", left_platform->x, left_platform->y);
-    // printf("right_platform x: %d, y: %d\n", right_platform->x, right_platform->y);
-    // printf("ball x: %d, y: %d\n", ball->x, ball->y);
+    printf("next_x: %d, next_y: %d\n", next_x, next_y);
+    printf("left_platform x: %d, y: %d\n", left_platform->x, left_platform->y);
+    printf("right_platform x: %d, y: %d\n", right_platform->x, right_platform->y);
+    printf("ball x: %d, y: %d\n", ball->x, ball->y);
 
     ball->x = next_x;
     ball->y = next_y;
@@ -61,24 +57,7 @@ void update_ping_pong(GameData* game) {
     free_box(right_coll);
     free_box(ball_coll);
 
-    int* moving_delay = get(game->current_scene->objects, "moving_delay", strcmp);
-    if (moving_delay == NULL) return;
-
-    if (*moving_delay >= 750) {
-        *moving_delay = 0;
-
-        Structure* moving_platform_left = get(game->current_scene->objects, "moving_platform_left", strcmp);
-        Structure* moving_platform_right = get(game->current_scene->objects, "moving_platform_right", strcmp);
-
-        if (moving_platform_left == NULL || moving_platform_right == NULL) {
-            return;
-        }
-
-        change_structure_coordinates(game, moving_platform_left, moving_platform_left->position.x - 1, moving_platform_left->position.y);
-        change_structure_coordinates(game, moving_platform_right, moving_platform_right->position.x + 1, moving_platform_right->position.y);    
-    } else {
-        *moving_delay = *moving_delay + game->deltaT;
-    }
+    
 
     return;
 }
@@ -127,26 +106,10 @@ void populate_ping_pong(GameData* game) {
     insert(game->current_scene->objects, "ball_x_velocity", ball_x_velocity, free);
     insert(game->current_scene->objects, "ball_y_velocity", ball_y_velocity, free);
 
-    Structure* moving_platform_left = init_structure(game, "moving_platform_left", "src_assets_cafet_tablePingPongHalf", 0, 5, 0, "none");
-    insert(game->current_scene->objects, "moving_platform_left", moving_platform_left,NULL);
-    
-    game->current_scene->structures = append_first(moving_platform_left, game->current_scene->structures);
-    push_render_stack_structure(game, moving_platform_left, false);
-
-    Structure* moving_platform_right = init_structure(game, "moving_platform_right", "src_assets_cafet_tablePingPongHalf", 8, 5, 0, "none");
-    insert(game->current_scene->objects, "moving_platform_right", moving_platform_right,NULL);
-    
-    game->current_scene->structures = append_first(moving_platform_right, game->current_scene->structures);
-    push_render_stack_structure(game, moving_platform_right, false);
-
     push_render_stack_circle(game, ball, false); // on ne refait pas de malloc a chaque update donc non temporaire
     push_render_stack_rect(game, left_platform, false);
     push_render_stack_rect(game, right_platform, false);
     
-    int* moving_delay = malloc(sizeof(int));
-    *moving_delay = 0;
-    insert(game->current_scene->objects, "moving_delay", moving_delay, free);
-
 }
 
 // void test(Entity* e, float delta){

@@ -4,7 +4,6 @@
 #include <SDL2/SDL.h>
 #include "game.h"
 #include "entity.h"
-// #include "physics.h"
 #include "assets.h"
 #include "linked_list.h"
 

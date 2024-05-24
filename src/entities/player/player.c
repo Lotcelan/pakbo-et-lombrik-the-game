@@ -8,45 +8,31 @@ void update_player(GameData* game, Entity* player, float delta_t) {
     if (player == NULL) {
         return;
     }
+    // bool* is_going_down = get(player->objects, "is_going_down", strcmp);
+    // bool* is_going_up = get(player->objects, "is_going_up", strcmp);
+    // bool* is_going_left = get(player->objects, "is_going_left", strcmp);
+    // bool* is_going_right = get(player->objects, "is_going_right", strcmp);
 
-    Modifier* m = get_entity_modifier(player, N_LIFE);
-    if (m) {
-        player->current_hp = (player->max_hp - player->current_hp >= m->quantity) ? player->current_hp + m->quantity : player->max_hp;
-        remove_entity_modifier(player, m);
-    }
+    // if (is_going_down == NULL || is_going_up == NULL || is_going_left == NULL || is_going_right == NULL) {
+    //     return;
+    // }
 
-    int* previous_time_alive_jump_modifier = get(player->objects, "previous_time_alive_jump_modifier", strcmp);
-    if (previous_time_alive_jump_modifier != NULL) {
-        Modifier* m = get_entity_modifier(player, N_JUMP);
-        if (m != NULL) {
-            if (*previous_time_alive_jump_modifier == -1 || *previous_time_alive_jump_modifier > m->current_time_alive) {
-                *previous_time_alive_jump_modifier = m->current_time_alive;
-                int* jump_amount = get(player->objects, "jump_amount", strcmp);
-                if (jump_amount != NULL) {
-                    *jump_amount = 1 + m->quantity;
-                }   
-            }
-        }
-    }
-    m = get_entity_modifier(player, POISON_AFFECT);
-    int* nb_poison_proc = get(player->objects, "nb_poison_proc", strcmp);
-    // printf("Poison proc : %i\n", *nb_poison_proc);
-    if (m && nb_poison_proc){
-        
-        int k = (m->current_time_alive) / m->value;
-        if (k > *nb_poison_proc){
-            *nb_poison_proc += 1;
-            damage_entity(game, player, m->quantity, 0, 0, false, NULL);
-        }
-    }else{
-        *nb_poison_proc = 0;
-    }
+    // if (*is_going_down) {
+    //     player->y_position += 1;
+    // }
+    // if (*is_going_up) {
+    //     player->y_position -= 1;
+    // }
+    // if (*is_going_left) {
+    //     player->x_position -= 1;
+    // }
+    // if (*is_going_right) {
+    //     player->x_position += 1;
+    // }
+    // return;
 
     if (player->current_hp <= 0) {
         player->current_hp = player->max_hp;
-        list_delete(player->modifiers, destroy_modifier);
-        player->modifiers = NULL;
-        playSoundEffect(game->player->soundEffectManager, "../src/assets/sounds/splash-death-splash-46048.mp3" );
         change_scene(game, "game_over_-1_-1");
         player->damage_delay = -1;
         return;
@@ -215,15 +201,6 @@ Entity* init_player(GameData* game, int x, int y) {
     int* jump_amount = malloc(sizeof(int));
     *jump_amount = 1;
     insert(player->objects, "jump_amount", jump_amount, free);
-
-    int* previous_time_alive_jump_modifier = malloc(sizeof(int));
-    *previous_time_alive_jump_modifier = -1;
-    insert(player->objects, "previous_time_alive_jump_modifier", previous_time_alive_jump_modifier, free);
-
-    int* nb_poison_proc = malloc(sizeof(int));
-    *nb_poison_proc = 0;
-    insert(player->objects, "nb_poison_proc", nb_poison_proc, free);
-
 
     return player;
 }

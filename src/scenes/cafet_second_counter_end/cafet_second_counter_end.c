@@ -2,7 +2,11 @@
 
 void update_cafet_second_counter_end(GameData* game) {
     // printf("Current coords : %d, %d\n", moving_platform->position.x, moving_platform->position.y);
-
+    if (game->player->collision_box->zone.x > game->width_amount * CELL_WIDTH) {
+        change_scene(game, "cafet_crossing_counters_1_4");
+        return;
+    }
+    
     return;
 }
 
@@ -25,8 +29,6 @@ void event_handler_cafet_second_counter_end(GameData* game) {
 
 void populate_cafet_second_counter_end(GameData* game) {
     push_background_structures(game);
-
-    spawn_modifier_in_scene(game, game->current_scene, create_modifier(N_JUMP, 1, -1), 15, 3);
 }
 
 Scene* init_cafet_second_counter_end(GameData* game) {

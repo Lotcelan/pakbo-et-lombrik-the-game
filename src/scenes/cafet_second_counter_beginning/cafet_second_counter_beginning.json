@@ -3,38 +3,6 @@
     "background" : "src_assets_cafet_bgRight",
     "structures" : [
         {
-            "identifier" : "blockLeft",
-            "x" : -1,
-            "y" : 0,
-            "resource" : "src_assets_structures_fullBlockVertical",
-            "allow_pass_through" : 0,
-            "teleport_to_scene" : "cafet_crossing_counters_15_4"
-        },
-        {
-            "identifier" : "blockRight",
-            "x" : 16,
-            "y" : 0,
-            "resource" : "src_assets_structures_fullBlockVertical",
-            "allow_pass_through" : 0,
-            "teleport_to_scene" : "cafet_second_counter_end_2_4"
-        },
-        {
-            "identifier" : "blockUp",
-            "x" : 0,
-            "y" : -1,
-            "resource" : "src_assets_structures_fullBlockHorizontal",
-            "allow_pass_through" : 0,
-            "teleport_to_scene" : "none"
-        },
-        {
-            "identifier" : "blockDown",
-            "x" : 0,
-            "y" : 8,
-            "resource" : "src_assets_structures_fullBlockHorizontal",
-            "allow_pass_through" : 0,
-            "teleport_to_scene" : "cave_beginning_1_0"
-        },
-        {
             "identifier" : "comptoire05",
             "x" : 0,
             "y" : 5,

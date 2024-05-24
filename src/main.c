@@ -4,7 +4,6 @@
 #include "engine/include/scenes.h"
 #include "engine/include/soundsManager.h"
 #include "entities/canard01/canard01.h"
-#include "entities/duck_purple/duck_purple.h"
 #include "entities/duck_orange/duck_orange.h"
 #include "entities/duck_green/duck_green.h"
 #include "entities/duck_blue/duck_blue.h"
@@ -17,17 +16,6 @@
 #include "entities/wormcan/wormcan.h"
 #include "entities/bobbi/bobbi.h"
 #include "entities/pano1/pano1.h"
-
-#include "entities/kiwi_iced/kiwi_iced.h"
-#include "entities/kiwi_red_iced/kiwi_red_iced.h"
-#include "entities/kiwi_yellow_iced/kiwi_yellow_iced.h"
-#include "entities/fly_blue/fly_blue.h"
-#include "entities/canard_laque_iced/canard_laque_iced.h"
-#include "entities/ice_pic_collision/ice_pic_collision.h"
-#include "entities/ice_pic_structure/ice_pic_structure.h"
-#include "entities/first_final_boss/first_final_boss.h"
-
-
 #include "resources.h"
 #include "scenes/etagere_level/etagere_level.h"
 #include "scenes/main_menu/main_menu.h"
@@ -47,21 +35,10 @@
 #include "scenes/intro2/intro2.h"
 #include "scenes/intro2bis/intro2bis.h"
 #include "scenes/intro3/intro3.h"
-#include "scenes/cave_beginning/cave_beginning.h"
-#include "scenes/first_boss_room/first_boss_room.h"
-#include "scenes/cafet_ping_pong_beginning/cafet_ping_pong_beginning.h"
-
-#include "scenes/ewan_first_scene/ewan_first_scene.h"
-#include "scenes/ewan_second_scene/ewan_second_scene.h"
-#include "scenes/ewan_fourth_scene/ewan_fourth_scene.h"
-#include "scenes/cave/cave.h"
-#include "scenes/cave2/cave2.h"
-
-#include "scenes/ewan_third_scene/ewan_third_scene.h"
-
 #include "weapons/arbalete/arbalete.h"
 #include "weapons/basic_sword/basic_sword.h"
 #include "weapons/blue_duck_boss_laser/blue_duck_boss_laser.h"
+
 
 
 int main(int argc, char* argv[]) {
@@ -91,7 +68,7 @@ int main(int argc, char* argv[]) {
 	TTF_Init();
 
 	
-	
+
 	
 
 	GameData* game = init_game(16, 8, 1024, 512, "Pakbo é Lonbrik", 30);
@@ -142,10 +119,6 @@ int main(int argc, char* argv[]) {
 	*i_duck_orange = init_duck_orange;
 	insert(game->entities, "duck_orange", i_duck_orange, free);
 
-	EntityInitFunc* i_duck_purple = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
-	*i_duck_purple = init_duck_purple;
-	insert(game->entities, "duck_purple", i_duck_purple, free);
-
 	EntityInitFunc* i_duck_green = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
 	*i_duck_green = init_duck_green;
 	insert(game->entities, "duck_green", i_duck_green, free);
@@ -169,37 +142,6 @@ int main(int argc, char* argv[]) {
 	EntityInitFunc* pano1 = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
 	*pano1 = init_pano1;
 	insert(game->entities, "pano1", pano1, free);
-	EntityInitFunc* kiwi_iced = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
-	*kiwi_iced = init_kiwi_iced;
-	insert(game->entities, "kiwiIced", kiwi_iced, free);
-
-	EntityInitFunc* kiwi_red_iced = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
-	*kiwi_red_iced = init_kiwi_red_iced;
-	insert(game->entities, "kiwiRedIced", kiwi_red_iced, free);
-
-	EntityInitFunc* kiwi_yellow_iced = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
-	*kiwi_yellow_iced = init_kiwi_yellow_iced;
-	insert(game->entities, "kiwiYellowIced", kiwi_yellow_iced, free);
-
-	EntityInitFunc* fly_blue = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
-	*fly_blue = init_fly_blue;
-	insert(game->entities, "flyBlue", fly_blue, free);
-
-	EntityInitFunc* canard_laque_iced = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
-	*canard_laque_iced = init_canard_laque_iced;
-	insert(game->entities, "canardLaqueIced", canard_laque_iced, free);
-	EntityInitFunc* first_final_boss = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
-	*first_final_boss = init_first_final_boss;
-	insert(game->entities, "first_final_boss", first_final_boss, free);
-	
-	EntityInitFunc* i_ice_pic_structure = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
-	*i_ice_pic_structure = init_ice_pic_structure;
-	insert(game->entities, "icePicStructure", i_ice_pic_structure, free);
-
-	EntityInitFunc* i_ice_pic_collision = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
-	*i_ice_pic_collision = init_ice_pic_collision;
-	insert(game->entities, "icePicCollision", i_ice_pic_collision, free);
-
 
 	// potentiellement systeme de sauvegarde plus tard (donc init avec valeurs différentes)
 	Entity* player = init_player(game, -1, -1);	 // -1 -1 convention pour dire que l'on ne l'affiche pas
@@ -242,30 +184,6 @@ int main(int argc, char* argv[]) {
 	*intro2bis = init_intro2bis;
 	SceneInit* intro3 = (SceneInit*)malloc(sizeof(SceneInit));
 	*intro3 = init_intro3;
-	SceneInit* cafet_ping_pong_beginning = (SceneInit*)malloc(sizeof(SceneInit));
-	*cafet_ping_pong_beginning = init_cafet_ping_pong_beginning;
-
-	SceneInit* cave_beginning = (SceneInit*)malloc(sizeof(SceneInit));
-	*cave_beginning = init_cave_beginning;
-
-	SceneInit* ewan_first_scene = (SceneInit*)malloc(sizeof(SceneInit));
-	*ewan_first_scene = init_ewan_first_scene;
-
-	SceneInit* ewan_second_scene = (SceneInit*)malloc(sizeof(SceneInit));
-	*ewan_second_scene = init_ewan_second_scene;
-	
-	SceneInit* ewan_third_scene = (SceneInit*)malloc(sizeof(SceneInit));
-	*ewan_third_scene = init_ewan_third_scene;
-
-	SceneInit* ewan_fourth_scene = (SceneInit*)malloc(sizeof(SceneInit));
-	*ewan_fourth_scene = init_ewan_fourth_scene;
-
-	SceneInit* cave = (SceneInit*)malloc(sizeof(SceneInit));
-	*cave = init_cave;
-	SceneInit* cave2 = (SceneInit*)malloc(sizeof(SceneInit));
-	*cave2 = init_cave2;
-	SceneInit* first_boss_room = (SceneInit*)malloc(sizeof(SceneInit));
-	*first_boss_room = init_first_boss_room;
 
 
 	insert(game->scenes, "scene01", scene01, free);
@@ -286,15 +204,6 @@ int main(int argc, char* argv[]) {
 	insert(game->scenes, "intro2", intro2, free);
 	insert(game->scenes, "intro2bis", intro2bis, free);
 	insert(game->scenes, "intro3", intro3, free);
-	insert(game->scenes, "cave_beginning", cave_beginning, free);
-	insert(game->scenes, "ewan_first_scene", ewan_first_scene, free);
-	insert(game->scenes, "ewan_second_scene", ewan_second_scene, free);
-	insert(game->scenes, "ewan_third_scene", ewan_third_scene, free);
-	insert(game->scenes, "ewan_fourth_scene", ewan_fourth_scene, free);
-	insert(game->scenes, "cafet_ping_pong_beginning", cafet_ping_pong_beginning, free);
-	insert(game->scenes, "cave", cave, free);
-	insert(game->scenes, "cave2", cave2, free);
-	insert(game->scenes, "first_boss_room", first_boss_room, free);
 
 	change_scene(game, "main_menu_-1_-1");
 
