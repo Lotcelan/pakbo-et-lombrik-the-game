@@ -7,12 +7,6 @@ void update_greg(GameData* game, Entity* greg, float delta_t) {
 		return;
 	}
 
-	if (greg->x_position > game->player->x_position){
-		greg->sprite->orientation = SDL_FLIP_NONE;
-	}
-	else{
-		greg->sprite->orientation = SDL_FLIP_HORIZONTAL;
-	}
 
 	Box* interact_box = init_rect_box_from_entity(game, greg);
 	// pour l'instant on suppose
