@@ -428,4 +428,26 @@
       "x" : 14,
       "y" : 7,
       "teleport_to_scene" : "none",
-      "identifi
+      "identifier" : "dirtWall0.png_46552B43-87E2-4638-BF29-4578789EB5C4",
+      "allow_pass_through" : 0,
+      "resource" : "src_assets_structures_dirtWall0"
+    },
+    {
+      "identifier" : "dirtWall0.png_8CB9F97E-0713-4D8F-BDF0-0EC30E0FC80B",
+      "y" : 7,
+      "teleport_to_scene" : "none",
+      "x" : 15,
+      "allow_pass_through" : 0,
+      "resource" : "src_assets_structures_dirtWall0"
+    }
+  ],
+  "background" : "src_assets_backgrounds_backgroundCave3",
+  "entities" : [
+    {
+      "identifier" : "canard01",
+      "x" : 10,
+      "y" : 0
+    }
+  ],
+  "name" : "intro3"
+}

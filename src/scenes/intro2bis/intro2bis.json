@@ -821,4 +821,9 @@
       "x" : 15,
       "resource" : "src_assets_structures_dirt",
       "identifier" : "dirt.png_2520133A-6786-4E10-A8FF-511295AE7401",
-      "teleport_to_scene"
+      "teleport_to_scene" : "none",
+      "allow_pass_through" : 0,
+      "y" : 7
+    }
+  ]
+}

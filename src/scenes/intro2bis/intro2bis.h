@@ -9,4 +9,6 @@
 void update_intro2bis(GameData* game);
 void event_handler_intro2bis(GameData* game);
 void populate_intro2bis(GameData* game);
-Scene* init_intro2bis(GameDat
+Scene* init_intro2bis(GameData* game);
+
+#endif
