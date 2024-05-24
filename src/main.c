@@ -18,6 +18,9 @@
 #include "entities/pano1/pano1.h"
 #include "entities/pano2/pano2.h"
 #include "entities/sandwich/sandwich.h"
+#include "entities/cuddy/cuddy.h"
+#include "entities/james/james.h"
+#include "entities/greg/greg.h"
 #include "resources.h"
 #include "scenes/etagere_level/etagere_level.h"
 #include "scenes/main_menu/main_menu.h"
@@ -38,6 +41,8 @@
 #include "scenes/intro2bis/intro2bis.h"
 #include "scenes/intro3/intro3.h"
 #include "scenes/intro4/intro4.h"
+#include "scenes/intro5/intro5.h"
+#include "scenes/hub/hub.h"
 #include "weapons/arbalete/arbalete.h"
 #include "weapons/basic_sword/basic_sword.h"
 #include "weapons/blue_duck_boss_laser/blue_duck_boss_laser.h"
@@ -154,6 +159,18 @@ int main(int argc, char* argv[]) {
 	*sandwich = init_sandwich;
 	insert(game->entities, "sandwich", sandwich, free);
 
+	EntityInitFunc* cuddy = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
+	*cuddy = init_cuddy;
+	insert(game->entities, "cuddy", cuddy, free);
+
+	EntityInitFunc* james = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
+	*james = init_james;
+	insert(game->entities, "james", james, free);
+
+	EntityInitFunc* greg = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
+	*greg = init_greg;
+	insert(game->entities, "greg", greg, free);
+
 	// potentiellement systeme de sauvegarde plus tard (donc init avec valeurs différentes)
 	Entity* player = init_player(game, -1, -1);	 // -1 -1 convention pour dire que l'on ne l'affiche pas
 	game->player = player;
@@ -197,6 +214,10 @@ int main(int argc, char* argv[]) {
 	*intro3 = init_intro3;
 	SceneInit* intro4 = (SceneInit*)malloc(sizeof(SceneInit));
 	*intro4 = init_intro4;
+	SceneInit* intro5 = (SceneInit*)malloc(sizeof(SceneInit));
+	*intro5 = init_intro5;
+	SceneInit* hub = (SceneInit*)malloc(sizeof(SceneInit));
+	*hub = init_hub;
 
 
 	insert(game->scenes, "scene01", scene01, free);
@@ -218,6 +239,8 @@ int main(int argc, char* argv[]) {
 	insert(game->scenes, "intro2bis", intro2bis, free);
 	insert(game->scenes, "intro3", intro3, free);
 	insert(game->scenes, "intro4", intro4, free);
+	insert(game->scenes, "intro5", intro5, free);
+	insert(game->scenes, "hub", hub, free);
 
 	change_scene(game, "main_menu_-1_-1");
 

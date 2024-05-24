@@ -264,6 +264,9 @@ extern int src_assets_structures_caveBetonTexture_2_png_len;
 extern unsigned char src_assets_structures_stone9_2_png[];
 extern int src_assets_structures_stone9_2_png_len;
 
+extern unsigned char src_assets_structures_lit_png[];
+extern int src_assets_structures_lit_png_len;
+
 extern unsigned char src_assets_structures_tree_png[];
 extern int src_assets_structures_tree_png_len;
 
@@ -417,11 +420,17 @@ extern int src_assets_entities_fly_png_len;
 extern unsigned char src_assets_entities_icePicGoutte_png[];
 extern int src_assets_entities_icePicGoutte_png_len;
 
+extern unsigned char src_assets_entities_greg_png[];
+extern int src_assets_entities_greg_png_len;
+
 extern unsigned char src_assets_entities_icePicCollision_png[];
 extern int src_assets_entities_icePicCollision_png_len;
 
 extern unsigned char src_assets_entities_wormcan_png[];
 extern int src_assets_entities_wormcan_png_len;
+
+extern unsigned char src_assets_entities_james_png[];
+extern int src_assets_entities_james_png_len;
 
 extern unsigned char src_assets_entities_bouth_png[];
 extern int src_assets_entities_bouth_png_len;
@@ -458,6 +467,9 @@ extern int src_assets_entities_projectiles_arrow_png_len;
 
 extern unsigned char src_assets_entities_sandwich_png[];
 extern int src_assets_entities_sandwich_png_len;
+
+extern unsigned char src_assets_entities_cuddy_png[];
+extern int src_assets_entities_cuddy_png_len;
 
 extern unsigned char src_assets_hp_dead_png[];
 extern int src_assets_hp_dead_png_len;

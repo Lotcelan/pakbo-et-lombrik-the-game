@@ -25,6 +25,69 @@
             }
         ]
     },
+    "greg" : {
+        "message" : "Bonjour je m'appelle Gregory, je suis le medecin de cette escouade.",
+        "font_name" : "Minecraft",
+        "options" : [ "Tu es medecin ?", "Qui est ce qui me ramene ici ?"],
+        "branches" : [
+            {
+                "message" : "De toute evidence.",
+                "font_name" : "Minecraft",
+                "options" : [],
+                "branches" : []
+            }, 
+            {
+                "message" : "Mes subordonnes, Allison, Eric et Robert, sont des agents de terrain. Ils s'occuppent de tout.",
+                "font_name" : "Minecraft",
+                "options" : [],
+                "branches" : []
+            }
+        ]
+    },
+    "james" : {
+        "message" : "Bonjour je m'appelle James, je suis l'armurier de l'escouade",
+        "font_name" : "Minecraft",
+        "options" : [ "Peux-tu m'enseigner le maniement de l'epee ?", "Est-ce qu'on a des explosifs en reserve ?"],
+        "branches" : [
+            {
+                "message" : "Tu as lu le panneau sur le chemin jusqu'ici non ? Brandis ton epee avec X. Pour ce qui est du reste, trouve ton propre style.",
+                "font_name" : "Minecraft",
+                "options" : [],
+                "branches" : []
+            }, 
+            {
+                "message" : "Helas non, l'escouade est en manque d'argent et donc de materiel ces temps cis",
+                "font_name" : "Minecraft",
+                "options" : [],
+                "branches" : []
+            }
+        ]
+    },
+    "cuddy" : {
+        "message" : "Je suis le sergent Cuddy, tu dois etre l'adjudant Bric ? Tu vas pouvoir partir en mission immediatement, sauf si tu as encore des questions ?",
+        "font_name" : "Minecraft",
+        "options" : [ "Qui est-ce la haut ?", "Qui est-ce la bas ?", "Aucune"],
+        "branches" : [
+            {
+                "message" : "Voici Gregory, un des meilleurs medecins de l'armee, il te sera d'une grande aide en cas de pepin.",
+                "font_name" : "Minecraft",
+                "options" : [],
+                "branches" : []
+            }, 
+            {
+                "message" : "Voici James, il fait office d'armurier.",
+                "font_name" : "Minecraft",
+                "options" : [],
+                "branches" : []
+            },
+            {
+                "message" : "Alors au travail !",
+                "font_name" : "Minecraft",
+                "options" : [],
+                "branches" : []
+            }
+        ]
+    },
     "bobbi" : {
         "message" : "Lom Bric ! Enfin tu es arrive !",
         "font_name" : "Minecraft",
@@ -70,7 +133,7 @@
         "options" : [],
         "branches" : [
             {
-                "message" : "Je me suis rendu compte que je pouvais me gratter le dos facilement avec mon épée ! (appuyer sur X pour brandir son épée)",
+                "message" : "Je me suis rendu compte que je pouvais me gratter le dos facilement avec mon epee ! (appuyer sur X pour brandir son epee)",
                 "font_name" : "Minecraft",
                 "options" : [],
                 "branches" : [
