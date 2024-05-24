@@ -1,15 +1,15 @@
-#include "cave.h"
+#include "cave2.h"
 
-void update_cave(GameData* game) {
-    ///if (game->player->y_position > game->height_amount * CELL_HEIGHT) {
-    ///    change_scene(game, "cave_1_6");
-    ///    return;
-    ///}
+void update_cave2(GameData* game) {
+    if (game->player->y_position > game->height_amount * CELL_HEIGHT) {
+        change_scene(game, "cave2_1_6");
+        return;
+    }
 
     return;
 }
 
-void event_handler_cave(GameData* game) {
+void event_handler_cave2(GameData* game) {
     switch (game->event.type) {
         case SDL_KEYDOWN:
             switch (game->event.key.keysym.sym) {
@@ -26,18 +26,18 @@ void event_handler_cave(GameData* game) {
     return;
 }
 
-void populate_cave(GameData* game) {
+void populate_cave2(GameData* game) {
     push_background_structures(game);   
     for (int i = 0; i < 3; i++) add_modifier_to_entity(game, game->player, N_JUMP, 1, -1);
 
 }
 
-Scene* init_cave(GameData* game) {
-    Scene* scene = init_scene(game, "cave");
+Scene* init_cave2(GameData* game) {
+    Scene* scene = init_scene(game, "cave2");
 
-    scene->update = update_cave;
-    scene->event_handler = event_handler_cave;
-    scene->populate = populate_cave;
+    scene->update = update_cave2;
+    scene->event_handler = event_handler_cave2;
+    scene->populate = populate_cave2;
 
 
     return scene;

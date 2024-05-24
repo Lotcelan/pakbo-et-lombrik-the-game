@@ -3,6 +3,31 @@
   "background": "src_assets_backgrounds_BackgroundBsCave",
   "structures": [
     {
+      "identifier" : "blockLeft",
+      "x" : -1,
+      "y" : 0,
+      "resource" : "src_assets_structures_fullBlockVertical",
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none"
+  },
+  {
+      "identifier" : "blockRight",
+      "x" : 16,
+      "y" : 0,
+      "resource" : "src_assets_structures_fullBlockVertical",
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "cave2_2_2"
+  },
+  {
+      "identifier" : "blockUp",
+      "x" : 0,
+      "y" : -1,
+      "resource" : "src_assets_structures_fullBlockHorizontal",
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none"
+  },
+
+    {
       "identifier": "ground01",
       "x": -1,
       "y": 7,
@@ -37,38 +62,8 @@
     
 
 
-    {
-      "identifier": "ground11",
-      "x": 9,
-      "y": 7,
-      "resource": "src_assets_structures_betonTexture",
-      "allow_pass_through": 0,
-      "teleport_to_scene": "none"
-    },
-    {
-      "identifier": "ground12",
-      "x": 10,
-      "y": 7,
-      "resource": "src_assets_structures_betonTexture",
-      "allow_pass_through": 0,
-      "teleport_to_scene": "none"
-    },
-    {
-      "identifier": "ground13",
-      "x": 11,
-      "y": 7,
-      "resource": "src_assets_structures_betonTexture",
-      "allow_pass_through": 0,
-      "teleport_to_scene": "none"
-    },
-    {
-      "identifier": "ground14",
-      "x": 12,
-      "y": 7,
-      "resource": "src_assets_structures_betonTexture",
-      "allow_pass_through": 0,
-      "teleport_to_scene": "none"
-    },
+    
+    
     {
       "identifier": "ground15",
       "x": 13,
@@ -142,97 +137,196 @@
       "teleport_to_scene": "none"
     },
     
-    
-
     {
-      "identifier": "wall01",
-      "x": 9,
-      "y": 5,
-      "resource": "src_assets_structures_betonTexture",
-      "allow_pass_through": 0,
-      "teleport_to_scene": "none"
-    },
-    
-    {
-      "identifier": "wall01",
-      "x": 10,
-      "y": 5,
-      "resource": "src_assets_structures_betonTexture",
-      "allow_pass_through": 0,
-      "teleport_to_scene": "none"
-    },
-    {
-      "identifier": "wall02",
-      "x": 10,
+      "identifier": "upperGround11",
+      "x": 12,
       "y": 4,
       "resource": "src_assets_structures_betonTexture",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
     {
-      "identifier": "wall03",
-      "x": 10,
+      "identifier": "upperGround11",
+      "x": 13,
+      "y": 4,
+      "resource": "src_assets_structures_betonTexture",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    {
+      "identifier": "upperGround12",
+      "x": 14,
+      "y": 4,
+      "resource": "src_assets_structures_betonTexture",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    {
+      "identifier": "upperGround13",
+      "x": 15,
+      "y": 4,
+      "resource": "src_assets_structures_betonTexture",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    {
+      "identifier": "upperGround11",
+      "x": 16,
+      "y": 4,
+      "resource": "src_assets_structures_betonTexture",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    {
+      "identifier": "upperGround11",
+      "x": 12,
       "y": 3,
       "resource": "src_assets_structures_betonTexture",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
     {
-      "identifier": "wall04",
-      "x": 10,
-      "y": 2,
-      "resource": "src_assets_structures_betonTexture",
-      "allow_pass_through": 0,
-      "teleport_to_scene": "none"
-    },
-    {
-      "identifier": "wall05",
-      "x": 11,
-      "y": 2,
-      "resource": "src_assets_structures_betonTexture",
-      "allow_pass_through": 0,
-      "teleport_to_scene": "none"
-    },{
-      "identifier": "wall06",
-      "x": 11,
-      "y": 1,
-      "resource": "src_assets_structures_betonTexture",
-      "allow_pass_through": 0,
-      "teleport_to_scene": "none"
-    },
-    {
-      "identifier": "wall07",
-      "x": 12,
-      "y": 1,
-      "resource": "src_assets_structures_betonTexture",
-      "allow_pass_through": 0,
-      "teleport_to_scene": "none"
-    },
-    {
-      "identifier": "wall08",
+      "identifier": "upperGround11",
       "x": 13,
-      "y": 1,
+      "y": 3,
       "resource": "src_assets_structures_betonTexture",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
     {
-      "identifier": "wall09",
+      "identifier": "upperGround12",
       "x": 14,
-      "y": 1,
+      "y": 3,
       "resource": "src_assets_structures_betonTexture",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
     {
-      "identifier": "wall10",
+      "identifier": "upperGround13",
       "x": 15,
-      "y": 1,
+      "y": 3,
+      "resource": "src_assets_structures_betonTexture",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    {
+      "identifier": "upperGround11",
+      "x": 16,
+      "y": 3,
+      "resource": "src_assets_structures_betonTexture",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    {
+      "identifier": "upperGround11",
+      "x": 13,
+      "y": 5,
+      "resource": "src_assets_structures_betonTexture",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    {
+      "identifier": "upperGround12",
+      "x": 14,
+      "y": 5,
+      "resource": "src_assets_structures_betonTexture",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    {
+      "identifier": "upperGround13",
+      "x": 15,
+      "y": 5,
+      "resource": "src_assets_structures_betonTexture",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    {
+      "identifier": "upperGround11",
+      "x": 16,
+      "y": 5,
       "resource": "src_assets_structures_betonTexture",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
     
+    
+    
+
+    {
+      "identifier": "upperGround14",
+      "x": 11,
+      "y": 2,
+      "resource": "src_assets_structures_betonTexture",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    {
+      "identifier": "upperGround15",
+      "x": 12,
+      "y": 2,
+      "resource": "src_assets_structures_betonTexture",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    {
+      "identifier": "upperGround16",
+      "x": 13,
+      "y": 2,
+      "resource": "src_assets_structures_betonTexture",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    {
+      "identifier": "upperGround17",
+      "x": 14,
+      "y": 2,
+      "resource": "src_assets_structures_betonTexture",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    {
+      "identifier": "upperGround18",
+      "x": 15,
+      "y": 2,
+      "resource": "src_assets_structures_betonTexture",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+
+
+    {
+      "identifier": "upperGround19",
+      "x": 5,
+      "y": 5,
+      "resource": "src_assets_structures_betonTexture",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    {
+      "identifier": "upperGround20",
+      "x": 6,
+      "y": 5,
+      "resource": "src_assets_structures_betonTexture",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    {
+      "identifier": "upperGround21",
+      "x": 9,
+      "y": 5,
+      "resource": "src_assets_structures_betonTexture",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    {
+      "identifier": "upperGround22",
+      "x": 10,
+      "y": 5,
+      "resource": "src_assets_structures_betonTexture",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
 
 
 
@@ -259,7 +353,7 @@
   "entities": [
     {
       "identifier": "flyBlue",
-      "x": 12,
+      "x": 8,
       "y": 0
     },
 
@@ -274,8 +368,8 @@
       "y": 4
     },
     {
-      "identifier": "flyBlue",
-      "x": 0,
+      "identifier": "duck_purple",
+      "x": 2,
       "y": 1
     }
 
