@@ -3,7 +3,7 @@
 void update_intro1(GameData* game) {
     // printf("Current coords : %d, %d\n", moving_platform->position.x, moving_platform->position.y);
     if (game->player->collision_box->zone.x > 256) {
-        change_scene(game, "main_menu_-1_-1");
+        change_scene(game, "intro2_0_2");
         return;
     }
     

@@ -15,6 +15,7 @@
 #include "entities/medic_hub/medic_hub.h"
 #include "entities/wormcan/wormcan.h"
 #include "entities/bobbi/bobbi.h"
+#include "entities/pano1/pano1.h"
 #include "resources.h"
 #include "scenes/etagere_level/etagere_level.h"
 #include "scenes/main_menu/main_menu.h"
@@ -31,6 +32,9 @@
 #include "scenes/continue/continue.h"
 #include "scenes/telecom/telecom.h"
 #include "scenes/intro1/intro1.h"
+#include "scenes/intro2/intro2.h"
+#include "scenes/intro2bis/intro2bis.h"
+#include "scenes/intro3/intro3.h"
 #include "weapons/arbalete/arbalete.h"
 #include "weapons/basic_sword/basic_sword.h"
 #include "weapons/blue_duck_boss_laser/blue_duck_boss_laser.h"
@@ -135,6 +139,10 @@ int main(int argc, char* argv[]) {
 	*bobbi = init_bobbi;
 	insert(game->entities, "bobbi", bobbi, free);
 
+	EntityInitFunc* pano1 = (EntityInitFunc*)malloc(sizeof(EntityInitFunc));
+	*pano1 = init_pano1;
+	insert(game->entities, "pano1", pano1, free);
+
 	// potentiellement systeme de sauvegarde plus tard (donc init avec valeurs différentes)
 	Entity* player = init_player(game, -1, -1);	 // -1 -1 convention pour dire que l'on ne l'affiche pas
 	game->player = player;
@@ -170,6 +178,12 @@ int main(int argc, char* argv[]) {
 	*telecom = init_telecom;
 	SceneInit* intro1 = (SceneInit*)malloc(sizeof(SceneInit));
 	*intro1 = init_intro1;
+	SceneInit* intro2 = (SceneInit*)malloc(sizeof(SceneInit));
+	*intro2 = init_intro2;
+	SceneInit* intro2bis = (SceneInit*)malloc(sizeof(SceneInit));
+	*intro2bis = init_intro2bis;
+	SceneInit* intro3 = (SceneInit*)malloc(sizeof(SceneInit));
+	*intro3 = init_intro3;
 
 
 	insert(game->scenes, "scene01", scene01, free);
@@ -187,6 +201,9 @@ int main(int argc, char* argv[]) {
 	insert(game->scenes, "cafet_second_counter_end", cafet_second_counter_end, free);
 	insert(game->scenes, "telecom", telecom, free);
 	insert(game->scenes, "intro1", intro1, free);
+	insert(game->scenes, "intro2", intro2, free);
+	insert(game->scenes, "intro2bis", intro2bis, free);
+	insert(game->scenes, "intro3", intro3, free);
 
 	change_scene(game, "main_menu_-1_-1");
 

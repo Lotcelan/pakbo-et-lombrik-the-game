@@ -12,6 +12,12 @@ void update_canard01(GameData* game, Entity* canard01, float delta_t) {
 	if (are_colliding(canard01->hit_box, game->player->hurt_box)) {
 		damage_entity(game, game->player, 1, 1000, -1, false, canard01);
 	}
+	if (canard01->x_position < game->player->x_position){
+		canard01->sprite->orientation = SDL_FLIP_HORIZONTAL;
+	}
+	else{
+		canard01->sprite->orientation = SDL_FLIP_NONE;
+	}
 	return;
 }
 void event_handler_canard01(Entity* canard01, GameData* game) {

@@ -315,6 +315,9 @@ extern int src_assets_entities_ducks_fullDuckBlue_png_len;
 extern unsigned char src_assets_entities_ducks_fullDuckOrange_png[];
 extern int src_assets_entities_ducks_fullDuckOrange_png_len;
 
+extern unsigned char src_assets_entities_panoda_png[];
+extern int src_assets_entities_panoda_png_len;
+
 extern unsigned char src_assets_entities_icePicStructure_png[];
 extern int src_assets_entities_icePicStructure_png_len;
 

@@ -51,6 +51,19 @@
             }
         ]
     },
+    "pano1" :{
+        "message" : "J'ai creuse ce tunnel par erreur, pour arriver a l'avant poste, il faut revenir sur vos pas.",
+        "font_name" : "Minecraft",
+        "options" : [],
+        "branches" : [
+            {
+                "message" : "Cordialement,\nBobbi",
+                "font_name" : "Minecraft",
+                "options" : [],
+                "branches" : []
+            }
+        ]
+    },
     "medic_hub_test" : {
         "message" : "Bienvenue Lom Bric",
         "font_name" : "suifak_small",
