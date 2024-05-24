@@ -3,10 +3,35 @@
   "background": "src_assets_backgrounds_BackgroundBsCave",
   "structures": [
     {
+      "identifier" : "blockLeft",
+      "x" : -1,
+      "y" : 0,
+      "resource" : "src_assets_structures_fullBlockVertical",
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none"
+  },
+  {
+      "identifier" : "blockRight",
+      "x" : 16,
+      "y" : 0,
+      "resource" : "src_assets_structures_fullBlockVertical",
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "cave2_0_6"
+  },
+  {
+      "identifier" : "blockUp",
+      "x" : 0,
+      "y" : -1,
+      "resource" : "src_assets_structures_fullBlockHorizontal",
+      "allow_pass_through" : 0,
+      "teleport_to_scene" : "none"
+  },
+
+    {
       "identifier": "ground01",
       "x": -1,
       "y": 7,
-      "resource": "src_assets_structures_betonTexture",
+      "resource": "src_assets_structures_cobble",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -14,7 +39,7 @@
       "identifier": "ground02",
       "x": 0,
       "y": 7,
-      "resource": "src_assets_structures_betonTexture",
+      "resource": "src_assets_structures_cobble",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -22,7 +47,7 @@
       "identifier": "ground03",
       "x": 1,
       "y": 7,
-      "resource": "src_assets_structures_betonTexture",
+      "resource": "src_assets_structures_cobble",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -30,50 +55,20 @@
       "identifier": "ground04",
       "x": 2,
       "y": 7,
-      "resource": "src_assets_structures_betonTexture",
+      "resource": "src_assets_structures_cobble",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
     
 
 
-    {
-      "identifier": "ground11",
-      "x": 9,
-      "y": 7,
-      "resource": "src_assets_structures_betonTexture",
-      "allow_pass_through": 0,
-      "teleport_to_scene": "none"
-    },
-    {
-      "identifier": "ground12",
-      "x": 10,
-      "y": 7,
-      "resource": "src_assets_structures_betonTexture",
-      "allow_pass_through": 0,
-      "teleport_to_scene": "none"
-    },
-    {
-      "identifier": "ground13",
-      "x": 11,
-      "y": 7,
-      "resource": "src_assets_structures_betonTexture",
-      "allow_pass_through": 0,
-      "teleport_to_scene": "none"
-    },
-    {
-      "identifier": "ground14",
-      "x": 12,
-      "y": 7,
-      "resource": "src_assets_structures_betonTexture",
-      "allow_pass_through": 0,
-      "teleport_to_scene": "none"
-    },
+    
+    
     {
       "identifier": "ground15",
       "x": 13,
       "y": 7,
-      "resource": "src_assets_structures_betonTexture",
+      "resource": "src_assets_structures_cobble",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -81,7 +76,7 @@
       "identifier": "ground16",
       "x": 14,
       "y": 7,
-      "resource": "src_assets_structures_betonTexture",
+      "resource": "src_assets_structures_cobble",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -89,7 +84,7 @@
       "identifier": "ground17",
       "x": 15,
       "y": 7,
-      "resource": "src_assets_structures_betonTexture",
+      "resource": "src_assets_structures_cobble",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -97,7 +92,7 @@
       "identifier": "ground18",
       "x": 16,
       "y": 7,
-      "resource": "src_assets_structures_betonTexture",
+      "resource": "src_assets_structures_cobble",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -105,7 +100,7 @@
       "identifier": "upperGround01",
       "x": 1,
       "y": 2,
-      "resource": "src_assets_structures_betonTexture",
+      "resource": "src_assets_structures_cobble",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -113,7 +108,7 @@
       "identifier": "upperGround02",
       "x": 2,
       "y": 2,
-      "resource": "src_assets_structures_betonTexture",
+      "resource": "src_assets_structures_cobble",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -121,7 +116,7 @@
       "identifier": "upperGround03",
       "x": 3,
       "y": 2,
-      "resource": "src_assets_structures_betonTexture",
+      "resource": "src_assets_structures_cobble",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -129,7 +124,7 @@
       "identifier": "upperGround04",
       "x": 4,
       "y": 2,
-      "resource": "src_assets_structures_betonTexture",
+      "resource": "src_assets_structures_cobble",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -137,102 +132,201 @@
       "identifier": "upperGround05",
       "x": 5,
       "y": 2,
-      "resource": "src_assets_structures_betonTexture",
+      "resource": "src_assets_structures_cobble",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
+    
+    {
+      "identifier": "upperGround11",
+      "x": 12,
+      "y": 4,
+      "resource": "src_assets_structures_cobble",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    {
+      "identifier": "upperGround11",
+      "x": 13,
+      "y": 4,
+      "resource": "src_assets_structures_cobble",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    {
+      "identifier": "upperGround12",
+      "x": 14,
+      "y": 4,
+      "resource": "src_assets_structures_cobble",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    {
+      "identifier": "upperGround13",
+      "x": 15,
+      "y": 4,
+      "resource": "src_assets_structures_cobble",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    {
+      "identifier": "upperGround11",
+      "x": 16,
+      "y": 4,
+      "resource": "src_assets_structures_cobble",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    {
+      "identifier": "upperGround11",
+      "x": 12,
+      "y": 3,
+      "resource": "src_assets_structures_cobble",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    {
+      "identifier": "upperGround11",
+      "x": 13,
+      "y": 3,
+      "resource": "src_assets_structures_cobble",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    {
+      "identifier": "upperGround12",
+      "x": 14,
+      "y": 3,
+      "resource": "src_assets_structures_cobble",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    {
+      "identifier": "upperGround13",
+      "x": 15,
+      "y": 3,
+      "resource": "src_assets_structures_cobble",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    {
+      "identifier": "upperGround11",
+      "x": 16,
+      "y": 3,
+      "resource": "src_assets_structures_cobble",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    {
+      "identifier": "upperGround11",
+      "x": 13,
+      "y": 5,
+      "resource": "src_assets_structures_cobble",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    {
+      "identifier": "upperGround12",
+      "x": 14,
+      "y": 5,
+      "resource": "src_assets_structures_cobble",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    {
+      "identifier": "upperGround13",
+      "x": 15,
+      "y": 5,
+      "resource": "src_assets_structures_cobble",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    {
+      "identifier": "upperGround11",
+      "x": 16,
+      "y": 5,
+      "resource": "src_assets_structures_cobble",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    
     
     
 
     {
-      "identifier": "wall01",
+      "identifier": "upperGround14",
+      "x": 11,
+      "y": 2,
+      "resource": "src_assets_structures_cobble",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    {
+      "identifier": "upperGround15",
+      "x": 12,
+      "y": 2,
+      "resource": "src_assets_structures_cobble",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    {
+      "identifier": "upperGround16",
+      "x": 13,
+      "y": 2,
+      "resource": "src_assets_structures_cobble",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    {
+      "identifier": "upperGround17",
+      "x": 14,
+      "y": 2,
+      "resource": "src_assets_structures_cobble",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    {
+      "identifier": "upperGround18",
+      "x": 15,
+      "y": 2,
+      "resource": "src_assets_structures_cobble",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+
+
+    {
+      "identifier": "upperGround19",
+      "x": 5,
+      "y": 5,
+      "resource": "src_assets_structures_cobble",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    {
+      "identifier": "upperGround20",
+      "x": 6,
+      "y": 5,
+      "resource": "src_assets_structures_cobble",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    {
+      "identifier": "upperGround21",
       "x": 9,
       "y": 5,
-      "resource": "src_assets_structures_betonTexture",
+      "resource": "src_assets_structures_cobble",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
-    
     {
-      "identifier": "wall01",
+      "identifier": "upperGround22",
       "x": 10,
       "y": 5,
-      "resource": "src_assets_structures_betonTexture",
+      "resource": "src_assets_structures_cobble",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
-    {
-      "identifier": "wall02",
-      "x": 10,
-      "y": 4,
-      "resource": "src_assets_structures_betonTexture",
-      "allow_pass_through": 0,
-      "teleport_to_scene": "none"
-    },
-    {
-      "identifier": "wall03",
-      "x": 10,
-      "y": 3,
-      "resource": "src_assets_structures_betonTexture",
-      "allow_pass_through": 0,
-      "teleport_to_scene": "none"
-    },
-    {
-      "identifier": "wall04",
-      "x": 10,
-      "y": 2,
-      "resource": "src_assets_structures_betonTexture",
-      "allow_pass_through": 0,
-      "teleport_to_scene": "none"
-    },
-    {
-      "identifier": "wall05",
-      "x": 11,
-      "y": 2,
-      "resource": "src_assets_structures_betonTexture",
-      "allow_pass_through": 0,
-      "teleport_to_scene": "none"
-    },{
-      "identifier": "wall06",
-      "x": 11,
-      "y": 1,
-      "resource": "src_assets_structures_betonTexture",
-      "allow_pass_through": 0,
-      "teleport_to_scene": "none"
-    },
-    {
-      "identifier": "wall07",
-      "x": 12,
-      "y": 1,
-      "resource": "src_assets_structures_betonTexture",
-      "allow_pass_through": 0,
-      "teleport_to_scene": "none"
-    },
-    {
-      "identifier": "wall08",
-      "x": 13,
-      "y": 1,
-      "resource": "src_assets_structures_betonTexture",
-      "allow_pass_through": 0,
-      "teleport_to_scene": "none"
-    },
-    {
-      "identifier": "wall09",
-      "x": 14,
-      "y": 1,
-      "resource": "src_assets_structures_betonTexture",
-      "allow_pass_through": 0,
-      "teleport_to_scene": "none"
-    },
-    {
-      "identifier": "wall10",
-      "x": 15,
-      "y": 1,
-      "resource": "src_assets_structures_betonTexture",
-      "allow_pass_through": 0,
-      "teleport_to_scene": "none"
-    },
-    
 
 
 
@@ -245,37 +339,30 @@
       "resource" : "src_assets_structures_door",
       "y" : 6,
       "allow_pass_through" : 0
-    },
-
-    {
-      "teleport_to_scene" : "cave_beginning_2_2",
-      "x" : 1,
-      "identifier" : "door_to_dungeon",
-      "resource" : "src_assets_structures_door",
-      "y" : 1,
-      "allow_pass_through" : 0
     }
+
+    
   ],
   "entities": [
     {
-      "identifier": "flyBlue",
-      "x": 12,
+      "identifier": "la_mouche",
+      "x": 8,
       "y": 0
     },
 
     {
-      "identifier": "flyBlue",
+      "identifier": "la_mouche",
       "x": 7,
       "y": 5
     },
     {
-      "identifier": "flyBlue",
+      "identifier": "la_mouche",
       "x": 6,
       "y": 4
     },
     {
-      "identifier": "flyBlue",
-      "x": 0,
+      "identifier": "duck_purple",
+      "x": 2,
       "y": 1
     }
 

@@ -1,22 +1,10 @@
 #include "cave.h"
 
 void update_cave(GameData* game) {
-    // printf("Current coords : %d, %d\n", moving_platform->position.x, moving_platform->position.y);
-    //if (game->player->collision_box->zone.x > game->width_amount * CELL_WIDTH) {
-    //    change_scene(game, "cafet_crossing_counters_1_4");
-    //    return;
-    //}
-    //
-    //if (game->player->y_position > game->height_amount * CELL_HEIGHT) {
-    //    change_scene(game, "cave_beginning_1_0");
-    //    return;
-    //}
-
-
-    if (game->player->y_position > game->height_amount * CELL_HEIGHT) {
-        change_scene(game, "cave_1_6");
-        return;
-    }
+    ///if (game->player->y_position > game->height_amount * CELL_HEIGHT) {
+    ///    change_scene(game, "cave_1_6");
+    ///    return;
+    ///}
 
     return;
 }
