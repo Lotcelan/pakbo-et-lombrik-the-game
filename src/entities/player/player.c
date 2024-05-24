@@ -40,6 +40,7 @@ void update_player(GameData* game, Entity* player, float delta_t) {
         player->current_hp = player->max_hp;
         list_delete(player->modifiers, destroy_modifier);
         player->modifiers = NULL;
+        playSoundEffect(game->player->soundEffectManager, "../src/assets/sounds/splash-death-splash-46048.mp3" );
         change_scene(game, "game_over_-1_-1");
         player->damage_delay = -1;
         return;

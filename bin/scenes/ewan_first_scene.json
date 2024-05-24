@@ -25,6 +25,14 @@
       "allow_pass_through" : 0,
       "teleport_to_scene" : "none"
   },
+  {
+    "identifier" : "blockDown",
+    "x" : 0,
+    "y" : 8,
+    "resource" : "src_assets_structures_fullBlockHorizontal",
+    "allow_pass_through" : 4,
+    "teleport_to_scene" : "none"
+},
     {
       "teleport_to_scene" : "none",
       "y" : 0,
