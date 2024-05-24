@@ -10,14 +10,22 @@ void free_entity(void* entite) {
 	}
 	SDL_QueryTexture(e->sprite->spriteSheet, NULL, NULL, &width, &height);
 	// on libère les listes de coordonnées
-	for (int i = 0; i < (height / e->sprite->height); i++) {
-		list_cyclic_delete(e->sprite->frames[i], free);
-	}
+	// for (int i = 0; i < (height / e->sprite->height); i++) {
+	// 	list_cyclic_delete(e->sprite->frames[i], free);
+	// }
 	free(e->sprite->frames);
 	free(e->sprite->Lock_liste);
 	SDL_DestroyTexture(e->sprite->spriteSheet);
 	free(e->sprite);
 	list_delete(e->modifiers, destroy_modifier);
+	destroyHashTable(e->objects);
+	free_box(e->collision_box);
+	free_box(e->hurt_box);
+	free_box(e->hit_box);
+	free_box(e->prev_collision_box);
+	free_box(e->prev_hurt_box);
+	free_box(e->prev_hit_box);
+	delete_weapon(e->weapon);
 	free(e);
 }
 

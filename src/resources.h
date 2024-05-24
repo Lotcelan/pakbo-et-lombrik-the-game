@@ -207,6 +207,9 @@ extern int src_assets_backgrounds_birckBackground_png_len;
 extern unsigned char src_assets_backgrounds_BackgroundBsCave_png[];
 extern int src_assets_backgrounds_BackgroundBsCave_png_len;
 
+extern unsigned char src_assets_backgrounds_serverRoom_png[];
+extern int src_assets_backgrounds_serverRoom_png_len;
+
 extern unsigned char src_assets_backgrounds_backgroundCave_png[];
 extern int src_assets_backgrounds_backgroundCave_png_len;
 
