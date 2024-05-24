@@ -13,7 +13,7 @@ void update_cafet_ping_pong_beginning(GameData* game) {
     }
 
     if (game->player->collision_box->zone.x < 0) {
-        change_scene(game, "cafet_second_counter_end_15_4");
+        change_scene(game, "cafet_second_counter_end_15_3");
         return;
     }
 
