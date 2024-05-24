@@ -354,7 +354,7 @@ List *list_cyclic_del_first( List *l, void delete(void*) )
         List *move = l ;
         if (move->next == l)
             {
-               delete(l) ;
+               delete(l->value) ;
                return NULL ;
             }
         while (move->next != l)
@@ -365,7 +365,8 @@ List *list_cyclic_del_first( List *l, void delete(void*) )
         List *p = l->next ;
         if (delete!=NULL) 
             {
-                delete(l) ;
+                // if ()
+                delete(l->value) ;
             }
         return p ;
     }

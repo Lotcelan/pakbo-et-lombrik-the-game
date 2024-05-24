@@ -9,6 +9,12 @@ void update_player(GameData* game, Entity* player, float delta_t) {
         return;
     }
 
+    Modifier* m = get_entity_modifier(player, N_LIFE);
+    if (m) {
+        player->current_hp = (player->max_hp - player->current_hp >= m->quantity) ? player->current_hp + m->quantity : player->max_hp;
+        remove_entity_modifier(player, m);
+    }
+
     int* previous_time_alive_jump_modifier = get(player->objects, "previous_time_alive_jump_modifier", strcmp);
     if (previous_time_alive_jump_modifier != NULL) {
         Modifier* m = get_entity_modifier(player, N_JUMP);
@@ -22,9 +28,9 @@ void update_player(GameData* game, Entity* player, float delta_t) {
             }
         }
     }
-    Modifier* m = get_entity_modifier(player, POISON_AFFECT);
+    m = get_entity_modifier(player, POISON_AFFECT);
     int* nb_poison_proc = get(player->objects, "nb_poison_proc", strcmp);
-    printf("Poison proc : %i\n", *nb_poison_proc);
+    // printf("Poison proc : %i\n", *nb_poison_proc);
     if (m && nb_poison_proc){
         
         int k = (m->current_time_alive) / m->value;
@@ -185,7 +191,7 @@ Entity* init_player(GameData* game, int x, int y) {
     
     SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_entities_lombric"); // to change
 
-    Entity* player = init_entity(x, y, 14, spritesheet, 16, 16, nbs, lock, update_player, event_handler_player, update_animation_player, 6, true);
+    Entity* player = init_entity(x, y, 14, spritesheet, 16, 16, nbs, lock, update_player, event_handler_player, update_animation_player, 10, true);
 
     // WeaponInitFunc* arbalete = get(game->weapons, "arbalete", strcmp);
     WeaponInitFunc* basic_sword = get(game->weapons, "basic_sword", strcmp);

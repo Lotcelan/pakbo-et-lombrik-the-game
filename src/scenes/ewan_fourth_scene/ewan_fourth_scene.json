@@ -150,7 +150,7 @@
       "x" : 15,
       "allow_pass_through" : 0,
       "identifier" : "IceDoor.png_910C52ED-C3CA-4084-A2A2-A35E21589328",
-      "teleport_to_scene" : "cave_2_4",
+      "teleport_to_scene" : "cave_0_6",
       "resource" : "src_assets_structures_IceDoor"
     },
     {

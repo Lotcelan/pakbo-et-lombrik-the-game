@@ -56,5 +56,20 @@
         "optionts" : [],
         "branches" : []
 
+    },
+    "ending_demo" : {
+        "message" : "Canard laque a ete vaincu ! Felicitation !",
+        "font_name" : "suifak_small",
+        "optionts" : [ "Merci !" ],
+        "branches" : [
+            {
+                "message" : "C'est la fin de la demo ! Merci d'avoir teste !",
+                "font_name" : "suifak_small",
+                "optionts" : [],
+                "branches" : []
+        
+            }
+        ]
+
     }
 }
