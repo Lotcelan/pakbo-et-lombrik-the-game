@@ -1,10 +1,10 @@
 #include "cave.h"
 
 void update_cave(GameData* game) {
-    ///if (game->player->y_position > game->height_amount * CELL_HEIGHT) {
-    ///    change_scene(game, "cave_1_6");
-    ///    return;
-    ///}
+    if (game->player->collision_box->zone.y > game->height_amount * CELL_HEIGHT) {
+        game->player->current_hp = -1;
+        return;
+    }
 
     return;
 }
