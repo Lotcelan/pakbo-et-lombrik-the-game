@@ -49,7 +49,7 @@ void event_handler_main_menu(GameData* game) {
                     // change_scene(game, "cafet_ping_pong_beginning_0_3");
                     // change_scene(game, "cafet_second_counter_end_0_3");
 
-                    change_scene(game, "cave2_0_6");
+                    change_scene(game, "cave_0_6");
 
                     return;
                 } else if (strcmp(main_menu_options[*selectedMenuItem], "Quit")==0) {
