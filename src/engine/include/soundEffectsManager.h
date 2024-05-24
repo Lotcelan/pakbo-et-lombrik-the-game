@@ -10,3 +10,5 @@ SoundEffectManager* initSoundEffectManager();
 void playSoundEffect(SoundEffectManager* manager, const char* filename);
 
 void setSoundEffectVolume(SoundEffectManager* manager, int volume);
+
+void destroySoundEffectsManager(SoundEffectManager* manager);

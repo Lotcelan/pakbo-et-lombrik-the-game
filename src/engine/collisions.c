@@ -1,4 +1,5 @@
 #include "./include/collisions.h"
+#include "./include/physics.h"
 
 Box* init_rect_box(int x, int y, int w, int h) {
 	Box* box = malloc(sizeof(Box));
@@ -448,7 +449,8 @@ void change_structure_coordinates(GameData* game, Structure* s, int x, int y) {
 	while (current != NULL) {
 		Entity* e = (Entity*)(current->value);
 		if (are_colliding(e->collision_box, s->collision_box)) { // ici ne gère que les déplacements en hauteur
-			change_entity_coordinates(e, e->collision_box->zone.x + dx, e->collision_box->zone.y + dy);
+			// change_entity_coordinates(e, e->collision_box->zone.x, e->collision_box->zone.y + dy);
+			do_the_moves(game, e, 0, dy);
 		}
 
 		current = current->next;
@@ -459,10 +461,12 @@ void change_structure_coordinates(GameData* game, Structure* s, int x, int y) {
 	while (current != NULL) {
 		Entity* e = (Entity*)(current->value);
 		Box* offset_by_one = copy_box(e->collision_box);
-		offset_by_one->zone.y++;
+		offset_by_one->zone.y = offset_by_one->zone.y + 1;
 		if (are_colliding(offset_by_one, s->collision_box)) { // ici ne gère que les déplacements en largeur
-			printf("%s\n", s->identifier);
-			change_entity_coordinates(e, e->collision_box->zone.x + dx, e->collision_box->zone.y + dy);
+			// printf("%s\n", s->identifier);
+			// checking if it can move the entity
+			// change_entity_coordinates(e, e->collision_box->zone.x + dx, e->collision_box->zone.y);
+			do_the_moves(game, e, dx, 0);
 		}
 
 		current = current->next;

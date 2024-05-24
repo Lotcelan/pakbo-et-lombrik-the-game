@@ -236,6 +236,7 @@ List *suffix_non_delete(List *list, int n)
 
 List *prefix_non_delete(List *list, int n)
     {
+        if (list == NULL) return NULL;
         if (n == 0)
             {
                 return NULL ;
@@ -313,10 +314,14 @@ List *create_list_cyclic(void *value, List *next)
         list->value = value ;
         list->next = next ;
         List *p = next ;
-        while(p->next != next)
+        while(p != NULL)
+            if (p->next != next)
             {
                 p = p->next ;
+            } else {
+                break;
             }
+        if (p == NULL) return NULL; // there was an error
         p->next = list ;
         return list ;
     }
@@ -345,10 +350,11 @@ void print_list_cyclic(List *list)
 
 List *list_cyclic_del_first( List *l, void delete(void*) )
     {
+        if (l == NULL) return NULL;
         List *move = l ;
         if (move->next == l)
             {
-               delete(l) ;
+               delete(l->value) ;
                return NULL ;
             }
         while (move->next != l)
@@ -359,7 +365,8 @@ List *list_cyclic_del_first( List *l, void delete(void*) )
         List *p = l->next ;
         if (delete!=NULL) 
             {
-                delete(l) ;
+                // if ()
+                delete(l->value) ;
             }
         return p ;
     }
@@ -542,7 +549,7 @@ List* copy_list(List* to_copy, void* (*copy_value)(void*)) {
         new = append_first(copy_value(current->value), new);
         current = current->next;
     }
-    return new;
+    return reverse(new);
 
 }
 

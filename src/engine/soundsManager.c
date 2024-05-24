@@ -50,3 +50,8 @@ void setMusicVolume(MusicManager* manager, int volume) {
     }
 }
 
+void destroyMusicManager(MusicManager* manager){
+    free(manager->currentMusic);
+    free(manager);
+}
+

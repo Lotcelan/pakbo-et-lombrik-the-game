@@ -10,14 +10,22 @@ void free_entity(void* entite) {
 	}
 	SDL_QueryTexture(e->sprite->spriteSheet, NULL, NULL, &width, &height);
 	// on libère les listes de coordonnées
-	for (int i = 0; i < (height / e->sprite->height); i++) {
-		list_cyclic_delete(e->sprite->frames[i], free);
-	}
+	// for (int i = 0; i < (height / e->sprite->height); i++) {
+	// 	list_cyclic_delete(e->sprite->frames[i], free);
+	// }
 	free(e->sprite->frames);
 	free(e->sprite->Lock_liste);
 	SDL_DestroyTexture(e->sprite->spriteSheet);
 	free(e->sprite);
 	list_delete(e->modifiers, destroy_modifier);
+	destroyHashTable(e->objects);
+	free_box(e->collision_box);
+	free_box(e->hurt_box);
+	free_box(e->hit_box);
+	free_box(e->prev_collision_box);
+	free_box(e->prev_hurt_box);
+	free_box(e->prev_hit_box);
+	delete_weapon(e->weapon);
 	free(e);
 }
 
@@ -222,6 +230,16 @@ void damage_entity(GameData* game, Entity* e, int damage, int delay, int stagger
 		// 	attacker->x_velocity = -s_x * 50 -attacker->x_velocity;
 		// 	// attacker->y_velocity = -s_y * 20 -attacker->y_velocity;
 		// }
+
+		if (attacker && e){
+			Modifier *m = get_entity_modifier(attacker, POISON_EFFECT);
+			if (m){
+				int value = m->value;
+				int proc_delay = (value & 0xFFFF);
+				int poison_duration = (value >> 16) & 0xFFFF;
+				add_modifier_to_entity(game, e, POISON_AFFECT, proc_delay, poison_duration);
+			}
+		}
 	}
 
 	
@@ -235,6 +253,16 @@ void clear_entities(GameData* game) {
 	while (current != NULL) {
 		Entity* e = (Entity*)current->value;
 		if (e->current_hp <= 0) {
+			if (e->objects) {
+				bool* do_not_clear = get(e->objects, "DO_NOT_CLEAR", strcmp); // hardcodé
+				if (do_not_clear) {
+					if (*do_not_clear) {
+						current = current->next;
+						continue;
+					}
+				}
+			}
+			
 			game->current_scene->entities = delete_compare(game->current_scene->entities, e, compare_entities, free_entity);
 			current = game->current_scene->entities;
 			continue;

@@ -12,6 +12,7 @@
 #include <SDL2/SDL.h>
 #include "scenes.h"
 #include <stdbool.h>
+#include <stdint.h>
 #include "hashtable.h"
 #include "framerate.h"
 #include "entity.h"
