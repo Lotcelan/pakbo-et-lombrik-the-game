@@ -1,0 +1,92 @@
+{
+    "test" : {
+        "message" : "Hello, World!",
+        "font_name" : "suifak_small",
+        "options" : [ "option1", "option2" ],
+        "branches" : [
+            {
+                "message" : "branch1 JE SUIS BEAUUUUUUUUUUUUUUUUUUUUUUCOUP DE TEXTE AAAAAAAAa",
+                "font_name" : "suifak_small",
+                "options" : [],
+                "branches" : []
+            }, 
+            {
+                "message" : "branch2",
+                "font_name" : "suifak_small",
+                "options" : [ "suivant"],
+                "branches" : [
+                    {
+                        "message" : "Tu as appuyé sur suivant",
+                        "font_name" : "suifak_small",
+                        "options" : [],
+                        "branches" : []
+                    }
+                ]
+            }
+        ]
+    },
+    "bobbi" : {
+        "message" : "Lom Bric ! Enfin tu es arrive !",
+        "font_name" : "Minecraft",
+        "options" : [ "Qui es-tu ?", "Ou sont les autres ?" ],
+        "branches" : [
+            {
+                "message" : "Je m'appelle bobbi ! Je suis une nouvelle recrue.",
+                "font_name" : "Minecraft",
+                "options" : [],
+                "branches" : []
+            }, 
+            {
+                "message" : "Le reste de l'escouade est deja a l'avant poste.",
+                "font_name" : "Minecraft",
+                "options" : [],
+                "branches" : [
+                    {
+                    "message" : "Tu peux les rejoindre par ce tunnel, je l'ai creuse moi-meme !",
+                    "font_name" : "Minecraft",
+                    "options" : [],
+                    "branches" : []
+                }
+            ]
+            }
+        ]
+    },
+    "pano1" :{
+        "message" : "J'ai creuse ce tunnel par erreur, pour arriver a l'avant poste, il faut revenir sur vos pas.",
+        "font_name" : "Minecraft",
+        "options" : [],
+        "branches" : [
+            {
+                "message" : "Cordialement,\nBobbi",
+                "font_name" : "Minecraft",
+                "options" : [],
+                "branches" : []
+            }
+        ]
+    },
+    "medic_hub_test" : {
+        "message" : "Bienvenue Lom Bric",
+        "font_name" : "suifak_small",
+        "options" : [ "Bonjour", "JU-JU-JUUUUUL" ],
+        "branches" : [
+            {
+                "message" : "Bisous !",
+                "font_name" : "suifak_small",
+                "options" : [],
+                "branches" : []
+            }, 
+            {
+                "message" : "AU DD",
+                "font_name" : "suifak_small",
+                "options" : [],
+                "branches" : []
+            }
+        ]
+    },
+    "second_counter_fork_blocking" : {
+        "message" : "Oh non ! Il te faut te debarasser des mouches pour continuer...",
+        "font_name" : "suifak_small",
+        "optionts" : [],
+        "branches" : []
+    }
+}
