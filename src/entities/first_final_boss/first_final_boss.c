@@ -75,16 +75,26 @@ void update_animation_first_final_boss(Entity* e, float delta) {
 			return;
 		}
 		if (*is_attacking) {
-			e->etat = 1;
+			e->etat = 3;
 		} else if (e->x_velocity == 0 && e->y_velocity == 0) {
-			e->etat = 0;
+			e->etat = 2;
 		}
 		else {
-			e->etat = 0;
+			e->etat = 2;
 		}
 
 	} else {
-		e->etat=0;
+		if (is_attacking == NULL) {
+			return;
+		}
+		if (*is_attacking) {
+			e->etat = 0;
+		} else if (e->x_velocity == 0 && e->y_velocity == 0) {
+			e->etat = 1;
+		}
+		else {
+			e->etat = 1;
+		}
 	}
 	if (e->x_velocity > 0) {
 		e->sprite->orientation = SDL_FLIP_HORIZONTAL;
@@ -95,16 +105,20 @@ void update_animation_first_final_boss(Entity* e, float delta) {
 }
 
 Entity* init_first_final_boss(GameData* game, int x, int y) {
-	int* nbs = malloc(2 * sizeof(int));
-	nbs[0] = 5;	 // idle
-	nbs[1] = 5;	 // walk
+	int* nbs = malloc(4 * sizeof(int));
+	nbs[0] = 5;	 // idle psych
+	nbs[1] = 5;	 // walk psych
+	nbs[2] = 5;	 // idle
+	nbs[3] = 5;	 // walk
 	
-	int* lock = malloc(3 * sizeof(int));
+	int* lock = malloc(4 * sizeof(int));
 	lock[0] = 0;
-	lock[1] = 0;
-	lock[2] = 3;
+	lock[1] = 5;
+	lock[2] = 0;
+	lock[3] = 5;
+	
 
-	SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_entities_ducks_fullCanardLaque");	// to change
+	SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_entities_ducks_fullCanardLaqueWithPsych");	// to change
 
 	// Entity* first_final_boss = init_entity(x, y, 14, spritesheet, 46, 24, nbs, lock, update_first_final_boss, event_handler_first_final_boss, update_animation_first_final_boss, 40, true);
 	Entity* first_final_boss = init_entity(x, y, 14, spritesheet, 46, 24, nbs, lock, update_first_final_boss, event_handler_first_final_boss, update_animation_first_final_boss, 8, true);

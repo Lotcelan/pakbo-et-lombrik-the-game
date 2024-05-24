@@ -48,6 +48,9 @@ extern int src_assets_entities_ducks_fullCanardLaque_png_len;
 extern unsigned char src_assets_entities_ducks_fullDuckPurple_png[];
 extern int src_assets_entities_ducks_fullDuckPurple_png_len;
 
+extern unsigned char src_assets_entities_ducks_fullCanardLaqueWithPsych_png[];
+extern int src_assets_entities_ducks_fullCanardLaqueWithPsych_png_len;
+
 extern unsigned char src_assets_entities_ducks_fullDuckOrange_png[];
 extern int src_assets_entities_ducks_fullDuckOrange_png_len;
 

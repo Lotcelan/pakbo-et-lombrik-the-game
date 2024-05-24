@@ -39,6 +39,7 @@ void update_first_boss_room(GameData* game) {
     }
 
     if (*state == 5) {
+        game->state = CLOSING;
         return;
     }
     Entity* boss = (Entity*)get(game->current_scene->objects, "boss", strcmp);
@@ -83,6 +84,9 @@ void update_first_boss_room(GameData* game) {
         bool* DO_NOT_CLEAR = get(boss->objects, "DO_NOT_CLEAR", strcmp);
         *DO_NOT_CLEAR = false;
         boss->current_hp = -1;
+        Dialog* ending_demo = get_dialog_from_json("ending_demo");
+        game->current_dialog = ending_demo;
+
     }
 
 	return;
