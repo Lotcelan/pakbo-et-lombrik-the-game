@@ -1,6 +1,6 @@
 {
     "name": "Exemple level",
-    "background" : "src_assets_cafet_bgLeft",
+    "background" : "src_assets_backgrounds_serverRoom",
     "structures" : [
         {
             "identifier" : "blockLeft",

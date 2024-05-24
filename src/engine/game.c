@@ -76,6 +76,12 @@ void free_game(GameData* gameData) {
     destroy_dialog(gameData->current_dialog);
     // free(gameData->keyboardState); jsuis con c'est un const
     free_entity(gameData->player);
+    if (gameData->current_scene) {
+        free_scene(gameData->current_scene);
+    }
+    if (gameData->current_dialog) {
+        destroy_dialog(gameData->current_dialog);
+    }
     free(gameData);
 }
 
