@@ -18,6 +18,14 @@
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
+    {
+      "identifier": "blockUp",
+      "x": 0,
+      "y": -2,
+      "resource": "src_assets_structures_fullBlockHorizontal",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "first_boss_room_7_6"
+    },
     
     {
       "identifier": "ground01",
@@ -171,6 +179,7 @@
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
+    
 
     {
       "identifier": "upper_ground01",
@@ -207,6 +216,14 @@
     {
       "identifier": "upper_ground01",
       "x": 15,
+      "y": 0,
+      "resource": "src_assets_structures_betonTexture",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    },
+    {
+      "identifier": "upper_ground01",
+      "x": 15,
       "y": 1,
       "resource": "src_assets_structures_betonTexture",
       "allow_pass_through": 0,
@@ -230,21 +247,34 @@
     },
     {
       "identifier": "upper_ground01",
-      "x": 12,
-      "y": 1,
+      "x": 13,
+      "y": 2,
       "resource": "src_assets_structures_betonTexture",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
-
-
     {
-      "teleport_to_scene" : "first_boss_room_7_6",
-      "x" : 13,
-      "identifier" : "door_to_boss",
-      "resource" : "src_assets_structures_door",
-      "y" : 0,
-      "allow_pass_through" : 0
+      "identifier": "upper_ground01",
+      "x": 12,
+      "y": 2,
+      "resource": "src_assets_structures_betonTexture",
+      "allow_pass_through": 0,
+      "teleport_to_scene": "none"
+    }
+
+
+  ],
+  "entities": [
+    
+    {
+      "identifier": "duck_purple",
+      "x": 9,
+      "y": 2
+    },
+    {
+      "identifier": "duck_purple",
+      "x": 4,
+      "y": 4
     }
 
 
