@@ -1,0 +1,112 @@
+{
+    "name": "Exemple level",
+    "background" : "src_assets_cafet_bgLeft",
+    "structures" : [
+        {
+            "identifier" : "blockLeft",
+            "x" : -1,
+            "y" : 0,
+            "resource" : "src_assets_structures_fullBlockVertical",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "cafet_beginning_15_4"
+        },
+        {
+            "identifier" : "blockRight",
+            "x" : 16,
+            "y" : 0,
+            "resource" : "src_assets_structures_fullBlockVertical",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "cafet_second_counter_beginning_3_4"
+        },
+        {
+            "identifier" : "blockUp",
+            "x" : 0,
+            "y" : -1,
+            "resource" : "src_assets_structures_fullBlockHorizontal",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "none"
+        },
+        {
+            "identifier" : "blockDown",
+            "x" : 0,
+            "y" : 8,
+            "resource" : "src_assets_structures_fullBlockHorizontal",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "cave_beginning_1_0"
+        },
+        {
+            "identifier" : "comptoire05",
+            "x" : 0,
+            "y" : 5,
+            "resource" : "src_assets_cafet_comptoireMiddle",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "none"
+        },
+        {
+            "identifier" : "ombre06",
+            "x" : 0,
+            "y" : 6,
+            "resource" : "src_assets_cafet_betonTextureOmbre",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "none"
+        },
+        {
+            "identifier" : "beton07",
+            "x" : 0,
+            "y" : 7,
+            "resource" : "src_assets_cafet_betonTexture",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "none"
+        },
+        {
+            "identifier" : "comptoire15",
+            "x" : 1,
+            "y" : 5,
+            "resource" : "src_assets_cafet_comptoireMiddle",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "none"
+        },
+        {
+            "identifier" : "ombre16",
+            "x" : 1,
+            "y" : 6,
+            "resource" : "src_assets_cafet_betonTextureOmbre",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "none"
+        },
+        {
+            "identifier" : "beton17",
+            "x" : 1,
+            "y" : 7,
+            "resource" : "src_assets_cafet_betonTexture",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "none"
+        },
+        {
+            "identifier" : "comptoire155",
+            "x" : 15,
+            "y" : 5,
+            "resource" : "src_assets_cafet_comptoireMiddle",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "none"
+        },
+        {
+            "identifier" : "ombre156",
+            "x" : 15,
+            "y" : 6,
+            "resource" : "src_assets_cafet_betonTextureOmbre",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "none"
+        },
+        {
+            "identifier" : "beton157",
+            "x" : 15,
+            "y" : 7,
+            "resource" : "src_assets_cafet_betonTexture",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "none"
+        }
+    ],
+    "entities" : [
+    ]
+}
