@@ -114,11 +114,17 @@ extern int src_assets_server_png_len;
 extern unsigned char src_assets_continue_png[];
 extern int src_assets_continue_png_len;
 
+extern unsigned char src_assets_structures_bouilloire_2_png[];
+extern int src_assets_structures_bouilloire_2_png_len;
+
 extern unsigned char src_assets_structures_dirtWall0_png[];
 extern int src_assets_structures_dirtWall0_png_len;
 
 extern unsigned char src_assets_structures_dirtWall1_png[];
 extern int src_assets_structures_dirtWall1_png_len;
+
+extern unsigned char src_assets_structures_fullBlockHorizontal_2_png[];
+extern int src_assets_structures_fullBlockHorizontal_2_png_len;
 
 extern unsigned char src_assets_structures_grasswallLeft_png[];
 extern int src_assets_structures_grasswallLeft_png_len;
@@ -132,11 +138,26 @@ extern int src_assets_structures_dirtWall2_png_len;
 extern unsigned char src_assets_structures_grassCornerLeft_png[];
 extern int src_assets_structures_grassCornerLeft_png_len;
 
+extern unsigned char src_assets_structures_stone6_2_png[];
+extern int src_assets_structures_stone6_2_png_len;
+
 extern unsigned char src_assets_structures_sol_png[];
 extern int src_assets_structures_sol_png_len;
 
+extern unsigned char src_assets_structures_pastaMamaMia_2_png[];
+extern int src_assets_structures_pastaMamaMia_2_png_len;
+
 extern unsigned char src_assets_structures_iceBlocWithSnow_png[];
 extern int src_assets_structures_iceBlocWithSnow_png_len;
+
+extern unsigned char src_assets_structures_stone2_2_png[];
+extern int src_assets_structures_stone2_2_png_len;
+
+extern unsigned char src_assets_structures_stone655_2_png[];
+extern int src_assets_structures_stone655_2_png_len;
+
+extern unsigned char src_assets_structures_comptoireMiddle_2_png[];
+extern int src_assets_structures_comptoireMiddle_2_png_len;
 
 extern unsigned char src_assets_structures_tree2Reverse_png[];
 extern int src_assets_structures_tree2Reverse_png_len;
@@ -150,23 +171,53 @@ extern int src_assets_structures_grasswallRight_png_len;
 extern unsigned char src_assets_structures_tree3Apple_png[];
 extern int src_assets_structures_tree3Apple_png_len;
 
+extern unsigned char src_assets_structures_betonTextureOmbre_2_png[];
+extern int src_assets_structures_betonTextureOmbre_2_png_len;
+
+extern unsigned char src_assets_structures_icePic3_2_png[];
+extern int src_assets_structures_icePic3_2_png_len;
+
 extern unsigned char src_assets_structures_iceBlocLeft_png[];
 extern int src_assets_structures_iceBlocLeft_png_len;
 
 extern unsigned char src_assets_structures_randomBlock_png[];
 extern int src_assets_structures_randomBlock_png_len;
 
+extern unsigned char src_assets_structures_ordinateurOpenBar_2_png[];
+extern int src_assets_structures_ordinateurOpenBar_2_png_len;
+
+extern unsigned char src_assets_structures_stone7_2_png[];
+extern int src_assets_structures_stone7_2_png_len;
+
 extern unsigned char src_assets_structures_iceBlocRight_png[];
 extern int src_assets_structures_iceBlocRight_png_len;
 
+extern unsigned char src_assets_structures_stone105_2_png[];
+extern int src_assets_structures_stone105_2_png_len;
+
+extern unsigned char src_assets_structures_stone5_2_png[];
+extern int src_assets_structures_stone5_2_png_len;
+
 extern unsigned char src_assets_structures_ecocupInfusion_png[];
 extern int src_assets_structures_ecocupInfusion_png_len;
+
+extern unsigned char src_assets_structures_giganticFork_2_png[];
+extern int src_assets_structures_giganticFork_2_png_len;
+
+extern unsigned char src_assets_structures_piedTable_2_png[];
+extern int src_assets_structures_piedTable_2_png_len;
 
 extern unsigned char src_assets_structures_black_png[];
 extern int src_assets_structures_black_png_len;
 
 extern unsigned char src_assets_structures_tree_reverse_png[];
 extern int src_assets_structures_tree_reverse_png_len;
+
+extern unsigned char src_assets_structures_stone3_2_png[];
+extern int src_assets_structures_stone3_2_png_len;
+
+extern unsigned char src_assets_structures_stone10_2_png[];
+extern int src_assets_structures_stone10_2_png_len;
 
 extern unsigned char src_assets_structures_iceBlocAllLeft_png[];
 extern int src_assets_structures_iceBlocAllLeft_png_len;
@@ -186,6 +237,9 @@ extern int src_assets_structures_dirtCornerIn2_png_len;
 extern unsigned char src_assets_structures_dirtCornerEx2_png[];
 extern int src_assets_structures_dirtCornerEx2_png_len;
 
+extern unsigned char src_assets_structures_fullBlockVertical_2_png[];
+extern int src_assets_structures_fullBlockVertical_2_png_len;
+
 extern unsigned char src_assets_structures_grass_png[];
 extern int src_assets_structures_grass_png_len;
 
@@ -204,11 +258,26 @@ extern int src_assets_structures_dirtCornerIn1_png_len;
 extern unsigned char src_assets_structures_dirtCornerEx1_png[];
 extern int src_assets_structures_dirtCornerEx1_png_len;
 
+extern unsigned char src_assets_structures_caveBetonTexture_2_png[];
+extern int src_assets_structures_caveBetonTexture_2_png_len;
+
+extern unsigned char src_assets_structures_stone9_2_png[];
+extern int src_assets_structures_stone9_2_png_len;
+
 extern unsigned char src_assets_structures_tree_png[];
 extern int src_assets_structures_tree_png_len;
 
+extern unsigned char src_assets_structures_stone62_2_png[];
+extern int src_assets_structures_stone62_2_png_len;
+
 extern unsigned char src_assets_structures_door_png[];
 extern int src_assets_structures_door_png_len;
+
+extern unsigned char src_assets_structures_stone3Radius_2_png[];
+extern int src_assets_structures_stone3Radius_2_png_len;
+
+extern unsigned char src_assets_structures_cobble_2_png[];
+extern int src_assets_structures_cobble_2_png_len;
 
 extern unsigned char src_assets_structures_wall_jpg[];
 extern int src_assets_structures_wall_jpg_len;
@@ -218,6 +287,9 @@ extern int src_assets_structures_tulip_png_len;
 
 extern unsigned char src_assets_structures_IceDoor_png[];
 extern int src_assets_structures_IceDoor_png_len;
+
+extern unsigned char src_assets_structures_iceBlocPlatform_2_png[];
+extern int src_assets_structures_iceBlocPlatform_2_png_len;
 
 extern unsigned char src_assets_structures_ecocup_png[];
 extern int src_assets_structures_ecocup_png_len;
@@ -234,11 +306,17 @@ extern int src_assets_structures_icePic_png_len;
 extern unsigned char src_assets_structures_grassCornerRight_png[];
 extern int src_assets_structures_grassCornerRight_png_len;
 
+extern unsigned char src_assets_structures_stone65_2_png[];
+extern int src_assets_structures_stone65_2_png_len;
+
 extern unsigned char src_assets_structures_iceBlocAllRight_png[];
 extern int src_assets_structures_iceBlocAllRight_png_len;
 
 extern unsigned char src_assets_structures_iceBlocDownRight_png[];
 extern int src_assets_structures_iceBlocDownRight_png_len;
+
+extern unsigned char src_assets_structures_server_2_png[];
+extern int src_assets_structures_server_2_png_len;
 
 extern unsigned char src_assets_structures_tree2_png[];
 extern int src_assets_structures_tree2_png_len;
@@ -252,8 +330,20 @@ extern int src_assets_structures_solEclaire_png_len;
 extern unsigned char src_assets_structures_poppy_png[];
 extern int src_assets_structures_poppy_png_len;
 
+extern unsigned char src_assets_structures_tableLeft_2_png[];
+extern int src_assets_structures_tableLeft_2_png_len;
+
 extern unsigned char src_assets_structures_iceBlocDownLeft_png[];
 extern int src_assets_structures_iceBlocDownLeft_png_len;
+
+extern unsigned char src_assets_structures_tableRight_2_png[];
+extern int src_assets_structures_tableRight_2_png_len;
+
+extern unsigned char src_assets_structures_stone8_2_png[];
+extern int src_assets_structures_stone8_2_png_len;
+
+extern unsigned char src_assets_structures_stone63_2_png[];
+extern int src_assets_structures_stone63_2_png_len;
 
 extern unsigned char src_assets_duck_purple_png[];
 extern int src_assets_duck_purple_png_len;
@@ -365,6 +455,9 @@ extern int src_assets_entities_projectiles_projectile_laser_png_len;
 
 extern unsigned char src_assets_entities_projectiles_arrow_png[];
 extern int src_assets_entities_projectiles_arrow_png_len;
+
+extern unsigned char src_assets_entities_sandwich_png[];
+extern int src_assets_entities_sandwich_png_len;
 
 extern unsigned char src_assets_hp_dead_png[];
 extern int src_assets_hp_dead_png_len;

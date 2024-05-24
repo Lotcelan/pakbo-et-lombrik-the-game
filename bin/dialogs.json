@@ -52,7 +52,7 @@
         ]
     },
     "pano1" :{
-        "message" : "J'ai creuse ce tunnel par erreur, pour arriver a l'avant poste, il faut revenir sur vos pas.",
+        "message" : "Voie condamnee. Pour atteindre l'avant poste, rebroussez chemin.",
         "font_name" : "Minecraft",
         "options" : [],
         "branches" : [
@@ -61,6 +61,26 @@
                 "font_name" : "Minecraft",
                 "options" : [],
                 "branches" : []
+            }
+        ]
+    },
+    "pano2" :{
+        "message" : "Astuce de bobbi :",
+        "font_name" : "Minecraft",
+        "options" : [],
+        "branches" : [
+            {
+                "message" : "Je me suis rendu compte que je pouvais me gratter le dos facilement avec mon épée ! (appuyer sur X pour brandir son épée)",
+                "font_name" : "Minecraft",
+                "options" : [],
+                "branches" : [
+                    {
+                    "message" : "(Peut aussi servir de chausse pieds)",
+                    "font_name" : "Minecraft",
+                    "options" : [],
+                    "branches" : []
+                }
+            ]
             }
         ]
     },
