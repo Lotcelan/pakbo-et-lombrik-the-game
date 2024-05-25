@@ -71,7 +71,7 @@ void update_animation_ice_pic_structure(Entity* e, float delta) {
 
 Entity* init_ice_pic_structure(GameData* game, int x, int y) {
 	int* nbs = malloc(2 * sizeof(int));
-	nbs[0] = 1;	
+	nbs[0] = 1;
 	nbs[1] = 1;
 	int* lock = malloc(2  * sizeof(int));
 	lock[0] = 1;

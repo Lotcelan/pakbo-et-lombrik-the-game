@@ -61,7 +61,7 @@ void update_animation_ice_pic_collision(Entity* e, float delta) {
 
 Entity* init_ice_pic_collision(GameData* game, int x, int y) {
 	int* nbs = malloc(2 * sizeof(int));
-	nbs[0] = 3;	
+	nbs[0] = 1;
 	nbs[1] = 3;
 	int* lock = malloc(2  * sizeof(int));
 	lock[0] = 1;
