@@ -1,6 +1,6 @@
 {
   "name": "Exemple level",
-  "background": "src_assets_backgrounds_BackgroundBsCave",
+  "background": "src_assets_backgrounds_backgroundBsCaveBlurred",
   "structures": [
     {
       "identifier": "blockLeft",
@@ -31,7 +31,7 @@
       "identifier": "ground01",
       "x": 0,
       "y": 7,
-      "resource": "src_assets_structures_stone2",
+      "resource": "src_assets_structures_stoneCave_stoneCave2",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -39,7 +39,7 @@
       "identifier": "ground02",
       "x": 1,
       "y": 7,
-      "resource": "src_assets_structures_stone2",
+      "resource": "src_assets_structures_stoneCave_stoneCave2",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -47,7 +47,7 @@
       "identifier": "ground01",
       "x": 2,
       "y": 7,
-      "resource": "src_assets_structures_stone2",
+      "resource": "src_assets_structures_stoneCave_stoneCave2",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -55,7 +55,7 @@
       "identifier": "ground01",
       "x": 3,
       "y": 7,
-      "resource": "src_assets_structures_stone2",
+      "resource": "src_assets_structures_stoneCave_stoneCave2",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -63,7 +63,7 @@
       "identifier": "ground01",
       "x": 4,
       "y": 7,
-      "resource": "src_assets_structures_stone2",
+      "resource": "src_assets_structures_stoneCave_stoneCave2",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -71,7 +71,7 @@
       "identifier": "ground01",
       "x": 5,
       "y": 7,
-      "resource": "src_assets_structures_stone2",
+      "resource": "src_assets_structures_stoneCave_stoneCave2",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -79,7 +79,7 @@
       "identifier": "ground01",
       "x": 6,
       "y": 7,
-      "resource": "src_assets_structures_stone2",
+      "resource": "src_assets_structures_stoneCave_stoneCave2",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -87,7 +87,7 @@
       "identifier": "ground01",
       "x": 7,
       "y": 7,
-      "resource": "src_assets_structures_stone2",
+      "resource": "src_assets_structures_stoneCave_stoneCave2",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -95,7 +95,7 @@
       "identifier": "ground01",
       "x": 8,
       "y": 7,
-      "resource": "src_assets_structures_stone2",
+      "resource": "src_assets_structures_stoneCave_stoneCave2",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -103,7 +103,7 @@
       "identifier": "ground01",
       "x": 9,
       "y": 7,
-      "resource": "src_assets_structures_stone2",
+      "resource": "src_assets_structures_stoneCave_stoneCave2",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -111,7 +111,7 @@
       "identifier": "ground01",
       "x": 10,
       "y": 7,
-      "resource": "src_assets_structures_stone2",
+      "resource": "src_assets_structures_stoneCave_stoneCave2",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -119,7 +119,7 @@
       "identifier": "ground01",
       "x": 11,
       "y": 7,
-      "resource": "src_assets_structures_stone2",
+      "resource": "src_assets_structures_stoneCave_stoneCave2",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -127,7 +127,7 @@
       "identifier": "ground01",
       "x": 12,
       "y": 7,
-      "resource": "src_assets_structures_stone2",
+      "resource": "src_assets_structures_stoneCave_stoneCave2",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -135,7 +135,7 @@
       "identifier": "ground01",
       "x": 13,
       "y": 7,
-      "resource": "src_assets_structures_stone2",
+      "resource": "src_assets_structures_stoneCave_stoneCave2",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -143,7 +143,7 @@
       "identifier": "ground01",
       "x": 14,
       "y": 7,
-      "resource": "src_assets_structures_stone2",
+      "resource": "src_assets_structures_stoneCave_stoneCave2",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -151,7 +151,7 @@
       "identifier": "ground01",
       "x": 15,
       "y": 7,
-      "resource": "src_assets_structures_stone2",
+      "resource": "src_assets_structures_stoneCave_stoneCave2",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -159,7 +159,7 @@
       "identifier": "ground01",
       "x": 16,
       "y": 7,
-      "resource": "src_assets_structures_stone2",
+      "resource": "src_assets_structures_stoneCave_stoneCave2",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -167,7 +167,7 @@
       "identifier": "ground01",
       "x": 17,
       "y": 7,
-      "resource": "src_assets_structures_stone2",
+      "resource": "src_assets_structures_stoneCave_stoneCave2",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -175,7 +175,7 @@
       "identifier": "ground01",
       "x": 18,
       "y": 7,
-      "resource": "src_assets_structures_stone2",
+      "resource": "src_assets_structures_stoneCave_stoneCave2",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -185,7 +185,7 @@
       "identifier": "upper_ground01",
       "x": 3,
       "y": 5,
-      "resource": "src_assets_structures_stone2",
+      "resource": "src_assets_structures_stoneCave_stoneCave2",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -193,7 +193,7 @@
       "identifier": "upper_ground01",
       "x": 4,
       "y": 5,
-      "resource": "src_assets_structures_stone2",
+      "resource": "src_assets_structures_stoneCave_stoneCave2",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -201,7 +201,7 @@
       "identifier": "upper_ground01",
       "x": 8,
       "y": 3,
-      "resource": "src_assets_structures_stone2",
+      "resource": "src_assets_structures_stoneCave_stoneCave2",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -209,7 +209,7 @@
       "identifier": "upper_ground01",
       "x": 9,
       "y": 3,
-      "resource": "src_assets_structures_stone2",
+      "resource": "src_assets_structures_stoneCave_stoneCave2",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -217,7 +217,7 @@
       "identifier": "upper_ground01",
       "x": 15,
       "y": 0,
-      "resource": "src_assets_structures_stone2",
+      "resource": "src_assets_structures_stoneCave_stoneCave2",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -225,7 +225,7 @@
       "identifier": "upper_ground01",
       "x": 15,
       "y": 1,
-      "resource": "src_assets_structures_stone63",
+      "resource": "src_assets_structures_stoneCave_stoneCave63",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -233,7 +233,7 @@
       "identifier": "upper_ground01",
       "x": 14,
       "y": 1,
-      "resource": "src_assets_structures_stone2",
+      "resource": "src_assets_structures_stoneCave_stoneCave2",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -241,7 +241,7 @@
       "identifier": "upper_ground01",
       "x": 13,
       "y": 1,
-      "resource": "src_assets_structures_stone2",
+      "resource": "src_assets_structures_stoneCave_stoneCave2",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -249,7 +249,7 @@
       "identifier": "upper_ground01",
       "x": 13,
       "y": 2,
-      "resource": "src_assets_structures_stone63",
+      "resource": "src_assets_structures_stoneCave_stoneCave63",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     },
@@ -257,7 +257,7 @@
       "identifier": "upper_ground01",
       "x": 12,
       "y": 2,
-      "resource": "src_assets_structures_stone2",
+      "resource": "src_assets_structures_stoneCave_stoneCave2",
       "allow_pass_through": 0,
       "teleport_to_scene": "none"
     }

@@ -261,6 +261,168 @@ extern int src_assets_structures_tableRight_png_len;
 extern unsigned char src_assets_structures_iceBlocRight_png[];
 extern int src_assets_structures_iceBlocRight_png_len;
 
+extern unsigned char src_assets_structures_stoneCave_stoneCave55_png[];
+extern int src_assets_structures_stoneCave_stoneCave55_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave48_png[];
+extern int src_assets_structures_stoneCave_stoneCave48_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave46_png[];
+extern int src_assets_structures_stoneCave_stoneCave46_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave44_png[];
+extern int src_assets_structures_stoneCave_stoneCave44_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave36_png[];
+extern int src_assets_structures_stoneCave_stoneCave36_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave13_png[];
+extern int src_assets_structures_stoneCave_stoneCave13_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave11_png[];
+extern int src_assets_structures_stoneCave_stoneCave11_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave32_png[];
+extern int src_assets_structures_stoneCave_stoneCave32_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave16_png[];
+extern int src_assets_structures_stoneCave_stoneCave16_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave52_png[];
+extern int src_assets_structures_stoneCave_stoneCave52_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave38_png[];
+extern int src_assets_structures_stoneCave_stoneCave38_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave19_png[];
+extern int src_assets_structures_stoneCave_stoneCave19_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave51_png[];
+extern int src_assets_structures_stoneCave_stoneCave51_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave10_png[];
+extern int src_assets_structures_stoneCave_stoneCave10_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave23_png[];
+extern int src_assets_structures_stoneCave_stoneCave23_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave8_png[];
+extern int src_assets_structures_stoneCave_stoneCave8_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave7_png[];
+extern int src_assets_structures_stoneCave_stoneCave7_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave47_png[];
+extern int src_assets_structures_stoneCave_stoneCave47_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave49_png[];
+extern int src_assets_structures_stoneCave_stoneCave49_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave5_png[];
+extern int src_assets_structures_stoneCave_stoneCave5_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave2_png[];
+extern int src_assets_structures_stoneCave_stoneCave2_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave27_png[];
+extern int src_assets_structures_stoneCave_stoneCave27_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave50_png[];
+extern int src_assets_structures_stoneCave_stoneCave50_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave29_png[];
+extern int src_assets_structures_stoneCave_stoneCave29_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave53_png[];
+extern int src_assets_structures_stoneCave_stoneCave53_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave37_png[];
+extern int src_assets_structures_stoneCave_stoneCave37_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave14_png[];
+extern int src_assets_structures_stoneCave_stoneCave14_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave25_png[];
+extern int src_assets_structures_stoneCave_stoneCave25_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave35_png[];
+extern int src_assets_structures_stoneCave_stoneCave35_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave15_png[];
+extern int src_assets_structures_stoneCave_stoneCave15_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave28_png[];
+extern int src_assets_structures_stoneCave_stoneCave28_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave3_png[];
+extern int src_assets_structures_stoneCave_stoneCave3_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave6_png[];
+extern int src_assets_structures_stoneCave_stoneCave6_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave42_png[];
+extern int src_assets_structures_stoneCave_stoneCave42_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave41_png[];
+extern int src_assets_structures_stoneCave_stoneCave41_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave4_png[];
+extern int src_assets_structures_stoneCave_stoneCave4_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave20_png[];
+extern int src_assets_structures_stoneCave_stoneCave20_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave54_png[];
+extern int src_assets_structures_stoneCave_stoneCave54_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave30_png[];
+extern int src_assets_structures_stoneCave_stoneCave30_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave33_png[];
+extern int src_assets_structures_stoneCave_stoneCave33_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave26_png[];
+extern int src_assets_structures_stoneCave_stoneCave26_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave34_png[];
+extern int src_assets_structures_stoneCave_stoneCave34_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave45_png[];
+extern int src_assets_structures_stoneCave_stoneCave45_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave1_png[];
+extern int src_assets_structures_stoneCave_stoneCave1_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave17_png[];
+extern int src_assets_structures_stoneCave_stoneCave17_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave43_png[];
+extern int src_assets_structures_stoneCave_stoneCave43_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave40_png[];
+extern int src_assets_structures_stoneCave_stoneCave40_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave24_png[];
+extern int src_assets_structures_stoneCave_stoneCave24_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave18_png[];
+extern int src_assets_structures_stoneCave_stoneCave18_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave31_png[];
+extern int src_assets_structures_stoneCave_stoneCave31_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave39_png[];
+extern int src_assets_structures_stoneCave_stoneCave39_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave21_png[];
+extern int src_assets_structures_stoneCave_stoneCave21_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave12_png[];
+extern int src_assets_structures_stoneCave_stoneCave12_png_len;
+
+extern unsigned char src_assets_structures_stoneCave_stoneCave22_png[];
+extern int src_assets_structures_stoneCave_stoneCave22_png_len;
+
 extern unsigned char src_assets_structures_rock1_png[];
 extern int src_assets_structures_rock1_png_len;
 
@@ -368,6 +530,9 @@ extern int src_assets_backgrounds_bgRight_png_len;
 
 extern unsigned char src_assets_backgrounds_bgLeft_png[];
 extern int src_assets_backgrounds_bgLeft_png_len;
+
+extern unsigned char src_assets_backgrounds_backgroundBsCaveBlurred_png[];
+extern int src_assets_backgrounds_backgroundBsCaveBlurred_png_len;
 
 extern unsigned char src_assets_backgrounds_telecom_png[];
 extern int src_assets_backgrounds_telecom_png_len;
