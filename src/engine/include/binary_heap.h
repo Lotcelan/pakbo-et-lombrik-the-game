@@ -29,5 +29,6 @@ binary_heap_basic_entry* create_binary_heap_basic_entry(void* value, float prior
 bool is_binary_heap_empty(binary_heap* bh);
 bool is_present_in_binary_heap(binary_heap* bh, void* value, bool (*cmp)(void*, void*)); // on n'utilise pas le même compare que dans la structure car là on compare les values par les priorités
 void binary_heap_modify(binary_heap* bh, void* to_modify, void* new_value, bool (*cmp)(void* v1, void* v2)); // même principe
-
+void binary_heap_basic_entry_free(void* bhe);
+void binary_heap_free(binary_heap* bh);
 #endif

@@ -17,7 +17,7 @@ void destroyHashTable(HashTable* hashtable) {
         Entry* entry = hashtable->table[i];
         while (entry != NULL) {
             Entry* next = entry->next;
-            entry->destroy(entry);
+            if (entry->destroy) entry->destroy(entry);
             entry = next;
         }
     }

@@ -14,3 +14,4 @@ void pauseMusic();
 void resumeMusic();
 
 void setMusicVolume(MusicManager* manager, int volume);
+void destroyMusicManager(MusicManager* manager);

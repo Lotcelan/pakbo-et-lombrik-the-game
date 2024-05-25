@@ -120,9 +120,9 @@ void populate(GameData* game) {
     insert(scene->objects, "selectedMenuItem", selectedMenuItem, free);
     
     SDL_Rect* menuItemsRect = (SDL_Rect*)malloc(sizeof(SDL_Rect) * NUM_MENU_ITEMS);
-    menuItemsRect[0] = (SDL_Rect){ .x = 50, .y = 50, .w = 100, .h = 50 };
-    menuItemsRect[1] = (SDL_Rect){ .x = 50, .y = 110, .w = 100, .h = 50 };
-    menuItemsRect[2] = (SDL_Rect){ .x = 50, .y = 170, .w = 100, .h = 50 };
+    menuItemsRect[0] = (SDL_Rect){ .x = 50, .y = 10, .w = 100, .h = 30 };
+    menuItemsRect[1] = (SDL_Rect){ .x = 50, .y = 50, .w = 100, .h = 30 };
+    menuItemsRect[2] = (SDL_Rect){ .x = 50, .y = 90, .w = 100, .h = 30 };
 
     insert(scene->objects, "menuItemsRect", menuItemsRect, free);
 

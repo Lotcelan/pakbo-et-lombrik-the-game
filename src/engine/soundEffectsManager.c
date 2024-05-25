@@ -31,3 +31,9 @@ void setSoundEffectVolume(SoundEffectManager* manager, int volume) {
         Mix_VolumeChunk(manager->currentEffect, volume);
     }
 }
+
+
+void destroySoundEffectsManager(SoundEffectManager* manager){
+    free(manager->currentEffect);
+    free(manager);
+}
