@@ -26,7 +26,7 @@ void event_handler_cafet_second_counter_end(GameData* game) {
 
 void populate_cafet_second_counter_end(GameData* game) {
     push_background_structures(game);
-    spawn_modifier_in_scene(game, game->current_scene, create_modifier(N_JUMP, 1, -1), 15, 3);
+    spawn_modifier_in_scene(game, game->current_scene, create_modifier(N_JUMP, 1, -1), 4, 2);
 }
 
 Scene* init_cafet_second_counter_end(GameData* game) {

@@ -57,6 +57,14 @@
             "resource" : "src_assets_cafet_piedTable",
             "allow_pass_through" : 0,
             "teleport_to_scene" : "none"
+        },
+        {
+            "identifier" : "pingpongtable",
+            "x" : 8,
+            "y" : 7,
+            "resource" : "src_assets_cafet_tablePingPongHalf",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "none"
         }
 
     ],

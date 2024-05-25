@@ -147,6 +147,8 @@ void populate_ping_pong(GameData* game) {
     *moving_delay = 0;
     insert(game->current_scene->objects, "moving_delay", moving_delay, free);
 
+    spawn_modifier_in_scene(game, game->current_scene, create_modifier(SPEED_HOOF, 1, -1), 7, 4);
+
 }
 
 // void test(Entity* e, float delta){
