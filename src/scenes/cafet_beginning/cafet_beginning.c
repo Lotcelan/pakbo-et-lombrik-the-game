@@ -26,10 +26,10 @@ void event_handler_cafet_beginning(GameData* game) {
 void populate_cafet_beginning(GameData* game) {
     push_background_structures(game);
 
-    for (int i = 0; i < 3; i++) add_modifier_to_entity(game, game->player, N_JUMP, 1, -1);
-    for (int i = 0; i < 15; i++) add_modifier_to_entity(game, game->player, POISON_EFFECT, 1, 5000);
+    // for (int i = 0; i < 3; i++) add_modifier_to_entity(game, game->player, N_JUMP, 1, -1);
+    // for (int i = 0; i < 15; i++) add_modifier_to_entity(game, game->player, POISON_EFFECT, 1, 5000);
 
-    spawn_modifier_in_scene(game, game->current_scene, create_modifier(N_JUMP, 1, -1), 8, 4);
+    // spawn_modifier_in_scene(game, game->current_scene, create_modifier(N_JUMP, 1, -1), 8, 4);
 }
 
 Scene* init_cafet_beginning(GameData* game) {

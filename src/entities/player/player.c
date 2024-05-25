@@ -201,7 +201,7 @@ Entity* init_player(GameData* game, int x, int y) {
     
     SDL_Texture* spritesheet = loadTextureFromMemory(game, "src_assets_entities_lombric"); // to change
 
-    Entity* player = init_entity(x, y, 14, spritesheet, 16, 16, nbs, lock, update_player, event_handler_player, update_animation_player, 6, true);
+    Entity* player = init_entity(x, y, 14, spritesheet, 16, 16, nbs, lock, update_player, event_handler_player, update_animation_player, 10, true);
     // on redéfinit la collision bux du joueur
     //player->collision_box = init_rect_box(4, 4, 8, 12);
     //player->hurt_box = copy_box(player->collision_box);

@@ -28,7 +28,7 @@ void event_handler_cave2(GameData* game) {
 
 void populate_cave2(GameData* game) {
     push_background_structures(game);   
-    for (int i = 0; i < 3; i++) add_modifier_to_entity(game, game->player, N_JUMP, 1, -1);
+    // for (int i = 0; i < 3; i++) add_modifier_to_entity(game, game->player, N_JUMP, 1, -1);
 
 }
 
