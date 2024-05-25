@@ -1,0 +1,197 @@
+{
+    "test" : {
+        "message" : "Hello, World!",
+        "font_name" : "suifak_small",
+        "options" : [ "option1", "option2" ],
+        "branches" : [
+            {
+                "message" : "branch1 JE SUIS BEAUUUUUUUUUUUUUUUUUUUUUUCOUP DE TEXTE AAAAAAAAa",
+                "font_name" : "suifak_small",
+                "options" : [],
+                "branches" : []
+            }, 
+            {
+                "message" : "branch2",
+                "font_name" : "suifak_small",
+                "options" : [ "suivant"],
+                "branches" : [
+                    {
+                        "message" : "Tu as appuyé sur suivant",
+                        "font_name" : "suifak_small",
+                        "options" : [],
+                        "branches" : []
+                    }
+                ]
+            }
+        ]
+    },
+    "greg" : {
+        "message" : "Bonjour je m'appelle Gregory, je suis le medecin de cette escouade.",
+        "font_name" : "Minecraft",
+        "options" : [ "Tu es medecin ?", "Qui me transportera jusqu'ici ?"],
+        "branches" : [
+            {
+                "message" : "De toute evidence.",
+                "font_name" : "Minecraft",
+                "options" : [],
+                "branches" : []
+            }, 
+            {
+                "message" : "Mes subordonnes, Allison, Eric et Robert, sont des agents de terrain. Ils s'occupperont de tout.",
+                "font_name" : "Minecraft",
+                "options" : [],
+                "branches" : []
+            }
+        ]
+    },
+    "james" : {
+        "message" : "Bonjour je m'appelle James, je suis l'armurier de l'escouade",
+        "font_name" : "Minecraft",
+        "options" : [ "Peux-tu m'enseigner le maniement de l'epee ?", "Est-ce qu'on a des munitions en reserve ?"],
+        "branches" : [
+            {
+                "message" : "Tu as lu le panneau sur le chemin jusqu'ici non ? Brandis ton epee avec X. Pour ce qui est du reste, trouve ton propre style.",
+                "font_name" : "Minecraft",
+                "options" : [],
+                "branches" : []
+            }, 
+            {
+                "message" : "Helas non, l'escouade est en manque d'argent et donc de materiel ces temps-ci.",
+                "font_name" : "Minecraft",
+                "options" : [],
+                "branches" : []
+            }
+        ]
+    },
+    "cuddy" : {
+        "message" : "Je suis le sergent Cuddy, tu dois etre l'adjudant Bric ? Tu vas pouvoir partir en mission immediatement, sauf si tu as encore des questions ?",
+        "font_name" : "Minecraft",
+        "options" : [ "Qui est-ce la haut ?", "Qui est-ce la bas ?", "Aucune"],
+        "branches" : [
+            {
+                "message" : "Voici Gregory, un des meilleurs medecins de l'armee, il te sera d'une grande aide en cas de pepin.",
+                "font_name" : "Minecraft",
+                "options" : [],
+                "branches" : []
+            }, 
+            {
+                "message" : "Voici James, il fait office d'armurier. Tu as deja rencontre son frere je crois.",
+                "font_name" : "Minecraft",
+                "options" : [],
+                "branches" : []
+            },
+            {
+                "message" : "Alors au travail !",
+                "font_name" : "Minecraft",
+                "options" : [],
+                "branches" : []
+            }
+        ]
+    },
+    "bobbi" : {
+        "message" : "Lom Bric ! Enfin tu es arrive !",
+        "font_name" : "Minecraft",
+        "options" : [ "Qui es-tu ?", "Ou sont les autres ?" ],
+        "branches" : [
+            {
+                "message" : "Je m'appelle bobbi ! Je suis une nouvelle recrue.",
+                "font_name" : "Minecraft",
+                "options" : [],
+                "branches" : []
+            }, 
+            {
+                "message" : "Le reste de l'escouade est deja a l'avant poste.",
+                "font_name" : "Minecraft",
+                "options" : [],
+                "branches" : [
+                    {
+                    "message" : "Tu peux les rejoindre par ce tunnel, je l'ai creuse moi-meme !",
+                    "font_name" : "Minecraft",
+                    "options" : [],
+                    "branches" : []
+                }
+            ]
+            }
+        ]
+    },
+    "pano1" :{
+        "message" : "Voie condamnee. Pour atteindre l'avant poste, rebroussez chemin.",
+        "font_name" : "Minecraft",
+        "options" : [],
+        "branches" : [
+            {
+                "message" : "Cordialement,\nBobbi",
+                "font_name" : "Minecraft",
+                "options" : [],
+                "branches" : []
+            }
+        ]
+    },
+    "pano2" :{
+        "message" : "Astuce de bobbi :",
+        "font_name" : "Minecraft",
+        "options" : [],
+        "branches" : [
+            {
+                "message" : "Je me suis rendu compte que je pouvais me gratter le dos facilement avec mon epee ! \n(appuyer sur X)",
+                "font_name" : "Minecraft",
+                "options" : [],
+                "branches" : [
+                    {
+                    "message" : "(Peut aussi servir de chausse pieds)",
+                    "font_name" : "Minecraft",
+                    "options" : [],
+                    "branches" : []
+                }
+            ]
+            }
+        ]
+    },
+    "medic_hub_test" : {
+        "message" : "Bienvenue Lom Bric",
+        "font_name" : "suifak_small",
+        "options" : [ "Bonjour", "JU-JU-JUUUUUL" ],
+        "branches" : [
+            {
+                "message" : "Bisous !",
+                "font_name" : "suifak_small",
+                "options" : [],
+                "branches" : []
+            }, 
+            {
+                "message" : "AU DD",
+                "font_name" : "suifak_small",
+                "options" : [],
+                "branches" : []
+            }
+        ]
+    },
+    "second_counter_fork_blocking" : {
+        "message" : "Oh non ! Il te faut te debarasser des mouches pour continuer...",
+        "font_name" : "suifak_small",
+        "optionts" : [],
+        "branches" : []
+    },
+    "cave_beginning_fall" : {
+        "message" : "Je crois que tu as glissé... Fais attention il y a des pics juste en dessous de toi ! Evite les !",
+        "font_name" : "suifak_small",
+        "optionts" : [],
+        "branches" : []
+
+    },
+    "ending_demo" : {
+        "message" : "Canard laque a ete vaincu ! Felicitation !",
+        "font_name" : "suifak_small",
+        "optionts" : [ "Merci !" ],
+        "branches" : [
+            {
+                "message" : "C'est la fin de la demo ! Merci d'avoir teste !",
+                "font_name" : "suifak_small",
+                "optionts" : [],
+                "branches" : []
+        
+            }
+        ]
+
+    }
+}
