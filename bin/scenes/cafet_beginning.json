@@ -3,11 +3,43 @@
     "background" : "src_assets_cafet_bgLeft",
     "structures" : [
         {
+            "identifier" : "blockLeft",
+            "x" : -1,
+            "y" : 0,
+            "resource" : "src_assets_structures_fullBlockVertical",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "none"
+        },
+        {
+            "identifier" : "blockRight",
+            "x" : 16,
+            "y" : 0,
+            "resource" : "src_assets_structures_fullBlockVertical",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "cafet_crossing_counters_1_4"
+        },
+        {
+            "identifier" : "blockUp",
+            "x" : 0,
+            "y" : -1,
+            "resource" : "src_assets_structures_fullBlockHorizontal",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "none"
+        },
+        {
+            "identifier" : "blockDown",
+            "x" : 0,
+            "y" : 8,
+            "resource" : "src_assets_structures_fullBlockHorizontal",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "cave_beginning_1_0"
+        },
+        {
             "identifier" : "ordinateur",
             "x" : 3,
             "y" : 3,
             "resource" : "src_assets_cafet_ordinateurOpenBar",
-            "allow_pass_through" : 0,
+            "allow_pass_through" : 10,
             "teleport_to_scene" : "none"
         },
         {
@@ -397,7 +429,7 @@
     ],
     "entities" : [
         {
-            "identifier" : "la_mouche",
+            "identifier" : "duck_purple",
             "x" : 12,
             "y" : 1
         }

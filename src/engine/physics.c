@@ -77,6 +77,7 @@ Structure* do_the_moves(GameData* game, Entity* e, int delta_x, int delta_y) {
         e->y_velocity = 0;
     }
 
+    return result;
 }
 
 Structure* update_entity_movement(GameData* game, Entity* e, float delta_t, bool gravity_enabled) {

@@ -223,7 +223,7 @@ void update_modifiers(GameData* game) {
         SceneModifier* sm = (SceneModifier*)current->value;
         Modifier* m = sm->modifier;
         if (m == NULL) {
-            previous == current;
+            previous = current;
             current = current->next;
             continue;
         }

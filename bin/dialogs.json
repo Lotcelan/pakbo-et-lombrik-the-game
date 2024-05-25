@@ -56,7 +56,7 @@
                 "branches" : []
             }, 
             {
-                "message" : "Helas non, l'escouade est en manque d'argent et donc de materiel ces temps cis",
+                "message" : "Helas non, l'escouade est en manque d'argent et donc de materiel ces temps-ci.",
                 "font_name" : "Minecraft",
                 "options" : [],
                 "branches" : []
@@ -171,5 +171,27 @@
         "font_name" : "suifak_small",
         "optionts" : [],
         "branches" : []
+    },
+    "cave_beginning_fall" : {
+        "message" : "Je crois que tu as glissé... Fais attention il y a des pics juste en dessous de toi ! Evite les !",
+        "font_name" : "suifak_small",
+        "optionts" : [],
+        "branches" : []
+
+    },
+    "ending_demo" : {
+        "message" : "Canard laque a ete vaincu ! Felicitation !",
+        "font_name" : "suifak_small",
+        "optionts" : [ "Merci !" ],
+        "branches" : [
+            {
+                "message" : "C'est la fin de la demo ! Merci d'avoir teste !",
+                "font_name" : "suifak_small",
+                "optionts" : [],
+                "branches" : []
+        
+            }
+        ]
+
     }
 }
