@@ -30,6 +30,8 @@ void update_first_boss_room(GameData* game) {
 	}
 
     if (*state == 1) {
+        bool* is_auto_y_velocity_reset_enabled = get(game->player->objects, "is_auto_y_velocity_reset_enabled", strcmp);
+        *is_auto_y_velocity_reset_enabled = true;
         EntityInitFunc* boss_func = get(game->entities, "first_final_boss", strcmp);
         if (!boss_func) return;
         Entity* boss = (*boss_func)(game, 7, 2);
@@ -113,7 +115,10 @@ void populate_first_boss_room(GameData* game) {
 	push_background_structures(game);
 
 	if (game->player) {
-		change_entity_coordinates(game->player, game->player->x_position, 6 * CELL_HEIGHT);
+        printf("allo\n");
+		change_entity_coordinates(game->player, 6 * CELL_WIDTH, 6 * CELL_HEIGHT);
+        bool* is_auto_y_velocity_reset_enabled = get(game->player->objects, "is_auto_y_velocity_reset_enabled", strcmp);
+        *is_auto_y_velocity_reset_enabled = false;
 		game->player->y_velocity = -220;
 	}
 

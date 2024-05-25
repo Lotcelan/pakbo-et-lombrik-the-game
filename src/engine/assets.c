@@ -138,6 +138,7 @@ void render_entity(GameData* game, Entity* e, float delta) {
 
     // zone de la sprite sheet à afficher
     // rappel : sprite->frames est une liste de coordonnées
+    if (!e->sprite) return;
     int* frame = e->sprite->currentFrame->value;    // tableau de taille 2 : [x, y]
     // printf("\n\n%d, %d\n\n", frame[0], frame[1]);
     SDL_Rect spriteRect = {.x = frame[0]*sprite->width, .y = frame[1]*sprite->height, .w = sprite->width, .h = sprite->height};

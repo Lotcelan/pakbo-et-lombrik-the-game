@@ -41,8 +41,9 @@ void event_handler_main_menu(GameData* game) {
                 if (strcmp(main_menu_options[*selectedMenuItem], "Play")==0) {
                     // game->current_scene = get(game->scenes, "spawn_level", strcmp);
                     game->player->y_velocity = 0;
-                    // change_scene(game, "telecom_3_4");
-                    change_scene(game, "cafet_beginning_2_4");
+                    change_scene(game, "telecom_3_4");
+                    // change_scene(game, "cafet_beginning_2_4");
+                    // change_scene(game, "first_boss_room_2_4");
                     return;
                 } else if (strcmp(main_menu_options[*selectedMenuItem], "Quit")==0) {
                     game->state = CLOSING;

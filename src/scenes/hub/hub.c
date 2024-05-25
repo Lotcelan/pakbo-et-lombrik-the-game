@@ -3,7 +3,8 @@
 void update_hub(GameData* game) {
     // printf("Current coords : %d, %d\n", moving_platform->position.x, moving_platform->position.y);
     if (game->player->collision_box->zone.y < 0) {
-        change_scene(game, "main_menu_-1_-1");
+        // change_scene(game, "main_menu_-1_-1");
+        change_scene(game, "cafet_beginning_2_4");
         return;
     }
     else if (game->player->collision_box->zone.x < 0) {

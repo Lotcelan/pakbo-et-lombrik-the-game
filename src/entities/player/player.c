@@ -95,7 +95,15 @@ void event_handler_player(Entity* player, GameData* game) {
         // printf("j'ai envent handlé : %i\n", *jump_amount);
     }
     if (!(game->keyboardState[SDL_SCANCODE_UP]) && player->y_velocity < 0){
-        player->y_velocity = 0;
+        bool* is_auto_y_velocity_reset_enabled = get(player->objects, "is_auto_y_velocity_reset_enabled", strcmp);
+        if (is_auto_y_velocity_reset_enabled) {
+            if (*is_auto_y_velocity_reset_enabled) {
+                player->y_velocity = 0;
+            }
+        }
+        else {
+            player->y_velocity = 0;
+        }
     }
     // else if (game->keyboardState[SDL_SCANCODE_DOWN]) {
     //     player->y_velocity = 100;
@@ -221,5 +229,11 @@ Entity* init_player(GameData* game, int x, int y) {
 
     int* nb_poison_proc = malloc(sizeof(int));
     *nb_poison_proc = 0;
-    insert(player->objects, "nb_poison_proc", nb_poison_proc, free);    return player;
+    insert(player->objects, "nb_poison_proc", nb_poison_proc, free);
+    
+    bool* is_auto_y_velocity_reset_enabled = malloc(sizeof(bool));
+    *is_auto_y_velocity_reset_enabled = true;
+    insert(player->objects, "is_auto_y_velocity_reset_enabled", is_auto_y_velocity_reset_enabled, free);
+
+    return player;
 }

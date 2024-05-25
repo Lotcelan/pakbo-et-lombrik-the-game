@@ -2,7 +2,7 @@
 
 void update_cave2(GameData* game) {
     if (game->player->y_position > game->height_amount * CELL_HEIGHT) {
-        change_scene(game, "cave2_1_6");
+        game->player->current_hp = -1;
         return;
     }
 
