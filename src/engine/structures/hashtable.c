@@ -108,7 +108,7 @@ void replace(HashTable* hashtable, const char* key, void* value, void (*destroy)
         if (cmp(entry->key, key) == 0) {
             if (entry->destroy != NULL) {
                 // printf("Destroying %p\n", entry->value);
-                entry->destroy(entry->value);
+                if (entry->value != NULL) entry->destroy(entry->value);
             }
             entry->value = value;
             entry->destroy = destroy;

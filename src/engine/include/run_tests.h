@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include "test_binary_heap.h"
 #include "test_linked_lists.h"
+#include "test_hashtable.h"
 
 
 #endif
