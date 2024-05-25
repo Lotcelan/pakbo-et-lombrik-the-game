@@ -41,10 +41,22 @@ void event_handler_main_menu(GameData* game) {
                 if (strcmp(main_menu_options[*selectedMenuItem], "Play")==0) {
                     // game->current_scene = get(game->scenes, "spawn_level", strcmp);
                     game->player->y_velocity = 0;
-                    // change_scene(game, "telecom_3_4");
-                    //change_scene(game, "cafet_second_counter_end_2_4");
-                    // change_scene(game, "first_boss_room_2_4");
-                    change_scene(game, "cave2_1_6");
+
+                    // change_scene(game, "cafet_beginning_2_4");
+                    // change_scene(game, "first_boss_room_7_6");
+                    change_scene(game, "telecom_3_4");
+
+                    // change_scene(game, "cafet_beginning_2_4");
+                    //change_scene(game, "first_boss_room_7_6");
+                    // change_scene(game, "cafet_beginning_2_4");
+                    // change_scene(game, "first_boss_room_7_6");
+
+                    //change_scene(game, "ping_pong_1_4");
+                    // change_scene(game, "cafet_ping_pong_beginning_0_3");
+                    // change_scene(game, "cafet_second_counter_end_0_3");
+
+                    //change_scene(game, "cave_0_6");
+
                     return;
                 } else if (strcmp(main_menu_options[*selectedMenuItem], "Quit")==0) {
                     game->state = CLOSING;
@@ -83,15 +95,15 @@ void update_main_menu(GameData* game) {
             // SDL_SetRenderDrawColor(game->renderer, 255, 0, 0, 255);
             // push_render_stack_rect(game, menuItems[i].rect);
             // SDL_RenderDrawRect(game->renderer, &menuItems[i].rect);
-            Rectangle* rect = init_rectangle(menuItemsRect[i].x, menuItemsRect[i].y, menuItemsRect[i].w, menuItemsRect[i].h, (SDL_Color){255, 0, 0, 255}, (SDL_Color){0, 0, 0, 255});
+            Rectangle* rect = init_rectangle(menuItemsRect[i].x, menuItemsRect[i].y, menuItemsRect[i].w, menuItemsRect[i].h, (SDL_Color){255, 0, 0, 0}, (SDL_Color){0, 0, 0, 0});
             push_render_stack_rect(game, rect, true);
         }  else {
-            Rectangle* rect = init_rectangle(menuItemsRect[i].x, menuItemsRect[i].y, menuItemsRect[i].w, menuItemsRect[i].h, (SDL_Color){0, 0, 0, 255}, (SDL_Color){0, 0, 0, 255});
+            Rectangle* rect = init_rectangle(menuItemsRect[i].x, menuItemsRect[i].y, menuItemsRect[i].w, menuItemsRect[i].h, (SDL_Color){0, 0, 0, 0}, (SDL_Color){0, 0, 0, 0});
             push_render_stack_rect(game, rect, true);
         }
 
 
-        Text* text = init_text(game, main_menu_options[i], (SDL_Color){255, 255, 255, (int)SDL_GetTicks() % 256}, 50, 55 + i*60, get(game->fonts, "suifak", strcmp));        
+        Text* text = init_text(game, main_menu_options[i], (SDL_Color){255, 255, 255, (int)SDL_GetTicks() % 256}, 50, 10 + i*40, get(game->fonts, "suifak", strcmp));        
         push_render_stack_text(game, text, true);
     
 

@@ -25,6 +25,8 @@ void event_handler_ewan_fourth_scene(GameData* game) {
 
 void populate_ewan_fourth_scene(GameData* game) {
     push_background_structures(game);
+
+    spawn_modifier_in_scene(game, game->current_scene, create_modifier(N_JUMP, 1, -1), 13, 3);
 }
 
 Scene* init_ewan_fourth_scene(GameData* game) {

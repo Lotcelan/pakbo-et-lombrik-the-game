@@ -34,7 +34,7 @@ void update_cafet_second_counter_beginning(GameData* game) {
         char text[50];
         sprintf(text, "Il reste %d mouches !", remaining_flies);
         
-        Text* t = init_text(game, text, (SDL_Color){255, 0, 0, 255}, CELL_WIDTH * 5, CELL_HEIGHT, (TTF_Font*)get(game->fonts, "suifak_small", strcmp));
+        Text* t = init_text(game, text, (SDL_Color){255, 0, 0, 255}, CELL_WIDTH * 5, CELL_HEIGHT, (TTF_Font*)get(game->fonts, "Minecraft", strcmp));
         push_render_stack_text(game, t, true);
     }
 
