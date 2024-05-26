@@ -36,6 +36,7 @@ Un dossier contenant une scène doit avoir :
 <details>
 <summary>Format de data.json</summary>
 Le fichier `data.json` doit suivre ce format :
+
 ```json
 {
     "name": "Exemple level", // The name can not be 'none'
@@ -101,6 +102,7 @@ Scene* init_scene01(GameData* game) {
 }
 
 ```
+
 </details>
 
 ### Processus d'ajout d'une scène

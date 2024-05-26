@@ -1,6 +1,12 @@
 # Bâtô & Ver2Ter
 *Ou bien Paquebots & Lombrics*
 
+## Présentation
+
+Pakbo é Lombrik est un jeu qui se veut dynamique, avec des combats amusants et du platforming qui donne envie d'explorer un monde qui tourne autour de TN mais pas que !
+
+![Trailer](./TRAILER-2.mp4)
+
 ## Installation
 
 **Section destinée aux développeurs**
