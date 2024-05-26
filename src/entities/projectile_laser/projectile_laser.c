@@ -18,7 +18,6 @@ void update_projectile_laser(GameData* game, Entity* projectile_laser, float del
         if (*is_exploding && ((int*)(projectile_laser->sprite->currentFrame->value))[0]  == 3) {
             // printf("je dead ca\n");
             projectile_laser->current_hp = -1;
-            
             return;
         }
     }
@@ -32,6 +31,7 @@ void update_projectile_laser(GameData* game, Entity* projectile_laser, float del
             *is_exploding = true;
             projectile_laser->x_velocity = 0;
             projectile_laser->y_velocity = 0;
+            projectile_laser->hit_box = NULL;
             return;
         }
     }
@@ -62,6 +62,7 @@ void update_projectile_laser(GameData* game, Entity* projectile_laser, float del
         if (are_colliding(projectile_laser->hit_box, game->player->hurt_box)) damage_entity(game, game->player, projectile_laser->parent->weapon->damage_value, 100, 100, false, projectile_laser);
         if (is_exploding != NULL) {
             *is_exploding = true;
+            projectile_laser->hit_box = NULL;
             projectile_laser->x_velocity = 0;
             projectile_laser->y_velocity = 0;
             return;

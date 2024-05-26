@@ -95,16 +95,48 @@ void update_main_menu(GameData* game) {
             // SDL_SetRenderDrawColor(game->renderer, 255, 0, 0, 255);
             // push_render_stack_rect(game, menuItems[i].rect);
             // SDL_RenderDrawRect(game->renderer, &menuItems[i].rect);
-            Rectangle* rect = init_rectangle(menuItemsRect[i].x, menuItemsRect[i].y, menuItemsRect[i].w, menuItemsRect[i].h, (SDL_Color){255, 0, 0, 0}, (SDL_Color){0, 0, 0, 0});
-            push_render_stack_rect(game, rect, true);
+            // Rectangle* rect = init_rectangle(menuItemsRect[i].x, menuItemsRect[i].y, menuItemsRect[i].w, menuItemsRect[i].h, (SDL_Color){255, 0, 0, 0}, (SDL_Color){0, 0, 0, 0});
+            // push_render_stack_rect(game, rect, true);
+            Texture* t;
+
+            if (strcmp(main_menu_options[*selectedMenuItem], "Play")==0) {
+                t = init_texture_from_memory(game, "src_assets_play_gold", menuItemsRect[i].x, menuItemsRect[i].y);
+            } else if (strcmp(main_menu_options[*selectedMenuItem], "Options")==0) {
+                t = init_texture_from_memory(game, "src_assets_options_gold", menuItemsRect[i].x, menuItemsRect[i].y);
+            } else {
+                t = init_texture_from_memory(game, "src_assets_quit_gold", menuItemsRect[i].x, menuItemsRect[i].y);
+
+            }
+
+            t->dstRect->w = menuItemsRect[i].w;
+            t->dstRect->h = menuItemsRect[i].h;
+            
+            push_render_stack_texture(game, t, true);
+
+            
         }  else {
-            Rectangle* rect = init_rectangle(menuItemsRect[i].x, menuItemsRect[i].y, menuItemsRect[i].w, menuItemsRect[i].h, (SDL_Color){0, 0, 0, 0}, (SDL_Color){0, 0, 0, 0});
-            push_render_stack_rect(game, rect, true);
+            Texture* t;
+
+            if (strcmp(main_menu_options[i], "Play")==0) {
+                t = init_texture_from_memory(game, "src_assets_play_silver", menuItemsRect[i].x, menuItemsRect[i].y);
+            } else if (strcmp(main_menu_options[i], "Options")==0) {
+                t = init_texture_from_memory(game, "src_assets_options_silver", menuItemsRect[i].x, menuItemsRect[i].y);
+            } else {
+                t = init_texture_from_memory(game, "src_assets_quit_silver", menuItemsRect[i].x, menuItemsRect[i].y);
+
+            }
+
+            t->dstRect->w = menuItemsRect[i].w;
+            t->dstRect->h = menuItemsRect[i].h;
+            
+            push_render_stack_texture(game, t, true);
+            // Rectangle* rect = init_rectangle(menuItemsRect[i].x, menuItemsRect[i].y, menuItemsRect[i].w, menuItemsRect[i].h, (SDL_Color){0, 0, 0, 0}, (SDL_Color){0, 0, 0, 0});
+            // push_render_stack_rect(game, rect, true);
         }
 
 
-        Text* text = init_text(game, main_menu_options[i], (SDL_Color){255, 255, 255, (int)SDL_GetTicks() % 256}, 50, 10 + i*40, get(game->fonts, "suifak", strcmp));        
-        push_render_stack_text(game, text, true);
+        // Text* text = init_text(game, main_menu_options[i], (SDL_Color){255, 255, 255, (int)SDL_GetTicks() % 256}, 50, 10 + i*40, get(game->fonts, "suifak", strcmp));        
+        // push_render_stack_text(game, text, true);
     
 
         // SDL_Color textColor = {(int)SDL_GetTicks() % 256, (((int)SDL_GetTicks() % 256) + 50) % 256, ((2*(int)SDL_GetTicks() % 256) + 100) % 256, 255};
@@ -134,9 +166,9 @@ void populate(GameData* game) {
     insert(scene->objects, "selectedMenuItem", selectedMenuItem, free);
     
     SDL_Rect* menuItemsRect = (SDL_Rect*)malloc(sizeof(SDL_Rect) * NUM_MENU_ITEMS);
-    menuItemsRect[0] = (SDL_Rect){ .x = 50, .y = 10, .w = 100, .h = 30 };
-    menuItemsRect[1] = (SDL_Rect){ .x = 50, .y = 50, .w = 100, .h = 30 };
-    menuItemsRect[2] = (SDL_Rect){ .x = 50, .y = 90, .w = 100, .h = 30 };
+    menuItemsRect[0] = (SDL_Rect){ .x = 20, .y = 10, .w = 100, .h = 30 };
+    menuItemsRect[1] = (SDL_Rect){ .x = 20, .y = 50, .w = 100, .h = 30 };
+    menuItemsRect[2] = (SDL_Rect){ .x = 20, .y = 90, .w = 100, .h = 30 };
 
     insert(scene->objects, "menuItemsRect", menuItemsRect, free);
 
