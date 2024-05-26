@@ -5,7 +5,8 @@
 
 Pakbo é Lombrik est un jeu qui se veut dynamique, avec des combats amusants et du platforming qui donne envie d'explorer un monde qui tourne autour de TN mais pas que !
 
-![Trailer](./TRAILER-2.mp4)
+https://github.com/Lotcelan/pakbo-et-lombrik-the-game/assets/40437798/293538b3-53b3-4aa9-b797-7e3b60113d6b
+
 
 ![Map actuelle](./gdp/Diagramme_lvl.png)
 
