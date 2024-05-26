@@ -7,6 +7,8 @@ Pakbo é Lombrik est un jeu qui se veut dynamique, avec des combats amusants et 
 
 ![Trailer](./TRAILER-2.mp4)
 
+![Map actuelle](./gdp/Diagramme_lvl.png)
+
 ## Installation
 
 **Section destinée aux développeurs**
