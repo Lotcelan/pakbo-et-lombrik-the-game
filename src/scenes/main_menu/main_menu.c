@@ -5,7 +5,7 @@
 
 void event_handler_main_menu(GameData* game) {
     int* selectedMenuItem = get(game->current_scene->objects, "selectedMenuItem", strcmp);
-    const char *main_menu_options[] = {"Play", "Options", "Quit"};
+    const char *main_menu_options[] = {"Play", "Quit"};
     SDL_Rect* menuItemsRect;
     SDL_Point point;
     switch (game->event.type) {
@@ -101,8 +101,6 @@ void update_main_menu(GameData* game) {
 
             if (strcmp(main_menu_options[*selectedMenuItem], "Play")==0) {
                 t = init_texture_from_memory(game, "src_assets_play_gold", menuItemsRect[i].x, menuItemsRect[i].y);
-            } else if (strcmp(main_menu_options[*selectedMenuItem], "Options")==0) {
-                t = init_texture_from_memory(game, "src_assets_options_gold", menuItemsRect[i].x, menuItemsRect[i].y);
             } else {
                 t = init_texture_from_memory(game, "src_assets_quit_gold", menuItemsRect[i].x, menuItemsRect[i].y);
 
@@ -119,9 +117,8 @@ void update_main_menu(GameData* game) {
 
             if (strcmp(main_menu_options[i], "Play")==0) {
                 t = init_texture_from_memory(game, "src_assets_play_silver", menuItemsRect[i].x, menuItemsRect[i].y);
-            } else if (strcmp(main_menu_options[i], "Options")==0) {
-                t = init_texture_from_memory(game, "src_assets_options_silver", menuItemsRect[i].x, menuItemsRect[i].y);
-            } else {
+            } 
+            else {
                 t = init_texture_from_memory(game, "src_assets_quit_silver", menuItemsRect[i].x, menuItemsRect[i].y);
 
             }
@@ -168,7 +165,6 @@ void populate(GameData* game) {
     SDL_Rect* menuItemsRect = (SDL_Rect*)malloc(sizeof(SDL_Rect) * NUM_MENU_ITEMS);
     menuItemsRect[0] = (SDL_Rect){ .x = 20, .y = 10, .w = 100, .h = 30 };
     menuItemsRect[1] = (SDL_Rect){ .x = 20, .y = 50, .w = 100, .h = 30 };
-    menuItemsRect[2] = (SDL_Rect){ .x = 20, .y = 90, .w = 100, .h = 30 };
 
     insert(scene->objects, "menuItemsRect", menuItemsRect, free);
 

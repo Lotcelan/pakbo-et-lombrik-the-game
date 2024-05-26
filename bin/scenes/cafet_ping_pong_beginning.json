@@ -1,0 +1,73 @@
+{
+    "name": "Exemple level",
+    "background" : "src_assets_cafet_bgRight",
+    "structures" : [
+        {
+            "identifier" : "table04",
+            "x" : 0,
+            "y" : 4,
+            "resource" : "src_assets_cafet_tableMiddle",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "none"
+        },
+        {
+            "identifier" : "table14",
+            "x" : 1,
+            "y" : 4,
+            "resource" : "src_assets_cafet_tableMiddle",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "none"
+        },
+        {
+            "identifier" : "table24",
+            "x" : 2,
+            "y" : 4,
+            "resource" : "src_assets_cafet_tableRight",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "none"
+        },
+        {
+            "identifier" : "pied05",
+            "x" : 0,
+            "y" : 5,
+            "resource" : "src_assets_cafet_piedTable",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "none"
+        },
+        {
+            "identifier" : "pied06",
+            "x" : 0,
+            "y" : 6,
+            "resource" : "src_assets_cafet_piedTable",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "none"
+        },
+        {
+            "identifier" : "pied07",
+            "x" : 0,
+            "y" : 7,
+            "resource" : "src_assets_cafet_piedTable",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "none"
+        },
+        {
+            "identifier" : "pied08",
+            "x" : 0,
+            "y" : 8,
+            "resource" : "src_assets_cafet_piedTable",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "none"
+        },
+        {
+            "identifier" : "pingpongtable",
+            "x" : 8,
+            "y" : 7,
+            "resource" : "src_assets_cafet_tablePingPongHalf",
+            "allow_pass_through" : 0,
+            "teleport_to_scene" : "none"
+        }
+
+    ],
+    "entities" : [
+    ]
+}
